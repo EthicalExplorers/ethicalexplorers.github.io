@@ -80,6 +80,46 @@
             from { background-position: 0 0; }
             to { background-position: 200px 200px; }
         }
+
+        /* Article Modal specific styles */
+        .article-modal-content {
+            max-height: 80vh; /* Limit height to prevent overflow */
+            overflow-y: auto; /* Enable scrolling for long content */
+            text-align: left; /* Align text within the modal content */
+        }
+        .article-modal-content h3, .article-modal-content h4 {
+            color: #00FFFF; /* Headings color within modal */
+            text-shadow: none; /* Remove glow for body headings */
+            margin-bottom: 1rem;
+            margin-top: 1.5rem;
+        }
+        .article-modal-content p {
+            margin-bottom: 1rem;
+        }
+        .article-modal-content ul {
+            list-style-type: disc;
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .article-modal-content ul ul { /* Nested lists */
+            list-style-type: circle;
+            margin-left: 1.5rem;
+        }
+        .article-modal-content pre {
+            background-color: #1a1a1a;
+            color: #39FF14;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            margin-bottom: 1rem;
+        }
+        .article-modal-content code {
+            background-color: #4a4a4a;
+            padding: 0.2em 0.4em;
+            border-radius: 0.25rem;
+            font-family: 'monospace';
+            font-size: 0.9em;
+        }
     </style>
 </head>
 <body class="circuit-bg min-h-screen flex flex-col">
@@ -231,6 +271,17 @@
                 <h3 id="gameModalTitle" class="text-4xl font-bold text-neon-green mb-6"></h3>
                 <p id="gameModalDescription" class="text-gray-300 text-lg mb-8"></p>
                 <button class="btn-secondary text-lg px-8 py-4" onclick="startGame()">Start Game</button>
+            </div>
+        </div>
+
+        <!-- Article Modal (New) -->
+        <div id="articleModal" class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-[100] hidden p-4">
+            <div class="bg-gray-800 p-8 rounded-xl card-glow max-w-4xl w-full h-[90vh] overflow-hidden flex flex-col relative border border-neon-green">
+                <button onclick="hideArticleModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white text-3xl z-10">&times;</button>
+                <h3 id="articleModalTitle" class="text-4xl font-bold text-neon-green mb-6 text-center"></h3>
+                <div id="articleModalContent" class="article-modal-content text-gray-300 text-lg leading-relaxed flex-grow pr-4">
+                    <!-- Article content will be loaded here -->
+                </div>
             </div>
         </div>
     </main>
@@ -468,7 +519,7 @@
                                 ${tagsHtml}
                             </div>
                             <span class="text-gray-500 text-xs mb-4">Published: ${item.date}</span>
-                            <a href="#" class="btn-secondary w-full text-center text-sm" onclick="showArticleModal('${encodeURIComponent(JSON.stringify(item))}')">
+                            <a href="#" class="btn-secondary w-full text-center text-sm" onclick="showArticleModal('${encodeURIComponent(JSON.stringify(item))}'); return false;">
                                 <i class="fas fa-newspaper mr-2"></i> Read More
                             </a>
                         </div>
