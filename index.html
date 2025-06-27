@@ -162,45 +162,11 @@
                 <h2 class="text-5xl font-bold mb-12 text-neon-green">
                     <i class="fab fa-youtube mr-4"></i>Latest Expeditions
                 </h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-                    <!-- NEW: Video Card - Host Your Own Onion Website -->
-                    <div class="bg-gray-800 rounded-xl overflow-hidden card-glow p-6 flex flex-col">
-                        <img src="https://placehold.co/600x337/1A1A1A/00FFFF?text=Onion+Website+Tutorial" alt="YouTube Video Thumbnail: Onion Website Tutorial" class="w-full h-auto rounded-lg mb-4 object-cover">
-                        <h3 class="text-2xl font-bold text-teal-400 mb-3 hover:text-teal-300 transition duration-200">Kali Linux: Host Your Own Onion Website Tutorial</h3>
-                        <p class="text-gray-400 text-sm mb-4 flex-grow">Master anonymous web hosting. Learn to set up your own onion website on Kali Linux using Tor hidden services.</p>
-                        <a href="https://youtu.be/lM8YPeLNbhA" target="_blank" class="btn-secondary w-full text-center text-sm">
-                            <i class="fas fa-play-circle mr-2"></i> Watch Now
-                        </a>
-                    </div>
-                    <!-- Video Card 1 (Original) -->
-                    <div class="bg-gray-800 rounded-xl overflow-hidden card-glow p-6 flex flex-col">
-                        <img src="https://placehold.co/600x337/1A1A1A/00FFFF?text=Video+Thumbnail+1" alt="YouTube Video Thumbnail" class="w-full h-auto rounded-lg mb-4 object-cover">
-                        <h3 class="text-2xl font-bold text-teal-400 mb-3 hover:text-teal-300 transition duration-200">Understanding Network Penetration Testing</h3>
-                        <p class="text-gray-400 text-sm mb-4 flex-grow">Learn the basics of network pentesting, including reconnaissance, scanning, and exploitation phases...</p>
-                        <a href="https://youtube.com/watch?v=yourvideoid1" target="_blank" class="btn-secondary w-full text-center text-sm">
-                            <i class="fas fa-play-circle mr-2"></i> Watch Now
-                        </a>
-                    </div>
-                    <!-- Video Card 2 (Original) -->
-                    <div class="bg-gray-800 rounded-xl overflow-hidden card-glow p-6 flex flex-col">
-                        <img src="https://placehold.co/600x337/1A1A1A/9900FF?text=Video+Thumbnail+2" alt="YouTube Video Thumbnail" class="w-full h-auto rounded-lg mb-4 object-cover">
-                        <h3 class="text-2xl font-bold text-purple-400 mb-3 hover:text-purple-300 transition duration-200">Web Application Security: XSS Vulnerabilities</h3>
-                        <p class="text-gray-400 text-sm mb-4 flex-grow">Dive deep into Cross-Site Scripting (XSS) attacks, how to identify them, and effective mitigation strategies...</p>
-                        <a href="https://youtube.com/watch?v=yourvideoid2" target="_blank" class="btn-secondary w-full text-center text-sm">
-                            <i class="fas fa-play-circle mr-2"></i> Watch Now
-                        </a>
-                    </div>
-                    <!-- Video Card 3 (Original) -->
-                    <div class="bg-gray-800 rounded-xl overflow-hidden card-glow p-6 flex flex-col">
-                        <img src="https://placehold.co/600x337/1A1A1A/39FF14?text=Video+Thumbnail+3" alt="YouTube Video Thumbnail" class="w-full h-auto rounded-lg mb-4 object-cover">
-                        <h3 class="text-2xl font-bold text-green-400 mb-3 hover:text-green-300 transition duration-200">OSINT for Beginners: Gathering Open Source Intelligence</h3>
-                        <p class="text-gray-400 text-sm mb-4 flex-grow">Explore the world of Open Source Intelligence (OSINT) and how to gather crucial information legally and ethically...</p>
-                        <a href="https://youtube.com/watch?v=yourvideoid3" target="_blank" class="btn-secondary w-full text-center text-sm">
-                            <i class="fas fa-play-circle mr-2"></i> Watch Now
-                        </a>
-                    </div>
+                <!-- Container for dynamically loaded YouTube videos -->
+                <div id="youtube-videos-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                    <!-- Videos will be injected here by JavaScript -->
                 </div>
-                <button class="btn-primary mt-12 text-lg px-8 py-4">Load More Expeditions</button>
+                <button id="load-more-youtube" class="btn-primary mt-12 text-lg px-8 py-4 hidden">Load More Expeditions</button>
             </div>
         </section>
 
@@ -211,52 +177,11 @@
                     <i class="fas fa-scroll mr-4"></i>The Knowledge Vault
                 </h2>
                 <p class="text-gray-400 text-xl mb-12">Daily articles complementing our YouTube expeditions with ethical hacking tips & tricks.</p>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-                    <!-- NEW: Article Card - Unveiling the Hidden Web -->
-                    <div class="bg-gray-800 rounded-xl overflow-hidden card-glow p-6 flex flex-col">
-                        <h3 class="text-2xl font-bold text-neon-green mb-3 hover:text-teal-400 transition duration-200">Unveiling the Hidden Web: Hosting Your Onion Site on Kali Linux</h3>
-                        <p class="text-gray-400 text-sm mb-4 flex-grow">A comprehensive guide to setting up your own anonymous onion website on Kali Linux, exploring Tor hidden services, privacy, and censorship resistance.</p>
-                        <div class="flex flex-wrap gap-2 text-xs text-gray-500 mb-4">
-                            <span class="bg-gray-700 px-2 py-1 rounded-full">#OnionWebsite</span>
-                            <span class="bg-gray-700 px-2 py-1 rounded-full">#TorHiddenService</span>
-                            <span class="bg-gray-700 px-2 py-1 rounded-full">#KaliLinux</span>
-                            <span class="bg-gray-700 px-2 py-1 rounded-full">#PrivacyOnline</span>
-                            <span class="bg-gray-700 px-2 py-1 rounded-full">#Cybersecurity</span>
-                        </div>
-                        <span class="text-gray-500 text-xs mb-4">Published: June 28, 2025</span>
-                        <a href="#" class="btn-secondary w-full text-center text-sm">
-                            <i class="fas fa-newspaper mr-2"></i> Read More
-                        </a>
-                    </div>
-                    <!-- Article Card 1 (Original) -->
-                    <div class="bg-gray-800 rounded-xl overflow-hidden card-glow p-6 flex flex-col">
-                        <h3 class="text-2xl font-bold text-neon-green mb-3 hover:text-teal-400 transition duration-200">Top 5 Tools for Ethical Hackers in 2025</h3>
-                        <p class="text-gray-400 text-sm mb-4 flex-grow">Discover the essential software and frameworks every aspiring ethical hacker needs in their toolkit...</p>
-                        <span class="text-gray-500 text-xs mb-4">Published: June 10, 2025</span>
-                        <a href="#" class="btn-secondary w-full text-center text-sm">
-                            <i class="fas fa-newspaper mr-2"></i> Read More
-                        </a>
-                    </div>
-                    <!-- Article Card 2 (Original) -->
-                    <div class="bg-gray-800 rounded-xl overflow-hidden card-glow p-6 flex flex-col">
-                        <h3 class="text-2xl font-bold text-purple-400 mb-3 hover:text-purple-300 transition duration-200">Securing Your Home Network: A Beginner's Guide</h3>
-                        <p class="text-gray-400 text-sm mb-4 flex-grow">Practical steps to harden your Wi-Fi, router, and connected devices against common threats...</p>
-                        <span class="text-gray-500 text-xs mb-4">Published: June 09, 2025</span>
-                        <a href="#" class="btn-secondary w-full text-center text-sm">
-                            <i class="fas fa-newspaper mr-2"></i> Read More
-                        </a>
-                    </div>
-                    <!-- Article Card 3 (Original) -->
-                    <div class="bg-gray-800 rounded-xl overflow-hidden card-glow p-6 flex flex-col">
-                        <h3 class="text-2xl font-bold text-teal-400 mb-3 hover:text-neon-green transition duration-200">The Ethics of Penetration Testing: A Deep Dive</h3>
-                        <p class="text-gray-400 text-sm mb-4 flex-grow">Understanding the legal and moral boundaries of ethical hacking and responsible disclosure...</p>
-                        <span class="text-gray-500 text-xs mb-4">Published: June 08, 2025</span>
-                        <a href="#" class="btn-secondary w-full text-center text-sm">
-                            <i class="fas fa-newspaper mr-2"></i> Read More
-                        </a>
-                    </div>
+                <!-- Container for dynamically loaded articles -->
+                <div id="articles-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                    <!-- Articles will be injected here by JavaScript -->
                 </div>
-                <button class="btn-primary mt-12 text-lg px-8 py-4">Explore More Articles</button>
+                <button id="explore-more-articles" class="btn-primary mt-12 text-lg px-8 py-4 hidden">Explore More Articles</button>
             </div>
         </section>
 
@@ -329,6 +254,150 @@
     </footer>
 
     <script>
+        // Data for YouTube Videos
+        const allYoutubeVideos = [
+            {
+                title: "Kali Linux: Host Your Own Onion Website Tutorial",
+                description: "Master anonymous web hosting. Learn to set up your own onion website on Kali Linux using Tor hidden services.",
+                thumbnail: "https://placehold.co/600x337/1A1A1A/00FFFF?text=Onion+Website+Tutorial",
+                link: "https://youtu.be/lM8YPeLNbhA"
+            },
+            {
+                title: "Understanding Network Penetration Testing",
+                description: "Learn the basics of network pentesting, including reconnaissance, scanning, and exploitation phases...",
+                thumbnail: "https://placehold.co/600x337/1A1A1A/00FFFF?text=Video+Thumbnail+1",
+                link: "https://youtube.com/watch?v=yourvideoid1"
+            },
+            {
+                title: "Web Application Security: XSS Vulnerabilities",
+                description: "Dive deep into Cross-Site Scripting (XSS) attacks, how to identify them, and effective mitigation strategies...",
+                thumbnail: "https://placehold.co/600x337/1A1A1A/9900FF?text=Video+Thumbnail+2",
+                link: "https://youtube.com/watch?v=yourvideoid2"
+            },
+            {
+                title: "OSINT for Beginners: Gathering Open Source Intelligence",
+                description: "Explore the world of Open Source Intelligence (OSINT) and how to gather crucial information legally and ethically...",
+                thumbnail: "https://placehold.co/600x337/1A1A1A/39FF14?text=Video+Thumbnail+3",
+                link: "https://youtube.com/watch?v=yourvideoid3"
+            }
+            // Add more YouTube videos here
+        ];
+
+        // Data for Blog Articles
+        const allBlogArticles = [
+            {
+                title: "Unveiling the Hidden Web: Hosting Your Onion Site on Kali Linux",
+                description: "A comprehensive guide to setting up your own anonymous onion website on Kali Linux, exploring Tor hidden services, privacy, and censorship resistance.",
+                date: "June 28, 2025",
+                tags: ["OnionWebsite", "TorHiddenService", "KaliLinux", "DarkWeb", "PrivacyOnline", "DigitalPrivacy", "Cybersecurity", "AnonymousBrowse"], // Displaying a few prominent tags
+                full_tags: [ // Full list of tags for search/filtering if implemented
+                    "#OnionWebsite", "#TorHiddenService", "#KaliLinux", "#DarkWeb", "#PrivacyOnline",
+                    "#DigitalPrivacy", "#Cybersecurity", "#AnonymousBrowse", "#NetworkSecurity", "#EthicalHacking",
+                    "#Infosec", "#OpSec", "#CensorshipResistance", "#DataProtection", "#WebHosting",
+                    "#SecureCommunication", "#LinuxSecurity", "#OpenSource", "#Decentralization", "#DeepWeb",
+                    "#CyberAwareness", "#DigitalRights", "#VirtualPrivateNetwork", "#ThreatIntelligence",
+                    "#AIinCybersecurity", "#ZeroTrust", "#OSINT", "How to host .onion site Kali Linux",
+                    "Set up Tor hidden service Kali 2025", "Anonymous web hosting guide",
+                    "Kali Linux dark web server setup", "Secure web server on Tor network",
+                    "Learn Tor hidden services", "Kali Linux privacy tools", "Dark web anonymity guide."
+                ]
+            },
+            {
+                title: "Top 5 Tools for Ethical Hackers in 2025",
+                description: "Discover the essential software and frameworks every aspiring ethical hacker needs in their toolkit...",
+                date: "June 10, 2025",
+                tags: ["EthicalHacking", "Tools", "Cybersecurity", "PenTesting"]
+            },
+            {
+                title: "Securing Your Home Network: A Beginner's Guide",
+                description: "Practical steps to harden your Wi-Fi, router, and connected devices against common threats...",
+                date: "June 09, 2025",
+                tags: ["NetworkSecurity", "HomeSecurity", "BeginnerGuide", "Privacy"]
+            },
+            {
+                title: "The Ethics of Penetration Testing: A Deep Dive",
+                description: "Understanding the legal and moral boundaries of ethical hacking and responsible disclosure...",
+                date: "June 08, 2025",
+                tags: ["EthicalHacking", "Ethics", "PenTesting", "Legal"]
+            }
+            // Add more blog articles here
+        ];
+
+        const initialDisplayCount = 3; // Number of items to show initially
+
+        // Function to render content cards
+        function renderCards(containerId, dataArray, startIndex, endIndex, type) {
+            const container = document.getElementById(containerId);
+            let htmlContent = '';
+            for (let i = startIndex; i < endIndex && i < dataArray.length; i++) {
+                const item = dataArray[i];
+                if (type === 'video') {
+                    htmlContent += `
+                        <div class="bg-gray-800 rounded-xl overflow-hidden card-glow p-6 flex flex-col">
+                            <img src="${item.thumbnail}" alt="YouTube Video Thumbnail: ${item.title}" class="w-full h-auto rounded-lg mb-4 object-cover">
+                            <h3 class="text-2xl font-bold text-teal-400 mb-3 hover:text-teal-300 transition duration-200">${item.title}</h3>
+                            <p class="text-gray-400 text-sm mb-4 flex-grow">${item.description}</p>
+                            <a href="${item.link}" target="_blank" class="btn-secondary w-full text-center text-sm">
+                                <i class="fas fa-play-circle mr-2"></i> Watch Now
+                            </a>
+                        </div>
+                    `;
+                } else if (type === 'article') {
+                    // Displaying only the first few tags on the card for brevity
+                    const tagsHtml = item.tags.slice(0, 4).map(tag => `<span class="bg-gray-700 px-2 py-1 rounded-full">#${tag}</span>`).join('');
+                    htmlContent += `
+                        <div class="bg-gray-800 rounded-xl overflow-hidden card-glow p-6 flex flex-col">
+                            <h3 class="text-2xl font-bold text-neon-green mb-3 hover:text-teal-400 transition duration-200">${item.title}</h3>
+                            <p class="text-gray-400 text-sm mb-4 flex-grow">${item.description}</p>
+                            <div class="flex flex-wrap gap-2 text-xs text-gray-500 mb-4">
+                                ${tagsHtml}
+                            </div>
+                            <span class="text-gray-500 text-xs mb-4">Published: ${item.date}</span>
+                            <a href="#" class="btn-secondary w-full text-center text-sm">
+                                <i class="fas fa-newspaper mr-2"></i> Read More
+                            </a>
+                        </div>
+                    `;
+                }
+            }
+            container.innerHTML += htmlContent; // Append content
+        }
+
+        // Initial rendering on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            renderCards('youtube-videos-container', allYoutubeVideos, 0, initialDisplayCount, 'video');
+            if (allYoutubeVideos.length > initialDisplayCount) {
+                document.getElementById('load-more-youtube').classList.remove('hidden');
+            }
+
+            renderCards('articles-container', allBlogArticles, 0, initialDisplayCount, 'article');
+            if (allBlogArticles.length > initialDisplayCount) {
+                document.getElementById('explore-more-articles').classList.remove('hidden');
+            }
+        });
+
+        // Load More Videos functionality
+        let currentYoutubeVideosShown = initialDisplayCount;
+        document.getElementById('load-more-youtube').addEventListener('click', () => {
+            const videosToLoad = allYoutubeVideos.length - currentYoutubeVideosShown;
+            if (videosToLoad > 0) {
+                renderCards('youtube-videos-container', allYoutubeVideos, currentYoutubeVideosShown, allYoutubeVideos.length, 'video');
+                currentYoutubeVideosShown = allYoutubeVideos.length; // All videos are now shown
+                document.getElementById('load-more-youtube').classList.add('hidden'); // Hide the button
+            }
+        });
+
+        // Load More Articles functionality
+        let currentArticlesShown = initialDisplayCount;
+        document.getElementById('explore-more-articles').addEventListener('click', () => {
+            const articlesToLoad = allBlogArticles.length - currentArticlesShown;
+            if (articlesToLoad > 0) {
+                renderCards('articles-container', allBlogArticles, currentArticlesShown, allBlogArticles.length, 'article');
+                currentArticlesShown = allBlogArticles.length; // All articles are now shown
+                document.getElementById('explore-more-articles').classList.add('hidden'); // Hide the button
+            }
+        });
+
         // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
@@ -356,10 +425,7 @@
         }
 
         function startGame() {
-            // In a real application, this would navigate to the game page or load game logic.
-            // For this demonstration, we'll just show a message.
             console.log("Game started! (This is a simulation. In a real app, the game would load here.)");
-            // Using a custom message box instead of alert()
             const gameStartedMessage = document.createElement('div');
             gameStartedMessage.className = 'fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-[101]';
             gameStartedMessage.innerHTML = `
