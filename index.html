@@ -59,7 +59,8 @@
         /* The typing animation */
         @keyframes typing {
             from { width: 0 }
-            to { width: 100% }
+            /* Changed to max-content to ensure full text is visible */
+            to { width: max-content; }
         }
 
         /* The typewriter cursor effect */
@@ -118,7 +119,7 @@
                 <h1 class="text-6xl md:text-7xl lg:text-8xl font-extrabold mb-6 leading-tight text-neon-green">
                     Ethical <span class="text-purple-400">Explorers</span>
                 </h1>
-                <p id="tagline" class="typing-effect text-2xl md:text-3xl text-gray-300 mb-10 overflow-hidden whitespace-nowrap border-r-4 border-neon-green pr-2">
+                <p id="tagline" class="typing-effect text-2xl md:text-3xl text-gray-300 mb-10 pr-2">
                     Mastering Cyber Frontiers: Code, Exploit, Defend.
                 </p>
                 <div class="flex flex-col sm:flex-row justify-center space-y-6 sm:space-y-0 sm:space-x-8">
@@ -162,7 +163,16 @@
                     <i class="fab fa-youtube mr-4"></i>Latest Expeditions
                 </h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-                    <!-- Video Card 1 -->
+                    <!-- NEW: Video Card - Host Your Own Onion Website -->
+                    <div class="bg-gray-800 rounded-xl overflow-hidden card-glow p-6 flex flex-col">
+                        <img src="https://placehold.co/600x337/1A1A1A/00FFFF?text=Onion+Website+Tutorial" alt="YouTube Video Thumbnail: Onion Website Tutorial" class="w-full h-auto rounded-lg mb-4 object-cover">
+                        <h3 class="text-2xl font-bold text-teal-400 mb-3 hover:text-teal-300 transition duration-200">Kali Linux: Host Your Own Onion Website Tutorial</h3>
+                        <p class="text-gray-400 text-sm mb-4 flex-grow">Master anonymous web hosting. Learn to set up your own onion website on Kali Linux using Tor hidden services.</p>
+                        <a href="https://youtu.be/lM8YPeLNbhA" target="_blank" class="btn-secondary w-full text-center text-sm">
+                            <i class="fas fa-play-circle mr-2"></i> Watch Now
+                        </a>
+                    </div>
+                    <!-- Video Card 1 (Original) -->
                     <div class="bg-gray-800 rounded-xl overflow-hidden card-glow p-6 flex flex-col">
                         <img src="https://placehold.co/600x337/1A1A1A/00FFFF?text=Video+Thumbnail+1" alt="YouTube Video Thumbnail" class="w-full h-auto rounded-lg mb-4 object-cover">
                         <h3 class="text-2xl font-bold text-teal-400 mb-3 hover:text-teal-300 transition duration-200">Understanding Network Penetration Testing</h3>
@@ -171,7 +181,7 @@
                             <i class="fas fa-play-circle mr-2"></i> Watch Now
                         </a>
                     </div>
-                    <!-- Video Card 2 -->
+                    <!-- Video Card 2 (Original) -->
                     <div class="bg-gray-800 rounded-xl overflow-hidden card-glow p-6 flex flex-col">
                         <img src="https://placehold.co/600x337/1A1A1A/9900FF?text=Video+Thumbnail+2" alt="YouTube Video Thumbnail" class="w-full h-auto rounded-lg mb-4 object-cover">
                         <h3 class="text-2xl font-bold text-purple-400 mb-3 hover:text-purple-300 transition duration-200">Web Application Security: XSS Vulnerabilities</h3>
@@ -180,7 +190,7 @@
                             <i class="fas fa-play-circle mr-2"></i> Watch Now
                         </a>
                     </div>
-                    <!-- Video Card 3 -->
+                    <!-- Video Card 3 (Original) -->
                     <div class="bg-gray-800 rounded-xl overflow-hidden card-glow p-6 flex flex-col">
                         <img src="https://placehold.co/600x337/1A1A1A/39FF14?text=Video+Thumbnail+3" alt="YouTube Video Thumbnail" class="w-full h-auto rounded-lg mb-4 object-cover">
                         <h3 class="text-2xl font-bold text-green-400 mb-3 hover:text-green-300 transition duration-200">OSINT for Beginners: Gathering Open Source Intelligence</h3>
@@ -202,7 +212,23 @@
                 </h2>
                 <p class="text-gray-400 text-xl mb-12">Daily articles complementing our YouTube expeditions with ethical hacking tips & tricks.</p>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-                    <!-- Article Card 1 -->
+                    <!-- NEW: Article Card - Unveiling the Hidden Web -->
+                    <div class="bg-gray-800 rounded-xl overflow-hidden card-glow p-6 flex flex-col">
+                        <h3 class="text-2xl font-bold text-neon-green mb-3 hover:text-teal-400 transition duration-200">Unveiling the Hidden Web: Hosting Your Onion Site on Kali Linux</h3>
+                        <p class="text-gray-400 text-sm mb-4 flex-grow">A comprehensive guide to setting up your own anonymous onion website on Kali Linux, exploring Tor hidden services, privacy, and censorship resistance.</p>
+                        <div class="flex flex-wrap gap-2 text-xs text-gray-500 mb-4">
+                            <span class="bg-gray-700 px-2 py-1 rounded-full">#OnionWebsite</span>
+                            <span class="bg-gray-700 px-2 py-1 rounded-full">#TorHiddenService</span>
+                            <span class="bg-gray-700 px-2 py-1 rounded-full">#KaliLinux</span>
+                            <span class="bg-gray-700 px-2 py-1 rounded-full">#PrivacyOnline</span>
+                            <span class="bg-gray-700 px-2 py-1 rounded-full">#Cybersecurity</span>
+                        </div>
+                        <span class="text-gray-500 text-xs mb-4">Published: June 28, 2025</span>
+                        <a href="#" class="btn-secondary w-full text-center text-sm">
+                            <i class="fas fa-newspaper mr-2"></i> Read More
+                        </a>
+                    </div>
+                    <!-- Article Card 1 (Original) -->
                     <div class="bg-gray-800 rounded-xl overflow-hidden card-glow p-6 flex flex-col">
                         <h3 class="text-2xl font-bold text-neon-green mb-3 hover:text-teal-400 transition duration-200">Top 5 Tools for Ethical Hackers in 2025</h3>
                         <p class="text-gray-400 text-sm mb-4 flex-grow">Discover the essential software and frameworks every aspiring ethical hacker needs in their toolkit...</p>
@@ -211,7 +237,7 @@
                             <i class="fas fa-newspaper mr-2"></i> Read More
                         </a>
                     </div>
-                    <!-- Article Card 2 -->
+                    <!-- Article Card 2 (Original) -->
                     <div class="bg-gray-800 rounded-xl overflow-hidden card-glow p-6 flex flex-col">
                         <h3 class="text-2xl font-bold text-purple-400 mb-3 hover:text-purple-300 transition duration-200">Securing Your Home Network: A Beginner's Guide</h3>
                         <p class="text-gray-400 text-sm mb-4 flex-grow">Practical steps to harden your Wi-Fi, router, and connected devices against common threats...</p>
@@ -220,7 +246,7 @@
                             <i class="fas fa-newspaper mr-2"></i> Read More
                         </a>
                     </div>
-                    <!-- Article Card 3 -->
+                    <!-- Article Card 3 (Original) -->
                     <div class="bg-gray-800 rounded-xl overflow-hidden card-glow p-6 flex flex-col">
                         <h3 class="text-2xl font-bold text-teal-400 mb-3 hover:text-neon-green transition duration-200">The Ethics of Penetration Testing: A Deep Dive</h3>
                         <p class="text-gray-400 text-sm mb-4 flex-grow">Understanding the legal and moral boundaries of ethical hacking and responsible disclosure...</p>
