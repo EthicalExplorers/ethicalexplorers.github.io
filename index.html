@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ethical Explorers - Mastering Cyber Frontiers</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts - Inter for body, Orbitron for headings -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Orbitron:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0D0D0D; /* Dark background */
+            color: #E0E0E0; /* Light grey text */
+            overflow-x: hidden; /* Prevent horizontal scroll */
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Orbitron', sans-serif;
+            color: #00FFFF; /* Electric blue for headings */
+            text-shadow: 0 0 8px rgba(0, 255, 255, 0.6); /* Subtle neon glow */
+        }
+        .text-neon-green {
+            color: #39FF14;
+            text-shadow: 0 0 5px rgba(57, 255, 20, 0.6);
+        }
+        .bg-gradient-hack {
+            background: linear-gradient(135deg, #000033 0%, #1A1A1A 100%);
+        }
+        .btn-primary {
+            @apply bg-gradient-to-r from-purple-600 to-indigo-700 text-white font-bold py-3 px-6 rounded-lg shadow-lg hover:from-purple-700 hover:to-indigo-800 transition duration-300 ease-in-out transform hover:scale-105;
+            box-shadow: 0 0 15px rgba(153, 0, 255, 0.7); /* Purple glow */
+        }
+        .btn-secondary {
+            @apply bg-gradient-to-r from-green-500 to-teal-600 text-white font-bold py-3 px-6 rounded-lg shadow-lg hover:from-green-600 hover:to-teal-700 transition duration-300 ease-in-out transform hover:scale-105;
+            box-shadow: 0 0 15px rgba(57, 255, 20, 0.7); /* Green glow */
+        }
+        .card-glow {
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3); /* Cyan glow */
+            transition: all 0.3s ease-in-out;
+        }
+        .card-glow:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.7);
+        }
+
+        /* Typing effect for hero text */
+        .typing-effect {
+            overflow: hidden; /* Ensures the content is not revealed until the animation */
+            white-space: nowrap; /* Keeps the content on a single line */
+            margin: 0 auto; /* Gives that scrolling effect as the typing happens */
+            letter-spacing: .15em; /* Adjust as needed */
+            animation: typing 3s steps(40, end) forwards,
+                       blink-caret .75s step-end infinite;
+        }
+
+        /* The typing animation */
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+
+        /* The typewriter cursor effect */
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: #39FF14; }
+        }
+
+        /* Circuit board pattern for background */
+        .circuit-bg {
+            background-image: url('data:image/svg+xml,%3Csvg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath d="M100 0L0 100V0H100z" fill="%231A1A1A" opacity="0.1"/%3E%3Cpath d="M0 0L100 100V0H0z" fill="%2300FFFF" opacity="0.05"/%3E%3C/svg%3E');
+            background-size: 200px;
+        }
+
+        /* Network flow animation for Hero Section */
+        @keyframes network-flow {
+            from { background-position: 0 0; }
+            to { background-position: 200px 200px; }
+        }
+    </style>
+</head>
+<body class="circuit-bg min-h-screen flex flex-col">
+
+    <!-- Navbar -->
+    <nav class="bg-gray-900 bg-opacity-70 backdrop-blur-md p-4 sticky top-0 z-50 rounded-b-xl shadow-lg">
+        <div class="container mx-auto flex justify-between items-center flex-wrap">
+            <a href="#" class="text-2xl font-bold text-neon-green tracking-wider rounded-md p-2">
+                Ethical <span class="text-purple-400">Explorers</span>
+            </a>
+            <div class="block lg:hidden">
+                <button id="nav-toggle" class="flex items-center px-3 py-2 border rounded text-gray-400 border-gray-400 hover:text-white hover:border-white">
+                    <svg class="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Menu</title><path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/></svg>
+                </button>
+            </div>
+            <div class="w-full flex-grow lg:flex lg:items-center lg:w-auto hidden" id="nav-content">
+                <ul class="text-base lg:flex lg:ml-auto items-center">
+                    <li><a href="#home" class="block mt-4 lg:inline-block lg:mt-0 text-gray-300 hover:text-neon-green px-4 py-2 rounded-lg transition duration-300">Home</a></li>
+                    <li><a href="#about" class="block mt-4 lg:inline-block lg:mt-0 text-gray-300 hover:text-neon-green px-4 py-2 rounded-lg transition duration-300">About Us</a></li>
+                    <li><a href="#youtube" class="block mt-4 lg:inline-block lg:mt-0 text-gray-300 hover:text-neon-green px-4 py-2 rounded-lg transition duration-300">Latest Expeditions</a></li>
+                    <li><a href="#articles" class="block mt-4 lg:inline-block lg:mt-0 text-gray-300 hover:text-neon-green px-4 py-2 rounded-lg transition duration-300">Knowledge Vault</a></li>
+                    <li><a href="#games" class="block mt-4 lg:inline-block lg:mt-0 text-gray-300 hover:text-neon-green px-4 py-2 rounded-lg transition duration-300">Anomaly Lab</a></li>
+                    <li>
+                        <a href="https://youtube.com/@ethicalexplorers18" target="_blank" class="block mt-4 lg:inline-block lg:mt-0 btn-primary ml-4 transition duration-300">
+                            <i class="fab fa-youtube mr-2"></i> Visit YouTube
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="flex-grow">
+        <!-- Hero Section -->
+        <section id="home" class="relative h-screen flex items-center justify-center text-center p-8 bg-gradient-hack rounded-b-3xl shadow-xl border-b-4 border-teal-500">
+            <div class="relative z-10 max-w-4xl mx-auto">
+                <h1 class="text-6xl md:text-7xl lg:text-8xl font-extrabold mb-6 leading-tight text-neon-green">
+                    Ethical <span class="text-purple-400">Explorers</span>
+                </h1>
+                <p id="tagline" class="typing-effect text-2xl md:text-3xl text-gray-300 mb-10 overflow-hidden whitespace-nowrap border-r-4 border-neon-green pr-2">
+                    Mastering Cyber Frontiers: Code, Exploit, Defend.
+                </p>
+                <div class="flex flex-col sm:flex-row justify-center space-y-6 sm:space-y-0 sm:space-x-8">
+                    <a href="https://youtube.com/@ethicalexplorers18" target="_blank" class="btn-primary flex items-center justify-center">
+                        <i class="fab fa-youtube mr-3"></i> Join the Expedition
+                    </a>
+                    <a href="#articles" class="btn-secondary flex items-center justify-center">
+                        <i class="fas fa-book-open mr-3"></i> Dive into the Articles
+                    </a>
+                </div>
+            </div>
+            <!-- Subtle network overlay animation -->
+            <div class="absolute inset-0 z-0 opacity-10" style="background-image: radial-gradient(circle at center, #00FFFF 1px, transparent 1px), radial-gradient(circle at center, #9900FF 1px, transparent 1px); background-size: 30px 30px; animation: network-flow 20s linear infinite;"></div>
+        </section>
+
+        <!-- About Us Section -->
+        <section id="about" class="py-20 px-8 bg-black bg-opacity-70 backdrop-blur-sm mt-8 rounded-2xl shadow-xl">
+            <div class="container mx-auto text-center max-w-4xl">
+                <h2 class="text-5xl font-bold mb-12 text-purple-400">
+                    <i class="fas fa-info-circle mr-4"></i>About Ethical Explorers
+                </h2>
+                <div class="text-lg text-gray-300 leading-relaxed space-y-6">
+                    <p>Join the <strong class="text-neon-green">Ethical Explorers</strong> on a thrilling journey into the world of ethical hacking!</p>
+                    <p>We delve into the fascinating world of cybersecurity, exploring vulnerabilities and learning how to ethically exploit them to make systems stronger.</p>
+                    <p>Here's what you can expect:</p>
+                    <ul class="list-disc list-inside text-left mx-auto max-w-2xl space-y-2">
+                        <li><strong class="text-teal-400">In-depth tutorials:</strong> We break down complex ethical hacking concepts into easy-to-understand lessons, perfect for beginners and seasoned explorers alike.</li>
+                        <li><strong class="text-teal-400">Real-world scenarios:</strong> Learn how ethical hackers identify and address security weaknesses before malicious actors can exploit them.</li>
+                        <li><strong class="text-teal-400">The latest tools and techniques:</strong> Stay ahead of the curve with demonstrations of the best ethical hacking tools used by professionals.</li>
+                    </ul>
+                    <p>Whether you're a cybersecurity enthusiast, a developer looking to fortify your applications, Ethical Explorers is your one-stop shop for ethical hacking knowledge.</p>
+                    <p class="font-bold text-xl text-neon-green">Subscribe now and embark on your ethical hacking adventure!</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Latest Expeditions (YouTube Videos Section) -->
+        <section id="youtube" class="py-20 px-8 bg-gray-900 bg-opacity-80 backdrop-blur-sm mt-8 rounded-2xl shadow-xl">
+            <div class="container mx-auto text-center">
+                <h2 class="text-5xl font-bold mb-12 text-neon-green">
+                    <i class="fab fa-youtube mr-4"></i>Latest Expeditions
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                    <!-- Video Card 1 -->
+                    <div class="bg-gray-800 rounded-xl overflow-hidden card-glow p-6 flex flex-col">
+                        <img src="https://placehold.co/600x337/1A1A1A/00FFFF?text=Video+Thumbnail+1" alt="YouTube Video Thumbnail" class="w-full h-auto rounded-lg mb-4 object-cover">
+                        <h3 class="text-2xl font-bold text-teal-400 mb-3 hover:text-teal-300 transition duration-200">Understanding Network Penetration Testing</h3>
+                        <p class="text-gray-400 text-sm mb-4 flex-grow">Learn the basics of network pentesting, including reconnaissance, scanning, and exploitation phases...</p>
+                        <a href="https://youtube.com/watch?v=yourvideoid1" target="_blank" class="btn-secondary w-full text-center text-sm">
+                            <i class="fas fa-play-circle mr-2"></i> Watch Now
+                        </a>
+                    </div>
+                    <!-- Video Card 2 -->
+                    <div class="bg-gray-800 rounded-xl overflow-hidden card-glow p-6 flex flex-col">
+                        <img src="https://placehold.co/600x337/1A1A1A/9900FF?text=Video+Thumbnail+2" alt="YouTube Video Thumbnail" class="w-full h-auto rounded-lg mb-4 object-cover">
+                        <h3 class="text-2xl font-bold text-purple-400 mb-3 hover:text-purple-300 transition duration-200">Web Application Security: XSS Vulnerabilities</h3>
+                        <p class="text-gray-400 text-sm mb-4 flex-grow">Dive deep into Cross-Site Scripting (XSS) attacks, how to identify them, and effective mitigation strategies...</p>
+                        <a href="https://youtube.com/watch?v=yourvideoid2" target="_blank" class="btn-secondary w-full text-center text-sm">
+                            <i class="fas fa-play-circle mr-2"></i> Watch Now
+                        </a>
+                    </div>
+                    <!-- Video Card 3 -->
+                    <div class="bg-gray-800 rounded-xl overflow-hidden card-glow p-6 flex flex-col">
+                        <img src="https://placehold.co/600x337/1A1A1A/39FF14?text=Video+Thumbnail+3" alt="YouTube Video Thumbnail" class="w-full h-auto rounded-lg mb-4 object-cover">
+                        <h3 class="text-2xl font-bold text-green-400 mb-3 hover:text-green-300 transition duration-200">OSINT for Beginners: Gathering Open Source Intelligence</h3>
+                        <p class="text-gray-400 text-sm mb-4 flex-grow">Explore the world of Open Source Intelligence (OSINT) and how to gather crucial information legally and ethically...</p>
+                        <a href="https://youtube.com/watch?v=yourvideoid3" target="_blank" class="btn-secondary w-full text-center text-sm">
+                            <i class="fas fa-play-circle mr-2"></i> Watch Now
+                        </a>
+                    </div>
+                </div>
+                <button class="btn-primary mt-12 text-lg px-8 py-4">Load More Expeditions</button>
+            </div>
+        </section>
+
+        <!-- The Knowledge Vault (Articles/Blogs Section) -->
+        <section id="articles" class="py-20 px-8 bg-black bg-opacity-70 backdrop-blur-sm mt-8 rounded-2xl shadow-xl">
+            <div class="container mx-auto text-center">
+                <h2 class="text-5xl font-bold mb-12 text-purple-400">
+                    <i class="fas fa-scroll mr-4"></i>The Knowledge Vault
+                </h2>
+                <p class="text-gray-400 text-xl mb-12">Daily articles complementing our YouTube expeditions with ethical hacking tips & tricks.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                    <!-- Article Card 1 -->
+                    <div class="bg-gray-800 rounded-xl overflow-hidden card-glow p-6 flex flex-col">
+                        <h3 class="text-2xl font-bold text-neon-green mb-3 hover:text-teal-400 transition duration-200">Top 5 Tools for Ethical Hackers in 2025</h3>
+                        <p class="text-gray-400 text-sm mb-4 flex-grow">Discover the essential software and frameworks every aspiring ethical hacker needs in their toolkit...</p>
+                        <span class="text-gray-500 text-xs mb-4">Published: June 10, 2025</span>
+                        <a href="#" class="btn-secondary w-full text-center text-sm">
+                            <i class="fas fa-newspaper mr-2"></i> Read More
+                        </a>
+                    </div>
+                    <!-- Article Card 2 -->
+                    <div class="bg-gray-800 rounded-xl overflow-hidden card-glow p-6 flex flex-col">
+                        <h3 class="text-2xl font-bold text-purple-400 mb-3 hover:text-purple-300 transition duration-200">Securing Your Home Network: A Beginner's Guide</h3>
+                        <p class="text-gray-400 text-sm mb-4 flex-grow">Practical steps to harden your Wi-Fi, router, and connected devices against common threats...</p>
+                        <span class="text-gray-500 text-xs mb-4">Published: June 09, 2025</span>
+                        <a href="#" class="btn-secondary w-full text-center text-sm">
+                            <i class="fas fa-newspaper mr-2"></i> Read More
+                        </a>
+                    </div>
+                    <!-- Article Card 3 -->
+                    <div class="bg-gray-800 rounded-xl overflow-hidden card-glow p-6 flex flex-col">
+                        <h3 class="text-2xl font-bold text-teal-400 mb-3 hover:text-neon-green transition duration-200">The Ethics of Penetration Testing: A Deep Dive</h3>
+                        <p class="text-gray-400 text-sm mb-4 flex-grow">Understanding the legal and moral boundaries of ethical hacking and responsible disclosure...</p>
+                        <span class="text-gray-500 text-xs mb-4">Published: June 08, 2025</span>
+                        <a href="#" class="btn-secondary w-full text-center text-sm">
+                            <i class="fas fa-newspaper mr-2"></i> Read More
+                        </a>
+                    </div>
+                </div>
+                <button class="btn-primary mt-12 text-lg px-8 py-4">Explore More Articles</button>
+            </div>
+        </section>
+
+        <!-- The Anomaly Lab (Hacker Related Web-Based Games/Quizzes Section) -->
+        <section id="games" class="py-20 px-8 bg-gray-900 bg-opacity-80 backdrop-blur-sm mt-8 rounded-2xl shadow-xl">
+            <div class="container mx-auto text-center">
+                <h2 class="text-5xl font-bold mb-12 text-neon-green">
+                    <i class="fas fa-flask mr-4"></i>The Anomaly Lab
+                </h2>
+                <p class="text-gray-400 text-xl mb-12">Engage with interactive challenges and sharpen your ethical hacking prowess.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                    <!-- Game/Quiz Card 1 -->
+                    <div class="bg-gray-800 rounded-xl overflow-hidden card-glow p-6 flex flex-col items-center justify-center text-center">
+                        <i class="fas fa-code text-6xl text-purple-400 mb-6"></i>
+                        <h3 class="text-2xl font-bold text-purple-400 mb-3">Crack the Code Challenge</h3>
+                        <p class="text-gray-400 text-sm mb-4 flex-grow">Identify vulnerabilities in code snippets and propose secure fixes.</p>
+                        <button class="btn-primary w-full text-center text-sm" onclick="showGameModal('Crack the Code Challenge', 'Identify vulnerabilities in code snippets and propose secure fixes. (Game simulation: Click "Start Game" to continue)')">
+                            <i class="fas fa-gamepad mr-2"></i> Play Now
+                        </button>
+                    </div>
+                    <!-- Game/Quiz Card 2 -->
+                    <div class="bg-gray-800 rounded-xl overflow-hidden card-glow p-6 flex flex-col items-center justify-center text-center">
+                        <i class="fas fa-terminal text-6xl text-teal-400 mb-6"></i>
+                        <h3 class="text-2xl font-bold text-teal-400 mb-3">Decipher the Log Puzzle</h3>
+                        <p class="text-gray-400 text-sm mb-4 flex-grow">Analyze simulated server logs to detect suspicious activities and cyber threats.</p>
+                        <button class="btn-primary w-full text-center text-sm" onclick="showGameModal('Decipher the Log Puzzle', 'Analyze simulated server logs to detect suspicious activities and cyber threats. (Game simulation: Click "Start Game" to continue)')">
+                            <i class="fas fa-gamepad mr-2"></i> Play Now
+                        </button>
+                    </div>
+                    <!-- Game/Quiz Card 3 -->
+                    <div class="bg-gray-800 rounded-xl overflow-hidden card-glow p-6 flex flex-col items-center justify-center text-center">
+                        <i class="fas fa-fingerprint text-6xl text-neon-green mb-6"></i>
+                        <h3 class="text-2xl font-bold text-neon-green mb-3">Phishing Detector Quiz</h3>
+                        <p class="text-gray-400 text-sm mb-4 flex-grow">Can you spot the fake? Test your ability to identify common phishing attempts.</p>
+                        <button class="btn-primary w-full text-center text-sm" onclick="showGameModal('Phishing Detector Quiz', 'Can you spot the fake? Test your ability to identify common phishing attempts. (Game simulation: Click "Start Game" to continue)')">
+                            <i class="fas fa-gamepad mr-2"></i> Play Now
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Game Modal (simulated for demonstration) -->
+        <div id="gameModal" class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-[100] hidden p-4">
+            <div class="bg-gray-800 p-8 rounded-xl card-glow max-w-lg w-full text-center relative border border-neon-green">
+                <button onclick="hideGameModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white text-3xl">&times;</button>
+                <h3 id="gameModalTitle" class="text-4xl font-bold text-neon-green mb-6"></h3>
+                <p id="gameModalDescription" class="text-gray-300 text-lg mb-8"></p>
+                <button class="btn-secondary text-lg px-8 py-4" onclick="startGame()">Start Game</button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 bg-opacity-70 backdrop-blur-md py-8 mt-12 rounded-t-xl shadow-lg">
+        <div class="container mx-auto text-center">
+            <div class="flex justify-center space-x-6 mb-6">
+                <a href="https://youtube.com/@ethicalexplorers18" target="_blank" class="text-gray-400 hover:text-red-500 transition duration-300 transform hover:scale-125 text-3xl"><i class="fab fa-youtube"></i></a>
+                <a href="#" target="_blank" class="text-gray-400 hover:text-blue-400 transition duration-300 transform hover:scale-125 text-3xl"><i class="fab fa-twitter"></i></a>
+                <a href="#" target="_blank" class="text-gray-400 hover:text-indigo-400 transition duration-300 transform hover:scale-125 text-3xl"><i class="fab fa-discord"></i></a>
+                <a href="#" target="_blank" class="text-gray-400 hover:text-purple-400 transition duration-300 transform hover:scale-125 text-3xl"><i class="fab fa-instagram"></i></a>
+            </div>
+            <p class="text-gray-500 text-sm mb-4">&copy; 2025 Ethical Explorers. All rights reserved.</p>
+            <div class="flex justify-center space-x-6 text-sm">
+                <a href="#" class="text-gray-500 hover:text-neon-green transition duration-300">Privacy Policy</a>
+                <span class="text-gray-600">|</span>
+                <a href="#" class="text-gray-500 hover:text-neon-green transition duration-300">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Navbar toggle for mobile
+        document.getElementById('nav-toggle').onclick = function () {
+            document.getElementById('nav-content').classList.toggle('hidden');
+        }
+
+        // Simulate game modal
+        function showGameModal(title, description) {
+            document.getElementById('gameModalTitle').innerText = title;
+            document.getElementById('gameModalDescription').innerText = description;
+            document.getElementById('gameModal').classList.remove('hidden');
+        }
+
+        function hideGameModal() {
+            document.getElementById('gameModal').classList.add('hidden');
+        }
+
+        function startGame() {
+            // In a real application, this would navigate to the game page or load game logic.
+            // For this demonstration, we'll just show a message.
+            console.log("Game started! (This is a simulation. In a real app, the game would load here.)");
+            // Using a custom message box instead of alert()
+            const gameStartedMessage = document.createElement('div');
+            gameStartedMessage.className = 'fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-[101]';
+            gameStartedMessage.innerHTML = `
+                <div class="bg-gray-800 p-8 rounded-xl card-glow max-w-sm w-full text-center relative border border-neon-green">
+                    <p class="text-neon-green text-xl mb-6">Game started! (This is a simulation. In a real app, the game would load here.)</p>
+                    <button class="btn-secondary px-6 py-2" onclick="this.parentNode.parentNode.remove()">OK</button>
+                </div>
+            `;
+            document.body.appendChild(gameStartedMessage);
+            hideGameModal();
+        }
+    </script>
+</body>
+</html>
