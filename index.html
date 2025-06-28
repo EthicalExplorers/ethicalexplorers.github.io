@@ -218,8 +218,8 @@
                 </h2>
                 <p class="text-gray-400 text-xl mb-12">Daily articles complementing our YouTube expeditions with ethical hacking tips & tricks.</p>
                 <!-- Container for dynamically loaded articles -->
-                <div id="articles-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-                    <!-- Articles will be injected here by JavaScript -->
+                <div id="articles-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 min-h-[200px] justify-items-center items-center">
+                    <!-- Articles will be injected here by JavaScript or a "No articles" message -->
                 </div>
                 <button id="explore-more-articles" class="btn-primary mt-12 text-lg px-8 py-4 hidden">Explore More Articles</button>
             </div>
@@ -309,25 +309,25 @@
         const allYoutubeVideos = [
             {
                 title: "Kali Linux: Host Your Own Onion Website Tutorial",
-                description: "Learn to set up your own anonymous onion website on Kali Linux using Tor hidden services.", // Updated description
+                description: "Learn to set up your own anonymous onion website on Kali Linux using Tor hidden services.",
                 thumbnail: "https://img.youtube.com/vi/lM8YPeLNbhA/hqdefault.jpg",
                 link: "https://youtu.be/lM8YPeLNbhA"
             },
             {
                 title: "Easy Way to Investigate Instagram Profiles OSINT Tool: OSINTGRAM Installion",
-                description: "Discover OSINTGRAM for Instagram profile investigations – a powerful OSINT tool for ethical data gathering.", // Updated description
+                description: "Discover OSINTGRAM for Instagram profile investigations – a powerful OSINT tool for ethical data gathering.",
                 thumbnail: "https://img.youtube.com/vi/nysaecTpCqM/hqdefault.jpg",
                 link: "https://youtu.be/nysaecTpCqM"
             },
             {
                 title: "Web Application Security: Practical XSS Vulnerability & Prevention Guide",
-                description: "Understand Cross-Site Scripting (XSS) vulnerabilities and practical prevention techniques for web applications.", // Updated description
+                description: "Understand Cross-Site Scripting (XSS) vulnerabilities and practical prevention techniques for web applications.",
                 thumbnail: "https://img.youtube.com/vi/90S9l7X32Zk/hqdefault.jpg",
                 link: "https://youtu.be/90S9l7X32Zk"
             },
             {
                 title: "OSINT Tool Installation & Tutorial: Gathering Open Source Intelligence",
-                description: "Master OSINT with this guide on tool installation and techniques for collecting open-source intelligence ethically.", // Updated description
+                description: "Master OSINT with this guide on tool installation and techniques for collecting open-source intelligence ethically.",
                 thumbnail: "https://img.youtube.com/vi/YIM6OWdgd-Y/hqdefault.jpg",
                 link: "https://youtu.be/YIM6OWdgd-Y"
             }
@@ -339,7 +339,13 @@
         // Function to render content cards
         function renderCards(containerId, dataArray, startIndex, endIndex, type) {
             const container = document.getElementById(containerId);
+            if (!container) {
+                console.error(`Container with ID "${containerId}" not found.`);
+                return;
+            }
             let htmlContent = '';
+            let itemsRendered = 0; // Track how many items are actually rendered
+
             for (let i = startIndex; i < endIndex && i < dataArray.length; i++) {
                 const item = dataArray[i];
                 if (type === 'video') {
@@ -354,7 +360,6 @@
                         </div>
                     `;
                 } else if (type === 'article') {
-                    // Displaying only the first few tags on the card for brevity
                     const tagsHtml = item.tags.slice(0, 4).map(tag => `<span class="bg-gray-700 px-2 py-1 rounded-full">#${tag}</span>`).join('');
                     htmlContent += `
                         <div class="bg-gray-800 rounded-xl overflow-hidden card-glow p-6 flex flex-col">
@@ -370,8 +375,15 @@
                         </div>
                     `;
                 }
+                itemsRendered++;
             }
-            container.innerHTML += htmlContent; // Append content
+
+            if (itemsRendered === 0 && startIndex === 0 && type === 'article') {
+                // If no articles are rendered initially, display a message
+                container.innerHTML = `<p class="text-gray-500 text-lg py-10">No articles available at the moment. Please check back later!</p>`;
+            } else {
+                container.innerHTML = htmlContent; // Replace content instead of appending
+            }
         }
 
         // Initial rendering on page load
@@ -379,11 +391,15 @@
             renderCards('youtube-videos-container', allYoutubeVideos, 0, initialDisplayCount, 'video');
             if (allYoutubeVideos.length > initialDisplayCount) {
                 document.getElementById('load-more-youtube').classList.remove('hidden');
+            } else {
+                document.getElementById('load-more-youtube').classList.add('hidden'); // Ensure hidden if not needed
             }
 
             renderCards('articles-container', allBlogArticles, 0, initialDisplayCount, 'article');
             if (allBlogArticles.length > initialDisplayCount) {
                 document.getElementById('explore-more-articles').classList.remove('hidden');
+            } else {
+                document.getElementById('explore-more-articles').classList.add('hidden'); // Ensure hidden if not needed
             }
         });
 
