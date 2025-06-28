@@ -334,7 +334,7 @@
             // Add more YouTube videos here
         ];
 
-        const initialDisplayCount = 3; // Number of items to show initially
+        let initialDisplayCount = 3; // Number of items to show initially
 
         // Data for Blog Articles
         const allBlogArticles = [
@@ -490,6 +490,9 @@
             // Add more blog articles here
         ];
 
+        let currentYoutubeVideosShown = initialDisplayCount;
+        let currentArticlesShown = initialDisplayCount;
+
         // Function to render content cards
         function renderCards(containerId, dataArray, startIndex, endIndex, type) {
             const container = document.getElementById(containerId);
@@ -500,12 +503,10 @@
             let htmlContent = '';
             let itemsRendered = 0; // Track how many items are actually rendered
 
-            // --- DEBUG LOGS START ---
-            if (type === 'article') {
-                console.log(`[DEBUG] renderCards called for articles-container. Data Array Length: ${dataArray.length}`);
-                console.log("[DEBUG] allBlogArticles content:", dataArray);
+            // Clear the container only for initial render
+            if (startIndex === 0) {
+                container.innerHTML = '';
             }
-            // --- DEBUG LOGS END ---
 
             for (let i = startIndex; i < endIndex && i < dataArray.length; i++) {
                 const item = dataArray[i];
@@ -540,20 +541,14 @@
             }
 
             if (itemsRendered === 0 && startIndex === 0 && type === 'article') {
-                container.innerHTML = `<p class="text-gray-500 text-lg py-10">No articles available at the moment. Please check back later!</p>`;
-                console.log("[DEBUG] No articles rendered, displaying fallback message.");
+                container.innerHTML = `<p class="text-gray-500 text-lg py-10 w-full col-span-full">No articles available at the moment. Please check back later!</p>`;
             } else {
-                container.innerHTML = htmlContent; // Replace content instead of appending
-                if (type === 'article') {
-                    console.log("[DEBUG] Articles HTML content generated (first 500 chars):", htmlContent.substring(0, 500));
-                }
+                container.innerHTML += htmlContent; // Append content for subsequent loads
             }
         }
 
         // Initial rendering on page load
         document.addEventListener('DOMContentLoaded', () => {
-            const initialDisplayCount = 3; // Number of items to show initially
-
             renderCards('youtube-videos-container', allYoutubeVideos, 0, initialDisplayCount, 'video');
             if (allYoutubeVideos.length > initialDisplayCount) {
                 document.getElementById('load-more-youtube').classList.remove('hidden');
@@ -570,24 +565,24 @@
         });
 
         // Load More Videos functionality
-        let currentYoutubeVideosShown = initialDisplayCount;
         document.getElementById('load-more-youtube').addEventListener('click', () => {
-            const videosToLoad = allYoutubeVideos.length - currentYoutubeVideosShown;
-            if (videosToLoad > 0) {
-                renderCards('youtube-videos-container', allYoutubeVideos, currentYoutubeVideosShown, allYoutubeVideos.length, 'video');
-                currentYoutubeVideosShown = allYoutubeVideos.length; // All videos are now shown
-                document.getElementById('load-more-youtube').classList.add('hidden'); // Hide the button
+            const nextBatchEnd = currentYoutubeVideosShown + initialDisplayCount; // Load next 'initialDisplayCount' items
+            renderCards('youtube-videos-container', allYoutubeVideos, currentYoutubeVideosShown, nextBatchEnd, 'video');
+            currentYoutubeVideosShown = Math.min(nextBatchEnd, allYoutubeVideos.length); // Update shown count
+
+            if (currentYoutubeVideosShown === allYoutubeVideos.length) {
+                document.getElementById('load-more-youtube').classList.add('hidden'); // Hide if all loaded
             }
         });
 
         // Load More Articles functionality
-        let currentArticlesShown = initialDisplayCount;
         document.getElementById('explore-more-articles').addEventListener('click', () => {
-            const articlesToLoad = allBlogArticles.length - currentArticlesShown;
-            if (articlesToLoad > 0) {
-                renderCards('articles-container', allBlogArticles, currentArticlesShown, allBlogArticles.length, 'article');
-                currentArticlesShown = allBlogArticles.length; // All articles are now shown
-                document.getElementById('explore-more-articles').classList.add('hidden'); // Hide the button
+            const nextBatchEnd = currentArticlesShown + initialDisplayCount; // Load next 'initialDisplayCount' items
+            renderCards('articles-container', allBlogArticles, currentArticlesShown, nextBatchEnd, 'article');
+            currentArticlesShown = Math.min(nextBatchEnd, allBlogArticles.length); // Update shown count
+
+            if (currentArticlesShown === allBlogArticles.length) {
+                document.getElementById('explore-more-articles').classList.add('hidden'); // Hide if all loaded
             }
         });
 
