@@ -271,7 +271,7 @@
                         <i class="fas fa-terminal text-6xl text-teal-400 mb-6"></i>
                         <h3 class="text-2xl font-bold text-teal-400 mb-3">Decipher the Log Puzzle</h3>
                         <p class="text-gray-400 text-sm mb-4 flex-grow">Analyze simulated server logs to detect suspicious activities and cyber threats.</p>
-                        <button class="btn-primary w-full text-center text-sm" onclick="showGameModal('Decipher the Log Puzzle', 'Analyze simulated server logs to detect suspicious activities and cyber threats. (Game simulation: Click "Start Game" to continue)')">
+                        <button class="btn-primary w-full text-center text-sm" onclick="showGameModal('Decipher the Log Puzzle', 'Analyze simulated server logs to detect suspicious activities and cyber threats.')">
                             <i class="fas fa-gamepad mr-2"></i> Play Now
                         </button>
                     </div>
@@ -280,7 +280,7 @@
                         <i class="fas fa-fingerprint text-6xl text-neon-green mb-6"></i>
                         <h3 class="text-2xl font-bold text-neon-green mb-3">Phishing Detector Quiz</h3>
                         <p class="text-gray-400 text-sm mb-4 flex-grow">Can you spot the fake? Test your ability to identify common phishing attempts.</p>
-                        <button class="btn-primary w-full text-center text-sm" onclick="showGameModal('Phishing Detector Quiz', 'Can you spot the fake? Test your ability to identify common phishing attempts. (Game simulation: Click "Start Game" to continue)')">
+                        <button class="btn-primary w-full text-center text-sm" onclick="showGameModal('Phishing Detector Quiz', 'Can you spot the fake? Test your ability to identify common phishing attempts.')">
                             <i class="fas fa-gamepad mr-2"></i> Play Now
                         </button>
                     </div>
@@ -771,46 +771,42 @@
         }
 
         // Game Logic for "Crack the Code Challenge"
-        let secretCode = [];
-        let attemptsLeft = 10;
-        let gameActive = false;
+        let crackCodeSecret = [];
+        let crackCodeAttemptsLeft = 10;
+        let crackCodeGameActive = false;
 
-        function generateSecretCode() {
+        function generateCrackCodeSecret() {
             const digits = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-            secretCode = [];
-            while (secretCode.length < 4) {
+            crackCodeSecret = [];
+            while (crackCodeSecret.length < 4) {
                 const randomIndex = Math.floor(Math.random() * digits.length);
-                secretCode.push(digits[randomIndex]);
+                crackCodeSecret.push(digits[randomIndex]);
                 digits.splice(randomIndex, 1); // Ensure unique digits
             }
-            console.log("Secret Code (for debugging):", secretCode.join('')); // For development/testing
+            console.log("Crack the Code Secret (for debugging):", crackCodeSecret.join(''));
         }
 
         function initializeCrackTheCodeGame() {
-            generateSecretCode();
-            attemptsLeft = 10;
-            gameActive = true;
+            generateCrackCodeSecret();
+            crackCodeAttemptsLeft = 10;
+            crackCodeGameActive = true;
             document.getElementById('gameContent').innerHTML = `
                 <div class="space-y-6">
-                    <p id="gameStatus" class="text-xl text-teal-300">Crack the 4-digit code! You have <span id="attemptsLeft">${attemptsLeft}</span> attempts left.</p>
+                    <p id="crackCodeGameStatus" class="text-xl text-teal-300">Crack the 4-digit code! You have <span id="crackCodeAttemptsLeft">${crackCodeAttemptsLeft}</span> attempts left.</p>
                     <div class="flex justify-center mb-4">
-                        <input type="number" id="guess1" class="guess-input" min="0" max="9" maxlength="1" oninput="this.value=this.value.slice(0,1)">
-                        <input type="number" id="guess2" class="guess-input" min="0" max="9" maxlength="1" oninput="this.value=this.value.slice(0,1)">
-                        <input type="number" id="guess3" class="guess-input" min="0" max="9" maxlength="1" oninput="this.value=this.value.slice(0,1)">
-                        <input type="number" id="guess4" class="guess-input" min="0" max="9" maxlength="1" oninput="this.value=this.value.slice(0,1)">
+                        <input type="number" id="crackCodeGuess1" class="guess-input" min="0" max="9" maxlength="1" oninput="this.value=this.value.slice(0,1)">
+                        <input type="number" id="crackCodeGuess2" class="guess-input" min="0" max="9" maxlength="1" oninput="this.value=this.value.slice(0,1)">
+                        <input type="number" id="crackCodeGuess3" class="guess-input" min="0" max="9" maxlength="1" oninput="this.value=this.value.slice(0,1)">
+                        <input type="number" id="crackCodeGuess4" class="guess-input" min="0" max="9" maxlength="1" oninput="this.value=this.value.slice(0,1)">
                     </div>
-                    <button class="btn-primary px-6 py-3 text-base" onclick="submitGuess()">Submit Guess</button>
-                    <div id="guessHistory" class="mt-6 space-y-2 max-h-48 overflow-y-auto bg-gray-700 p-4 rounded-lg">
+                    <button class="btn-primary px-6 py-3 text-base" onclick="submitCrackCodeGuess()">Submit Guess</button>
+                    <div id="crackCodeGuessHistory" class="mt-6 space-y-2 max-h-48 overflow-y-auto bg-gray-700 p-4 rounded-lg">
                         <!-- Guess history will appear here -->
                     </div>
-                    <button id="playAgainButton" class="btn-secondary px-6 py-3 text-base hidden" onclick="resetCrackTheCodeGame()">Play Again</button>
+                    <button id="crackCodePlayAgainButton" class="btn-secondary px-6 py-3 text-base hidden" onclick="resetCrackTheCodeGame()">Play Again</button>
                 </div>
             `;
-            // Focus on the first input field
-            document.getElementById('guess1').focus();
-
-            // Add event listeners for automatically moving focus
-            const inputs = document.querySelectorAll('.guess-input');
+            const inputs = document.querySelectorAll('#gameContent .guess-input');
             inputs.forEach((input, index) => {
                 input.addEventListener('input', (e) => {
                     if (e.target.value.length === 1 && index < inputs.length - 1) {
@@ -823,99 +819,270 @@
                     }
                 });
             });
-            document.getElementById('startGameButton').classList.add('hidden'); // Hide "Start Game" button once game initializes
+            document.getElementById('crackCodeGuess1').focus();
+            document.getElementById('startGameButton').classList.add('hidden');
         }
 
-        function submitGuess() {
-            if (!gameActive) return;
+        function submitCrackCodeGuess() {
+            if (!crackCodeGameActive) return;
 
-            const guess = [
-                parseInt(document.getElementById('guess1').value),
-                parseInt(document.getElementById('guess2').value),
-                parseInt(document.getElementById('guess3').value),
-                parseInt(document.getElementById('guess4').value)
+            const guessInputs = [
+                document.getElementById('crackCodeGuess1').value,
+                document.getElementById('crackCodeGuess2').value,
+                document.getElementById('crackCodeGuess3').value,
+                document.getElementById('crackCodeGuess4').value
             ];
 
-            // Basic validation
-            if (guess.some(isNaN) || guess.some(val => val < 0 || val > 9)) {
-                document.getElementById('gameStatus').innerText = "Please enter 4 digits (0-9).";
-                document.getElementById('gameStatus').classList.remove('text-teal-300', 'text-green-500', 'text-red-500');
-                document.getElementById('gameStatus').classList.add('text-yellow-400');
+            // Validate all inputs are filled and are digits
+            if (guessInputs.some(input => input === '' || !/^\d$/.test(input))) {
+                const statusElement = document.getElementById('crackCodeGameStatus');
+                statusElement.innerText = "Please enter all 4 digits (0-9).";
+                statusElement.className = 'text-xl text-yellow-400'; // Set warning color
                 return;
             }
 
-            attemptsLeft--;
-            document.getElementById('attemptsLeft').innerText = attemptsLeft;
+            const guess = guessInputs.map(Number); // Convert to numbers
+
+            crackCodeAttemptsLeft--;
+            document.getElementById('crackCodeAttemptsLeft').innerText = crackCodeAttemptsLeft;
 
             let correctPosition = 0;
-            let correctDigit = 0; // Correct digit, wrong position
+            let correctDigit = 0;
 
-            const secretCodeCopy = [...secretCode];
+            const secretCodeCopy = [...crackCodeSecret];
             const guessCopy = [...guess];
 
-            // Check for correct position (green pegs) first
             for (let i = 0; i < 4; i++) {
                 if (guessCopy[i] === secretCodeCopy[i]) {
                     correctPosition++;
-                    secretCodeCopy[i] = -1; // Mark as used
-                    guessCopy[i] = -2; // Mark as used
+                    secretCodeCopy[i] = -1;
+                    guessCopy[i] = -2;
                 }
             }
 
-            // Check for correct digit, wrong position (yellow pegs)
             for (let i = 0; i < 4; i++) {
-                if (guessCopy[i] !== -2) { // If not already counted as correct position
+                if (guessCopy[i] !== -2) {
                     const indexInSecret = secretCodeCopy.indexOf(guessCopy[i]);
                     if (indexInSecret !== -1) {
                         correctDigit++;
-                        secretCodeCopy[indexInSecret] = -1; // Mark as used
+                        secretCodeCopy[indexInSecret] = -1;
                     }
                 }
             }
 
-            // Display guess history
-            const guessHistory = document.getElementById('guessHistory');
+            const guessHistory = document.getElementById('crackCodeGuessHistory');
             let feedbackHtml = '';
             for (let i = 0; i < correctPosition; i++) feedbackHtml += '<span class="feedback-peg feedback-green"></span>';
             for (let i = 0; i < correctDigit; i++) feedbackHtml += '<span class="feedback-peg feedback-yellow"></span>';
-            for (let i = 0; i < (4 - correctPosition - correctDigit); i++) feedbackHtml += '<span class="feedback-peg feedback-gray"></span>'; // Unmatched/incorrect pegs
+            for (let i = 0; i < (4 - correctPosition - correctDigit); i++) feedbackHtml += '<span class="feedback-peg feedback-gray"></span>';
 
             guessHistory.innerHTML = `<div class="flex items-center justify-between p-2 bg-gray-900 rounded-md">
                                         <div class="flex">${guess.join('')}</div>
                                         <div class="flex">${feedbackHtml}</div>
                                       </div>` + guessHistory.innerHTML;
 
-            // Check win/loss condition
+            const statusElement = document.getElementById('crackCodeGameStatus');
             if (correctPosition === 4) {
-                document.getElementById('gameStatus').innerText = "Congratulations! You cracked the code!";
-                document.getElementById('gameStatus').classList.remove('text-teal-300', 'text-yellow-400', 'text-red-500');
-                document.getElementById('gameStatus').classList.add('text-green-500');
-                gameActive = false;
-                document.getElementById('playAgainButton').classList.remove('hidden');
-            } else if (attemptsLeft === 0) {
-                document.getElementById('gameStatus').innerText = `Game Over! The code was ${secretCode.join('')}.`;
-                document.getElementById('gameStatus').classList.remove('text-teal-300', 'text-yellow-400', 'text-green-500');
-                document.getElementById('gameStatus').classList.add('text-red-500');
-                gameActive = false;
-                document.getElementById('playAgainButton').classList.remove('hidden');
+                statusElement.innerText = "Congratulations! You cracked the code!";
+                statusElement.className = 'text-xl text-green-500';
+                crackCodeGameActive = false;
+                document.getElementById('crackCodePlayAgainButton').classList.remove('hidden');
+            } else if (crackCodeAttemptsLeft === 0) {
+                statusElement.innerText = `Game Over! The code was ${crackCodeSecret.join('')}.`;
+                statusElement.className = 'text-xl text-red-500';
+                crackCodeGameActive = false;
+                document.getElementById('crackCodePlayAgainButton').classList.remove('hidden');
+            } else {
+                 statusElement.innerText = `Crack the 4-digit code! You have ${crackCodeAttemptsLeft} attempts left.`;
+                 statusElement.className = 'text-xl text-teal-300'; // Reset color after warning
             }
 
-            // Clear input fields for next guess
-            document.getElementById('guess1').value = '';
-            document.getElementById('guess2').value = '';
-            document.getElementById('guess3').value = '';
-            document.getElementById('guess4').value = '';
-            if (gameActive) {
-                document.getElementById('guess1').focus();
+            document.getElementById('crackCodeGuess1').value = '';
+            document.getElementById('crackCodeGuess2').value = '';
+            document.getElementById('crackCodeGuess3').value = '';
+            document.getElementById('crackCodeGuess4').value = '';
+            if (crackCodeGameActive) {
+                document.getElementById('crackCodeGuess1').focus();
             }
         }
 
         function resetCrackTheCodeGame() {
-            document.getElementById('playAgainButton').classList.add('hidden');
-            document.getElementById('gameStatus').classList.remove('text-green-500', 'text-red-500', 'text-yellow-400');
-            document.getElementById('gameStatus').classList.add('text-teal-300');
+            document.getElementById('crackCodePlayAgainButton').classList.add('hidden');
             initializeCrackTheCodeGame();
         }
+
+        // Game Logic for "Decipher the Log Puzzle"
+        let logPuzzleData = {};
+        let logPuzzleGameActive = false;
+
+        const logScenarios = [
+            {
+                log: `[2025-06-28 10:30:05] INFO: User 'admin' logged in from 192.168.1.100\n[2025-06-28 10:30:10] WARN: Multiple failed login attempts for 'root' from 10.0.0.5: Password incorrect\n[2025-06-28 10:30:15] DEBUG: Processing user query for report generation`,
+                keyword: "failed login attempts",
+                explanation: "The 'Multiple failed login attempts' from an unknown IP (10.0.0.5) is highly suspicious and suggests a brute-force attack."
+            },
+            {
+                log: `[2025-06-28 11:15:20] INFO: File 'document.pdf' accessed by user 'john_doe'\n[2025-06-28 11:15:25] ERROR: Unauthorized access attempt to /etc/shadow by 'johndoe'\n[2025-06-28 11:15:30] INFO: Database backup completed successfully`,
+                keyword: "Unauthorized access attempt",
+                explanation: "An 'Unauthorized access attempt' to sensitive system files like /etc/shadow is a critical security event."
+            },
+            {
+                log: `[2025-06-28 14:00:00] INFO: System health check OK\n[2025-06-28 14:00:05] INFO: New user 'guest' created\n[2025-06-28 14:00:10] CRITICAL: Unexpected outbound connection to malicious-site.ru from server-01`,
+                keyword: "malicious-site.ru",
+                explanation: "An 'Unexpected outbound connection' to a known malicious domain is a strong indicator of compromise."
+            }
+        ];
+
+        function initializeDecipherTheLogGame() {
+            const scenario = logScenarios[Math.floor(Math.random() * logScenarios.length)];
+            logPuzzleData = { ...scenario, attempts: 3 }; // Give 3 attempts for this game
+            logPuzzleGameActive = true;
+
+            document.getElementById('gameContent').innerHTML = `
+                <div class="space-y-6 text-left">
+                    <p class="text-gray-300">Analyze the log below and identify the **suspicious keyword**.</p>
+                    <pre id="logDisplay" class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm max-h-48 whitespace-pre-wrap">${logPuzzleData.log}</pre>
+                    <p id="logPuzzleStatus" class="text-xl text-teal-300">Attempts left: <span id="logPuzzleAttemptsLeft">${logPuzzleData.attempts}</span></p>
+                    <input type="text" id="logPuzzleGuess" placeholder="Enter suspicious keyword" class="w-full p-3 rounded-lg bg-gray-700 border border-teal-500 text-white focus:outline-none focus:border-neon-green">
+                    <button class="btn-primary px-6 py-3 text-base" onclick="submitLogPuzzleGuess()">Submit Keyword</button>
+                    <p id="logPuzzleResult" class="text-lg mt-4"></p>
+                    <button id="logPuzzlePlayAgainButton" class="btn-secondary px-6 py-3 text-base hidden" onclick="resetDecipherTheLogGame()">Play Again</button>
+                </div>
+            `;
+            document.getElementById('logPuzzleGuess').focus();
+            document.getElementById('startGameButton').classList.add('hidden');
+        }
+
+        function submitLogPuzzleGuess() {
+            if (!logPuzzleGameActive) return;
+
+            const guess = document.getElementById('logPuzzleGuess').value.trim();
+            const statusElement = document.getElementById('logPuzzleStatus');
+            const resultElement = document.getElementById('logPuzzleResult');
+
+            if (guess === "") {
+                statusElement.innerText = "Please enter a keyword.";
+                statusElement.className = 'text-xl text-yellow-400';
+                return;
+            }
+
+            logPuzzleData.attempts--;
+            document.getElementById('logPuzzleAttemptsLeft').innerText = logPuzzleData.attempts;
+
+            if (guess.toLowerCase() === logPuzzleData.keyword.toLowerCase()) {
+                resultElement.innerHTML = `<span class="text-green-500 font-bold">Correct!</span> ${logPuzzleData.explanation}`;
+                resultElement.className = 'text-lg text-green-500 mt-4';
+                statusElement.className = 'text-xl text-green-500';
+                statusElement.innerText = `You deciphered the log!`;
+                logPuzzleGameActive = false;
+                document.getElementById('logPuzzlePlayAgainButton').classList.remove('hidden');
+            } else if (logPuzzleData.attempts === 0) {
+                resultElement.innerHTML = `<span class="text-red-500 font-bold">Game Over!</span> The suspicious keyword was: "${logPuzzleData.keyword}". ${logPuzzleData.explanation}`;
+                resultElement.className = 'text-lg text-red-500 mt-4';
+                statusElement.className = 'text-xl text-red-500';
+                statusElement.innerText = `You failed to decipher the log.`;
+                logPuzzleGameActive = false;
+                document.getElementById('logPuzzlePlayAgainButton').classList.remove('hidden');
+            } else {
+                resultElement.innerText = "Incorrect keyword. Try again!";
+                resultElement.className = 'text-lg text-yellow-400 mt-4';
+                statusElement.innerText = `Attempts left: ${logPuzzleData.attempts}`;
+                statusElement.className = 'text-xl text-teal-300';
+            }
+            document.getElementById('logPuzzleGuess').value = ''; // Clear input
+            if (logPuzzleGameActive) {
+                document.getElementById('logPuzzleGuess').focus();
+            }
+        }
+
+        function resetDecipherTheLogGame() {
+            document.getElementById('logPuzzlePlayAgainButton').classList.add('hidden');
+            initializeDecipherTheLogGame();
+        }
+
+        // Game Logic for "Phishing Detector Quiz"
+        let phishingQuizData = {};
+        let phishingQuizActive = false;
+
+        const phishingScenarios = [
+            {
+                scenario: `Subject: Urgent - Your Account Is On Hold!
+Dear Customer,
+We detected unusual activity on your account. To prevent further issues, please verify your information immediately by clicking the link below:
+http://bit.ly/secure-my-account-login
+Failure to comply will result in account suspension.
+Thank you,
+Service Department`,
+                answer: "phishing",
+                explanation: "This is a classic phishing attempt. It uses urgent language ('Urgent', 'immediately', 'suspension'), a generic greeting ('Dear Customer'), and a suspicious short URL that doesn't match the supposed sender."
+            },
+            {
+                scenario: `Subject: Order Confirmation #12345
+Hi Jane,
+Thank you for your recent purchase from Ethical Explorers! Your order #12345 has been confirmed and will be shipped within 2 business days. You can track your order here:
+https://ethicalexplorers.com/track/12345
+Thank you for your business!
+The Ethical Explorers Team`,
+                answer: "legitimate",
+                explanation: "This appears legitimate. It has a personalized greeting, a specific order number, and a direct link to the expected website for tracking."
+            },
+            {
+                scenario: `Subject: Important Security Alert!
+Your password for online banking has expired. Please update it now to avoid service interruption. Click here:
+https://secure-login.bank-update.co/reset
+This message is for your security.`,
+                answer: "phishing",
+                explanation: "This is phishing. It creates a sense of urgency, mentions an expired password (which rarely happens without your initiation), and the URL is suspicious, not directly from a known bank domain."
+            }
+        ];
+
+        function initializePhishingDetectorGame() {
+            const scenario = phishingScenarios[Math.floor(Math.random() * phishingScenarios.length)];
+            phishingQuizData = { ...scenario };
+            phishingQuizActive = true;
+
+            document.getElementById('gameContent').innerHTML = `
+                <div class="space-y-6 text-left">
+                    <p class="text-gray-300">Examine the message below. Is it a **Phishing** attempt or **Legitimate**?</p>
+                    <pre id="phishingScenario" class="bg-gray-900 text-gray-200 p-4 rounded-lg overflow-x-auto text-sm max-h-64 whitespace-pre-wrap">${phishingQuizData.scenario}</pre>
+                    <div class="flex justify-center space-x-4">
+                        <button class="btn-primary px-6 py-3 text-base" onclick="submitPhishingAnswer('phishing')">Phishing</button>
+                        <button class="btn-secondary px-6 py-3 text-base" onclick="submitPhishingAnswer('legitimate')">Legitimate</button>
+                    </div>
+                    <p id="phishingQuizResult" class="text-lg mt-4 text-center"></p>
+                    <button id="phishingQuizPlayAgainButton" class="btn-secondary px-6 py-3 text-base hidden" onclick="resetPhishingDetectorGame()">Play Again</button>
+                </div>
+            `;
+            document.getElementById('startGameButton').classList.add('hidden');
+        }
+
+        function submitPhishingAnswer(answer) {
+            if (!phishingQuizActive) return;
+
+            const resultElement = document.getElementById('phishingQuizResult');
+            let isCorrect;
+
+            if (answer === phishingQuizData.answer) {
+                isCorrect = true;
+                resultElement.innerHTML = `<span class="text-green-500 font-bold">Correct!</span> ${phishingQuizData.explanation}`;
+                resultElement.className = 'text-lg text-green-500 mt-4 text-center';
+            } else {
+                isCorrect = false;
+                resultElement.innerHTML = `<span class="text-red-500 font-bold">Incorrect.</span> ${phishingQuizData.explanation}`;
+                resultElement.className = 'text-lg text-red-500 mt-4 text-center';
+            }
+
+            phishingQuizActive = false;
+            document.getElementById('phishingQuizPlayAgainButton').classList.remove('hidden');
+            document.querySelector('#gameContent .btn-primary').disabled = true; // Disable buttons
+            document.querySelector('#gameContent .btn-secondary').disabled = true;
+        }
+
+        function resetPhishingDetectorGame() {
+            document.getElementById('phishingQuizPlayAgainButton').classList.add('hidden');
+            initializePhishingDetectorGame();
+        }
+
 
         // Centralized function to show game modal based on title
         function showGameModal(title, description) {
@@ -924,10 +1091,23 @@
             document.getElementById('gameModal').classList.remove('hidden');
             document.getElementById('gameContent').innerHTML = ''; // Clear previous game content
 
+            // Reset status messages when a new game modal is opened
+            document.getElementById('gameModalDescription').classList.remove('text-yellow-400', 'text-red-500', 'text-green-500');
+            document.getElementById('gameModalDescription').classList.add('text-gray-300');
+
+
+            // Determine which game to initialize
             if (title === 'Crack the Code Challenge') {
                 document.getElementById('startGameButton').classList.remove('hidden');
-                document.getElementById('startGameButton').onclick = initializeCrackTheCodeGame; // Set specific game init
+                document.getElementById('startGameButton').onclick = initializeCrackTheCodeGame;
+            } else if (title === 'Decipher the Log Puzzle') {
+                document.getElementById('startGameButton').classList.remove('hidden');
+                document.getElementById('startGameButton').onclick = initializeDecipherTheLogGame;
+            } else if (title === 'Phishing Detector Quiz') {
+                document.getElementById('startGameButton').classList.remove('hidden');
+                document.getElementById('startGameButton').onclick = initializePhishingDetectorGame;
             } else {
+                // Fallback for other non-implemented games, or if game logic isn't tied to this
                 document.getElementById('startGameButton').classList.remove('hidden');
                 document.getElementById('startGameButton').onclick = () => {
                     const gameStartedMessage = document.createElement('div');
@@ -947,14 +1127,15 @@
 
         function hideGameModal() {
             document.getElementById('gameModal').classList.add('hidden');
-            gameActive = false; // Deactivate game when modal is hidden
+            crackCodeGameActive = false; // Deactivate all active games when modal is hidden
+            logPuzzleGameActive = false;
+            phishingQuizActive = false;
         }
 
-        // Function called by the "Start Game" button within the modal
+        // The startGame function now acts as a dispatcher based on the dynamically set onclick
         function startGame() {
-            // This function is now dynamically set by showGameModal based on the game
-            // For 'Crack the Code', it will call initializeCrackTheCodeGame directly.
-            // For others, it will show the simulation message.
+            // This function is dynamically set by showGameModal to call the specific game's initialization.
+            // No direct code here, it relies on the onclick attribute being set.
         }
     </script>
 </body>
