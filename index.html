@@ -361,9 +361,142 @@
 
         // Data for Blog Articles
         const allBlogArticles = [
+            // Kali Linux Onion Website Tutorial article
             {
-                title: "Unveiling the Digital Footprint: A Deep Dive into OSINT and Osintgram", // Replaced title
-                description: "In an increasingly interconnected world, the lines between public and private information are constantly blurring. This article delves into OSINT and introduces Osintgram, a tool to gather insights from Instagram profiles.", // Replaced description
+                title: "Kali Linux: Host Your Own Onion Website Tutorial",
+                description: "In an era where digital privacy is increasingly scrutinized, understanding tools that champion anonymity has become paramount. This comprehensive guide will walk you through the process of setting up your very own onion website on a Kali Linux machine.",
+                fullContent: `
+                    <h3 class="text-3xl font-bold text-neon-green mb-4">Kali Linux: Host Your Own Onion Website Tutorial</h3>
+                    <p class="mb-4">In an era where digital privacy is increasingly scrutinized, understanding tools that champion anonymity has become paramount. The dark web, often shrouded in mystery and misconception, is fundamentally built upon the principles of privacy and untraceability, powered by technologies like Tor. Far from being solely a domain for illicit activities, the dark web is a critical infrastructure for journalists, activists, and privacy-conscious individuals seeking to communicate and publish without censorship or surveillance.</p>
+                    <p class="mb-6">This comprehensive guide will walk you through the process of setting up your very own onion website on a Kali Linux machine. This isn't about promoting anything illegal, but rather about demystifying hidden services and empowering you with the knowledge to utilize this powerful technology responsibly.</p>
+
+                    <h4 class="text-2xl font-bold text-purple-400 mb-3">Why Host an Onion Website? Exploring the Benefits of Hidden Services</h4>
+                    <p class="mb-4">Before we delve into the technicalities, let's explore the compelling reasons one might choose to host a website on the Tor network:</p>
+                    <ul class="list-disc list-inside text-left mx-auto max-w-2xl space-y-2 mb-6">
+                        <li><strong>Enhanced Anonymity & Privacy:</strong> Tor’s onion routing ensures that the location of your server remains hidden from potential attackers or surveillance entities. This provides a robust layer of protection for the website host.</li>
+                        <li><strong>Censorship Resistance:</strong> In regions with strict internet censorship, onion websites can offer a lifeline for free speech, allowing content to be published and accessed even when traditional websites are blocked.</li>
+                        <li><strong>Secure Communication:</strong> For whistleblowers, journalists, and human rights activists, an onion site can serve as a secure drop-off point or communication platform, minimizing risks associated with sensitive information exchange.</li>
+                        <li><strong>Resilience:</strong> While not impervious to all attacks, the distributed nature of the Tor network can make onion services more resilient against certain forms of denial-of-service (DoS) attacks.</li>
+                        <li><strong>Educational Purposes:</strong> Understanding and setting up a hidden service provides invaluable insights into network security, encryption, and the architecture of anonymous communication networks. It's a hands-on cybersecurity learning experience.</li>
+                    </ul>
+
+                    <h4 class="text-2xl font-bold text-purple-400 mb-3">Prerequisites: Your Kali Linux Foundation</h4>
+                    <p class="mb-6">This tutorial assumes a basic familiarity with Kali Linux, the popular Debian-derived distribution designed for digital forensics and penetration testing. If you're new to Kali, we recommend spending some time with beginner guides to get comfortable with the terminal, file system navigation, and fundamental Linux commands. For this guide, we'll be using a simple index.html file as our test web page, a basic HTML file with some text to demonstrate the web hosting capabilities of your onion service.</p>
+
+                    <h4 class="text-2xl font-bold text-purple-400 mb-3">Step 1: Installing and Updating Tor – The Onion Router</h4>
+                    <p class="mb-4">The cornerstone of any dark web website or hidden service is Tor (The Onion Router). Tor is a free and open-source software that enables anonymous communication. While many Kali Linux installations come with Tor pre-installed, it's crucial to ensure you have the latest version for optimal security and functionality.</p>
+                    <ul class="list-disc list-inside text-left mx-auto max-w-2xl space-y-2 mb-6">
+                        <li><strong>Open your terminal:</strong> This is where all the magic happens.</li>
+                        <li><strong>Install or upgrade Tor:</strong> Execute the following command:</li>
+                        <pre class="bg-gray-900 text-green-400 p-3 rounded-md overflow-x-auto my-2"><code>sudo apt install tor</code></pre>
+                        <li>This command will check for Tor on your system. If it's not present, it will download and install it along with any necessary dependencies. If it's already installed, it will ensure you have the most up-to-date version. This is a critical Linux security practice.</li>
+                    </ul>
+
+                    <h4 class="text-2xl font-bold text-purple-400 mb-3">Step 2: Configuring Tor for Hidden Service Hosting</h4>
+                    <p class="mb-4">Now that Tor is installed, we need to instruct it to run a hidden service. This involves modifying Tor's primary configuration file, torrc, typically located in the <code class="bg-gray-700 p-1 rounded">/etc/tor/</code> directory.</p>
+                    <ul class="list-disc list-inside text-left mx-auto max-w-2xl space-y-2 mb-6">
+                        <li><strong>Open the torrc file with Nano editor:</strong></li>
+                        <pre class="bg-gray-900 text-green-400 p-3 rounded-md overflow-x-auto my-2"><code>sudo nano /etc/tor/torrc</code></pre>
+                        <li>Press Enter.</li>
+                        <li><strong>Locate Hidden Service Directives:</strong> The torrc file contains numerous configuration options. We're specifically interested in the hidden service configuration section. You can scroll through the file, or for a quicker method, use Nano's search function:
+                            <ul class="list-circle list-inside ml-4">
+                                <li>Press <code class="bg-gray-700 p-1 rounded">Ctrl + W</code></li>
+                                <li>Type "<code class="bg-gray-700 p-1 rounded">HiddenService</code>" and press Enter.</li>
+                            </ul>
+                        </li>
+                        <li>You'll be looking for two specific lines, which are usually commented out (indicated by a <code class="bg-gray-700 p-1 rounded">#</code> at the beginning):
+                            <pre class="bg-gray-900 text-green-400 p-3 rounded-md overflow-x-auto my-2"><code># HiddenServiceDir /var/lib/tor/hidden_service/
+# HiddenServicePort 80 127.0.0.1:80</code></pre>
+                        </li>
+                        <li><strong>Uncomment the lines:</strong> Delete the <code class="bg-gray-700 p-1 rounded">#</code> symbol at the beginning of both these lines. This activates them.</li>
+                        <li><code class="bg-gray-700 p-1 rounded">HiddenServiceDir /var/lib/tor/hidden_service/</code>: This directive tells Tor where to create and manage the necessary files for your hidden service. This directory will hold crucial information, including your service's private key and its unique, randomly generated onion hostname.</li>
+                        <li><code class="bg-gray-700 p-1 rounded">HiddenServicePort 80 127.0.0.1:80</code>: This line maps incoming traffic on port 80 of your onion service to port 80 of your local machine (127.0.0.1). This is where your web server (e.g., Apache or Nginx) will be listening.</li>
+                        <li><strong>Save and Exit:</strong>
+                            <ul class="list-circle list-inside ml-4">
+                                <li>Press <code class="bg-gray-700 p-1 rounded">Ctrl + X</code></li>
+                                <li>Type <code class="bg-gray-700 p-1 rounded">Y</code> for yes when asked to save.</li>
+                                <li>Press Enter to confirm the file name.</li>
+                            </ul>
+                        </li>
+                        <li>While <code class="bg-gray-700 p-1 rounded">/var/lib/tor/hidden_service</code> is the default and generally recommended location, advanced users might specify a different directory for specific server security or organizational reasons.</li>
+                    </ul>
+
+                    <h4 class="text-2xl font-bold text-purple-400 mb-3">Step 3: Setting Up Your Local Web Server</h4>
+                    <p class="mb-4">For your onion website to serve content, you need a local web server running. Apache is a popular and straightforward choice on Kali Linux.</p>
+                    <ul class="list-disc list-inside text-left mx-auto max-w-2xl space-y-2 mb-6">
+                        <li><strong>Install Apache2 (if not already installed):</strong></li>
+                        <pre class="bg-gray-900 text-green-400 p-3 rounded-md overflow-x-auto my-2"><code>sudo apt install apache2</code></pre>
+                        <li><strong>Place your website files:</strong> Your <code class="bg-gray-700 p-1 rounded">index.html</code> file (or any other web content) should be placed in Apache's default web root directory, which is <code class="bg-gray-700 p-1 rounded">/var/www/html/</code>.</li>
+                        <pre class="bg-gray-900 text-green-400 p-3 rounded-md overflow-x-auto my-2"><code>sudo mv /path/to/your/index.html /var/www/html/</code></pre>
+                        <li>(Replace <code class="bg-gray-700 p-1 rounded">/path/to/your/index.html</code> with the actual path to your file).</li>
+                        <li><strong>Start Apache2 service:</strong></li>
+                        <pre class="bg-gray-900 text-green-400 p-3 rounded-md overflow-x-auto my-2"><code>sudo systemctl start apache2</code></pre>
+                        <li>You can also enable it to start on boot: <code class="bg-gray-700 p-1 rounded">sudo systemctl enable apache2</code>.</li>
+                    </ul>
+
+                    <h4 class="text-2xl font-bold text-purple-400 mb-3">Step 4: Discovering Your Unique Onion Address</h4>
+                    <p class="mb-4">With Tor configured and your web server ready, it's time to reveal your onion address. This address is your website's unique identifier on the Tor network.</p>
+                    <ul class="list-disc list-inside text-left mx-auto max-w-2xl space-y-2 mb-6">
+                        <li><strong>Open your terminal.</strong></li>
+                        <li><strong>View the hostname file:</strong> Tor automatically generates a hostname file within your specified <code class="bg-gray-700 p-1 rounded">HiddenServiceDir</code>.</li>
+                        <pre class="bg-gray-900 text-green-400 p-3 rounded-md overflow-x-auto my-2"><code>sudo cat /var/lib/tor/hidden_service/hostname</code></pre>
+                        <li>Press Enter.</li>
+                        <li><strong>Copy your onion address:</strong> The output will be a long, seemingly random string of characters followed by the <code class="bg-gray-700 p-1 rounded">.onion</code> extension (e.g., <code class="bg-gray-700 p-1 rounded">abcdef1234567890abcdef1234567890.onion</code>). This is your website’s anonymous address. Copy this entire address carefully.</li>
+                    </ul>
+
+                    <h4 class="text-2xl font-bold text-purple-400 mb-3">Step 5: Starting the Tor Service</h4>
+                    <p class="mb-4">Now, bring your Tor hidden service online!</p>
+                    <ul class="list-disc list-inside text-left mx-auto max-w-2xl space-y-2 mb-6">
+                        <li><strong>Open a new terminal window.</strong> (This is to keep your previous terminal clear, though you can use the same one if you prefer).</li>
+                        <li><strong>Start the Tor service:</strong></li>
+                        <pre class="bg-gray-900 text-green-400 p-3 rounded-md overflow-x-auto my-2"><code>sudo systemctl start tor</code></pre>
+                        <li>This command initiates the Tor service in the background, making your hidden service accessible via its onion address.</li>
+                    </ul>
+
+                    <h4 class="text-2xl font-bold text-purple-400 mb-3">Step 6: Accessing Your Onion Website with Tor Browser</h4>
+                    <p class="mb-4">To access your newly created onion website, you must use the Tor Browser. Standard web browsers like Chrome, Firefox, or Safari cannot directly connect to <code class="bg-gray-700 p-1 rounded">.onion</code> addresses.</p>
+                    <ul class="list-disc list-inside text-left mx-auto max-w-2xl space-y-2 mb-6">
+                        <li><strong>Download Tor Browser:</strong> If you don't have it, download the official Tor Browser from the Tor Project website. Simply search for "Tor browser download" in your regular browser.</li>
+                        <li><strong>Launch Tor Browser.</strong></li>
+                        <li><strong>Paste your onion address:</strong> In the Tor Browser's address bar, paste the <code class="bg-gray-700 p-1 rounded">.onion</code> address you copied earlier and press Enter.</li>
+                        <li>Your simple <code class="bg-gray-700 p-1 rounded">index.html</code> file should now be displayed through the Tor network, confirming your Kali Linux onion site is live!</li>
+                    </ul>
+
+                    <h4 class="text-2xl font-bold text-purple-400 mb-3">Important Considerations for Your Hidden Service</h4>
+                    <ul class="list-disc list-inside text-left mx-auto max-w-2xl space-y-2 mb-6">
+                        <li><strong>Security Best Practices:</strong> While Tor offers anonymity, securing your underlying Kali Linux machine and web server is paramount. Regularly update your system (<code class="bg-gray-700 p-1 rounded">sudo apt update && sudo apt full-upgrade</code>), configure a firewall (<code class="bg-gray-700 p-1 rounded">ufw</code>), and apply other cybersecurity hardening measures.</li>
+                        <li><strong>Persistence:</strong> If you want your onion service to persist across reboots, ensure Tor and Apache2 services are enabled to start automatically (<code class="bg-gray-700 p-1 rounded">sudo systemctl enable tor</code> and <code class="bg-gray-700 p-1 rounded">sudo systemctl enable apache2</code>).</li>
+                        <li><strong>Content:</strong> Be mindful of the content you host. While the Tor network offers anonymity, illegal activities are still illegal and can lead to severe consequences.</li>
+                        <li><strong>Monitoring:</strong> For more advanced setups, consider monitoring your hidden service logs (<code class="bg-gray-700 p-1 rounded">/var/log/tor/log</code>) to ensure it's running smoothly and to troubleshoot any issues.</li>
+                    </ul>
+
+                    <h4 class="text-2xl font-bold text-purple-400 mb-3">Conclusion: Embracing Digital Freedom</h4>
+                    <p class="mb-4">Congratulations! You've successfully set up your very own onion website on Kali Linux. This process not only provides a platform for anonymous content hosting but also deepens your understanding of Tor network fundamentals, network security, and digital privacy technologies. By exploring these tools, you contribute to a more open and uncensored internet.</p>
+                    <p class="mb-6">The dark web, when used responsibly, is a powerful enabler of freedom and a testament to the continuous innovation in anonymous communication. Keep exploring, keep learning, and use your knowledge to advocate for a more secure and private digital world.</p>
+                    <p class="mb-4 text-center">
+                        <a href="https://youtu.be/lM8YPeLNbhA" target="_blank" class="btn-primary text-sm inline-flex items-center">
+                            <i class="fab fa-youtube mr-2"></i> Watch Video Tutorial
+                        </a>
+                    </p>
+                `,
+                date: "June 28, 2025",
+                tags: ["OnionWebsite", "TorHiddenService", "KaliLinux", "DarkWeb", "PrivacyOnline"],
+                full_tags: [
+                    "OnionWebsite", "TorHiddenService", "KaliLinux", "DarkWeb", "PrivacyOnline",
+                    "DigitalPrivacy", "Cybersecurity", "AnonymousBrowse", "NetworkSecurity", "EthicalHacking",
+                    "Infosec", "OpSec", "CensorshipResistance", "DataProtection", "WebHosting",
+                    "SecureCommunication", "LinuxSecurity", "OpenSource", "Decentralization", "DeepWeb",
+                    "CyberAwareness", "DigitalRights", "VirtualPrivateNetwork", "ThreatIntelligence",
+                    "AIinCybersecurity", "ZeroTrust", "OSINT", "How to host .onion site Kali Linux",
+                    "Set up Tor hidden service Kali 2025", "Anonymous web hosting guide",
+                    "Kali Linux dark web server setup", "Secure web server on Tor network",
+                    "Learn Tor hidden services", "Kali Linux privacy tools", "Dark web anonymity guide."
+                ]
+            },
+            // NEW: Unveiling the Digital Footprint: A Deep Dive into OSINT and Osintgram
+            {
+                title: "Unveiling the Digital Footprint: A Deep Dive into OSINT and Osintgram",
+                description: "In an increasingly interconnected world, the lines between public and private information are constantly blurring. This article delves into OSINT and introduces Osintgram, a tool to gather insights from Instagram profiles.",
                 fullContent: `
                     <h3 class="text-3xl font-bold text-neon-green mb-4">Unveiling the Digital Footprint: A Deep Dive into OSINT and Osintgram</h3>
                     <p class="mb-4">In an increasingly interconnected world, the lines between public and private information are constantly blurring. Every click, every post, and every interaction leaves a digital footprint. Understanding how to navigate and interpret this vast ocean of data is where Open-Source Intelligence (OSINT) comes into play. This article, inspired by a recent YouTube video, delves into the fascinating realm of OSINT and introduces a powerful Python-based tool called Osintgram, designed to gather insights from Instagram profiles.</p>
@@ -417,11 +550,63 @@
                     "DigitalEthics", "InternetSafety", "InvestigativeJournalism"
                 ]
             },
+            // REPLACED: Securing Your Home Network: A Beginner's Guide with CiLock article
             {
-                title: "Securing Your Home Network: A Beginner's Guide",
-                description: "Practical steps to harden your Wi-Fi, router, and connected devices against common threats...",
-                date: "June 09, 2025",
-                tags: ["NetworkSecurity", "HomeSecurity", "BeginnerGuide", "Privacy"]
+                title: "Unlocking the Potential of CiLock: Ethical Use Cases for Android Security",
+                description: "In an increasingly digital world, the security of our personal devices, especially smartphones, has become paramount. This article delves into the potential of CiLock, exploring its ethical use cases and highlighting best practices for Android security.",
+                fullContent: `
+                    <h3 class="text-3xl font-bold text-neon-green mb-4">Unlocking the Potential of CiLock: Ethical Use Cases for Android Security</h3>
+                    <p class="mb-4">By Ethical Explorers</p>
+                    <p class="mb-4">In an increasingly digital world, the security of our personal devices, especially smartphones, has become paramount. Android, being the most widely used mobile operating system, is a frequent target for cyber threats. This is where innovative solutions like CiLock come into play, offering robust security measures while emphasizing ethical considerations. This article delves into the potential of CiLock, exploring its ethical use cases and highlighting best practices for Android security in 2025 and beyond.</p>
+                    <h4 class="text-2xl font-bold text-purple-400 mb-3">The Evolving Landscape of Android Security</h4>
+                    <p class="mb-4">Android's open-source nature, while fostering innovation, also presents unique security challenges. From insecure data storage and weak server-side controls to improper authentication and excessive app permissions, vulnerabilities can arise at various points. The rise of sophisticated mobile malware, phishing attempts, and data breaches necessitates a proactive and multi-layered approach to security.</p>
+                    <p class="mb-6">Google is continuously enhancing Android's security features, with recent versions like Android 14 and 15 introducing significant improvements such as stronger device protection through recommended 6-digit PINs, the ability to disable insecure 2G networks, and advanced memory safety measures. Features like "Theft Detection Lock" and "Private Space" further bolster user protection against physical theft and unauthorized data access.</p>
+                    <h4 class="text-2xl font-bold text-purple-400 mb-3">Introducing CiLock: A New Era of Ethical Security</h4>
+                    <p class="mb-4">While the specifics of CiLock are not detailed, its focus on "ethical use cases" suggests a commitment to security practices that respect user privacy and data integrity. In the realm of Android security, ethical tools are crucial. They empower users and organizations to protect their data without resorting to intrusive or exploitative methods.</p>
+                    <p class="mb-6">Ethical use cases for a tool like CiLock could include:</p>
+                    <ul class="list-disc list-inside text-left mx-auto max-w-2xl space-y-2 mb-6">
+                        <li><strong>Secure Data Storage and Encryption:</strong> Ensuring sensitive user data is encrypted and stored securely, preventing unauthorized access even if the device is compromised.</li>
+                        <li><strong>Granular Permission Management:</strong> Allowing users to precisely control what data and device features applications can access, adhering to the principle of least privilege.</li>
+                        <li><strong>Secure Authentication Mechanisms:</strong> Implementing advanced authentication methods beyond simple passwords, such as multi-factor authentication (MFA) or biometric authentication, to safeguard user accounts.</li>
+                        <li><strong>Protection Against Malicious Applications:</strong> Identifying and neutralizing malware, spyware, and other potentially harmful applications before they can inflict damage.</li>
+                        <li><strong>Ethical Hacking and Penetration Testing:</strong> Providing tools for security professionals to conduct ethical penetration tests and vulnerability assessments, helping organizations identify and fix weaknesses in their Android applications and systems.</li>
+                        <li><strong>Compliance and Regulatory Adherence:</strong> Assisting businesses in meeting data protection regulations like GDPR and CCPA by ensuring secure handling of user data.</li>
+                    </ul>
+                    <h4 class="text-2xl font-bold text-purple-400 mb-3">Best Practices for Maximizing Android Security</h4>
+                    <p class="mb-4">Regardless of the tools you employ, a strong security posture relies on fundamental best practices:</p>
+                    <ul class="list-disc list-inside text-left mx-auto max-w-2xl space-y-2 mb-6">
+                        <li><strong>Regular Software Updates:</strong> Always keep your Android operating system and applications updated to benefit from the latest security patches and features.</li>
+                        <li><strong>Strong, Unique Passwords and MFA:</strong> Use complex, unique passwords for all your accounts and enable multi-factor authentication wherever possible.</li>
+                        <li><strong>Mindful App Permissions:</strong> Review and grant app permissions judiciously, only allowing access to what is absolutely necessary for the app's functionality.</li>
+                        <li><strong>Secure Network Connections:</strong> Prioritize secure Wi-Fi networks and use VPNs, especially when connecting to public Wi-Fi. Consider disabling 2G networks if not essential.</li>
+                        <li><strong>Beware of Phishing and Scams:</strong> Be vigilant against suspicious links, emails, and messages that attempt to trick you into revealing sensitive information.</li>
+                        <li><strong>Regular Backups:</strong> Back up your important data regularly to prevent loss in case of a security incident or device malfunction.</li>
+                        <li><strong>Employee Training (for Businesses):</strong> Educate employees on cybersecurity best practices, social engineering tactics, and the importance of data privacy.</li>
+                        <li><strong>Mobile Device Management (MDM):</strong> For businesses, implementing an MDM solution can centrally enforce security policies and manage devices effectively.</li>
+                    </ul>
+                    <h4 class="text-2xl font-bold text-purple-400 mb-3">The Future of Ethical Android Security</h4>
+                    <p class="mb-4">As cyber threats continue to evolve, so too must our defenses. Solutions like CiLock, with their emphasis on ethical use, are vital in building a more secure digital ecosystem. By combining advanced technology with a commitment to user privacy and responsible practices, we can unlock the full potential of Android devices while safeguarding our digital lives.</p>
+                    <p class="mb-4 text-center">
+                        <a href="https://youtu.be/90S9l7X32Zk" target="_blank" class="btn-primary text-sm inline-flex items-center">
+                            <i class="fab fa-youtube mr-2"></i> Watch Video Tutorial
+                        </a>
+                    </p>
+                `,
+                date: "June 28, 2025",
+                tags: [
+                    "Android Security", "Mobile Security", "Cybersecurity", "Ethical Hacking",
+                    "Data Protection", "Privacy", "App Security", "Malware", "Vulnerability",
+                    "Encryption", "MFA", "Biometric Security", "Zero Trust", "Cloud Security",
+                    "Threat Detection", "Digital Privacy", "Secure Data", "Android Updates",
+                    "Mobile Device Management", "Secure Apps"
+                ],
+                full_tags: [
+                    "AndroidSecurity", "Cybersecurity", "InfoSec", "DataProtection",
+                    "EthicalHacking", "MobileSecurity", "PrivacyMatters", "TechSecurity",
+                    "DigitalSafety", "CyberAware", "SecureYourData", "AppSecurity",
+                    "MalwareProtection", "ZeroTrust", "CloudSecurity", "CyberDefense",
+                    "StaySafeOnline", "TechTrends", "EthicalTech", "CiLock"
+                ]
             },
             {
                 title: "The Ethics of Penetration Testing: A Deep Dive",
