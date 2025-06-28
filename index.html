@@ -310,7 +310,7 @@
             {
                 title: "Kali Linux: Host Your Own Onion Website Tutorial",
                 description: "Master anonymous web hosting. Learn to set up your own onion website on Kali Linux using Tor hidden services.",
-                thumbnail: "https://placehold.co/600x337/1A1A1A/00FFFF?text=Onion+Website+Tutorial",
+                thumbnail: "https://img.youtube.com/vi/lM8YPeLNbhA/hqdefault.jpg", // Updated thumbnail
                 link: "https://youtu.be/lM8YPeLNbhA"
             },
             {
@@ -320,173 +320,18 @@
                 link: "https://youtu.be/nysaecTpCqM"
             },
             {
-                title: "Web Application Security: Practical XSS Vulnerability & Prevention Guide", // Updated title
+                title: "Web Application Security: Practical XSS Vulnerability & Prevention Guide",
                 description: "Dive deep into Cross-Site Scripting (XSS) attacks, how to identify them, and effective mitigation strategies...",
-                thumbnail: "https://img.youtube.com/vi/90S9l7X32Zk/hqdefault.jpg", // Updated thumbnail
-                link: "https://youtu.be/90S9l7X32Zk" // Updated link
+                thumbnail: "https://img.youtube.com/vi/90S9l7X32Zk/hqdefault.jpg",
+                link: "https://youtu.be/90S9l7X32Zk"
             },
             {
-                title: "OSINT for Beginners: Gathering Open Source Intelligence",
+                title: "OSINT Tool Installation & Tutorial: Gathering Open Source Intelligence",
                 description: "Explore the world of Open Source Intelligence (OSINT) and how to gather crucial information legally and ethically...",
-                thumbnail: "https://placehold.co/600x337/1A1A1A/39FF14?text=Video+Thumbnail+3",
-                link: "https://youtube.com/watch?v=yourvideoid3"
+                thumbnail: "https://img.youtube.com/vi/YIM6OWdgd-Y/hqdefault.jpg", // Updated thumbnail
+                link: "https://youtu.be/YIM6OWdgd-Y"
             }
             // Add more YouTube videos here
-        ];
-
-        // Data for Blog Articles
-        const allBlogArticles = [
-            // NEW: Article - Unveiling the Hidden Web
-            {
-                title: "Unveiling the Hidden Web: A Step-by-Step Guide to Hosting Your Own Onion Website on Kali Linux",
-                description: "In an era where digital privacy is increasingly scrutinized, understanding tools that champion anonymity has become paramount. This comprehensive guide will walk you through the process of setting up your very own onion website on a Kali Linux machine.",
-                fullContent: `
-                    <h3 class="text-3xl font-bold text-neon-green mb-4">Unveiling the Hidden Web: A Step-by-Step Guide to Hosting Your Own Onion Website on Kali Linux</h3>
-                    <p class="mb-4">In an era where digital privacy is increasingly scrutinized, understanding tools that champion anonymity has become paramount. The dark web, often shrouded in mystery and misconception, is fundamentally built upon the principles of privacy and untraceability, powered by technologies like Tor. Far from being solely a domain for illicit activities, the dark web is a critical infrastructure for journalists, activists, and privacy-conscious individuals seeking to communicate and publish without censorship or surveillance.</p>
-                    <p class="mb-6">This comprehensive guide will walk you through the process of setting up your very own onion website on a Kali Linux machine. This isn't about promoting anything illegal, but rather about demystifying hidden services and empowering you with the knowledge to utilize this powerful technology responsibly.</p>
-
-                    <h4 class="text-2xl font-bold text-purple-400 mb-3">Why Host an Onion Website? Exploring the Benefits of Hidden Services</h4>
-                    <p class="mb-4">Before we delve into the technicalities, let's explore the compelling reasons one might choose to host a website on the Tor network:</p>
-                    <ul class="list-disc list-inside text-left mx-auto max-w-2xl space-y-2 mb-6">
-                        <li><strong>Enhanced Anonymity & Privacy:</strong> Tor’s onion routing ensures that the location of your server remains hidden from potential attackers or surveillance entities. This provides a robust layer of protection for the website host.</li>
-                        <li><strong>Censorship Resistance:</strong> In regions with strict internet censorship, onion websites can offer a lifeline for free speech, allowing content to be published and accessed even when traditional websites are blocked.</li>
-                        <li><strong>Secure Communication:</strong> For whistleblowers, journalists, and human rights activists, an onion site can serve as a secure drop-off point or communication platform, minimizing risks associated with sensitive information exchange.</li>
-                        <li><strong>Resilience:</strong> While not impervious to all attacks, the distributed nature of the Tor network can make onion services more resilient against certain forms of denial-of-service (DoS) attacks.</li>
-                        <li><strong>Educational Purposes:</strong> Understanding and setting up a hidden service provides invaluable insights into network security, encryption, and the architecture of anonymous communication networks. It's a hands-on cybersecurity learning experience.</li>
-                    </ul>
-
-                    <h4 class="text-2xl font-bold text-purple-400 mb-3">Prerequisites: Your Kali Linux Foundation</h4>
-                    <p class="mb-6">This tutorial assumes a basic familiarity with Kali Linux, the popular Debian-derived distribution designed for digital forensics and penetration testing. If you're new to Kali, we recommend spending some time with beginner guides to get comfortable with the terminal, file system navigation, and fundamental Linux commands. For this guide, we'll be using a simple index.html file as our test web page, a basic HTML file with some text to demonstrate the web hosting capabilities of your onion service.</p>
-
-                    <h4 class="text-2xl font-bold text-purple-400 mb-3">Step 1: Installing and Updating Tor – The Onion Router</h4>
-                    <p class="mb-4">The cornerstone of any dark web website or hidden service is Tor (The Onion Router). Tor is a free and open-source software that enables anonymous communication. While many Kali Linux installations come with Tor pre-installed, it's crucial to ensure you have the latest version for optimal security and functionality.</p>
-                    <ul class="list-disc list-inside text-left mx-auto max-w-2xl space-y-2 mb-6">
-                        <li><strong>Open your terminal:</strong> This is where all the magic happens.</li>
-                        <li><strong>Install or upgrade Tor:</strong> Execute the following command:</li>
-                        <pre class="bg-gray-900 text-green-400 p-3 rounded-md overflow-x-auto my-2"><code>sudo apt install tor</code></pre>
-                        <li>This command will check for Tor on your system. If it's not present, it will download and install it along with any necessary dependencies. If it's already installed, it will ensure you have the most up-to-date version. This is a critical Linux security practice.</li>
-                    </ul>
-
-                    <h4 class="text-2xl font-bold text-purple-400 mb-3">Step 2: Configuring Tor for Hidden Service Hosting</h4>
-                    <p class="mb-4">Now that Tor is installed, we need to instruct it to run a hidden service. This involves modifying Tor's primary configuration file, torrc, typically located in the <code class="bg-gray-700 p-1 rounded">/etc/tor/</code> directory.</p>
-                    <ul class="list-disc list-inside text-left mx-auto max-w-2xl space-y-2 mb-6">
-                        <li><strong>Open the torrc file with Nano editor:</strong></li>
-                        <pre class="bg-gray-900 text-green-400 p-3 rounded-md overflow-x-auto my-2"><code>sudo nano /etc/tor/torrc</code></pre>
-                        <li>Press Enter.</li>
-                        <li><strong>Locate Hidden Service Directives:</strong> The torrc file contains numerous configuration options. We're specifically interested in the hidden service configuration section. You can scroll through the file, or for a quicker method, use Nano's search function:
-                            <ul class="list-circle list-inside ml-4">
-                                <li>Press <code class="bg-gray-700 p-1 rounded">Ctrl + W</code></li>
-                                <li>Type "<code class="bg-gray-700 p-1 rounded">HiddenService</code>" and press Enter.</li>
-                            </ul>
-                        </li>
-                        <li>You'll be looking for two specific lines, which are usually commented out (indicated by a <code class="bg-gray-700 p-1 rounded">#</code> at the beginning):
-                            <pre class="bg-gray-900 text-green-400 p-3 rounded-md overflow-x-auto my-2"><code># HiddenServiceDir /var/lib/tor/hidden_service/
-# HiddenServicePort 80 127.0.0.1:80</code></pre>
-                        </li>
-                        <li><strong>Uncomment the lines:</strong> Delete the <code class="bg-gray-700 p-1 rounded">#</code> symbol at the beginning of both these lines. This activates them.</li>
-                        <li><code class="bg-gray-700 p-1 rounded">HiddenServiceDir /var/lib/tor/hidden_service/</code>: This directive tells Tor where to create and manage the necessary files for your hidden service. This directory will hold crucial information, including your service's private key and its unique, randomly generated onion hostname.</li>
-                        <li><code class="bg-gray-700 p-1 rounded">HiddenServicePort 80 127.0.0.1:80</code>: This line maps incoming traffic on port 80 of your onion service to port 80 of your local machine (127.0.0.1). This is where your web server (e.g., Apache or Nginx) will be listening.</li>
-                        <li><strong>Save and Exit:</strong>
-                            <ul class="list-circle list-inside ml-4">
-                                <li>Press <code class="bg-gray-700 p-1 rounded">Ctrl + X</code></li>
-                                <li>Type <code class="bg-gray-700 p-1 rounded">Y</code> for yes when asked to save.</li>
-                                <li>Press Enter to confirm the file name.</li>
-                            </ul>
-                        </li>
-                        <li>While <code class="bg-gray-700 p-1 rounded">/var/lib/tor/hidden_service</code> is the default and generally recommended location, advanced users might specify a different directory for specific server security or organizational reasons.</li>
-                    </ul>
-
-                    <h4 class="text-2xl font-bold text-purple-400 mb-3">Step 3: Setting Up Your Local Web Server</h4>
-                    <p class="mb-4">For your onion website to serve content, you need a local web server running. Apache is a popular and straightforward choice on Kali Linux.</p>
-                    <ul class="list-disc list-inside text-left mx-auto max-w-2xl space-y-2 mb-6">
-                        <li><strong>Install Apache2 (if not already installed):</strong></li>
-                        <pre class="bg-gray-900 text-green-400 p-3 rounded-md overflow-x-auto my-2"><code>sudo apt install apache2</code></pre>
-                        <li><strong>Place your website files:</strong> Your <code class="bg-gray-700 p-1 rounded">index.html</code> file (or any other web content) should be placed in Apache's default web root directory, which is <code class="bg-gray-700 p-1 rounded">/var/www/html/</code>.</li>
-                        <pre class="bg-gray-900 text-green-400 p-3 rounded-md overflow-x-auto my-2"><code>sudo mv /path/to/your/index.html /var/www/html/</code></pre>
-                        <li>(Replace <code class="bg-gray-700 p-1 rounded">/path/to/your/index.html</code> with the actual path to your file).</li>
-                        <li><strong>Start Apache2 service:</strong></li>
-                        <pre class="bg-gray-900 text-green-400 p-3 rounded-md overflow-x-auto my-2"><code>sudo systemctl start apache2</code></pre>
-                        <li>You can also enable it to start on boot: <code class="bg-gray-700 p-1 rounded">sudo systemctl enable apache2</code>.</li>
-                    </ul>
-
-                    <h4 class="text-2xl font-bold text-purple-400 mb-3">Step 4: Discovering Your Unique Onion Address</h4>
-                    <p class="mb-4">With Tor configured and your web server ready, it's time to reveal your onion address. This address is your website's unique identifier on the Tor network.</p>
-                    <ul class="list-disc list-inside text-left mx-auto max-w-2xl space-y-2 mb-6">
-                        <li><strong>Open your terminal.</strong></li>
-                        <li><strong>View the hostname file:</strong> Tor automatically generates a hostname file within your specified <code class="bg-gray-700 p-1 rounded">HiddenServiceDir</code>.</li>
-                        <pre class="bg-gray-900 text-green-400 p-3 rounded-md overflow-x-auto my-2"><code>sudo cat /var/lib/tor/hidden_service/hostname</code></pre>
-                        <li>Press Enter.</li>
-                        <li><strong>Copy your onion address:</strong> The output will be a long, seemingly random string of characters followed by the <code class="bg-gray-700 p-1 rounded">.onion</code> extension (e.g., <code class="bg-gray-700 p-1 rounded">abcdef1234567890abcdef1234567890.onion</code>). This is your website’s anonymous address. Copy this entire address carefully.</li>
-                    </ul>
-
-                    <h4 class="text-2xl font-bold text-purple-400 mb-3">Step 5: Starting the Tor Service</h4>
-                    <p class="mb-4">Now, bring your Tor hidden service online!</p>
-                    <ul class="list-disc list-inside text-left mx-auto max-w-2xl space-y-2 mb-6">
-                        <li><strong>Open a new terminal window.</strong> (This is to keep your previous terminal clear, though you can use the same one if you prefer).</li>
-                        <li><strong>Start the Tor service:</strong></li>
-                        <pre class="bg-gray-900 text-green-400 p-3 rounded-md overflow-x-auto my-2"><code>sudo systemctl start tor</code></pre>
-                        <li>This command initiates the Tor service in the background, making your hidden service accessible via its onion address.</li>
-                    </ul>
-
-                    <h4 class="text-2xl font-bold text-purple-400 mb-3">Step 6: Accessing Your Onion Website with Tor Browser</h4>
-                    <p class="mb-4">To access your newly created onion website, you must use the Tor Browser. Standard web browsers like Chrome, Firefox, or Safari cannot directly connect to <code class="bg-gray-700 p-1 rounded">.onion</code> addresses.</p>
-                    <ul class="list-disc list-inside text-left mx-auto max-w-2xl space-y-2 mb-6">
-                        <li><strong>Download Tor Browser:</strong> If you don't have it, download the official Tor Browser from the Tor Project website. Simply search for "Tor browser download" in your regular browser.</li>
-                        <li><strong>Launch Tor Browser.</strong></li>
-                        <li><strong>Paste your onion address:</strong> In the Tor Browser's address bar, paste the <code class="bg-gray-700 p-1 rounded">.onion</code> address you copied earlier and press Enter.</li>
-                        <li>Your simple <code class="bg-gray-700 p-1 rounded">index.html</code> file should now be displayed through the Tor network, confirming your Kali Linux onion site is live!</li>
-                    </ul>
-
-                    <h4 class="text-2xl font-bold text-purple-400 mb-3">Important Considerations for Your Hidden Service</h4>
-                    <ul class="list-disc list-inside text-left mx-auto max-w-2xl space-y-2 mb-6">
-                        <li><strong>Security Best Practices:</strong> While Tor offers anonymity, securing your underlying Kali Linux machine and web server is paramount. Regularly update your system (<code class="bg-gray-700 p-1 rounded">sudo apt update && sudo apt full-upgrade</code>), configure a firewall (<code class="bg-gray-700 p-1 rounded">ufw</code>), and apply other cybersecurity hardening measures.</li>
-                        <li><strong>Persistence:</strong> If you want your onion service to persist across reboots, ensure Tor and Apache2 services are enabled to start automatically (<code class="bg-gray-700 p-1 rounded">sudo systemctl enable tor</code> and <code class="bg-gray-700 p-1 rounded">sudo systemctl enable apache2</code>).</li>
-                        <li><strong>Content:</strong> Be mindful of the content you host. While the Tor network offers anonymity, illegal activities are still illegal and can lead to severe consequences.</li>
-                        <li><strong>Monitoring:</strong> For more advanced setups, consider monitoring your hidden service logs (<code class="bg-gray-700 p-1 rounded">/var/log/tor/log</code>) to ensure it's running smoothly and to troubleshoot any issues.</li>
-                    </ul>
-
-                    <h4 class="text-2xl font-bold text-purple-400 mb-3">Conclusion: Embracing Digital Freedom</h4>
-                    <p class="mb-4">Congratulations! You've successfully set up your very own onion website on Kali Linux. This process not only provides a platform for anonymous content hosting but also deepens your understanding of Tor network fundamentals, network security, and digital privacy technologies. By exploring these tools, you contribute to a more open and uncensored internet.</p>
-                    <p class="mb-6">The dark web, when used responsibly, is a powerful enabler of freedom and a testament to the continuous innovation in anonymous communication. Keep exploring, keep learning, and use your knowledge to advocate for a more secure and private digital world.</p>
-                    <p class="mb-4 text-center">
-                        <a href="https://youtu.be/lM8YPeLNbhA" target="_blank" class="btn-primary text-sm inline-flex items-center">
-                            <i class="fab fa-youtube mr-2"></i> Watch Video Tutorial
-                        </a>
-                    </p>
-                `,
-                date: "June 28, 2025",
-                tags: ["OnionWebsite", "TorHiddenService", "KaliLinux", "DarkWeb", "PrivacyOnline"],
-                full_tags: [
-                    "OnionWebsite", "TorHiddenService", "KaliLinux", "DarkWeb", "PrivacyOnline",
-                    "DigitalPrivacy", "Cybersecurity", "AnonymousBrowse", "NetworkSecurity", "EthicalHacking",
-                    "Infosec", "OpSec", "CensorshipResistance", "DataProtection", "WebHosting",
-                    "SecureCommunication", "LinuxSecurity", "OpenSource", "Decentralization", "DeepWeb",
-                    "CyberAwareness", "DigitalRights", "VirtualPrivateNetwork", "ThreatIntelligence",
-                    "AIinCybersecurity", "ZeroTrust", "OSINT", "How to host .onion site Kali Linux",
-                    "Set up Tor hidden service Kali 2025", "Anonymous web hosting guide",
-                    "Kali Linux dark web server setup", "Secure web server on Tor network",
-                    "Learn Tor hidden services", "Kali Linux privacy tools", "Dark web anonymity guide."
-                ]
-            },
-            {
-                title: "Top 5 Tools for Ethical Hackers in 2025",
-                description: "Discover the essential software and frameworks every aspiring ethical hacker needs in their toolkit...",
-                date: "June 10, 2025",
-                tags: ["EthicalHacking", "Tools", "Cybersecurity", "PenTesting"]
-            },
-            {
-                title: "Securing Your Home Network: A Beginner's Guide",
-                description: "Practical steps to harden your Wi-Fi, router, and connected devices against common threats...",
-                date: "June 09, 2025",
-                tags: ["NetworkSecurity", "HomeSecurity", "BeginnerGuide", "Privacy"]
-            },
-            {
-                title: "The Ethics of Penetration Testing: A Deep Dive",
-                description: "Understanding the legal and moral boundaries of ethical hacking and responsible disclosure...",
-                date: "June 08, 2025",
-                tags: ["EthicalHacking", "Ethics", "PenTesting", "Legal"]
-            }
-            // Add more blog articles here
         ];
 
         const initialDisplayCount = 3; // Number of items to show initially
