@@ -47,20 +47,16 @@
         }
 
         /* Typing effect for hero text */
-        .typing-effect {
-            overflow: hidden; /* Ensures the content is not revealed until the animation */
-            white-space: nowrap; /* Keeps the content on a single line */
-            margin: 0 auto; /* Gives that scrolling effect as the typing happens */
-            letter-spacing: .15em; /* Adjust as needed */
-            animation: typing 3s steps(40, end) forwards,
-                       blink-caret .75s step-end infinite;
+        .typing-active {
+            overflow: hidden;
+            white-space: nowrap; /* Ensures text is on a single line during animation */
+            animation: typing 3s steps(40, end) forwards;
         }
 
         /* The typing animation */
         @keyframes typing {
             from { width: 0 }
-            /* Changed to max-content to ensure full text is visible */
-            to { width: max-content; }
+            to { width: 100%; } /* Animate to 100% of parent's width */
         }
 
         /* The typewriter cursor effect */
@@ -144,6 +140,20 @@
         .feedback-green { background-color: #39FF14; }
         .feedback-yellow { background-color: #FFFF00; }
         .feedback-gray { background-color: #4a4a4a; }
+
+        .loading-spinner {
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-top: 4px solid #00FFFF;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
     </style>
 </head>
 <body class="circuit-bg min-h-screen flex flex-col">
@@ -180,10 +190,10 @@
         <!-- Hero Section -->
         <section id="home" class="relative h-screen flex items-center justify-center text-center p-8 bg-gradient-hack rounded-b-3xl shadow-xl border-b-4 border-teal-500">
             <div class="relative z-10 max-w-4xl mx-auto">
-                <h1 class="text-6xl md:text-7xl lg:text-8xl font-extrabold mb-6 leading-tight text-neon-green">
+                <h1 class="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold mb-6 leading-tight text-neon-green">
                     Ethical <span class="text-purple-400">Explorers</span>
                 </h1>
-                <p id="tagline" class="typing-effect text-2xl md:text-3xl text-gray-300 mb-10 pr-2">
+                <p id="tagline" class="text-lg sm:text-xl md:text-2xl lg:text-3xl text-gray-300 mb-10 pr-2">
                     Mastering Cyber Frontiers: Code, Exploit, Defend.
                 </p>
                 <div class="flex flex-col sm:flex-row justify-center space-y-6 sm:space-y-0 sm:space-x-8">
@@ -297,7 +307,7 @@
                 <div id="gameContent" class="flex-grow w-full">
                     <!-- Game content will be injected here -->
                 </div>
-                <button id="startGameButton" class="btn-secondary text-lg px-8 py-4 mt-8" onclick="startGame()">Start Game</button>
+                <button id="startGameButton" class="btn-secondary text-lg px-8 py-4 mt-8">Start Game</button>
             </div>
         </div>
 
@@ -533,7 +543,7 @@
                     <ul class="list-disc list-inside text-left mx-auto max-w-2xl space-y-2 mb-6">
                         <li><strong>Due Diligence:</strong> Investigating individuals or organizations for background checks.</li>
                         <li><strong>Threat Intelligence:</strong> Identifying potential security risks or vulnerabilities.</li>
-                        <li><strong>Market Research:</strong> Understanding consumer behavior and industry trends.</li>
+                        <li><strong>Market Research:</b> Understanding consumer behavior and industry trends.</li>
                         <li><strong>Journalism:</strong> Verifying facts and uncovering stories from public sources.</li>
                         <li><strong>Missing Persons Cases:</strong> Gathering clues from online activity.</li>
                     </ul>
@@ -554,7 +564,7 @@
                         <li><strong>Respect for Privacy:</strong> While information may be public, it doesn't grant a license for malicious intent or harassment.</li>
                         <li><strong>Adherence to Legal Guidelines:</strong> Always operate within the bounds of local and international laws regarding data collection and privacy. Unauthorized access to private accounts or data is strictly prohibited and illegal.</li>
                         <li><strong>Avoiding Spam and Misuse:</strong> Do not use collected data for unsolicited communications or any form of exploitation.</li>
-                        <li><strong>Transparency (When Appropriate):</strong> In professional contexts, be transparent about your data collection methods and sources.</li>
+                        <li><strong>Transparency (When Appropriate):</b> In professional contexts, be transparent about your data collection methods and sources.</li>
                     </ul>
                     <p class="mb-6">The video serves as a crucial reminder that the true value of OSINT lies in its responsible application for legitimate and ethical investigations. Misuse of such tools can lead to severe legal repercussions and undermine the integrity of the OSINT community.</p>
                     <h4 class="text-2xl font-bold text-purple-400 mb-3">The Future of Digital Footprints and Responsible Exploration</h4>
@@ -584,7 +594,7 @@
                 fullContent: `
                     <h3 class="text-3xl font-bold text-neon-green mb-4">Unlocking the Potential of CiLock: Ethical Use Cases for Android Security</h3>
                     <p class="mb-4">By Ethical Explorers</p>
-                    <p class="mb-4">In an increasingly digital world, the security of our personal devices, especially smartphones, has become paramount. Android, being the most widely used mobile operating system, is a frequent target for cyber threats. This is where innovative solutions like CiLock come into play, offering robust security measures while emphasizing ethical considerations. This article delves into the potential of CiLock, exploring its ethical use cases and highlighting best practices for Android security in 2025 and beyond.</p>
+                    <p class="mb-4">In an increasingly digital world, the security of our personal devices, especially smartphones, has become paramount. Android, being the most widely used mobile operating system, is a frequent target for cyber threats. This is where innovative solutions like CiLock comes into play, offering robust security measures while emphasizing ethical considerations. This article delves into the potential of CiLock, exploring its ethical use cases and highlighting best practices for Android security in 2025 and beyond.</p>
                     <h4 class="text-2xl font-bold text-purple-400 mb-3">The Evolving Landscape of Android Security</h4>
                     <p class="mb-4">Android's open-source nature, while fostering innovation, also presents unique security challenges. From insecure data storage and weak server-side controls to improper authentication and excessive app permissions, vulnerabilities can arise at various points. The rise of sophisticated mobile malware, phishing attempts, and data breaches necessitates a proactive and multi-layered approach to security.</p>
                     <p class="mb-6">Google is continuously enhancing Android's security features, with recent versions like Android 14 and 15 introducing significant improvements such as stronger device protection through recommended 6-digit PINs, the ability to disable insecure 2G networks, and advanced memory safety measures. Features like "Theft Detection Lock" and "Private Space" further bolster user protection against physical theft and unauthorized data access.</p>
@@ -716,6 +726,20 @@
             } else {
                 document.getElementById('explore-more-articles').classList.add('hidden'); // Ensure hidden if not needed
             }
+
+            // Apply typing animation class and set up animationend listener
+            const taglineElement = document.getElementById('tagline');
+            if (taglineElement) {
+                taglineElement.classList.add('typing-active');
+                taglineElement.addEventListener('animationend', () => {
+                    // After the typing animation ends, remove the active class to revert styles
+                    taglineElement.classList.remove('typing-active');
+                    // Ensure text can wrap if it's too long for the container after animation
+                    taglineElement.style.whiteSpace = 'normal';
+                    taglineElement.style.overflow = 'visible';
+                    taglineElement.style.width = 'auto'; // Let width be determined by content/container
+                });
+            }
         });
 
         // Load More Videos functionality
@@ -770,6 +794,50 @@
             document.body.classList.remove('overflow-hidden');
         }
 
+        // --- Gemini API Call Function ---
+        async function callGeminiAPI(prompt, outputElementId, loadingElementId) {
+            const outputElement = document.getElementById(outputElementId);
+            const loadingElement = document.getElementById(loadingElementId);
+
+            if (!outputElement || !loadingElement) {
+                console.error("Output or loading element not found for Gemini API call.");
+                return;
+            }
+
+            outputElement.innerHTML = ''; // Clear previous content
+            loadingElement.classList.remove('hidden'); // Show loading spinner
+
+            try {
+                let chatHistory = [];
+                chatHistory.push({ role: "user", parts: [{ text: prompt }] });
+                const payload = { contents: chatHistory };
+                const apiKey = ""; // Canvas will provide this at runtime
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                const result = await response.json();
+
+                if (result.candidates && result.candidates.length > 0 &&
+                    result.candidates[0].content && result.candidates[0].content.parts &&
+                    result.candidates[0].content.parts.length > 0) {
+                    const text = result.candidates[0].content.parts[0].text;
+                    outputElement.innerHTML = `<pre class="bg-gray-700 text-white p-4 rounded-lg mt-4 whitespace-pre-wrap">${text}</pre>`;
+                } else {
+                    outputElement.innerHTML = `<p class="text-red-400 mt-4">Error: No content generated by the AI. Please try again.</p>`;
+                }
+            } catch (error) {
+                console.error("Error calling Gemini API:", error);
+                outputElement.innerHTML = `<p class="text-red-400 mt-4">Failed to get response from AI. Network error or API issue.</p>`;
+            } finally {
+                loadingElement.classList.add('hidden'); // Hide loading spinner
+            }
+        }
+
         // Game Logic for "Crack the Code Challenge"
         let crackCodeSecret = [];
         let crackCodeAttemptsLeft = 10;
@@ -799,13 +867,39 @@
                         <input type="number" id="crackCodeGuess3" class="guess-input" min="0" max="9" maxlength="1" oninput="this.value=this.value.slice(0,1)">
                         <input type="number" id="crackCodeGuess4" class="guess-input" min="0" max="9" maxlength="1" oninput="this.value=this.value.slice(0,1)">
                     </div>
-                    <button class="btn-primary px-6 py-3 text-base" onclick="submitCrackCodeGuess()">Submit Guess</button>
+                    <button id="submitCrackCodeGuessButton" class="btn-primary px-6 py-3 text-base">Submit Guess</button>
                     <div id="crackCodeGuessHistory" class="mt-6 space-y-2 max-h-48 overflow-y-auto bg-gray-700 p-4 rounded-lg">
                         <!-- Guess history will appear here -->
                     </div>
-                    <button id="crackCodePlayAgainButton" class="btn-secondary px-6 py-3 text-base hidden" onclick="resetCrackTheCodeGame()">Play Again</button>
+                    <button id="crackCodePlayAgainButton" class="btn-secondary px-6 py-3 text-base hidden">Play Again</button>
+
+                    <!-- LLM Feature for Crack the Code -->
+                    <div class="mt-8 pt-6 border-t border-gray-700">
+                        <h4 class="text-xl font-bold text-neon-green mb-4">✨ Analyze Code Vulnerabilities</h4>
+                        <textarea id="codeVulnerabilityInput" class="w-full h-32 p-3 rounded-lg bg-gray-700 border border-teal-500 text-white focus:outline-none focus:border-neon-green" placeholder="Paste your code snippet here to analyze for vulnerabilities..."></textarea>
+                        <button id="analyzeCodeButton" class="btn-primary px-6 py-3 text-base flex items-center justify-center mt-4">
+                            <span class="mr-2">✨ Analyze Code</span>
+                            <div id="codeAnalysisLoading" class="loading-spinner hidden"></div>
+                        </button>
+                        <div id="codeAnalysisOutput" class="mt-4 text-left"></div>
+                    </div>
                 </div>
             `;
+            // Attach event listener AFTER innerHTML is set
+            const submitButton = document.getElementById('submitCrackCodeGuessButton');
+            if (submitButton) {
+                submitButton.addEventListener('click', submitCrackCodeGuess);
+            }
+            const playAgainButton = document.getElementById('crackCodePlayAgainButton');
+            if (playAgainButton) {
+                playAgainButton.addEventListener('click', resetCrackTheCodeGame);
+            }
+            const analyzeButton = document.getElementById('analyzeCodeButton');
+            if (analyzeButton) {
+                analyzeButton.addEventListener('click', analyzeCodeVulnerability);
+            }
+
+
             const inputs = document.querySelectorAll('#gameContent .guess-input');
             inputs.forEach((input, index) => {
                 input.addEventListener('input', (e) => {
@@ -821,30 +915,66 @@
             });
             document.getElementById('crackCodeGuess1').focus();
             document.getElementById('startGameButton').classList.add('hidden');
+
+            console.log("Crack The Code game elements initialized and event listeners attached.");
         }
+
+        async function analyzeCodeVulnerability() {
+            const codeSnippet = document.getElementById('codeVulnerabilityInput').value.trim();
+            if (codeSnippet === "") {
+                document.getElementById('codeAnalysisOutput').innerHTML = `<p class="text-yellow-400 mt-4">Please paste a code snippet to analyze.</p>`;
+                return;
+            }
+
+            const prompt = `Analyze the following code snippet for potential security vulnerabilities and suggest secure fixes. Provide the explanation and fixes in a clear, concise, and actionable manner, using code examples where appropriate.
+
+Code Snippet:
+\`\`\`
+${codeSnippet}
+\`\`\`
+
+Structure your response with:
+1.  **Vulnerability Description:**
+2.  **Impact:**
+3.  **Secure Fixes:** (with code examples)
+`;
+            await callGeminiAPI(prompt, 'codeAnalysisOutput', 'codeAnalysisLoading');
+        }
+
 
         function submitCrackCodeGuess() {
             if (!crackCodeGameActive) return;
 
+            // Get element references at the beginning of the function
             const guessInputs = [
-                document.getElementById('crackCodeGuess1').value,
-                document.getElementById('crackCodeGuess2').value,
-                document.getElementById('crackCodeGuess3').value,
-                document.getElementById('crackCodeGuess4').value
+                document.getElementById('crackCodeGuess1'),
+                document.getElementById('crackCodeGuess2'),
+                document.getElementById('crackCodeGuess3'),
+                document.getElementById('crackCodeGuess4')
             ];
+            const statusElement = document.getElementById('crackCodeGameStatus');
+            const attemptsLeftElement = document.getElementById('crackCodeAttemptsLeft');
+            const guessHistory = document.getElementById('crackCodeGuessHistory');
+            const playAgainButton = document.getElementById('crackCodePlayAgainButton');
+
+            // Robustness check: Ensure all necessary elements exist
+            if (!statusElement || !attemptsLeftElement || !guessHistory || !playAgainButton || guessInputs.some(input => !input)) {
+                console.error("One or more Crack The Code game elements are missing. Game might not be initialized properly.");
+                // Optionally, display a user-friendly error message in the modal if critical elements are missing.
+                return;
+            }
 
             // Validate all inputs are filled and are digits
-            if (guessInputs.some(input => input === '' || !/^\d$/.test(input))) {
-                const statusElement = document.getElementById('crackCodeGameStatus');
+            if (guessInputs.some(input => input.value === '' || !/^\d$/.test(input.value))) {
                 statusElement.innerText = "Please enter all 4 digits (0-9).";
                 statusElement.className = 'text-xl text-yellow-400'; // Set warning color
                 return;
             }
 
-            const guess = guessInputs.map(Number); // Convert to numbers
+            const guess = guessInputs.map(input => Number(input.value)); // Convert to numbers
 
             crackCodeAttemptsLeft--;
-            document.getElementById('crackCodeAttemptsLeft').innerText = crackCodeAttemptsLeft;
+            attemptsLeftElement.innerText = crackCodeAttemptsLeft; // Use the element reference
 
             let correctPosition = 0;
             let correctDigit = 0;
@@ -870,7 +1000,6 @@
                 }
             }
 
-            const guessHistory = document.getElementById('crackCodeGuessHistory');
             let feedbackHtml = '';
             for (let i = 0; i < correctPosition; i++) feedbackHtml += '<span class="feedback-peg feedback-green"></span>';
             for (let i = 0; i < correctDigit; i++) feedbackHtml += '<span class="feedback-peg feedback-yellow"></span>';
@@ -881,34 +1010,31 @@
                                         <div class="flex">${feedbackHtml}</div>
                                       </div>` + guessHistory.innerHTML;
 
-            const statusElement = document.getElementById('crackCodeGameStatus');
             if (correctPosition === 4) {
                 statusElement.innerText = "Congratulations! You cracked the code!";
                 statusElement.className = 'text-xl text-green-500';
                 crackCodeGameActive = false;
-                document.getElementById('crackCodePlayAgainButton').classList.remove('hidden');
+                playAgainButton.classList.remove('hidden');
             } else if (crackCodeAttemptsLeft === 0) {
                 statusElement.innerText = `Game Over! The code was ${crackCodeSecret.join('')}.`;
                 statusElement.className = 'text-xl text-red-500';
                 crackCodeGameActive = false;
-                document.getElementById('crackCodePlayAgainButton').classList.remove('hidden');
+                playAgainButton.classList.remove('hidden');
             } else {
-                 // Important fix: ensure status text always includes attempts left if game is active
                  statusElement.innerText = `Crack the 4-digit code! You have ${crackCodeAttemptsLeft} attempts left.`;
-                 statusElement.className = 'text-xl text-teal-300'; // Reset color after warning
+                 statusElement.className = 'text-xl text-teal-300';
             }
 
-            document.getElementById('crackCodeGuess1').value = '';
-            document.getElementById('crackCodeGuess2').value = '';
-            document.getElementById('crackCodeGuess3').value = '';
-            document.getElementById('crackCodeGuess4').value = '';
+            guessInputs.forEach(input => input.value = ''); // Clear input values using the element references
             if (crackCodeGameActive) {
-                document.getElementById('crackCodeGuess1').focus();
+                guessInputs[0].focus(); // Focus on the first input
             }
         }
 
         function resetCrackTheCodeGame() {
             document.getElementById('crackCodePlayAgainButton').classList.add('hidden');
+            document.getElementById('codeAnalysisOutput').innerHTML = ''; // Clear LLM output
+            document.getElementById('codeVulnerabilityInput').value = ''; // Clear LLM input
             initializeCrackTheCodeGame();
         }
 
@@ -945,21 +1071,48 @@
                     <pre id="logDisplay" class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm max-h-48 whitespace-pre-wrap">${logPuzzleData.log}</pre>
                     <p id="logPuzzleStatus" class="text-xl text-teal-300">Attempts left: <span id="logPuzzleAttemptsLeft">${logPuzzleData.attempts}</span></p>
                     <input type="text" id="logPuzzleGuess" placeholder="Enter suspicious keyword" class="w-full p-3 rounded-lg bg-gray-700 border border-teal-500 text-white focus:outline-none focus:border-neon-green">
-                    <button class="btn-primary px-6 py-3 text-base" onclick="submitLogPuzzleGuess()">Submit Keyword</button>
+                    <button id="submitLogPuzzleGuessButton" class="btn-primary px-6 py-3 text-base">Submit Keyword</button>
                     <p id="logPuzzleResult" class="text-lg mt-4"></p>
-                    <button id="logPuzzlePlayAgainButton" class="btn-secondary px-6 py-3 text-base hidden" onclick="resetDecipherTheLogGame()">Play Again</button>
+                    <div id="llmLogExplanationContainer" class="mt-6 pt-4 border-t border-gray-700 hidden">
+                        <h4 class="text-xl font-bold text-neon-green mb-3 flex items-center">✨ AI Explanation:</h4>
+                        <div id="llmLogExplanationOutput" class="text-gray-300"></div>
+                        <div id="llmLogLoading" class="loading-spinner hidden mx-auto mt-4"></div>
+                    </div>
+                    <button id="logPuzzlePlayAgainButton" class="btn-secondary px-6 py-3 text-base hidden">Play Again</button>
                 </div>
             `;
+            // Attach event listeners after innerHTML is set
+            const submitButton = document.getElementById('submitLogPuzzleGuessButton');
+            if (submitButton) {
+                submitButton.addEventListener('click', submitLogPuzzleGuess);
+            }
+            const playAgainButton = document.getElementById('logPuzzlePlayAgainButton');
+            if (playAgainButton) {
+                playAgainButton.addEventListener('click', resetDecipherTheLogGame);
+            }
+
             document.getElementById('logPuzzleGuess').focus();
             document.getElementById('startGameButton').classList.add('hidden');
         }
 
-        function submitLogPuzzleGuess() {
+        async function submitLogPuzzleGuess() {
             if (!logPuzzleGameActive) return;
 
-            const guess = document.getElementById('logPuzzleGuess').value.trim();
+            const guessInput = document.getElementById('logPuzzleGuess');
             const statusElement = document.getElementById('logPuzzleStatus');
             const resultElement = document.getElementById('logPuzzleResult');
+            const attemptsLeftElement = document.getElementById('logPuzzleAttemptsLeft');
+            const playAgainButton = document.getElementById('logPuzzlePlayAgainButton');
+            const llmExplanationContainer = document.getElementById('llmLogExplanationContainer');
+
+
+            // Robustness check: Ensure all necessary elements exist
+            if (!guessInput || !statusElement || !resultElement || !attemptsLeftElement || !playAgainButton || !llmExplanationContainer) {
+                console.error("One or more Log Puzzle game elements are missing. Game might not be initialized properly.");
+                return;
+            }
+
+            const guess = guessInput.value.trim();
 
             if (guess === "") {
                 statusElement.innerText = "Please enter a keyword.";
@@ -968,7 +1121,7 @@
             }
 
             logPuzzleData.attempts--;
-            document.getElementById('logPuzzleAttemptsLeft').innerText = logPuzzleData.attempts;
+            attemptsLeftElement.innerText = logPuzzleData.attempts; // Use the element reference
 
             if (guess.toLowerCase() === logPuzzleData.keyword.toLowerCase()) {
                 resultElement.innerHTML = `<span class="text-green-500 font-bold">Correct!</span> ${logPuzzleData.explanation}`;
@@ -976,29 +1129,36 @@
                 statusElement.className = 'text-xl text-green-500';
                 statusElement.innerText = `You deciphered the log!`;
                 logPuzzleGameActive = false;
-                document.getElementById('logPuzzlePlayAgainButton').classList.remove('hidden');
+                playAgainButton.classList.remove('hidden');
+
+                // Trigger LLM explanation
+                llmExplanationContainer.classList.remove('hidden');
+                const prompt = `Explain in detail the security implications of this log anomaly: "${logPuzzleData.log}" (focus on the part "${logPuzzleData.keyword}") and suggest how an ethical explorer would investigate and mitigate it.`;
+                await callGeminiAPI(prompt, 'llmLogExplanationOutput', 'llmLogLoading');
+
             } else if (logPuzzleData.attempts === 0) {
                 resultElement.innerHTML = `<span class="text-red-500 font-bold">Game Over!</span> The suspicious keyword was: "${logPuzzleData.keyword}". ${logPuzzleData.explanation}`;
                 resultElement.className = 'text-lg text-red-500 mt-4';
                 statusElement.className = 'text-xl text-red-500';
                 statusElement.innerText = `You failed to decipher the log.`;
                 logPuzzleGameActive = false;
-                document.getElementById('logPuzzlePlayAgainButton').classList.remove('hidden');
+                playAgainButton.classList.remove('hidden');
             } else {
                 resultElement.innerText = "Incorrect keyword. Try again!";
                 resultElement.className = 'text-lg text-yellow-400 mt-4';
-                // Important fix: ensure status text always includes attempts left if game is active
                 statusElement.innerText = `Attempts left: ${logPuzzleData.attempts}`;
                 statusElement.className = 'text-xl text-teal-300';
             }
-            document.getElementById('logPuzzleGuess').value = ''; // Clear input
+            guessInput.value = ''; // Clear input
             if (logPuzzleGameActive) {
-                document.getElementById('logPuzzleGuess').focus();
+                guessInput.focus();
             }
         }
 
         function resetDecipherTheLogGame() {
             document.getElementById('logPuzzlePlayAgainButton').classList.add('hidden');
+            document.getElementById('llmLogExplanationContainer').classList.add('hidden');
+            document.getElementById('llmLogExplanationOutput').innerHTML = '';
             initializeDecipherTheLogGame();
         }
 
@@ -1048,13 +1208,28 @@ This message is for your security.`,
                     <p class="text-gray-300">Examine the message below. Is it a **Phishing** attempt or **Legitimate**?</p>
                     <pre id="phishingScenario" class="bg-gray-900 text-gray-200 p-4 rounded-lg overflow-x-auto text-sm max-h-64 whitespace-pre-wrap">${phishingQuizData.scenario}</pre>
                     <div class="flex justify-center space-x-4">
-                        <button class="btn-primary px-6 py-3 text-base" onclick="submitPhishingAnswer('phishing')">Phishing</button>
-                        <button class="btn-secondary px-6 py-3 text-base" onclick="submitPhishingAnswer('legitimate')">Legitimate</button>
+                        <button id="phishingButton" class="btn-primary px-6 py-3 text-base">Phishing</button>
+                        <button id="legitimateButton" class="btn-secondary px-6 py-3 text-base">Legitimate</button>
                     </div>
                     <p id="phishingQuizResult" class="text-lg mt-4 text-center"></p>
-                    <button id="phishingQuizPlayAgainButton" class="btn-secondary px-6 py-3 text-base hidden" onclick="resetPhishingDetectorGame()">Play Again</button>
+                    <button id="phishingQuizPlayAgainButton" class="btn-secondary px-6 py-3 text-base hidden">Play Again</button>
                 </div>
             `;
+            // Attach event listeners after innerHTML is set
+            const phishingButton = document.getElementById('phishingButton');
+            const legitimateButton = document.getElementById('legitimateButton');
+            const playAgainButton = document.getElementById('phishingQuizPlayAgainButton');
+
+            if (phishingButton) {
+                phishingButton.addEventListener('click', () => submitPhishingAnswer('phishing'));
+            }
+            if (legitimateButton) {
+                legitimateButton.addEventListener('click', () => submitPhishingAnswer('legitimate'));
+            }
+            if (playAgainButton) {
+                playAgainButton.addEventListener('click', resetPhishingDetectorGame);
+            }
+
             document.getElementById('startGameButton').classList.add('hidden');
         }
 
@@ -1062,6 +1237,16 @@ This message is for your security.`,
             if (!phishingQuizActive) return;
 
             const resultElement = document.getElementById('phishingQuizResult');
+            const playAgainButton = document.getElementById('phishingQuizPlayAgainButton');
+            const phishingButton = document.getElementById('phishingButton'); // Use IDs for direct access
+            const legitimateButton = document.getElementById('legitimateButton'); // Use IDs for direct access
+
+            // Robustness check: Ensure all necessary elements exist
+            if (!resultElement || !playAgainButton || !phishingButton || !legitimateButton) {
+                console.error("One or more Phishing Quiz game elements are missing. Game might not be initialized properly.");
+                return;
+            }
+
             let isCorrect;
 
             if (answer === phishingQuizData.answer) {
@@ -1075,9 +1260,9 @@ This message is for your security.`,
             }
 
             phishingQuizActive = false;
-            document.getElementById('phishingQuizPlayAgainButton').classList.remove('hidden');
-            document.querySelector('#gameContent .btn-primary').disabled = true; // Disable buttons
-            document.querySelector('#gameContent .btn-secondary').disabled = true;
+            playAgainButton.classList.remove('hidden');
+            phishingButton.disabled = true; // Disable buttons
+            legitimateButton.disabled = true;
         }
 
         function resetPhishingDetectorGame() {
@@ -1088,41 +1273,61 @@ This message is for your security.`,
 
         // Centralized function to show game modal based on title
         function showGameModal(title, description) {
+            document.getElementById('gameModal').classList.remove('hidden');
             document.getElementById('gameModalTitle').innerText = title;
             document.getElementById('gameModalDescription').innerText = description;
-            document.getElementById('gameModal').classList.remove('hidden');
             document.getElementById('gameContent').innerHTML = ''; // Clear previous game content
 
             // Reset status messages when a new game modal is opened
-            document.getElementById('gameModalDescription').classList.remove('text-yellow-400', 'text-red-500', 'text-green-500');
-            document.getElementById('gameModalDescription').classList.add('text-gray-300');
+            const gameModalDescriptionElement = document.getElementById('gameModalDescription');
+            if (gameModalDescriptionElement) { // Added null check here
+                gameModalDescriptionElement.classList.remove('text-yellow-400', 'text-red-500', 'text-green-500');
+                gameModalDescriptionElement.classList.add('text-gray-300');
+            }
 
 
             // Determine which game to initialize
-            if (title === 'Crack the Code Challenge') {
-                document.getElementById('startGameButton').classList.remove('hidden');
-                document.getElementById('startGameButton').onclick = initializeCrackTheCodeGame;
-            } else if (title === 'Decipher the Log Puzzle') {
-                document.getElementById('startGameButton').classList.remove('hidden');
-                document.getElementById('startGameButton').onclick = initializeDecipherTheLogGame;
-            } else if (title === 'Phishing Detector Quiz') {
-                document.getElementById('startGameButton').classList.remove('hidden');
-                document.getElementById('startGameButton').onclick = initializePhishingDetectorGame;
+            const startGameBtn = document.getElementById('startGameButton');
+            if (startGameBtn) { // Null check for startGameButton
+                startGameBtn.classList.remove('hidden');
+                // Remove existing event listener to prevent multiple bindings if modal is opened repeatedly
+                startGameBtn.removeEventListener('click', initializeCrackTheCodeGame);
+                startGameBtn.removeEventListener('click', initializeDecipherTheLogGame);
+                startGameBtn.removeEventListener('click', initializePhishingDetectorGame);
+                // Also remove the generic fallback handler
+                const genericHandler = startGameBtn.getAttribute('data-generic-handler');
+                if (genericHandler) {
+                    startGameBtn.removeEventListener('click', window[genericHandler]);
+                    startGameBtn.removeAttribute('data-generic-handler');
+                }
+
+
+                if (title === 'Crack the Code Challenge') {
+                    startGameBtn.addEventListener('click', initializeCrackTheCodeGame);
+                } else if (title === 'Decipher the Log Puzzle') {
+                    startGameBtn.addEventListener('click', initializeDecipherTheLogGame);
+                } else if (title === 'Phishing Detector Quiz') {
+                    startGameBtn.addEventListener('click', initializePhishingDetectorGame);
+                } else {
+                    const genericFn = () => {
+                        const gameStartedMessage = document.createElement('div');
+                        gameStartedMessage.className = 'fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-[101]';
+                        gameStartedMessage.innerHTML = `
+                            <div class="bg-gray-800 p-8 rounded-xl card-glow max-w-sm w-full text-center relative border border-neon-green">
+                                <p class="text-neon-green text-xl mb-6">Game started! (This is a simulation. In a real app, the game would load here.)</p>
+                                <button class="btn-secondary px-6 py-2" onclick="this.parentNode.parentNode.remove()">OK</button>
+                            </div>
+                        `;
+                        document.body.appendChild(gameStartedMessage);
+                        hideGameModal();
+                    };
+                    startGameBtn.addEventListener('click', genericFn);
+                    // Store a reference to the generic handler if needed for removal
+                    startGameBtn.setAttribute('data-generic-handler', 'genericGameStartHandler'); // A simple way for a single generic handler
+                    window.genericGameStartHandler = genericFn; // Make it globally accessible for removal
+                }
             } else {
-                // Fallback for other non-implemented games, or if game logic isn't tied to this
-                document.getElementById('startGameButton').classList.remove('hidden');
-                document.getElementById('startGameButton').onclick = () => {
-                    const gameStartedMessage = document.createElement('div');
-                    gameStartedMessage.className = 'fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-[101]';
-                    gameStartedMessage.innerHTML = `
-                        <div class="bg-gray-800 p-8 rounded-xl card-glow max-w-sm w-full text-center relative border border-neon-green">
-                            <p class="text-neon-green text-xl mb-6">Game started! (This is a simulation. In a real app, the game would load here.)</p>
-                            <button class="btn-secondary px-6 py-2" onclick="this.parentNode.parentNode.remove()">OK</button>
-                        </div>
-                    `;
-                    document.body.appendChild(gameStartedMessage);
-                    hideGameModal();
-                };
+                console.error("startGameButton not found.");
             }
         }
 
