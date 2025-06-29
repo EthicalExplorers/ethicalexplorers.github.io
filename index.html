@@ -161,7 +161,7 @@
     <!-- Navbar -->
     <nav class="bg-gray-900 bg-opacity-70 backdrop-blur-md p-4 sticky top-0 z-50 rounded-b-xl shadow-lg">
         <div class="container mx-auto flex justify-between items-center flex-wrap">
-            <a href="#" class="text-2xl font-bold text-neon-green tracking-wider rounded-md p-2">
+            <a href="#home" class="text-2xl font-bold text-neon-green tracking-wider rounded-md p-2">
                 Ethical <span class="text-purple-400">Explorers</span>
             </a>
             <div class="block lg:hidden">
@@ -176,6 +176,7 @@
                     <li><a href="#youtube" class="block mt-4 lg:inline-block lg:mt-0 text-gray-300 hover:text-neon-green px-4 py-2 rounded-lg transition duration-300">Latest Expeditions</a></li>
                     <li><a href="#articles" class="block mt-4 lg:inline-block lg:mt-0 text-gray-300 hover:text-neon-green px-4 py-2 rounded-lg transition duration-300">Knowledge Vault</a></li>
                     <li><a href="#games" class="block mt-4 lg:inline-block lg:mt-0 text-gray-300 hover:text-neon-green px-4 py-2 rounded-lg transition duration-300">Anomaly Lab</a></li>
+                    <li><a href="#contact" class="block mt-4 lg:inline-block lg:mt-0 text-gray-300 hover:text-neon-green px-4 py-2 rounded-lg transition duration-300">Contact Us</a></li>
                     <li>
                         <a href="https://youtube.com/@ethicalexplorers18" target="_blank" class="block mt-4 lg:inline-block lg:mt-0 btn-primary ml-4 transition duration-300">
                             <i class="fab fa-youtube mr-2"></i> Visit YouTube
@@ -298,10 +299,127 @@
             </div>
         </section>
 
+        <!-- Contact Us Section -->
+        <section id="contact" class="py-20 px-8 bg-black bg-opacity-70 backdrop-blur-sm mt-8 rounded-2xl shadow-xl">
+            <div class="container mx-auto text-center max-w-2xl">
+                <h2 class="text-5xl font-bold mb-12 text-purple-400">
+                    <i class="fas fa-envelope mr-4"></i>Contact Us
+                </h2>
+                <p class="text-lg text-gray-300 mb-8">Have questions, suggestions, or collaboration inquiries? Reach out to us!</p>
+                <form class="space-y-6 text-left">
+                    <div>
+                        <label for="contact-name" class="block text-gray-300 text-lg font-bold mb-2">Name:</label>
+                        <input type="text" id="contact-name" name="name" class="w-full p-3 rounded-lg bg-gray-700 border border-teal-500 text-white focus:outline-none focus:border-neon-green" placeholder="Your Name" required>
+                    </div>
+                    <div>
+                        <label for="contact-email" class="block text-gray-300 text-lg font-bold mb-2">Email:</label>
+                        <input type="email" id="contact-email" name="email" class="w-full p-3 rounded-lg bg-gray-700 border border-teal-500 text-white focus:outline-none focus:border-neon-green" placeholder="your.email@example.com" required>
+                    </div>
+                    <div>
+                        <label for="contact-message" class="block text-gray-300 text-lg font-bold mb-2">Message:</label>
+                        <textarea id="contact-message" name="message" rows="6" class="w-full p-3 rounded-lg bg-gray-700 border border-teal-500 text-white focus:outline-none focus:border-neon-green" placeholder="Your message..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn-primary w-full text-lg">Send Message</button>
+                    <p class="text-sm text-gray-400 mt-4 text-center">Note: This is a client-side form for demonstration. Actual email sending requires server-side integration.</p>
+                </form>
+            </div>
+        </section>
+
+        <!-- Disclaimer Section -->
+        <section id="disclaimer" class="py-20 px-8 bg-gray-900 bg-opacity-80 backdrop-blur-sm mt-8 rounded-2xl shadow-xl">
+            <div class="container mx-auto text-center max-w-4xl">
+                <h2 class="text-5xl font-bold mb-12 text-neon-green">
+                    <i class="fas fa-exclamation-triangle mr-4"></i>Disclaimer
+                </h2>
+                <div class="text-lg text-gray-300 leading-relaxed space-y-6 text-left">
+                    <p>The content provided on this website and the Ethical Explorers YouTube channel, including but not limited to tutorials, articles, and games, is intended strictly for <strong class="text-purple-400">educational and informational purposes only</strong>.</p>
+                    <p>We emphasize <strong class="text-neon-green">ethical hacking and cybersecurity awareness</strong>. The techniques and tools discussed are for understanding vulnerabilities and improving defensive security measures. Any use of this information for illegal activities is strictly prohibited and we do not condone or encourage such actions.</p>
+                    <p>Users are solely responsible for their actions and adherence to all applicable local, national, and international laws. Ethical Explorers shall not be held liable for any misuse of the information presented on this platform.</p>
+                    <p>Always seek appropriate legal advice before engaging in activities that might have legal implications.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Privacy Policy Section -->
+        <section id="privacy-policy" class="py-20 px-8 bg-black bg-opacity-70 backdrop-blur-sm mt-8 rounded-2xl shadow-xl">
+            <div class="container mx-auto text-center max-w-4xl">
+                <h2 class="text-5xl font-bold mb-12 text-purple-400">
+                    <i class="fas fa-user-shield mr-4"></i>Privacy Policy
+                </h2>
+                <div class="text-lg text-gray-300 leading-relaxed space-y-6 text-left">
+                    <p>Your privacy is important to us. This Privacy Policy outlines the types of information we collect, how it's used, and the steps we take to protect your personal data when you visit Ethical Explorers.</p>
+                    <h3>Information We Collect</h3>
+                    <p>We may collect information in the following ways:</p>
+                    <ul class="list-disc list-inside ml-6">
+                        <li><strong>Personal Information:</strong> Voluntarily submitted information such as your name and email address when you contact us, subscribe to newsletters, or participate in quizzes/games.</li>
+                        <li><strong>Usage Data:</strong> Information about how you access and use the website, including IP address, browser type, pages visited, and time spent on pages. This helps us improve our content and user experience.</li>
+                    </ul>
+                    <h3>How We Use Your Information</h3>
+                    <p>The information we collect is used to:</p>
+                    <ul class="list-disc list-inside ml-6">
+                        <li>Provide, operate, and maintain our website and services.</li>
+                        <li>Improve, personalize, and expand our website.</li>
+                        <li>Understand and analyze how you use our website.</li>
+                        <li>Develop new products, services, features, and functionality.</li>
+                        <li>Communicate with you, either directly or through one of our partners, including for customer service, to provide you with updates and other information relating to the website, and for marketing and promotional purposes.</li>
+                        <li>Send you emails.</li>
+                        <li>Find and prevent fraud.</li>
+                    </ul>
+                    <h3>Log Files</h3>
+                    <p>Ethical Explorers follows a standard procedure of using log files. These files log visitors when they visit websites. All hosting companies do this and are a part of hosting services' analytics. The information collected by log files includes internet protocol (IP) addresses, browser type, Internet Service Provider (ISP), date and time stamp, referring/exit pages, and possibly the number of clicks. This is not linked to any personally identifiable information. The purpose of the information is for analyzing trends, administering the site, tracking users' movement on the website, and gathering demographic information.</p>
+                    <h3>Cookies and Web Beacons</h3>
+                    <p>Like any other website, Ethical Explorers uses 'cookies'. These cookies are used to store information including visitors' preferences, and the pages on the website that the visitor accessed or visited. The information is used to optimize the users' experience by customizing our web page content based on visitors' browser type and/or other information.</p>
+                    <h3>Third-Party Privacy Policies</h3>
+                    <p>Ethical Explorers' Privacy Policy does not apply to other advertisers or websites. Thus, we are advising you to consult the respective Privacy Policies of these third-party ad servers for more detailed information. It may include their practices and instructions about how to opt-out of certain options.</p>
+                    <h3>Children's Information</h3>
+                    <p>Another part of our priority is adding protection for children while using the internet. We encourage parents and guardians to observe, participate in, and/or monitor and guide their online activity. Ethical Explorers does not knowingly collect any Personal Identifiable Information from children under the age of 13. If you think that your child provided this kind of information on our website, we strongly encourage you to contact us immediately and we will do our best to promptly remove such information from our records.</p>
+                    <h3>Consent</h3>
+                    <p>By using our website, you hereby consent to our Privacy Policy and agree to its terms.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Terms of Service Section -->
+        <section id="terms-of-service" class="py-20 px-8 bg-gray-900 bg-opacity-80 backdrop-blur-sm mt-8 rounded-2xl shadow-xl">
+            <div class="container mx-auto text-center max-w-4xl">
+                <h2 class="text-5xl font-bold mb-12 text-neon-green">
+                    <i class="fas fa-file-contract mr-4"></i>Terms of Service
+                </h2>
+                <div class="text-lg text-gray-300 leading-relaxed space-y-6 text-left">
+                    <p>Welcome to Ethical Explorers! These terms and conditions outline the rules and regulations for the use of Ethical Explorers' Website.</p>
+                    <h3>1. Acceptance of Terms</h3>
+                    <p>By accessing this website, we assume you accept these terms and conditions. Do not continue to use Ethical Explorers if you do not agree to take all of the terms and conditions stated on this page.</p>
+                    <h3>2. Content and Use</h3>
+                    <p>The content provided on this website is for educational and informational purposes only. We specialize in ethical hacking and cybersecurity awareness. Users acknowledge and agree that any information, tools, or techniques discussed are for academic understanding and improving defensive security measures.</p>
+                    <p>Users are strictly prohibited from using any information obtained from this website for illegal activities, unauthorized access, or any actions that violate local, national, or international laws.</p>
+                    <h3>3. Intellectual Property Rights</h3>
+                    <p>Unless otherwise stated, Ethical Explorers and/or its licensors own the intellectual property rights for all material on Ethical Explorers. All intellectual property rights are reserved. You may access this from Ethical Explorers for your own personal use subjected to restrictions set in these terms and conditions.</p>
+                    <h3>4. Restrictions</h3>
+                    <p>You must not:</p>
+                    <ul class="list-disc list-inside ml-6">
+                        <li>Republish material from Ethical Explorers.</li>
+                        <li>Sell, rent or sub-license material from Ethical Explorers.</li>
+                        <li>Reproduce, duplicate or copy material from Ethical Explorers.</li>
+                        <li>Redistribute content from Ethical Explorers.</li>
+                    </ul>
+                    <h3>5. Limitation of Liability</h3>
+                    <p>In no event shall Ethical Explorers, nor any of its officers, directors and employees, be held liable for anything arising out of or in any way connected with your use of this website whether such liability is under contract. Ethical Explorers, including its officers, directors and employees shall not be held liable for any indirect, consequential or special liability arising out of or in any way related to your use of this website.</p>
+                    <h3>6. Indemnification</h3>
+                    <p>You hereby indemnify to the fullest extent Ethical Explorers from and against any and/or all liabilities, costs, demands, causes of action, damages and expenses arising in any way related to your breach of any of the provisions of these Terms.</p>
+                    <h3>7. Severability</h3>
+                    <p>If any provision of these Terms is found to be invalid under any applicable law, such provisions shall be deleted without affecting the remaining provisions herein.</p>
+                    <h3>8. Variation of Terms</h3>
+                    <p>Ethical Explorers is permitted to revise these Terms at any time as it sees fit, and by using this website you are expected to review these Terms on a regular basis.</p>
+                    <h3>9. Governing Law & Jurisdiction</h3>
+                    <p>These Terms will be governed by and interpreted in accordance with the laws of [Your Country/State], and you submit to the non-exclusive jurisdiction of the state and federal courts located in [Your Country/State] for the resolution of any disputes.</p>
+                </div>
+            </div>
+        </section>
+
         <!-- Game Modal (simulated or playable for demonstration) -->
         <div id="gameModal" class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-[100] hidden p-4">
             <div class="bg-gray-800 p-8 rounded-xl card-glow max-w-xl w-full text-center relative border border-neon-green flex flex-col">
-                <button onclick="hideGameModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white text-3xl">&times;</button>
+                <button id="hideGameModalButton" class="absolute top-4 right-4 text-gray-400 hover:text-white text-3xl">&times;</button>
                 <h3 id="gameModalTitle" class="text-4xl font-bold text-neon-green mb-6"></h3>
                 <p id="gameModalDescription" class="text-gray-300 text-lg mb-8"></p>
                 <div id="gameContent" class="flex-grow w-full">
@@ -332,10 +450,14 @@
                 <a href="https://www.instagram.com/ethical_explorers_18?igsh=MTduc2hld21hMHFuOQ==" target="_blank" class="text-gray-400 hover:text-pink-500 transition duration-300 transform hover:scale-125 text-3xl"><i class="fab fa-instagram"></i></a>
             </div>
             <p class="text-gray-500 text-sm mb-4">&copy; 2025 Ethical Explorers. All rights reserved.</p>
-            <div class="flex justify-center space-x-6 text-sm">
-                <a href="#" class="text-gray-500 hover:text-neon-green transition duration-300">Privacy Policy</a>
-                <span class="text-gray-600">|</span>
-                <a href="#" class="text-gray-500 hover:text-neon-green transition duration-300">Terms of Service</a>
+            <div class="flex flex-col sm:flex-row justify-center space-y-2 sm:space-y-0 sm:space-x-6 text-sm">
+                <a href="#privacy-policy" class="text-gray-500 hover:text-neon-green transition duration-300">Privacy Policy</a>
+                <span class="text-gray-600 hidden sm:block">|</span>
+                <a href="#terms-of-service" class="text-gray-500 hover:text-neon-green transition duration-300">Terms of Service</a>
+                <span class="text-gray-600 hidden sm:block">|</span>
+                <a href="#disclaimer" class="text-gray-500 hover:text-neon-green transition duration-300">Disclaimer</a>
+                <span class="text-gray-600 hidden sm:block">|</span>
+                <a href="#contact" class="text-gray-500 hover:text-neon-green transition duration-300">Contact Us</a>
             </div>
         </div>
     </footer>
@@ -543,7 +665,7 @@
                     <ul class="list-disc list-inside text-left mx-auto max-w-2xl space-y-2 mb-6">
                         <li><strong>Due Diligence:</strong> Investigating individuals or organizations for background checks.</li>
                         <li><strong>Threat Intelligence:</strong> Identifying potential security risks or vulnerabilities.</li>
-                        <li><strong>Market Research:</b> Understanding consumer behavior and industry trends.</li>
+                        <li><strong>Market Research:</strong> Understanding consumer behavior and industry trends.</li>
                         <li><strong>Journalism:</strong> Verifying facts and uncovering stories from public sources.</li>
                         <li><strong>Missing Persons Cases:</strong> Gathering clues from online activity.</li>
                     </ul>
@@ -739,6 +861,12 @@
                     taglineElement.style.overflow = 'visible';
                     taglineElement.style.width = 'auto'; // Let width be determined by content/container
                 });
+            }
+
+            // Attach event listener to hideGameModalButton
+            const hideGameModalBtn = document.getElementById('hideGameModalButton');
+            if (hideGameModalBtn) {
+                hideGameModalBtn.addEventListener('click', hideGameModal);
             }
         });
 
@@ -1295,10 +1423,9 @@ This message is for your security.`,
                 startGameBtn.removeEventListener('click', initializeDecipherTheLogGame);
                 startGameBtn.removeEventListener('click', initializePhishingDetectorGame);
                 // Also remove the generic fallback handler
-                const genericHandler = startGameBtn.getAttribute('data-generic-handler');
+                const genericHandler = window.genericGameStartHandler; // Get the function reference
                 if (genericHandler) {
-                    startGameBtn.removeEventListener('click', window[genericHandler]);
-                    startGameBtn.removeAttribute('data-generic-handler');
+                    startGameBtn.removeEventListener('click', genericHandler);
                 }
 
 
@@ -1322,9 +1449,7 @@ This message is for your security.`,
                         hideGameModal();
                     };
                     startGameBtn.addEventListener('click', genericFn);
-                    // Store a reference to the generic handler if needed for removal
-                    startGameBtn.setAttribute('data-generic-handler', 'genericGameStartHandler'); // A simple way for a single generic handler
-                    window.genericGameStartHandler = genericFn; // Make it globally accessible for removal
+                    window.genericGameStartHandler = genericFn; // Store the function reference
                 }
             } else {
                 console.error("startGameButton not found.");
