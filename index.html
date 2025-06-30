@@ -474,6 +474,24 @@
                 link: "https://youtu.be/Y3SPeZm2Uz4"
             },
             {
+                title: "How to Protect Yourself from Cyber Attacks? (Cybersecurity Basics)",
+                description: "Learn essential cybersecurity basics to protect yourself from various cyber attacks.",
+                thumbnail: "https://img.youtube.com/vi/Q-YwdQ-9tOk/hqdefault.jpg",
+                link: "https://youtu.be/Q-YwdQ-9tOk"
+            },
+            {
+                title: "What is Social Engineering? Types of Social Engineering Attacks",
+                description: "Understand social engineering and its various types of attacks used by cybercriminals.",
+                thumbnail: "https://img.youtube.com/vi/Yt-YZkKlRq0/hqdefault.jpg",
+                link: "https://youtu.be/Yt-YZkKlRq0"
+            },
+            {
+                title: "How to use Shodan? (Shodan Tutorial for Beginners)",
+                description: "A beginner's tutorial on how to use Shodan, the search engine for internet-connected devices.",
+                thumbnail: "https://img.youtube.com/vi/0i7cEQmhWbo/hqdefault.jpg",
+                link: "https://youtu.be/0i7cEQmhWbo"
+            },
+            {
                 title: "Kali Linux: Host Your Own Onion Website Tutorial",
                 description: "Learn to set up your own anonymous onion website on Kali Linux using Tor hidden services.",
                 thumbnail: "https://img.youtube.com/vi/lM8YPeLNbhA/hqdefault.jpg",
@@ -1237,7 +1255,911 @@ Structure your response with:
 
             document.getElementById('gameContent').innerHTML = `
                 <div class="space-y-6 text-left">
-                    <p class="text-gray-300">Analyze the log below and identify the **suspicious keyword**.</p>
+                    <p class="text-gray-300">Examine the message below. Is it a **Phishing** attempt or **Legitimate**?</p>
+                    <pre id="logDisplay" class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm max-h-48 whitespace-pre-wrap">${logPuzzleData.log}</pre>
+                    <p id="logPuzzleStatus" class="text-xl text-teal-300">Attempts left: <span id="logPuzzleAttemptsLeft">${logPuzzleData.attempts}</span></p>
+                    <input type="text" id="logPuzzleGuess" placeholder="Enter suspicious keyword" class="w-full p-3 rounded-lg bg-gray-700 border border-teal-500 text-white focus:outline-none focus:border-neon-green">
+                    <button id="submitLogPuzzleGuessButton" class="btn-primary px-6 py-3 text-base">Submit Keyword</button>
+                    <p id="logPuzzleResult" class="text-lg mt-4"></p>
+                    <div id="llmLogExplanationContainer" class="mt-6 pt-4 border-t border-gray-700 hidden">
+                        <h4 class="text-xl font-bold text-neon-green mb-3 flex items-center">✨ AI Explanation:</h4>
+                        <div id="llmLogExplanationOutput" class="text-gray-300"></div>
+                        <div id="llmLogLoading" class="loading-spinner hidden mx-auto mt-4"></div>
+                    </div>
+                    <button id="logPuzzlePlayAgainButton" class="btn-secondary px-6 py-3 text-base hidden">Play Again</button>
+                </div>
+            `;
+            // Attach event listeners after innerHTML is set
+            const submitButton = document.getElementById('submitLogPuzzleGuessButton');
+            if (submitButton) {
+                submitButton.addEventListener('click', submitLogPuzzleGuess);
+            }
+            const playAgainButton = document.getElementById('logPuzzlePlayAgainButton');
+            if (playAgainButton) {
+                playAgainButton.addEventListener('click', resetDecipherTheLogGame);
+            }
+
+            document.getElementById('logPuzzleGuess').focus();
+            document.getElementById('startGameButton').classList.add('hidden');
+        }
+
+        async function submitLogPuzzleGuess() {
+            if (!logPuzzleGameActive) return;
+
+            const guessInput = document.getElementById('logPuzzleGuess');
+            const statusElement = document.getElementById('logPuzzleStatus');
+            const resultElement = document.getElementById('logPuzzleResult');
+            const attemptsLeftElement = document.getElementById('logPuzzleAttemptsLeft');
+            const playAgainButton = document.getElementById('logPuzzlePlayAgainButton');
+            const llmExplanationContainer = document.getElementById('llmLogExplanationContainer');
+
+
+            // Robustness check: Ensure all necessary elements exist
+            if (!guessInput || !statusElement || !resultElement || !attemptsLeftElement || !playAgainButton || !llmExplanationContainer) {
+                console.error("One or more Log Puzzle game elements are missing. Game might not be initialized properly.");
+                return;
+            }
+
+            const guess = guessInput.value.trim();
+
+            if (guess === "") {
+                statusElement.innerText = "Please enter a keyword.";
+                statusElement.className = 'text-xl text-yellow-400';
+                return;
+            }
+
+            logPuzzleData.attempts--;
+            attemptsLeftElement.innerText = logPuzzleData.attempts; // Use the element reference
+
+            if (guess.toLowerCase() === logPuzzleData.keyword.toLowerCase()) {
+                resultElement.innerHTML = `<span class="text-green-500 font-bold">Correct!</span> ${logPuzzleData.explanation}`;
+                resultElement.className = 'text-lg text-green-500 mt-4';
+                statusElement.className = 'text-xl text-green-500';
+                statusElement.innerText = `You deciphered the log!`;
+                logPuzzleGameActive = false;
+                playAgainButton.classList.remove('hidden');
+
+                // Trigger LLM explanation
+                llmExplanationContainer.classList.remove('hidden');
+                const prompt = `Explain in detail the security implications of this log anomaly: "${logPuzzleData.log}" (focus on the part "${logPuzzleData.keyword}") and suggest how an ethical explorer would investigate and mitigate it.`;
+                await callGeminiAPI(prompt, 'llmLogExplanationOutput', 'llmLogLoading');
+
+            } else if (logPuzzleData.attempts === 0) {
+                resultElement.innerHTML = `<span class="text-red-500 font-bold">Game Over!</span> The suspicious keyword was: "${logPuzzleData.keyword}". ${logPuzzleData.explanation}`;
+                resultElement.className = 'text-lg text-red-500 mt-4';
+                statusElement.className = 'text-xl text-red-500';
+                statusElement.innerText = `You failed to decipher the log.`;
+                logPuzzleGameActive = false;
+                playAgainButton.classList.remove('hidden');
+            } else {
+                resultElement.innerText = "Incorrect keyword. Try again!";
+                resultElement.className = 'text-lg text-yellow-400 mt-4';
+                statusElement.innerText = `Attempts left: ${logPuzzleData.attempts}`;
+                statusElement.className = 'text-xl text-teal-300';
+            }
+            guessInput.value = ''; // Clear input
+            if (logPuzzleGameActive) {
+                guessInput.focus();
+            }
+        }
+
+        function resetDecipherTheLogGame() {
+            document.getElementById('logPuzzlePlayAgainButton').classList.add('hidden');
+            document.getElementById('llmLogExplanationContainer').classList.add('hidden');
+            document.getElementById('llmLogExplanationOutput').innerHTML = '';
+            initializeDecipherTheLogGame();
+        }
+
+        // Game Logic for "Phishing Detector Quiz"
+        let phishingQuizData = {};
+        let phishingQuizActive = false;
+
+        const phishingScenarios = [
+            {
+                scenario: `Subject: Urgent - Your Account Is On Hold!
+Dear Customer,
+We detected unusual activity on your account. To prevent further issues, please verify your information immediately by clicking the link below:
+http://bit.ly/secure-my-account-login
+Failure to comply will result in account suspension.
+Thank you,
+Service Department`,
+                answer: "phishing",
+                explanation: "This is a classic phishing attempt. It uses urgent language ('Urgent', 'immediately', 'suspension'), a generic greeting ('Dear Customer'), and a suspicious short URL that doesn't match the supposed sender."
+            },
+            {
+                scenario: `Subject: Order Confirmation #12345
+Hi Jane,
+Thank Data for YouTube Videos
+        const allYoutubeVideos = [
+            {
+                title: "Ethical Hacking: The Cybersecurity Roadmap",
+                description: "This video outlines a comprehensive roadmap for aspiring ethical hackers and cybersecurity professionals.",
+                thumbnail: "https://img.youtube.com/vi/Y3SPeZm2Uz4/hqdefault.jpg",
+                link: "https://youtu.be/Y3SPeZm2Uz4"
+            },
+            {
+                title: "How to Protect Yourself from Cyber Attacks? (Cybersecurity Basics)",
+                description: "Learn essential cybersecurity basics to protect yourself from various cyber attacks.",
+                thumbnail: "https://img.youtube.com/vi/Q-YwdQ-9tOk/hqdefault.jpg",
+                link: "https://youtu.be/Q-YwdQ-9tOk"
+            },
+            {
+                title: "What is Social Engineering? Types of Social Engineering Attacks",
+                description: "Understand social engineering and its various types of attacks used by cybercriminals.",
+                thumbnail: "https://img.youtube.com/vi/Yt-YZkKlRq0/hqdefault.jpg",
+                link: "https://youtu.be/Yt-YZkKlRq0"
+            },
+            {
+                title: "How to use Shodan? (Shodan Tutorial for Beginners)",
+                description: "A beginner's tutorial on how to use Shodan, the search engine for internet-connected devices.",
+                thumbnail: "https://img.youtube.com/vi/0i7cEQmhWbo/hqdefault.jpg",
+                link: "https://youtu.be/0i7cEQmhWbo"
+            },
+            {
+                title: "Kali Linux: Host Your Own Onion Website Tutorial",
+                description: "Learn to set up your own anonymous onion website on Kali Linux using Tor hidden services.",
+                thumbnail: "https://img.youtube.com/vi/lM8YPeLNbhA/hqdefault.jpg",
+                link: "https://youtu.be/lM8YPeLNbhA"
+            },
+            {
+                title: "Easy Way to Investigate Instagram Profiles OSINT Tool: OSINTGRAM Installion",
+                description: "Discover OSINTGRAM for Instagram profile investigations – a powerful OSINT tool for ethical data gathering.",
+                thumbnail: "https://img.youtube.com/vi/nysaecTpCqM/hqdefault.jpg",
+                link: "https://youtu.be/nysaecTpCqM"
+            },
+            {
+                title: "Web Application Security: Practical XSS Vulnerability & Prevention Guide",
+                description: "Understand Cross-Site Scripting (XSS) vulnerabilities and practical prevention techniques for web applications.",
+                thumbnail: "https://img.youtube.com/vi/90S9l7X32Zk/hqdefault.jpg",
+                link: "https://youtu.be/90S9l7X32Zk"
+            },
+            {
+                title: "OSINT Tool Installation & Tutorial: Gathering Open Source Intelligence",
+                description: "Master OSINT with this guide on tool installation and techniques for collecting open-source intelligence ethically.",
+                thumbnail: "https://img.youtube.com/vi/YIM6OWdgd-Y/hqdefault.jpg",
+                link: "https://youtu.be/YIM6OWdgd-Y"
+            },
+            // New Video Cards Added Below
+            {
+                title: "OSINT Framework: How to use it?",
+                description: "Learn how to effectively navigate and utilize the OSINT Framework for open-source intelligence gathering.",
+                thumbnail: "https://img.youtube.com/vi/iJVyAVyAirI/hqdefault.jpg",
+                link: "https://youtu.be/iJVyAVyAirI"
+            },
+            {
+                title: "How I would start learning CyberSecurity (No experience)",
+                description: "A beginner's guide to starting a cybersecurity journey with no prior experience.",
+                thumbnail: "https://img.youtube.com/vi/-38sbwTL_VI/hqdefault.jpg",
+                link: "https://youtu.be/-38sbwTL_VI"
+            },
+            {
+                title: "How to get an Internship in CyberSecurity?",
+                description: "Tips and strategies to land your first cybersecurity internship, even with limited experience.",
+                thumbnail: "https://img.youtube.com/vi/jJKU1VP2BzA/hqdefault.jpg",
+                link: "https://youtu.be/jJKU1VP2BzA"
+            },
+            {
+                title: "Hacker vs Hacker: The Ultimate Battle for Cyber Supremacy",
+                description: "A simulated battle showcasing the tactics and counter-tactics of ethical hackers in a cyber showdown.",
+                thumbnail: "https://img.youtube.com/vi/ttM42KgUMUA/hqdefault.jpg",
+                link: "https://youtu.be/ttM42KgUMUA"
+            }
+        ];
+
+        let initialDisplayCount = 3; // Number of items to show initially
+
+        // Data for Blog Articles
+        const allBlogArticles = [
+            // Kali Linux Onion Website Tutorial article
+            {
+                title: "Kali Linux: Host Your Own Onion Website Tutorial",
+                description: "In an era where digital privacy is increasingly scrutinized, understanding tools that champion anonymity has become paramount. This comprehensive guide will walk you through the process of setting up your very own onion website on a Kali Linux machine.",
+                fullContent: `
+                    <h3 class="text-3xl font-bold text-neon-green mb-4">Kali Linux: Host Your Own Onion Website Tutorial</h3>
+                    <p class="mb-4">In an era where digital privacy is increasingly scrutinized, understanding tools that champion anonymity has become paramount. The dark web, often shrouded in mystery and misconception, is fundamentally built upon the principles of privacy and untraceability, powered by technologies like Tor. Far from being solely a domain for illicit activities, the dark web is a critical infrastructure for journalists, activists, and privacy-conscious individuals seeking to communicate and publish without censorship or surveillance.</p>
+                    <p class="mb-6">This comprehensive guide will walk you through the process of setting up your very own onion website on a Kali Linux machine. This isn't about promoting anything illegal, but rather about demystifying hidden services and empowering you with the knowledge to utilize this powerful technology responsibly.</p>
+
+                    <h4 class="text-2xl font-bold text-purple-400 mb-3">Why Host an Onion Website? Exploring the Benefits of Hidden Services</h4>
+                    <p class="mb-4">Before we delve into the technicalities, let's explore the compelling reasons one might choose to host a website on the Tor network:</p>
+                    <ul class="list-disc list-inside text-left mx-auto max-w-2xl space-y-2 mb-6">
+                        <li><strong>Enhanced Anonymity & Privacy:</strong> Tor’s onion routing ensures that the location of your server remains hidden from potential attackers or surveillance entities. This provides a robust layer of protection for the website host.</li>
+                        <li><strong>Censorship Resistance:</strong> In regions with strict internet censorship, onion websites can offer a lifeline for free speech, allowing content to be published and accessed even when traditional websites are blocked.</li>
+                        <li><strong>Secure Communication:</strong> For whistleblowers, journalists, and human rights activists, an onion site can serve as a secure drop-off point or communication platform, minimizing risks associated with sensitive information exchange.</li>
+                        <li><strong>Resilience:</strong> While not impervious to all attacks, the distributed nature of the Tor network can make onion services more resilient against certain forms of denial-of-service (DoS) attacks.</li>
+                        <li><strong>Educational Purposes:</strong> Understanding and setting up a hidden service provides invaluable insights into network security, encryption, and the architecture of anonymous communication networks. It's a hands-on cybersecurity learning experience.</li>
+                    </ul>
+
+                    <h4 class="text-2xl font-bold text-purple-400 mb-3">Prerequisites: Your Kali Linux Foundation</h4>
+                    <p class="mb-6">This tutorial assumes a basic familiarity with Kali Linux, the popular Debian-derived distribution designed for digital forensics and penetration testing. If you're new to Kali, we recommend spending some time with beginner guides to get comfortable with the terminal, file system navigation, and fundamental Linux commands. For this guide, we'll be using a simple index.html file as our test web page, a basic HTML file with some text to demonstrate the web hosting capabilities of your onion service.</p>
+
+                    <h4 class="text-2xl font-bold text-purple-400 mb-3">Step 1: Installing and Updating Tor – The Onion Router</h4>
+                    <p class="mb-4">The cornerstone of any dark web website or hidden service is Tor (The Onion Router). Tor is a free and open-source software that enables anonymous communication. While many Kali Linux installations come with Tor pre-installed, it's crucial to ensure you have the latest version for optimal security and functionality.</p>
+                    <ul class="list-disc list-inside text-left mx-auto max-w-2xl space-y-2 mb-6">
+                        <li><strong>Open your terminal:</strong> This is where all the magic happens.</li>
+                        <li><strong>Install or upgrade Tor:</strong> Execute the following command:</li>
+                        <pre class="bg-gray-900 text-green-400 p-3 rounded-md overflow-x-auto my-2"><code>sudo apt install tor</code></pre>
+                        <li>This command will check for Tor on your system. If it's not present, it will download and install it along with any necessary dependencies. If it's already installed, it will ensure you have the most up-to-date version. This is a critical Linux security practice.</li>
+                    </ul>
+
+                    <h4 class="text-2xl font-bold text-purple-400 mb-3">Step 2: Configuring Tor for Hidden Service Hosting</h4>
+                    <p class="mb-4">Now that Tor is installed, we need to instruct it to run a hidden service. This involves modifying Tor's primary configuration file, torrc, typically located in the <code class="bg-gray-700 p-1 rounded">/etc/tor/</code> directory.</p>
+                    <ul class="list-disc list-inside text-left mx-auto max-w-2xl space-y-2 mb-6">
+                        <li><strong>Open the torrc file with Nano editor:</strong></li>
+                        <pre class="bg-gray-900 text-green-400 p-3 rounded-md overflow-x-auto my-2"><code>sudo nano /etc/tor/torrc</code></pre>
+                        <li>Press Enter.</li>
+                        <li><strong>Locate Hidden Service Directives:</strong> The torrc file contains numerous configuration options. We're specifically interested in the hidden service configuration section. You can scroll through the file, or for a quicker method, use Nano's search function:
+                            <ul class="list-circle list-inside ml-4">
+                                <li>Press <code class="bg-gray-700 p-1 rounded">Ctrl + W</code></li>
+                                <li>Type "<code class="bg-gray-700 p-1 rounded">HiddenService</code>" and press Enter.</li>
+                            </ul>
+                        </li>
+                        <li>You'll be looking for two specific lines, which are usually commented out (indicated by a <code class="bg-gray-700 p-1 rounded">#</code> at the beginning):
+                            <pre class="bg-gray-900 text-green-400 p-3 rounded-md overflow-x-auto my-2"><code># HiddenServiceDir /var/lib/tor/hidden_service/
+# HiddenServicePort 80 127.0.0.1:80</code></pre>
+                        </li>
+                        <li><strong>Uncomment the lines:</strong> Delete the <code class="bg-gray-700 p-1 rounded">#</code> symbol at the beginning of both these lines. This activates them.</li>
+                        <li><code class="bg-gray-700 p-1 rounded">HiddenServiceDir /var/lib/tor/hidden_service/</code>: This directive tells Tor where to create and manage the necessary files for your hidden service. This directory will hold crucial information, including your service's private key and its unique, randomly generated onion hostname.</li>
+                        <li><code class="bg-gray-700 p-1 rounded">HiddenServicePort 80 127.0.0.1:80</code>: This line maps incoming traffic on port 80 of your onion service to port 80 of your local machine (127.0.0.1). This is where your web server (e.g., Apache or Nginx) will be listening.</li>
+                        <li><strong>Save and Exit:</strong>
+                            <ul class="list-circle list-inside ml-4">
+                                <li>Press <code class="bg-gray-700 p-1 rounded">Ctrl + X</code></li>
+                                <li>Type <code class="bg-gray-700 p-1 rounded">Y</code> for yes when asked to save.</li>
+                                <li>Press Enter to confirm the file name.</li>
+                            </ul>
+                        </li>
+                        <li>While <code class="bg-gray-700 p-1 rounded">/var/lib/tor/hidden_service</code> is the default and generally recommended location, advanced users might specify a different directory for specific server security or organizational reasons.</li>
+                    </ul>
+
+                    <h4 class="text-2xl font-bold text-purple-400 mb-3">Step 3: Setting Up Your Local Web Server</h4>
+                    <p class="mb-4">For your onion website to serve content, you need a local web server running. Apache is a popular and straightforward choice on Kali Linux.</p>
+                    <ul class="list-disc list-inside text-left mx-auto max-w-2xl space-y-2 mb-6">
+                        <li><strong>Install Apache2 (if not already installed):</strong></li>
+                        <pre class="bg-gray-900 text-green-400 p-3 rounded-md overflow-x-auto my-2"><code>sudo apt install apache2</code></pre>
+                        <li><strong>Place your website files:</strong> Your <code class="bg-gray-700 p-1 rounded">index.html</code> file (or any other web content) should be placed in Apache's default web root directory, which is <code class="bg-gray-700 p-1 rounded">/var/www/html/</code>.</li>
+                        <pre class="bg-gray-900 text-green-400 p-3 rounded-md overflow-x-auto my-2"><code>sudo mv /path/to/your/index.html /var/www/html/</code></pre>
+                        <li>(Replace <code class="bg-gray-700 p-1 rounded">/path/to/your/index.html</code> with the actual path to your file).</li>
+                        <li><strong>Start Apache2 service:</strong></li>
+                        <pre class="bg-gray-900 text-green-400 p-3 rounded-md overflow-x-auto my-2"><code>sudo systemctl start apache2</code></pre>
+                        <li>You can also enable it to start on boot: <code class="bg-gray-700 p-1 rounded">sudo systemctl enable apache2</code>.</li>
+                    </ul>
+
+                    <h4 class="text-2xl font-bold text-purple-400 mb-3">Step 4: Discovering Your Unique Onion Address</h4>
+                    <p class="mb-4">With Tor configured and your web server ready, it's time to reveal your onion address. This address is your website's unique identifier on the Tor network.</p>
+                    <ul class="list-disc list-inside text-left mx-auto max-w-2xl space-y-2 mb-6">
+                        <li><strong>Open your terminal.</strong></li>
+                        <li><strong>View the hostname file:</strong> Tor automatically generates a hostname file within your specified <code class="bg-gray-700 p-1 rounded">HiddenServiceDir</code>.</li>
+                        <pre class="bg-gray-900 text-green-400 p-3 rounded-md overflow-x-auto my-2"><code>sudo cat /var/lib/tor/hidden_service/hostname</code></pre>
+                        <li>Press Enter.</li>
+                        <li><strong>Copy your onion address:</strong> The output will be a long, seemingly random string of characters followed by the <code class="bg-gray-700 p-1 rounded">.onion</code> extension (e.g., <code class="bg-gray-700 p-1 rounded">abcdef1234567890abcdef1234567890.onion</code>). This is your website’s anonymous address. Copy this entire address carefully.</li>
+                    </ul>
+
+                    <h4 class="text-2xl font-bold text-purple-400 mb-3">Step 5: Starting the Tor Service</h4>
+                    <p class="mb-4">Now, bring your Tor hidden service online!</p>
+                    <ul class="list-disc list-inside text-left mx-auto max-w-2xl space-y-2 mb-6">
+                        <li><strong>Open a new terminal window.</strong> (This is to keep your previous terminal clear, though you can use the same one if you prefer).</li>
+                        <li><strong>Start the Tor service:</strong></li>
+                        <pre class="bg-gray-900 text-green-400 p-3 rounded-md overflow-x-auto my-2"><code>sudo systemctl start tor</code></pre>
+                        <li>This command initiates the Tor service in the background, making your hidden service accessible via its onion address.</li>
+                    </ul>
+
+                    <h4 class="text-2xl font-bold text-purple-400 mb-3">Step 6: Accessing Your Onion Website with Tor Browser</h4>
+                    <p class="mb-4">To access your newly created onion website, you must use the Tor Browser. Standard web browsers like Chrome, Firefox, or Safari cannot directly connect to <code class="bg-gray-700 p-1 rounded">.onion</code> addresses.</p>
+                    <ul class="list-disc list-inside text-left mx-auto max-w-2xl space-y-2 mb-6">
+                        <li><strong>Download Tor Browser:</strong> If you don't have it, download the official Tor Browser from the Tor Project website. Simply search for "Tor browser download" in your regular browser.</li>
+                        <li><strong>Launch Tor Browser.</strong></li>
+                        <li><strong>Paste your onion address:</strong> In the Tor Browser's address bar, paste the <code class="bg-gray-700 p-1 rounded">.onion</code> address you copied earlier and press Enter.</li>
+                        <li>Your simple <code class="bg-gray-700 p-1 rounded">index.html</code> file should now be displayed through the Tor network, confirming your Kali Linux onion site is live!</li>
+                    </ul>
+
+                    <h4 class="text-2xl font-bold text-purple-400 mb-3">Important Considerations for Your Hidden Service</h4>
+                    <ul class="list-disc list-inside text-left mx-auto max-w-2xl space-y-2 mb-6">
+                        <li><strong>Security Best Practices:</strong> While Tor offers anonymity, securing your underlying Kali Linux machine and web server is paramount. Regularly update your system (<code class="bg-gray-700 p-1 rounded">sudo apt update && sudo apt full-upgrade</code>), configure a firewall (<code class="bg-gray-700 p-1 rounded">ufw</code>), and apply other cybersecurity hardening measures.</li>
+                        <li><strong>Persistence:</strong> If you want your onion service to persist across reboots, ensure Tor and Apache2 services are enabled to start automatically (<code class="bg-gray-700 p-1 rounded">sudo systemctl enable tor</code> and <code class="bg-gray-700 p-1 rounded">sudo systemctl enable apache2</code>).</li>
+                        <li><strong>Content:</strong> Be mindful of the content you host. While the Tor network offers anonymity, illegal activities are still illegal and can lead to severe consequences.</li>
+                        <li><strong>Monitoring:</strong> For more advanced setups, consider monitoring your hidden service logs (<code class="bg-gray-700 p-1 rounded">/var/log/tor/log</code>) to ensure it's running smoothly and to troubleshoot any issues.</li>
+                    </ul>
+
+                    <h4 class="text-2xl font-bold text-purple-400 mb-3">Conclusion: Embracing Digital Freedom</h4>
+                    <p class="mb-4">Congratulations! You've successfully set up your very own onion website on Kali Linux. This process not only provides a platform for anonymous content hosting but also deepens your understanding of Tor network fundamentals, network security, and digital privacy technologies. By exploring these tools, you contribute to a more open and uncensored internet.</p>
+                    <p class="mb-6">The dark web, when used responsibly, is a powerful enabler of freedom and a testament to the continuous innovation in anonymous communication. Keep exploring, keep learning, and use your knowledge to advocate for a more secure and private digital world.</p>
+                    <p class="mb-4 text-center">
+                        <a href="https://youtu.be/lM8YPeLNbhA" target="_blank" class="btn-primary text-sm inline-flex items-center">
+                            <i class="fab fa-youtube mr-2"></i> Watch Video Tutorial
+                        </a>
+                    </p>
+                `,
+                date: "June 28, 2025",
+                tags: ["OnionWebsite", "TorHiddenService", "KaliLinux", "DarkWeb", "PrivacyOnline"],
+                full_tags: [
+                    "DigitalPrivacy", "Cybersecurity", "AnonymousBrowse", "NetworkSecurity", "EthicalHacking",
+                    "Infosec", "OpSec", "CensorshipResistance", "DataProtection", "WebHosting",
+                    "SecureCommunication", "LinuxSecurity", "OpenSource", "Decentralization", "DeepWeb",
+                    "CyberAwareness", "DigitalRights", "VirtualPrivateNetwork", "ThreatIntelligence",
+                    "AIinCybersecurity", "ZeroTrust", "OSINT", "How to host .onion site Kali Linux",
+                    "Set up Tor hidden service Kali 2025", "Anonymous web hosting guide",
+                    "Kali Linux dark web server setup", "Secure web server on Tor network",
+                    "Learn Tor hidden services", "Kali Linux privacy tools", "Dark web anonymity guide."
+                ]
+            },
+            // NEW: Unveiling the Digital Footprint: A Deep Dive into OSINT and Osintgram
+            {
+                title: "Unveiling the Digital Footprint: A Deep Dive into OSINT and Osintgram",
+                description: "In an increasingly interconnected world, the lines between public and private information are constantly blurring. This article delves into OSINT and introduces Osintgram, a tool to gather insights from Instagram profiles.",
+                fullContent: `
+                    <h3 class="text-3xl font-bold text-neon-green mb-4">Unveiling the Digital Footprint: A Deep Dive into OSINT and Osintgram</h3>
+                    <p class="mb-4">In an increasingly interconnected world, the lines between public and private information are constantly blurring. Every click, every post, and every interaction leaves a digital footprint. Understanding how to navigate and interpret this vast ocean of data is where Open-Source Intelligence (OSINT) comes into play. This article, inspired by a recent YouTube video, delves into the fascinating realm of OSINT and introduces a powerful Python-based tool called Osintgram, designed to gather insights from Instagram profiles.</p>
+                    <h4 class="text-2xl font-bold text-purple-400 mb-3">What is OSINT? The Art of Public Data Collection</h4>
+                    <p class="mb-4">At its core, OSINT is the practice of collecting and analyzing information from publicly available sources. Far from being a clandestine activity, OSINT leverages data that is openly accessible to anyone. This can include everything from social media posts and public records to news articles, academic papers, and even satellite imagery.</p>
+                    <p class="mb-6">For researchers, journalists, security professionals, and even curious individuals, OSINT offers a legitimate and invaluable method for gathering intelligence. It can be used for a myriad of purposes:</p>
+                    <ul class="list-disc list-inside text-left mx-auto max-w-2xl space-y-2 mb-6">
+                        <li><strong>Due Diligence:</strong> Investigating individuals or organizations for background checks.</li>
+                        <li><strong>Threat Intelligence:</strong> Identifying potential security risks or vulnerabilities.</li>
+                        <li><strong>Market Research:</strong> Understanding consumer behavior and industry trends.</li>
+                        <li><strong>Journalism:</strong> Verifying facts and uncovering stories from public sources.</li>
+                        <li><strong>Missing Persons Cases:</strong> Gathering clues from online activity.</li>
+                    </ul>
+                    <p class="mb-6">The power of OSINT lies in its ability to connect disparate pieces of information, revealing patterns and insights that might otherwise remain hidden.</p>
+                    <h4 class="text-2xl font-bold text-purple-400 mb-3">Introducing Osintgram: A Gateway to Instagram Intelligence</h4>
+                    <p class="mb-4">While OSINT encompasses a wide array of sources, social media platforms are particularly rich veins of information. Instagram, with its vast user base and visual content, presents a unique opportunity for OSINT practitioners. This is where tools like Osintgram become indispensable.</p>
+                    <p class="mb-6">Osintgram is an open-source, Python-based tool specifically engineered to extract publicly available data from Instagram profiles. It allows users to:</p>
+                    <ul class="list-disc list-inside text-left mx-auto max-w-2xl space-y-2 mb-6">
+                        <li><strong>Gather Profile Information:</strong> Collect details like follower counts, following lists, and public biographies.</li>
+                        <li><strong>Analyze Posts:</strong> Access public photos, videos, and associated captions.</li>
+                        <li><strong>Identify Connections:</strong> Map relationships between profiles based on interactions.</li>
+                    </ul>
+                    <p class="mb-6">The video highlights the straightforward installation process for Osintgram, requiring only Python and Git. Users can then configure their Instagram credentials within the tool's credentials.py file to begin their investigations.</p>
+                    <h4 class="text-2xl font-bold text-purple-400 mb-3">Ethical Considerations: The Unbreakable Rule of Responsible OSINT</h4>
+                    <p class="mb-4">The power of OSINT tools like Osintgram comes with a significant responsibility. As the YouTube video emphatically stresses, these tools are for educational purposes only and must be used with the utmost ethical consideration. The digital landscape is governed by laws and ethical guidelines that must be respected at all times.</p>
+                    <p class="mb-6">Key ethical principles for OSINT practitioners include:</p>
+                    <ul class="list-disc list-inside text-left mx-auto max-w-2xl space-y-2 mb-6">
+                        <li><strong>Respect for Privacy:</strong> While information may be public, it doesn't grant a license for malicious intent or harassment.</li>
+                        <li><strong>Adherence to Legal Guidelines:</strong> Always operate within the bounds of local and international laws regarding data collection and privacy. Unauthorized access to private accounts or data is strictly prohibited and illegal.</li>
+                        <li><strong>Avoiding Spam and Misuse:</strong> Do not use collected data for unsolicited communications or any form of exploitation.</li>
+                        <li><strong>Transparency (When Appropriate):</b> In professional contexts, be transparent about your data collection methods and sources.</li>
+                    </ul>
+                    <p class="mb-6">The video serves as a crucial reminder that the true value of OSINT lies in its responsible application for legitimate and ethical investigations. Misuse of such tools can lead to severe legal repercussions and undermine the integrity of the OSINT community.</p>
+                    <h4 class="text-2xl font-bold text-purple-400 mb-3">The Future of Digital Footprints and Responsible Exploration</h4>
+                    <p class="mb-4">As our lives become increasingly intertwined with the digital realm, the importance of understanding and navigating our digital footprints will only grow. Tools like Osintgram provide a glimpse into the vast potential of OSINT, empowering individuals to gather insights from publicly available information. However, this power must always be wielded with a strong ethical compass.</p>
+                    <p class="mb-4">By embracing responsible practices and adhering to legal and ethical guidelines, we can harness the power of OSINT to foster greater transparency, enhance security, and contribute to a more informed society.</p>
+                    <p class="mb-4 text-center">
+                        <a href="https://youtu.be/nysaecTpCqM" target="_blank" class="btn-primary text-sm inline-flex items-center">
+                            <i class="fab fa-youtube mr-2"></i> Watch Video Tutorial
+                        </a>
+                    </p>
+                `,
+                date: "June 28, 2025",
+                tags: ["OSINT", "OpenSourceIntelligence", "Cybersecurity", "DataPrivacy", "EthicalHacking", "InformationSecurity", "DigitalFootprint", "PythonProgramming", "SocialMediaIntelligence", "DigitalForensics", "TechTools", "PrivacyMatters", "OnlineSecurity"],
+                full_tags: [
+                    "OSINT", "OpenSourceIntelligence", "Cybersecurity", "DataPrivacy",
+                    "EthicalHacking", "InformationSecurity", "DigitalFootprint", "PythonProgramming",
+                    "SocialMediaIntelligence", "DigitalForensics", "TechTools", "PrivacyMatters",
+                    "OnlineSecurity", "OSINTCommunity", "InfoSec", "CyberAwareness",
+                    "PrivacyRights", "DataProtection", "LearnPython", "TechTrends",
+                    "DigitalEthics", "InternetSafety", "InvestigativeJournalism"
+                ]
+            },
+            // REPLACED: Securing Your Home Network: A Beginner's Guide with CiLock article
+            {
+                title: "Unlocking the Potential of CiLock: Ethical Use Cases for Android Security",
+                description: "In an increasingly digital world, the security of our personal devices, especially smartphones, has become paramount. This article delves into the potential of CiLock, exploring its ethical use cases and highlighting best practices for Android security.",
+                fullContent: `
+                    <h3 class="text-3xl font-bold text-neon-green mb-4">Unlocking the Potential of CiLock: Ethical Use Cases for Android Security</h3>
+                    <p class="mb-4">By Ethical Explorers</p>
+                    <p class="mb-4">In an increasingly digital world, the security of our personal devices, especially smartphones, has become paramount. Android, being the most widely used mobile operating system, is a frequent target for cyber threats. This is where innovative solutions like CiLock comes into play, offering robust security measures while emphasizing ethical considerations. This article delves into the potential of CiLock, exploring its ethical use cases and highlighting best practices for Android security in 2025 and beyond.</p>
+                    <h4 class="text-2xl font-bold text-purple-400 mb-3">The Evolving Landscape of Android Security</h4>
+                    <p class="mb-4">Android's open-source nature, while fostering innovation, also presents unique security challenges. From insecure data storage and weak server-side controls to improper authentication and excessive app permissions, vulnerabilities can arise at various points. The rise of sophisticated mobile malware, phishing attempts, and data breaches necessitates a proactive and multi-layered approach to security.</p>
+                    <p class="mb-6">Google is continuously enhancing Android's security features, with recent versions like Android 14 and 15 introducing significant improvements such as stronger device protection through recommended 6-digit PINs, the ability to disable insecure 2G networks, and advanced memory safety measures. Features like "Theft Detection Lock" and "Private Space" further bolster user protection against physical theft and unauthorized data access.</p>
+                    <h4 class="text-2xl font-bold text-purple-400 mb-3">Introducing CiLock: A New Era of Ethical Security</h4>
+                    <p class="mb-4">While the specifics of CiLock are not detailed, its focus on "ethical use cases" suggests a commitment to security practices that respect user privacy and data integrity. In the realm of Android security, ethical tools are crucial. They empower users and organizations to protect their data without resorting to intrusive or exploitative methods.</p>
+                    <p class="mb-6">Ethical use cases for a tool like CiLock could include:</p>
+                    <ul class="list-disc list-inside text-left mx-auto max-w-2xl space-y-2 mb-6">
+                        <li><strong>Secure Data Storage and Encryption:</strong> Ensuring sensitive user data is encrypted and stored securely, preventing unauthorized access even if the device is compromised.</li>
+                        <li><strong>Granular Permission Management:</strong> Allowing users to precisely control what data and device features applications can access, adhering to the principle of least privilege.</li>
+                        <li><strong>Secure Authentication Mechanisms:</strong> Implementing advanced authentication methods beyond simple passwords, such as multi-factor authentication (MFA) or biometric authentication, to safeguard user accounts.</li>
+                        <li><strong>Protection Against Malicious Applications:</strong> Identifying and neutralizing malware, spyware, and other potentially harmful applications before they can inflict damage.</li>
+                        <li><strong>Ethical Hacking and Penetration Testing:</strong> Providing tools for security professionals to conduct ethical penetration tests and vulnerability assessments, helping organizations identify and fix weaknesses in their Android applications and systems.</li>
+                        <li><strong>Compliance and Regulatory Adherence:</strong> Assisting businesses in meeting data protection regulations like GDPR and CCPA by ensuring secure handling of user data.</li>
+                    </ul>
+                    <h4 class="text-2xl font-bold text-purple-400 mb-3">Best Practices for Maximizing Android Security</h4>
+                    <p class="mb-4">Regardless of the tools you employ, a strong security posture relies on fundamental best practices:</p>
+                    <ul class="list-disc list-inside text-left mx-auto max-w-2xl space-y-2 mb-6">
+                        <li><strong>Regular Software Updates:</strong> Always keep your Android operating system and applications updated to benefit from the latest security patches and features.</li>
+                        <li><strong>Strong, Unique Passwords and MFA:</strong> Use complex, unique passwords for all your accounts and enable multi-factor authentication wherever possible.</li>
+                        <li><strong>Mindful App Permissions:</strong> Review and grant app permissions judiciously, only allowing access to what is absolutely necessary for the app's functionality.</li>
+                        <li><strong>Secure Network Connections:</strong> Prioritize secure Wi-Fi networks and use VPNs, especially when connecting to public Wi-Fi. Consider disabling 2G networks if not essential.</li>
+                        <li><strong>Beware of Phishing and Scams:</strong> Be vigilant against suspicious links, emails, and messages that attempt to trick you into revealing sensitive information.</li>
+                        <li><strong>Regular Backups:</strong> Back up your important data regularly to prevent loss in case of a security incident or device malfunction.</li>
+                        <li><strong>Employee Training (for Businesses):</strong> Educate employees on cybersecurity best practices, social engineering tactics, and the importance of data privacy.</li>
+                        <li><strong>Mobile Device Management (MDM):</strong> For businesses, implementing an MDM solution can centrally enforce security policies and manage devices effectively.</li>
+                    </ul>
+                    <h4 class="text-2xl font-bold text-purple-400 mb-3">The Future of Ethical Android Security</h4>
+                    <p class="mb-4">As cyber threats continue to evolve, so too must our defenses. Solutions like CiLock, with their emphasis on ethical use, are vital in building a more secure digital ecosystem. By combining advanced technology with a commitment to user privacy and responsible practices, we can unlock the full potential of Android devices while safeguarding our digital lives.</p>
+                    <p class="mb-4 text-center">
+                        <a href="https://youtu.be/90S9l7X32Zk" target="_blank" class="btn-primary text-sm inline-flex items-center">
+                            <i class="fab fa-youtube mr-2"></i> Watch Video Tutorial
+                        </a>
+                    </p>
+                `,
+                date: "June 28, 2025",
+                tags: [
+                    "Android Security", "Mobile Security", "Cybersecurity", "Ethical Hacking",
+                    "Data Protection", "Privacy", "App Security", "Malware", "Vulnerability",
+                    "Encryption", "MFA", "Biometric Security", "Zero Trust", "Cloud Security",
+                    "Threat Detection", "Digital Privacy", "Secure Data", "Android Updates",
+                    "Mobile Device Management", "Secure Apps"
+                ],
+                full_tags: [
+                    "AndroidSecurity", "Cybersecurity", "InfoSec", "DataProtection",
+                    "EthicalHacking", "MobileSecurity", "PrivacyMatters", "TechSecurity",
+                    "DigitalSafety", "CyberAware", "SecureYourData", "AppSecurity",
+                    "MalwareProtection", "ZeroTrust", "CloudSecurity", "CyberDefense",
+                    "StaySafeOnline", "TechTrends", "EthicalTech", "CiLock"
+                ]
+            },
+            {
+                title: "Unlocking Android Apps: A Deep Dive into APK2URL for Analysis and Reverse Engineering",
+                description: "In the ever-evolving landscape of mobile technology, understanding the inner workings of Android applications is crucial for developers, security researchers, and enthusiasts alike. This article delves into APK2URL, a powerful command-line utility for Kali Linux that simplifies Android app analysis by transforming APKs into an easily navigable web-based file system.",
+                fullContent: `
+                    <h3 class="text-3xl font-bold text-neon-green mb-4">Unlocking Android Apps: A Deep Dive into APK2URL for Analysis and Reverse Engineering</h3>
+                    <p class="mb-4">In the ever-evolving landscape of mobile technology, understanding the inner workings of Android applications is crucial for developers, security researchers, and enthusiasts alike. Whether you're aiming to uncover vulnerabilities, analyze app behavior, or simply explore how an application is built, having the right tools is paramount. This article delves into APK2URL, a powerful command-line utility for Kali Linux that simplifies Android app analysis by transforming APKs into an easily navigable web-based file system.</p>
+                    <h4 class="text-2xl font-bold text-purple-400 mb-3">What is APK2URL?</h4>
+                    <p class="mb-4">APK2URL is an innovative tool designed to extract valuable information from Android Package (APK) files. At its core, it disassembles and decompiles APKs to identify and list IP and URL endpoints. However, its true power lies in its ability to convert an APK file into a URL-friendly format, creating a virtual file system that can be accessed and explored directly through a web browser. This means you can browse an app's contents, download individual files, and even modify them without needing additional complex tools.</p>
+                    <h4 class="text-2xl font-bold text-purple-400 mb-3">Key Features and Use Cases</h4>
+                    <p class="mb-4">1. Reverse Engineering</p>
+                    <p class="mb-4">For those interested in reverse engineering, APK2URL is an invaluable asset. It allows you to gain a deeper understanding of an app's functionality, identify potential vulnerabilities, and analyze its overall behavior. By providing a clear, structured view of the app's components, it simplifies the process of dissecting complex applications.</p>
+                    <p class="mb-4">2. App Analysis</p>
+                    <p class="mb-4">Beyond reverse engineering, APK2URL is excellent for general app analysis. You can easily extract critical information such as app permissions, the libraries it utilizes, and how it collects and handles data. This is particularly useful for privacy assessments and understanding the resources an app accesses on a device.</p>
+                    <p class="mb-4">3. Malware Analysis</p>
+                    <p class="mb-4">In the realm of cybersecurity, APK2URL shines as a tool for malware analysis. It helps security researchers identify suspicious code, hidden components, and other indicators of compromise within potentially malicious applications. Its ability to expose the internal structure of an APK makes it easier to spot malicious intent.</p>
+                    <p class="mb-4">4. App Modification (with caution)</p>
+                    <p class="mb-6">While the video cautions against it, APK2URL can also be used to modify APK files. This capability should be approached with extreme responsibility and ethical considerations. Unauthorized modification of applications can have legal implications and may violate terms of service.</p>
+                    <h4 class="text-2xl font-bold text-purple-400 mb-3">How to Use APK2URL</h4>
+                    <p class="mb-4">Using APK2URL is straightforward, especially for those familiar with the Linux command line. Here's a basic overview:</p>
+                    <ul class="list-disc list-inside text-left mx-auto max-w-2xl space-y-2 mb-6">
+                        <li><strong>Navigate to the Directory:</strong> Open your terminal in Kali Linux and navigate to the directory where your APK file is located.</li>
+                        <li><strong>Run the Command:</strong> Execute a specific command, replacing "your_app.apk" with the actual name of your APK file. (The exact command would typically be provided in the tool's documentation or the video itself.)</li>
+                        <li><strong>Access via Browser:</strong> After processing, APK2URL will provide a URL. When you open this URL in your web browser, you'll be presented with the app's contents organized in a directory-like structure, similar to browsing files on your computer.</li>
+                    </ul>
+                    <h4 class="text-2xl font-bold text-purple-400 mb-3">Ethical Considerations and Responsible Use</h4>
+                    <p class="mb-6">The power of APK2URL comes with a significant responsibility. The video [03:29] rightly emphasizes the importance of using this tool ethically and responsibly. Always respect terms of service, privacy policies, and be aware that unauthorized reverse engineering or modification of applications can be illegal. This tool is intended for legitimate purposes such as security research, personal learning, and ethical analysis.</p>
+                    <h4 class="text-2xl font-bold text-purple-400 mb-3">Conclusion</h4>
+                    <p class="mb-4">APK2URL is a game-changer for anyone involved in Android app analysis. Its ability to quickly transform complex APKs into an accessible web-based interface streamlines the process of understanding, analyzing, and even reverse-engineering applications. By providing a clear window into the internal structure of Android apps, it empowers users to explore, learn, and secure the mobile ecosystem more effectively. Remember to always use such powerful tools responsibly and ethically.</p>
+                    <p class="mb-4 text-center">
+                        <a href="https://youtu.be/mscPh_0QTwA" target="_blank" class="btn-primary text-sm inline-flex items-center">
+                            <i class="fab fa-youtube mr-2"></i> Watch Video Tutorial
+                        </a>
+                    </p>
+                `,
+                date: "July 01, 2025", // Updated date to current
+                tags: ["AndroidAppAnalysis", "APKReverseEngineering", "MobileSecurity", "KaliLinuxTools"],
+                full_tags: [
+                    "AndroidSecurity", "APKAnalysis", "ReverseEngineering", "KaliLinux",
+                    "Cybersecurity", "MobileApp", "Infosec", "MalwareAnalysis",
+                    "TechTools", "AppDev", "Command Line Utility", "Digital Forensics"
+                ]
+            }
+        ];
+
+        let currentYoutubeVideosShown = initialDisplayCount;
+        let currentArticlesShown = initialDisplayCount;
+
+        // Function to render content cards
+        function renderCards(containerId, dataArray, startIndex, endIndex, type) {
+            const container = document.getElementById(containerId);
+            if (!container) {
+                console.error(`Container with ID "${containerId}" not found.`);
+                return;
+            }
+            let htmlContent = '';
+            let itemsRendered = 0; // Track how many items are actually rendered
+
+            // Clear the container only for initial render
+            if (startIndex === 0) {
+                container.innerHTML = '';
+            }
+
+            for (let i = startIndex; i < endIndex && i < dataArray.length; i++) {
+                const item = dataArray[i];
+                if (type === 'video') {
+                    htmlContent += `
+                        <div class="bg-gray-800 rounded-xl overflow-hidden card-glow p-6 flex flex-col">
+                            <img src="${item.thumbnail}" alt="YouTube Video Thumbnail: ${item.title}" class="w-full h-auto rounded-lg mb-4 object-cover">
+                            <h3 class="text-2xl font-bold text-teal-400 mb-3 hover:text-teal-300 transition duration-200">${item.title}</h3>
+                            <p class="text-gray-400 text-sm mb-4 flex-grow">${item.description}</p>
+                            <a href="${item.link}" target="_blank" class="btn-secondary w-full text-center text-sm">
+                                <i class="fas fa-play-circle mr-2"></i> Watch Now
+                            </a>
+                        </div>
+                    `;
+                } else if (type === 'article') {
+                    const tagsHtml = item.tags.slice(0, 4).map(tag => `<span class="bg-gray-700 px-2 py-1 rounded-full">#${tag}</span>`).join('');
+                    htmlContent += `
+                        <div class="bg-gray-800 rounded-xl overflow-hidden card-glow p-6 flex flex-col">
+                            <h3 class="text-2xl font-bold text-neon-green mb-3 hover:text-teal-400 transition duration-200">${item.title}</h3>
+                            <p class="text-gray-400 text-sm mb-4 flex-grow">${item.description}</p>
+                            <div class="flex flex-wrap gap-2 text-xs text-gray-500 mb-4">
+                                ${tagsHtml}
+                            </div>
+                            <span class="text-gray-500 text-xs mb-4">Published: ${item.date}</span>
+                            <a href="#" class="btn-secondary w-full text-center text-sm" onclick="showArticleModal(event, ${i})">
+                                <i class="fas fa-newspaper mr-2"></i> Read More
+                            </a>
+                        </div>
+                    `;
+                }
+                itemsRendered++;
+            }
+
+            if (itemsRendered === 0 && startIndex === 0 && type === 'article') {
+                container.innerHTML = `<p class="text-gray-500 text-lg py-10 w-full col-span-full">No articles available at the moment. Please check back later!</p>`;
+            } else {
+                container.innerHTML += htmlContent; // Append content for subsequent loads
+            }
+        }
+
+        // Initial rendering on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            renderCards('youtube-videos-container', allYoutubeVideos, 0, initialDisplayCount, 'video');
+            if (allYoutubeVideos.length > initialDisplayCount) {
+                document.getElementById('load-more-youtube').classList.remove('hidden');
+            } else {
+                document.getElementById('load-more-youtube').classList.add('hidden'); // Ensure hidden if not needed
+            }
+
+            renderCards('articles-container', allBlogArticles, 0, initialDisplayCount, 'article');
+            if (allBlogArticles.length > initialDisplayCount) {
+                document.getElementById('explore-more-articles').classList.remove('hidden');
+            } else {
+                document.getElementById('explore-more-articles').classList.add('hidden'); // Ensure hidden if not needed
+            }
+
+            // Apply typing animation class and set up animationend listener
+            const taglineElement = document.getElementById('tagline');
+            if (taglineElement) {
+                taglineElement.classList.add('typing-active');
+                taglineElement.addEventListener('animationend', () => {
+                    // After the typing animation ends, remove the active class to revert styles
+                    taglineElement.classList.remove('typing-active');
+                    // Ensure text can wrap if it's too long for the container after animation
+                    taglineElement.style.whiteSpace = 'normal';
+                    taglineElement.style.overflow = 'visible';
+                    taglineElement.style.width = 'auto'; // Let width be determined by content/container
+                });
+            }
+
+            // Attach event listener to hideGameModalButton
+            const hideGameModalBtn = document.getElementById('hideGameModalButton');
+            if (hideGameModalBtn) {
+                hideGameModalBtn.addEventListener('click', hideGameModal);
+            }
+        });
+
+        // Load More Videos functionality
+        document.getElementById('load-more-youtube').addEventListener('click', () => {
+            const nextBatchEnd = currentYoutubeVideosShown + initialDisplayCount; // Load next 'initialDisplayCount' items
+            renderCards('youtube-videos-container', allYoutubeVideos, currentYoutubeVideosShown, nextBatchEnd, 'video');
+            currentYoutubeVideosShown = Math.min(nextBatchEnd, allYoutubeVideos.length); // Update shown count
+
+            if (currentYoutubeVideosShown === allYoutubeVideos.length) {
+                document.getElementById('load-more-youtube').classList.add('hidden'); // Hide if all loaded
+            }
+        });
+
+        // Load More Articles functionality
+        document.getElementById('explore-more-articles').addEventListener('click', () => {
+            const nextBatchEnd = currentArticlesShown + initialDisplayCount; // Load next 'initialDisplayCount' items
+            renderCards('articles-container', allBlogArticles, currentArticlesShown, nextBatchEnd, 'article');
+            currentArticlesShown = Math.min(nextBatchEnd, allBlogArticles.length); // Update shown count
+
+            if (currentArticlesShown === allBlogArticles.length) {
+                document.getElementById('explore-more-articles').classList.add('hidden'); // Hide if all loaded
+            }
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Navbar toggle for mobile
+        document.getElementById('nav-toggle').onclick = function () {
+            document.getElementById('nav-content').classList.toggle('hidden');
+        }
+
+        // Article Modal
+        function showArticleModal(event, index) {
+            event.preventDefault(); // Prevent default link behavior
+            const item = allBlogArticles[index]; // Retrieve item directly from array
+            document.getElementById('articleModalTitle').innerText = item.title;
+            document.getElementById('articleModalContent').innerHTML = item.fullContent;
+            document.getElementById('articleModal').classList.remove('hidden');
+            document.body.classList.add('overflow-hidden'); // Prevent scrolling body when modal is open
+        }
+
+        function hideArticleModal() {
+            document.getElementById('articleModal').classList.add('hidden');
+            document.body.classList.remove('overflow-hidden');
+        }
+
+        // --- Gemini API Call Function ---
+        async function callGeminiAPI(prompt, outputElementId, loadingElementId) {
+            const outputElement = document.getElementById(outputElementId);
+            const loadingElement = document.getElementById(loadingElementId);
+
+            if (!outputElement || !loadingElement) {
+                console.error("Output or loading element not found for Gemini API call.");
+                return;
+            }
+
+            outputElement.innerHTML = ''; // Clear previous content
+            loadingElement.classList.remove('hidden'); // Show loading spinner
+
+            try {
+                let chatHistory = [];
+                chatHistory.push({ role: "user", parts: [{ text: prompt }] });
+                const payload = { contents: chatHistory };
+                const apiKey = ""; // Canvas will provide this at runtime
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                const result = await response.json();
+
+                if (result.candidates && result.candidates.length > 0 &&
+                    result.candidates[0].content && result.candidates[0].content.parts &&
+                    result.candidates[0].content.parts.length > 0) {
+                    const text = result.candidates[0].content.parts[0].text;
+                    outputElement.innerHTML = `<pre class="bg-gray-700 text-white p-4 rounded-lg mt-4 whitespace-pre-wrap">${text}</pre>`;
+                } else {
+                    outputElement.innerHTML = `<p class="text-red-400 mt-4">Error: No content generated by the AI. Please try again.</p>`;
+                }
+            } catch (error) {
+                console.error("Error calling Gemini API:", error);
+                outputElement.innerHTML = `<p class="text-red-400 mt-4">Failed to get response from AI. Network error or API issue.</p>`;
+            } finally {
+                loadingElement.classList.add('hidden'); // Hide loading spinner
+            }
+        }
+
+        // Game Logic for "Crack the Code Challenge"
+        let crackCodeSecret = [];
+        let crackCodeAttemptsLeft = 10;
+        let crackCodeGameActive = false;
+
+        function generateCrackCodeSecret() {
+            const digits = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+            crackCodeSecret = [];
+            while (crackCodeSecret.length < 4) {
+                const randomIndex = Math.floor(Math.random() * digits.length);
+                crackCodeSecret.push(digits[randomIndex]);
+                digits.splice(randomIndex, 1); // Ensure unique digits
+            }
+            console.log("Crack the Code Secret (for debugging):", crackCodeSecret.join(''));
+        }
+
+        function initializeCrackTheCodeGame() {
+            generateCrackCodeSecret();
+            crackCodeAttemptsLeft = 10;
+            crackCodeGameActive = true;
+            document.getElementById('gameContent').innerHTML = `
+                <div class="space-y-6">
+                    <p id="crackCodeGameStatus" class="text-xl text-teal-300">Crack the 4-digit code! You have <span id="crackCodeAttemptsLeft">${crackCodeAttemptsLeft}</span> attempts left.</p>
+                    <div class="flex justify-center mb-4">
+                        <input type="number" id="crackCodeGuess1" class="guess-input" min="0" max="9" maxlength="1" oninput="this.value=this.value.slice(0,1)">
+                        <input type="number" id="crackCodeGuess2" class="guess-input" min="0" max="9" maxlength="1" oninput="this.value=this.value.slice(0,1)">
+                        <input type="number" id="crackCodeGuess3" class="guess-input" min="0" max="9" maxlength="1" oninput="this.value=this.value.slice(0,1)">
+                        <input type="number" id="crackCodeGuess4" class="guess-input" min="0" max="9" maxlength="1" oninput="this.value=this.value.slice(0,1)">
+                    </div>
+                    <button id="submitCrackCodeGuessButton" class="btn-primary px-6 py-3 text-base">Submit Guess</button>
+                    <div id="crackCodeGuessHistory" class="mt-6 space-y-2 max-h-48 overflow-y-auto bg-gray-700 p-4 rounded-lg">
+                        <!-- Guess history will appear here -->
+                    </div>
+                    <button id="crackCodePlayAgainButton" class="btn-secondary px-6 py-3 text-base hidden">Play Again</button>
+
+                    <!-- LLM Feature for Crack the Code -->
+                    <div class="mt-8 pt-6 border-t border-gray-700">
+                        <h4 class="text-xl font-bold text-neon-green mb-4">✨ Analyze Code Vulnerabilities</h4>
+                        <textarea id="codeVulnerabilityInput" class="w-full h-32 p-3 rounded-lg bg-gray-700 border border-teal-500 text-white focus:outline-none focus:border-neon-green" placeholder="Paste your code snippet here to analyze for vulnerabilities..."></textarea>
+                        <button id="analyzeCodeButton" class="btn-primary px-6 py-3 text-base flex items-center justify-center mt-4">
+                            <span class="mr-2">✨ Analyze Code</span>
+                            <div id="codeAnalysisLoading" class="loading-spinner hidden"></div>
+                        </button>
+                        <div id="codeAnalysisOutput" class="mt-4 text-left"></div>
+                    </div>
+                </div>
+            `;
+            // Attach event listener AFTER innerHTML is set
+            const submitButton = document.getElementById('submitCrackCodeGuessButton');
+            if (submitButton) {
+                submitButton.addEventListener('click', submitCrackCodeGuess);
+            }
+            const playAgainButton = document.getElementById('crackCodePlayAgainButton');
+            if (playAgainButton) {
+                playAgainButton.addEventListener('click', resetCrackTheCodeGame);
+            }
+            const analyzeButton = document.getElementById('analyzeCodeButton');
+            if (analyzeButton) {
+                analyzeButton.addEventListener('click', analyzeCodeVulnerability);
+            }
+
+
+            const inputs = document.querySelectorAll('#gameContent .guess-input');
+            inputs.forEach((input, index) => {
+                input.addEventListener('input', (e) => {
+                    if (e.target.value.length === 1 && index < inputs.length - 1) {
+                        inputs[index + 1].focus();
+                    }
+                });
+                input.addEventListener('keydown', (e) => {
+                    if (e.key === 'Backspace' && e.target.value.length === 0 && index > 0) {
+                        inputs[index - 1].focus();
+                    }
+                });
+            });
+            document.getElementById('crackCodeGuess1').focus();
+            document.getElementById('startGameButton').classList.add('hidden');
+
+            console.log("Crack The Code game elements initialized and event listeners attached.");
+        }
+
+        async function analyzeCodeVulnerability() {
+            const codeSnippet = document.getElementById('codeVulnerabilityInput').value.trim();
+            if (codeSnippet === "") {
+                document.getElementById('codeAnalysisOutput').innerHTML = `<p class="text-yellow-400 mt-4">Please paste a code snippet to analyze.</p>`;
+                return;
+            }
+
+            const prompt = `Analyze the following code snippet for potential security vulnerabilities and suggest secure fixes. Provide the explanation and fixes in a clear, concise, and actionable manner, using code examples where appropriate.
+
+Code Snippet:
+\`\`\`
+${codeSnippet}
+\`\`\`
+
+Structure your response with:
+1.  **Vulnerability Description:**
+2.  **Impact:**
+3.  **Secure Fixes:** (with code examples)
+`;
+            await callGeminiAPI(prompt, 'codeAnalysisOutput', 'codeAnalysisLoading');
+        }
+
+
+        function submitCrackCodeGuess() {
+            if (!crackCodeGameActive) return;
+
+            // Get element references at the beginning of the function
+            const guessInputs = [
+                document.getElementById('crackCodeGuess1'),
+                document.getElementById('crackCodeGuess2'),
+                document.getElementById('crackCodeGuess3'),
+                document.getElementById('crackCodeGuess4')
+            ];
+            const statusElement = document.getElementById('crackCodeGameStatus');
+            const attemptsLeftElement = document.getElementById('crackCodeAttemptsLeft');
+            const guessHistory = document.getElementById('crackCodeGuessHistory');
+            const playAgainButton = document.getElementById('crackCodePlayAgainButton');
+
+            // Robustness check: Ensure all necessary elements exist
+            if (!statusElement || !attemptsLeftElement || !guessHistory || !playAgainButton || guessInputs.some(input => !input)) {
+                console.error("One or more Crack The Code game elements are missing. Game might not be initialized properly.");
+                // Optionally, display a user-friendly error message in the modal if critical elements are missing.
+                return;
+            }
+
+            // Validate all inputs are filled and are digits
+            if (guessInputs.some(input => input.value === '' || !/^\d$/.test(input.value))) {
+                statusElement.innerText = "Please enter all 4 digits (0-9).";
+                statusElement.className = 'text-xl text-yellow-400'; // Set warning color
+                return;
+            }
+
+            const guess = guessInputs.map(input => Number(input.value)); // Convert to numbers
+
+            crackCodeAttemptsLeft--;
+            attemptsLeftElement.innerText = crackCodeAttemptsLeft; // Use the element reference
+
+            let correctPosition = 0;
+            let correctDigit = 0;
+
+            const secretCodeCopy = [...crackCodeSecret];
+            const guessCopy = [...guess];
+
+            for (let i = 0; i < 4; i++) {
+                if (guessCopy[i] === secretCodeCopy[i]) {
+                    correctPosition++;
+                    secretCodeCopy[i] = -1;
+                    guessCopy[i] = -2;
+                }
+            }
+
+            for (let i = 0; i < 4; i++) {
+                if (guessCopy[i] !== -2) {
+                    const indexInSecret = secretCodeCopy.indexOf(guessCopy[i]);
+                    if (indexInSecret !== -1) {
+                        correctDigit++;
+                        secretCodeCopy[indexInSecret] = -1;
+                    }
+                }
+            }
+
+            let feedbackHtml = '';
+            for (let i = 0; i < correctPosition; i++) feedbackHtml += '<span class="feedback-peg feedback-green"></span>';
+            for (let i = 0; i < correctDigit; i++) feedbackHtml += '<span class="feedback-peg feedback-yellow"></span>';
+            for (let i = 0; i < (4 - correctPosition - correctDigit); i++) feedbackHtml += '<span class="feedback-peg feedback-gray"></span>';
+
+            guessHistory.innerHTML = `<div class="flex items-center justify-between p-2 bg-gray-900 rounded-md">
+                                        <div class="flex">${guess.join('')}</div>
+                                        <div class="flex">${feedbackHtml}</div>
+                                      </div>` + guessHistory.innerHTML;
+
+            if (correctPosition === 4) {
+                statusElement.innerText = "Congratulations! You cracked the code!";
+                statusElement.className = 'text-xl text-green-500';
+                crackCodeGameActive = false;
+                playAgainButton.classList.remove('hidden');
+            } else if (crackCodeAttemptsLeft === 0) {
+                statusElement.innerText = `Game Over! The code was ${crackCodeSecret.join('')}.`;
+                statusElement.className = 'text-xl text-red-500';
+                crackCodeGameActive = false;
+                playAgainButton.classList.remove('hidden');
+            } else {
+                 statusElement.innerText = `Crack the 4-digit code! You have ${crackCodeAttemptsLeft} attempts left.`;
+                 statusElement.className = 'text-xl text-teal-300';
+            }
+
+            guessInputs.forEach(input => input.value = ''); // Clear input values using the element references
+            if (crackCodeGameActive) {
+                guessInputs[0].focus(); // Focus on the first input
+            }
+        }
+
+        function resetCrackTheCodeGame() {
+            document.getElementById('crackCodePlayAgainButton').classList.add('hidden');
+            document.getElementById('codeAnalysisOutput').innerHTML = ''; // Clear LLM output
+            document.getElementById('codeVulnerabilityInput').value = ''; // Clear LLM input
+            initializeCrackTheCodeGame();
+        }
+
+        // Game Logic for "Decipher the Log Puzzle"
+        let logPuzzleData = {};
+        let logPuzzleGameActive = false;
+
+        const logScenarios = [
+            {
+                log: `[2025-06-28 10:30:05] INFO: User 'admin' logged in from 192.168.1.100\n[2025-06-28 10:30:10] WARN: Multiple failed login attempts for 'root' from 10.0.0.5: Password incorrect\n[2025-06-28 10:30:15] DEBUG: Processing user query for report generation`,
+                keyword: "failed login attempts",
+                explanation: "The 'Multiple failed login attempts' from an unknown IP (10.0.0.5) is highly suspicious and suggests a brute-force attack."
+            },
+            {
+                log: `[2025-06-28 11:15:20] INFO: File 'document.pdf' accessed by user 'john_doe'\n[2025-06-28 11:15:25] ERROR: Unauthorized access attempt to /etc/shadow by 'johndoe'\n[2025-06-28 11:15:30] INFO: Database backup completed successfully`,
+                keyword: "Unauthorized access attempt",
+                explanation: "An 'Unauthorized access attempt' to sensitive system files like /etc/shadow is a critical security event."
+            },
+            {
+                log: `[2025-06-28 14:00:00] INFO: System health check OK\n[2025-06-28 14:00:05] INFO: New user 'guest' created\n[2025-06-28 14:00:10] CRITICAL: Unexpected outbound connection to malicious-site.ru from server-01`,
+                keyword: "malicious-site.ru",
+                explanation: "An 'Unexpected outbound connection' to a known malicious domain is a strong indicator of compromise."
+            }
+        ];
+
+        function initializeDecipherTheLogGame() {
+            const scenario = logScenarios[Math.floor(Math.random() * logScenarios.length)];
+            logPuzzleData = { ...scenario, attempts: 3 }; // Give 3 attempts for this game
+            logPuzzleGameActive = true;
+
+            document.getElementById('gameContent').innerHTML = `
+                <div class="space-y-6 text-left">
+                    <p class="text-gray-300">Examine the message below. Is it a **Phishing** attempt or **Legitimate**?</p>
                     <pre id="logDisplay" class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm max-h-48 whitespace-pre-wrap">${logPuzzleData.log}</pre>
                     <p id="logPuzzleStatus" class="text-xl text-teal-300">Attempts left: <span id="logPuzzleAttemptsLeft">${logPuzzleData.attempts}</span></p>
                     <input type="text" id="logPuzzleGuess" placeholder="Enter suspicious keyword" class="w-full p-3 rounded-lg bg-gray-700 border border-teal-500 text-white focus:outline-none focus:border-neon-green">
