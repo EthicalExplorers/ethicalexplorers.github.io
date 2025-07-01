@@ -547,7 +547,43 @@
 
         // Data for Blog Articles
         const allBlogArticles = [
-            // NEW ARTICLE 1: Unveiling Connections: Exploring the "Email to Phone Number" OSINT Tool
+            // NEW ARTICLE 4: Unlocking Lost Data: A Deep Dive into Foremost on Kali Linux
+            {
+                title: "Unlocking Lost Data: A Deep Dive into Foremost on Kali Linux",
+                description: "Explore Foremost, a powerful command-line utility on Kali Linux for data recovery and digital forensics, designed to recover lost files by scanning raw data for specific file headers and footers.",
+                fullContent: `
+                    <h3 class="text-3xl font-bold text-neon-green mb-4">Unlocking Lost Data: A Deep Dive into Foremost on Kali Linux</h3>
+                    <p class="mb-4">In the ever-evolving landscape of digital information, data loss is an unfortunate reality. Whether due to accidental deletion, system crashes, or malicious attacks, the ability to recover lost files is paramount for individuals and organizations alike. This is where tools like Foremost, a powerful command-line utility pre-installed on Kali Linux, come into play. This article will explore the intricacies of Foremost, its functionality, and its crucial role in data recovery and digital forensics.</p>
+                    <h4 class="text-2xl font-bold text-purple-400 mb-3">What is Foremost?</h4>
+                    <p class="mb-4">Foremost is an open-source, command-line-based file recovery application specifically designed for digital forensics and data recovery. It's a staple in the Kali Linux distribution, a popular operating system for cybersecurity professionals. Unlike typical file recovery tools that rely on the file system's metadata (which is often lost or corrupted when files are deleted), Foremost operates by scanning raw data for specific file headers and footers. These unique patterns act as signatures, allowing Foremost to identify and extract various file types, even if their original file system entries are gone. This makes it an invaluable asset for recovering a wide range of data, including documents, images, videos, and more.</p>
+                    <h4 class="text-2xl font-bold text-purple-400 mb-3">How Foremost Works: A Step-by-Step Approach</h4>
+                    <p class="mb-4">The fundamental principle behind Foremost's operation is its ability to recognize the distinct starting and ending patterns of different file formats. Here's a breakdown of its workflow:</p>
+                    <ul class="list-disc list-inside text-left mx-auto max-w-2xl space-y-2 mb-6">
+                        <li><strong>Specifying the Search Location:</strong> Before initiating a recovery operation, you must instruct Foremost where to look for the lost files. This can be a physical hard drive, a specific partition, or even a disk image file (a bit-for-bit copy of a storage device). This flexibility allows investigators to work on live systems or analyze forensic images offline.</li>
+                        <li><strong>Targeting File Types:</strong> Foremost comes equipped with a comprehensive configuration file that contains a database of known file headers and footers for various file types. Users can choose to target specific file extensions (e.g., .jpg, .pdf, .mp4) to narrow down the search and expedite the recovery process. Alternatively, a broader search can be performed to attempt to recover all recognizable file types. For advanced users, the configuration file can be modified to include new file types or customize existing ones, offering unparalleled control over the recovery process.</li>
+                        <li><strong>Scanning and Saving Recovered Files:</strong> Once the target location and desired file types are defined, Foremost meticulously scans the designated area. As it encounters patterns matching its internal database, it extracts the identified data and saves it to a specified output directory. This ensures that the recovered files are stored safely and separately from the original source, preventing any further data corruption.</li>
+                    </ul>
+                    <h4 class="text-2xl font-bold text-purple-400 mb-3">Important Considerations for Effective Data Recovery</h4>
+                    <p class="mb-4">While Foremost is a powerful tool, its success rate is heavily influenced by several factors:</p>
+                    <ul class="list-disc list-inside text-left mx-auto max-w-2xl space-y-2 mb-6">
+                        <li><strong>Timeliness of Recovery:</strong> The most critical factor in data recovery is time. The more a storage device is used after files have been deleted, the higher the likelihood of the original data being overwritten by new information. This significantly reduces the chances of successful recovery. Therefore, it's crucial to initiate recovery efforts as soon as data loss is detected.</li>
+                        <li><strong>Overwriting Data:</strong> When a file is "deleted" by an operating system, it often simply marks the space it occupied as available, rather than physically erasing the data. However, if new data is written to that same space, the original data is permanently overwritten and becomes unrecoverable by any means.</li>
+                        <li><strong>Advanced Customization:</strong> For niche file types or highly specific recovery scenarios, understanding and modifying Foremost's configuration file can be immensely beneficial. This allows users to fine-tune the tool to their exact needs, potentially recovering data that would otherwise be missed.</li>
+                    </ul>
+                    <h4 class="text-2xl font-bold text-purple-400 mb-3">Foremost in Digital Forensics and Beyond</h4>
+                    <p class="mb-4">Foremost's capabilities extend beyond simple data recovery for end-users. It is a cornerstone tool in digital forensics investigations, enabling experts to uncover hidden or deleted evidence from compromised systems. Its ability to work at the raw data level makes it indispensable for reconstructing events, analyzing malware, and gathering intelligence in cybersecurity incidents.</p>
+                    <p class="mb-4">In essence, Foremost empowers users with a robust and efficient method for reclaiming lost digital assets. Its command-line interface, while initially daunting for some, offers unparalleled control and precision, making it a favorite among cybersecurity professionals and anyone serious about data recovery. As our digital lives become increasingly intertwined with vast amounts of data, tools like Foremost will continue to play a vital role in ensuring data integrity and resilience.</p>
+                    <p class="mb-4 text-center">
+                        <a href="https://youtu.be/Cga_BlOsOFg" target="_blank" class="btn-primary text-sm inline-flex items-center">
+                            <i class="fab fa-youtube mr-2"></i> Watch Video Tutorial
+                        </a>
+                    </p>
+                `,
+                date: "July 01, 2025",
+                tags: ["Cybersecurity", "DataRecovery", "KaliLinux", "DigitalForensics"],
+                full_tags: ["Cybersecurity", "DataRecovery", "KaliLinux", "DigitalForensics", "InfoSec", "EthicalHacking", "DataProtection", "CyberDefense", "Ransomware", "CyberThreats", "Linux", "OpenSource", "FileRecovery", "TechTrends", "InformationSecurity", "CyberAttack", "Privacy", "HackingTools", "SystemSecurity"]
+            },
+            // EXISTING ARTICLE 1: Unveiling Connections: Exploring the "Email to Phone Number" OSINT Tool
             {
                 title: "Unveiling Connections: Exploring the 'Email to Phone Number' OSINT Tool",
                 description: "This article delves into the 'email to phone number' OSINT tool, explaining how it cross-references email addresses with publicly available online resources to find associated phone numbers.",
@@ -585,7 +621,7 @@
                 tags: ["OSINT", "Cybersecurity", "DigitalForensics", "Privacy"],
                 full_tags: ["OSINT", "Cybersecurity", "DigitalForensics", "Privacy", "InformationGathering", "TechTools", "OpenSource", "DataPrivacy", "EthicalHacking", "OnlineSecurity"]
             },
-            // NEW ARTICLE 2: Understanding EvilURL: A Dual-Edged Sword in Kali Linux
+            // EXISTING ARTICLE 2: Understanding EvilURL: A Dual-Edged Sword in Kali Linux
             {
                 title: "Understanding EvilURL: A Dual-Edged Sword in Kali Linux",
                 description: "Explore EvilURL, a versatile Kali Linux utility for URL manipulation, understanding its ethical applications in cybersecurity and the importance of responsible use.",
@@ -622,14 +658,13 @@
                 tags: ["Cybersecurity", "KaliLinux", "EthicalHacking", "Phishing"],
                 full_tags: ["Cybersecurity", "KaliLinux", "EthicalHacking", "Phishing", "URLShortener", "InfoSec", "NetworkSecurity", "SecurityTools", "MalwareAnalysis", "DigitalSecurity"]
             },
-            // NEW ARTICLE 3: Unmasking the Cloud: Introducing CloakQuest3r
+            // EXISTING ARTICLE 3: Unmasking the Cloud: Introducing CloakQuest3r
             {
                 title: "Unmasking the Cloud: Introducing CloakQuest3r",
                 description: "Learn about CloakQuest3r, a powerful Python tool designed to uncover the real IP addresses of websites hidden behind Cloudflare and similar CDN services.",
                 fullContent: `
                     <h3 class="text-3xl font-bold text-neon-green mb-4">Unmasking the Cloud: Introducing CloakQuest3r</h3>
                     <p class="mb-4">In the realm of web security and infrastructure, Cloudflare stands as a prominent Content Delivery Network (CDN) and security service. It plays a crucial role in enhancing website performance and safeguarding against various online threats. However, for security professionals and web administrators, the very protection Cloudflare offers can obscure a website's true underlying IP address, making it challenging to conduct thorough security assessments. This is where CloakQuest3r, a powerful Python tool, comes into play, designed specifically to uncover the real IP addresses of websites hidden behind Cloudflare and similar services.</p>
-                    <h4 class="text-2xl font-bold text-purple-400 mb-3">The Cloudflare Conundrum and CloakQuest3r's Solution</h4>
                     <p class="mb-4">Cloudflare operates by acting as a reverse proxy, sitting between a website's server and its visitors. It caches content, filters malicious traffic, and provides DDoS protection, among other services. While this is highly beneficial for website owners, it also means that the IP address visitors see is Cloudflare's, not the actual server's. This obscurity can be a hurdle for those needing to identify the true origin of a website for legitimate security testing or analysis.</p>
                     <p class="mb-4">CloakQuest3r addresses this challenge by employing clever techniques to bypass Cloudflare's protection and reveal the actual server IP. Its primary method involves subdomain scanning.</p>
                     <h4 class="text-2xl font-bold text-purple-400 mb-3">How CloakQuest3r Works: The Subdomain Strategy</h4>
@@ -790,7 +825,7 @@
                     "Learn Tor hidden services", "Kali Linux privacy tools", "Dark web anonymity guide."
                 ]
             },
-            // NEW: Unveiling the Digital Footprint: A Deep Dive into OSINT and Osintgram
+            // EXISTING: Unveiling the Digital Footprint: A Deep Dive into OSINT and Osintgram
             {
                 title: "Unveiling the Digital Footprint: A Deep Dive into OSINT and Osintgram",
                 description: "In an increasingly interconnected world, the lines between public and private information are constantly blurring. This article delves into OSINT and introduces Osintgram, a tool to gather insights from Instagram profiles.",
@@ -847,7 +882,7 @@
                     "DigitalEthics", "InternetSafety", "InvestigativeJournalism"
                 ]
             },
-            // REPLACED: Securing Your Home Network: A Beginner's Guide with CiLock article
+            // EXISTING: Unlocking the Potential of CiLock: Ethical Use Cases for Android Security
             {
                 title: "Unlocking the Potential of CiLock: Ethical Use Cases for Android Security",
                 description: "In an increasingly digital world, the security of our personal devices, especially smartphones, has become paramount. This article delves into the potential of CiLock, exploring its ethical use cases and highlighting best practices for Android security.",
@@ -1018,6 +1053,11 @@
         // Initial rendering on page load
         document.addEventListener('DOMContentLoaded', () => {
             console.log("DOMContentLoaded fired."); // Debugging log
+
+            // Sort articles by date in descending order (latest first)
+            allBlogArticles.sort((a, b) => new Date(b.date) - new Date(a.date));
+            console.log("Articles sorted by date.");
+
             renderCards('youtube-videos-container', allYoutubeVideos, 0, initialDisplayCount, 'video');
             if (allYoutubeVideos.length > initialDisplayCount) {
                 document.getElementById('load-more-youtube').classList.remove('hidden');
