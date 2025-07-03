@@ -13,6 +13,9 @@
     <!-- Font Awesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
+        html {
+            scroll-behavior: smooth; /* Enables smooth scrolling for anchor links */
+        }
         body {
             font-family: 'Inter', sans-serif;
             background-color: #0D0D0D; /* Dark background */
@@ -363,7 +366,7 @@
                         <li>Improve, personalize, and expand our website.</li>
                         <li>Understand and analyze how you use our website.</li>
                         <li>Develop new products, services, features, and functionality.</li>
-                        <li>Communicate with you, either directly or through one of our partners, including for customer service, to provide you with updates and other information relating to the website, and for marketing and promotional purposes.</li>
+                        <li>Communicates with you, either directly or through one of our partners, including for customer service, to provide you with updates and other information relating to the website, and for marketing and promotional purposes.</li>
                         <li>Send you emails.</li>
                         <li>Find and prevent fraud.</li>
                     </ul>
@@ -547,7 +550,89 @@
 
         // Data for Blog Articles
         const allBlogArticles = [
-            // NEW ARTICLE 4: Unlocking Lost Data: A Deep Dive into Foremost on Kali Linux
+            // NEW ARTICLE 1: Deep Dive into TorNet on Kali Linux
+            {
+                title: "Deep Dive into TorNet on Kali Linux: Your Ethical Guide to Automated IP Address Rotation for Ultimate Privacy",
+                description: "Explore TorNet, a powerful Python package for Kali Linux that automates IP address rotation using the Tor network for enhanced privacy and security.",
+                fullContent: `
+                    <h3 class="text-3xl font-bold text-neon-green mb-4">Deep Dive into TorNet on Kali Linux: Your Ethical Guide to Automated IP Address Rotation for Ultimate Privacy</h3>
+                    <p class="mb-4">In today's interconnected world, where every digital interaction leaves a trace, the quest for online privacy and security has never been more critical. For ethical hackers, penetration testers, and anyone serious about their digital footprint, tools that offer robust anonymity are invaluable. Among these, TorNet, a powerful Python package designed for Kali Linux, stands out as a true game-changer. This article will provide an in-depth exploration of TorNet, detailing its functionalities, immense benefits, and why it's becoming an indispensable part of ethical cybersecurity practices.</p>
+                    <h4 class="text-2xl font-bold text-purple-400 mb-3">What is TorNet?</h4>
+                    <p class="mb-4">At its core, TorNet is a Python package that leverages the renowned Tor (The Onion Router) network to automate the frequent rotation of your public IP address. While Tor itself provides a foundational layer of anonymity by routing your internet traffic through a series of volunteer-operated relays, TorNet takes this a step further. Instead of simply masking your IP, TorNet ensures that your IP address is constantly changing, making it incredibly challenging for anyone to consistently track your online activities or pinpoint your exact geographical location.</p>
+                    <p class="mb-4">Imagine being able to change your digital "vehicle" every few minutes. That's the power of TorNet. It transforms your online identity into a dynamic, moving target, significantly enhancing your anonymity and security in the digital realm. This capability is particularly vital in ethical hacking scenarios where maintaining a minimal and untraceable footprint is paramount during reconnaissance or vulnerability assessments.</p>
+                    <h4 class="text-2xl font-bold text-purple-400 mb-3">The Unpacking of Benefits: Why TorNet Matters</h4>
+                    <p class="mb-4">The advantages of integrating TorNet into your Kali Linux workflow are numerous and profound, directly addressing some of the most pressing concerns in modern cybersecurity:</p>
+                    <ul class="list-disc list-inside text-left mx-auto max-w-2xl space-y-2 mb-6">
+                        <li><strong>Enhanced Privacy:</strong> In an era of ubiquitous data collection and surveillance, privacy is a luxury many strive for. TorNet directly combats pervasive online tracking. By consistently changing your IP address, it becomes exponentially harder for websites, advertising networks, data brokers, and even government agencies to build comprehensive profiles of your online behavior. Your digital breadcrumbs are scattered, making it nearly impossible for anyone to piece together a continuous narrative of your online journey.</li>
+                        <li><strong>Increased Security:</strong> Beyond just privacy, TorNet offers a significant boost to your overall security posture. For individuals or organizations that might be targets of sophisticated cyber-attacks, frequent IP changes can act as a potent deterrent. If a malicious actor attempts to launch a sustained, targeted attack or conduct extensive reconnaissance against a specific IP, TorNet disrupts their efforts by constantly presenting a new address. This proactive defense mechanism can significantly reduce your attack surface and complicate an adversary's ability to maintain a persistent presence or track your movements.</li>
+                        <li><strong>Unparalleled Anonymity:</strong> While complete anonymity on the internet is an elusive goal, TorNet, by intelligently utilizing the Tor network, brings you closer to it. The multi-layered encryption and relay system of Tor, combined with TorNet's automated IP rotation, ensures that your origin is obscured. This is crucial for ethical hackers performing penetration tests, researchers investigating sensitive topics, journalists protecting their sources, or activists operating in environments with stringent censorship and surveillance. Your true geographical location and identity remain highly protected.</li>
+                        <li><strong>Exceptional Ease of Use:</strong> Despite its advanced capabilities, TorNet is designed with user-friendliness in mind. As a Python package, it offers both a straightforward command-line interface (CLI) for quick operations directly within your Kali Linux terminal and a robust set of functions that can be easily integrated into your Python scripts. This flexibility means that whether you're a seasoned developer automating complex cybersecurity tasks or a beginner looking for an effective privacy tool, TorNet can be readily adopted and leveraged.</li>
+                        <li><strong>Robust Protection from Tracking:</strong> The digital advertising ecosystem thrives on tracking your online activities to deliver highly targeted advertisements. TorNet actively thwarts this by breaking the link between your historical Browse data and your current IP address. With your IP frequently changing, tracking services and advertisers will find it exceedingly difficult to maintain a consistent profile, leading to a significant reduction in unsolicited targeted ads and a greater sense of digital autonomy.</li>
+                        <li><strong>Empowering Peace of Mind:</strong> Perhaps one of the most underrated benefits of TorNet is the psychological comfort it provides. In a landscape filled with data breaches, privacy concerns, and constant threats, knowing that your IP address is automatically and frequently rotated can instill a profound sense of confidence in your online privacy and security. This peace of mind allows you to focus on your ethical hacking engagements, research, or general Browse without the constant underlying worry of being tracked or identified.</li>
+                    </ul>
+                    <h4 class="text-2xl font-bold text-purple-400 mb-3">TorNet in Ethical Hacking and Beyond</h4>
+                    <p class="mb-4">For the ethical hacker and cybersecurity professional, TorNet is more than just a privacy tool; it's a strategic asset. During the reconnaissance phase of a penetration test, maintaining anonymity is crucial to avoid tipping off the target organization. TorNet enables you to perform extensive information gathering, network scanning, and vulnerability analysis with a constantly shifting IP, making it incredibly difficult for intrusion detection systems (IDS) or security operations centers (SOCs) to identify and block your activities based on a static IP address.</p>
+                    <p class="mb-4">Beyond ethical hacking, TorNet can be invaluable for:</p>
+                    <ul class="list-disc list-inside text-left mx-auto max-w-2xl space-y-2 mb-6">
+                        <li>Journalists and Researchers: Operating in sensitive regions or investigating controversial topics where digital anonymity is paramount for safety.</li>
+                        <li>Privacy Advocates: Individuals who simply wish to reclaim their digital sovereignty and minimize their online footprint from pervasive tracking.</li>
+                        <li>Developers: Integrating dynamic IP rotation into web scraping tools, automated testing environments, or other applications requiring a constantly changing public IP.</li>
+                    </ul>
+                    <h4 class="text-2xl font-bold text-purple-400 mb-3">Getting Started with TorNet on Kali Linux</h4>
+                    <p class="mb-4">The beauty of TorNet lies not only in its power but also in its accessibility. As a Python package, installation on Kali Linux is typically straightforward using pip:</p>
+                    <pre class="bg-gray-900 text-green-400 p-3 rounded-md overflow-x-auto my-2"><code>pip install tornet</code></pre>
+                    <p class="mb-4">Once installed, you can leverage its command-line interface for immediate use or import its functions into your Python scripts for more customized automation. Future articles and tutorials will dive deeper into the practical implementation, providing step-by-step guides on installation, configuration, and advanced usage examples.</p>
+                    <h4 class="text-2xl font-bold text-purple-400 mb-3">The Future of Online Privacy</h4>
+                    <p class="mb-4">As the digital landscape continues to evolve, so too must our tools and strategies for maintaining privacy and security. TorNet represents a significant leap forward in automated IP address rotation, offering a robust, ethical, and user-friendly solution for anyone operating in the complex world of cybersecurity. By making your online identity a dynamic, moving target, TorNet empowers you to navigate the internet with greater confidence, anonymity, and peace of mind.</p>
+                    <p class="mb-4 text-center">
+                        <a href="https://youtu.be/AJ02yyIXRb0" target="_blank" class="btn-primary text-sm inline-flex items-center">
+                            <i class="fab fa-youtube mr-2"></i> Watch Video Tutorial
+                        </a>
+                    </p>
+                `,
+                date: "July 03, 2025",
+                tags: ["TorNet", "KaliLinux", "EthicalHacking", "Cybersecurity"],
+                full_tags: ["TorNet", "KaliLinux", "EthicalHacking", "Cybersecurity", "OnlinePrivacy", "Anonymity", "IPRotation", "TorNetwork", "PythonSecurity", "PrivacyTools", "InfoSec", "CyberDefense", "PenetrationTesting", "DigitalPrivacy", "NetworkSecurity", "HackingTools", "SecurityAwareness", "DataPrivacy", "FutureOfSecurity", "AutomatedSecurity", "2025Cybersecurity"]
+            },
+            // NEW ARTICLE 2: Understanding John the Ripper: A Deep Dive into Password Cracking and Security
+            {
+                title: "Understanding John the Ripper: A Deep Dive into Password Cracking and Security",
+                description: "Learn about John the Ripper (JTR), a powerful open-source password cracking tool used for ethical hacking, penetration testing, and enhancing password security.",
+                fullContent: `
+                    <h3 class="text-3xl font-bold text-neon-green mb-4">Understanding John the Ripper: A Deep Dive into Password Cracking and Security</h3>
+                    <p class="mb-4">In the ever-evolving landscape of cybersecurity, understanding the tools and techniques used to assess and strengthen digital defenses is crucial. One such powerful utility is John the Ripper (JTR), a widely recognized open-source password cracking tool [00:05]. While its name might suggest malicious intent, JTR is a versatile tool primarily designed for legitimate purposes, playing a significant role in ethical hacking, penetration testing, and enhancing overall password security.</p>
+                    <h4 class="text-2xl font-bold text-purple-400 mb-3">What is John the Ripper?</h4>
+                    <p class="mb-4">At its core, John the Ripper is a robust password cracking software engineered to test the strength of passwords and identify potential vulnerabilities within systems [00:42]. It boasts the capability to crack a multitude of hash types, including commonly used ones like MD5 and SHA-1 [00:50]. This makes it an indispensable tool for security professionals seeking to fortify digital perimeters.</p>
+                    <h4 class="text-2xl font-bold text-purple-400 mb-3">Legitimate Applications of John the Ripper</h4>
+                    <p class="mb-4">The power of JTR lies in its legitimate applications, which are vital for maintaining robust cybersecurity postures:</p>
+                    <ul class="list-disc list-inside text-left mx-auto max-w-2xl space-y-2 mb-6">
+                        <li><strong>Password Recovery:</strong> Have you ever forgotten a crucial password? If you have access to the password's hash, JTR can be a lifesaver, assisting in the recovery of forgotten credentials [01:09]. This is particularly useful in scenarios where access to a system or file is lost due to a forgotten password.</li>
+                        <li><strong>Password Strength Testing:</strong> Organizations and individuals alike can leverage JTR to rigorously test the strength of their passwords [01:17]. By attempting to crack existing passwords, security teams can identify weak links and enforce stronger password policies, thereby reducing the risk of unauthorized access.</li>
+                        <li><strong>Vulnerability Assessment:</strong> JTR is an invaluable asset in comprehensive vulnerability assessment. It helps pinpoint weak passwords embedded within a system, allowing administrators to proactively address these weaknesses before they can be exploited by malicious actors [01:24]. This proactive approach is fundamental to a strong cybersecurity strategy.</li>
+                    </ul>
+                    <h4 class="text-2xl font-bold text-purple-400 mb-3">Basic Usage and Customization</h4>
+                    <p class="mb-4">For those new to JTR, getting started can be straightforward. A simple command like <code class="bg-gray-700 p-1 rounded">john hashes.txt</code> initiates the cracking process, utilizing default word lists to attempt to decipher hashes stored in a file named <code class="bg-gray-700 p-1 rounded">hashes.txt</code> [01:33].</p>
+                    <p class="mb-4">However, the true power of John the Ripper is unleashed through its extensive customization options [01:41]. Users can:</p>
+                    <ul class="list-disc list-inside text-left mx-auto max-w-2xl space-y-2 mb-6">
+                        <li>Employ custom word lists tailored to specific scenarios, enhancing the efficiency of the cracking process.</li>
+                        <li>Specify different hash formats to accommodate various encryption methods.</li>
+                        <li>Craft complex password patterns to simulate real-world brute-force attacks, providing a more accurate assessment of password resilience.</li>
+                    </ul>
+                    <h4 class="text-2xl font-bold text-purple-400 mb-3">Ethical Considerations and Responsible Use</h4>
+                    <p class="mb-6">It is paramount to understand and adhere to the ethical guidelines surrounding the use of John the Ripper. The video consistently emphasizes that using JTR without proper authorization is strictly illegal and highly unethical [00:13]. Respect for privacy and the absolute necessity of obtaining explicit permissions before deploying the tool are non-negotiable [00:33]. The information provided here and in the video is intended purely for educational purposes and for fostering cyber awareness [00:22]. Responsible and authorized use ensures that this powerful hacking tool contributes positively to digital security.</p>
+                    <h4 class="text-2xl font-bold text-purple-400 mb-3">Conclusion</h4>
+                    <p class="mb-4">John the Ripper stands as a testament to the dual nature of technology: a tool that can be wielded for both good and ill. When used responsibly and ethically, it is an indispensable component of any robust cybersecurity framework, empowering individuals and organizations to proactively identify and mitigate password vulnerabilities. By understanding its capabilities and respecting its limitations, we can harness the power of JTR to build a more secure digital future.</p>
+                    <p class="mb-4 text-center">
+                        <a href="https://youtu.be/zq3c3A_vWRI" target="_blank" class="btn-primary text-sm inline-flex items-center">
+                            <i class="fab fa-youtube mr-2"></i> Watch Video Tutorial
+                        </a>
+                    </p>
+                `,
+                date: "July 03, 2025",
+                tags: ["CyberSecurity", "EthicalHacking", "PasswordCracking", "InfoSec"],
+                full_tags: ["CyberSecurity", "EthicalHacking", "PasswordCracking", "InfoSec", "PenetrationTesting", "JohnTheRipper", "CyberAwareness", "TechTutorial", "DigitalSecurity", "HackingTools"]
+            },
+            // EXISTING ARTICLE 3: Unlocking Lost Data: A Deep Dive into Foremost on Kali Linux
             {
                 title: "Unlocking Lost Data: A Deep Dive into Foremost on Kali Linux",
                 description: "Explore Foremost, a powerful command-line utility on Kali Linux for data recovery and digital forensics, designed to recover lost files by scanning raw data for specific file headers and footers.",
@@ -572,7 +657,7 @@
                     </ul>
                     <h4 class="text-2xl font-bold text-purple-400 mb-3">Foremost in Digital Forensics and Beyond</h4>
                     <p class="mb-4">Foremost's capabilities extend beyond simple data recovery for end-users. It is a cornerstone tool in digital forensics investigations, enabling experts to uncover hidden or deleted evidence from compromised systems. Its ability to work at the raw data level makes it indispensable for reconstructing events, analyzing malware, and gathering intelligence in cybersecurity incidents.</p>
-                    <p class="mb-4">In essence, Foremost empowers users with a robust and efficient method for reclaiming lost digital assets. Its command-line interface, while initially daunting for some, offers unparalleled control and precision, making it a favorite among cybersecurity professionals and anyone serious about data recovery. As our digital lives become increasingly intertwined with vast amounts of data, tools like Foremost will continue to play a vital role in ensuring data integrity and resilience.</p>
+                    <p class="mb-4">In essence, Foremost empowers users with a robust and efficient method for reclaiming lost digital assets. Its command-line interface, while initially daunting for some, offers unparalleled control and precision, making it a favorite among cybersecurity professionals and anyone serious about data recovery.</p>
                     <p class="mb-4 text-center">
                         <a href="https://youtu.be/Cga_BlOsOFg" target="_blank" class="btn-primary text-sm inline-flex items-center">
                             <i class="fab fa-youtube mr-2"></i> Watch Video Tutorial
@@ -583,7 +668,7 @@
                 tags: ["Cybersecurity", "DataRecovery", "KaliLinux", "DigitalForensics"],
                 full_tags: ["Cybersecurity", "DataRecovery", "KaliLinux", "DigitalForensics", "InfoSec", "EthicalHacking", "DataProtection", "CyberDefense", "Ransomware", "CyberThreats", "Linux", "OpenSource", "FileRecovery", "TechTrends", "InformationSecurity", "CyberAttack", "Privacy", "HackingTools", "SystemSecurity"]
             },
-            // EXISTING ARTICLE 1: Unveiling Connections: Exploring the "Email to Phone Number" OSINT Tool
+            // EXISTING ARTICLE 4: Unveiling Connections: Exploring the "Email to Phone Number" OSINT Tool
             {
                 title: "Unveiling Connections: Exploring the 'Email to Phone Number' OSINT Tool",
                 description: "This article delves into the 'email to phone number' OSINT tool, explaining how it cross-references email addresses with publicly available online resources to find associated phone numbers.",
@@ -621,7 +706,7 @@
                 tags: ["OSINT", "Cybersecurity", "DigitalForensics", "Privacy"],
                 full_tags: ["OSINT", "Cybersecurity", "DigitalForensics", "Privacy", "InformationGathering", "TechTools", "OpenSource", "DataPrivacy", "EthicalHacking", "OnlineSecurity"]
             },
-            // EXISTING ARTICLE 2: Understanding EvilURL: A Dual-Edged Sword in Kali Linux
+            // EXISTING ARTICLE 5: Understanding EvilURL: A Dual-Edged Sword in Kali Linux
             {
                 title: "Understanding EvilURL: A Dual-Edged Sword in Kali Linux",
                 description: "Explore EvilURL, a versatile Kali Linux utility for URL manipulation, understanding its ethical applications in cybersecurity and the importance of responsible use.",
@@ -658,7 +743,7 @@
                 tags: ["Cybersecurity", "KaliLinux", "EthicalHacking", "Phishing"],
                 full_tags: ["Cybersecurity", "KaliLinux", "EthicalHacking", "Phishing", "URLShortener", "InfoSec", "NetworkSecurity", "SecurityTools", "MalwareAnalysis", "DigitalSecurity"]
             },
-            // EXISTING ARTICLE 3: Unmasking the Cloud: Introducing CloakQuest3r
+            // EXISTING ARTICLE 6: Unmasking the Cloud: Introducing CloakQuest3r
             {
                 title: "Unmasking the Cloud: Introducing CloakQuest3r",
                 description: "Learn about CloakQuest3r, a powerful Python tool designed to uncover the real IP addresses of websites hidden behind Cloudflare and similar CDN services.",
