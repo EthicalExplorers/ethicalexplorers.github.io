@@ -34,14 +34,59 @@
         .bg-gradient-hack {
             background: linear-gradient(135deg, #000033 0%, #1A1A1A 100%);
         }
+        /* Modernized button styles */
         .btn-primary {
-            @apply bg-gradient-to-r from-purple-600 to-indigo-700 text-white font-bold py-3 px-6 rounded-lg shadow-lg hover:from-purple-700 hover:to-indigo-800 transition duration-300 ease-in-out transform hover:scale-105;
+            @apply bg-gradient-to-r from-purple-600 to-indigo-700 text-white font-bold py-3 px-6 rounded-full shadow-lg hover:from-purple-700 hover:to-indigo-800 transition duration-300 ease-in-out transform hover:scale-105;
             box-shadow: 0 0 15px rgba(153, 0, 255, 0.7); /* Purple glow */
+            border: 2px solid transparent; /* Initial border for hover effect */
+            background-clip: padding-box; /* Ensure border is outside gradient */
+            position: relative;
+            z-index: 1;
         }
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 9999px; /* Full rounded corners */
+            padding: 2px; /* Border thickness */
+            background: linear-gradient(135deg, #a78bfa, #8b5cf6); /* Gradient border */
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+        .btn-primary:hover::before {
+            opacity: 1;
+        }
+
         .btn-secondary {
-            @apply bg-gradient-to-r from-green-500 to-teal-600 text-white font-bold py-3 px-6 rounded-lg shadow-lg hover:from-green-600 hover:to-teal-700 transition duration-300 ease-in-out transform hover:scale-105;
+            @apply bg-gradient-to-r from-green-500 to-teal-600 text-white font-bold py-3 px-6 rounded-full shadow-lg hover:from-green-600 hover:to-teal-700 transition duration-300 ease-in-out transform hover:scale-105;
             box-shadow: 0 0 15px rgba(57, 255, 20, 0.7); /* Green glow */
+            border: 2px solid transparent; /* Initial border for hover effect */
+            background-clip: padding-box; /* Ensure border is outside gradient */
+            position: relative;
+            z-index: 1;
         }
+        .btn-secondary::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 9999px; /* Full rounded corners */
+            padding: 2px; /* Border thickness */
+            background: linear-gradient(135deg, #6ee7b7, #34d399); /* Gradient border */
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+        .btn-secondary:hover::before {
+            opacity: 1;
+        }
+
         .card-glow {
             box-shadow: 0 0 20px rgba(0, 255, 255, 0.3); /* Cyan glow */
             transition: all 0.3s ease-in-out;
@@ -55,7 +100,8 @@
         .typing-active {
             overflow: hidden;
             white-space: nowrap; /* Ensures text is on a single line during animation */
-            animation: typing 3s steps(40, end) forwards;
+            border-right: 0.15em solid #39FF14; /* Cursor effect */
+            animation: typing 3s steps(40, end) forwards, blink-caret 0.75s step-end infinite;
         }
 
         /* The typing animation */
@@ -76,11 +122,7 @@
             background-size: 200px;
         }
 
-        /* Network flow animation for Hero Section */
-        @keyframes network-flow {
-            from { background-position: 0 0; }
-            to { background-position: 200px 200px; }
-        }
+        /* Removed network-flow animation */
 
         /* Article Modal specific styles */
         .article-modal-content {
@@ -211,8 +253,7 @@
                     </a>
                 </div>
             </div>
-            <!-- Subtle network overlay animation -->
-            <div class="absolute inset-0 z-0 opacity-10" style="background-image: radial-gradient(circle at center, #00FFFF 1px, transparent 1px), radial-gradient(circle at center, #9900FF 1px, transparent 1px); background-size: 30px 30px; animation: network-flow 20s linear infinite;"></div>
+            <!-- Removed network flow animation -->
         </section>
 
         <!-- About Us Section -->
@@ -366,7 +407,7 @@
                         <li>Improve, personalize, and expand our website.</li>
                         <li>Understand and analyze how you use our website.</li>
                         <li>Develop new products, services, features, and functionality.</li>
-                        <li>Communicates with you, either directly or through one of our partners, including for customer service, to provide you with updates and other information relating to the website, and for marketing and promotional purposes.</li>
+                        <li>Communicate with you, either directly or through one of our partners, including for customer service, to provide you with updates and other information relating to the website, and for marketing and promotional purposes.</li>
                         <li>Send you emails.</li>
                         <li>Find and prevent fraud.</li>
                     </ul>
@@ -1168,6 +1209,7 @@
                     taglineElement.style.whiteSpace = 'normal';
                     taglineElement.style.overflow = 'visible';
                     taglineElement.style.width = 'auto'; // Let width be determined by content/container
+                    taglineElement.style.borderRight = 'none'; // Remove cursor after typing
                 });
             }
 
