@@ -439,56 +439,6 @@
         // Search Filter Logic
         document.getElementById('mobileSearchInput').addEventListener('input', (e) => filterContent(e.target.value));
 
-        function filterContent(query) {
-            const lowerQuery = query.toLowerCase();
-            const filteredVideos = videos.filter(v => v.title.toLowerCase().includes(lowerQuery) || v.desc.toLowerCase().includes(lowerQuery));
-            const filteredArticles = articles.filter(a => a.title.toLowerCase().includes(lowerQuery) || a.desc.toLowerCase().includes(lowerQuery));
-            
-            renderVideosFiltered(filteredVideos);
-            renderArticlesFiltered(filteredArticles);
-        }
-
-        function renderVideosFiltered(list) {
-            const grid = document.getElementById('video-grid');
-            grid.innerHTML = '';
-            if(list.length === 0) grid.innerHTML = '<p class="text-slate-500 col-span-full">No videos found matching your query.</p>';
-            list.forEach(v => {
-                grid.innerHTML += `
-                    <div class="group bg-slate-800 rounded-xl overflow-hidden border border-slate-700 hover:border-brand-500/50 transition">
-                        <div class="relative overflow-hidden aspect-video">
-                            <img src="https://img.youtube.com/vi/${v.id}/hqdefault.jpg" alt="${v.title}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                            <div class="absolute inset-0 bg-black/50 group-hover:bg-black/30 transition flex items-center justify-center">
-                                <a href="https://youtu.be/${v.id}" target="_blank" class="w-12 h-12 bg-white/10 backdrop-blur rounded-full flex items-center justify-center text-white hover:bg-brand-500 transition border border-white/20"><i class="fas fa-play ml-1"></i></a>
-                            </div>
-                        </div>
-                        <div class="p-6">
-                            <h3 class="text-lg font-bold text-white mb-2 line-clamp-1">${v.title}</h3>
-                            <p class="text-slate-400 text-sm mb-4 line-clamp-2">${v.desc}</p>
-                            <a href="https://youtu.be/${v.id}" target="_blank" class="text-brand-400 text-sm font-medium hover:text-brand-300">Watch Module &rarr;</a>
-                        </div>
-                    </div>`;
-            });
-        }
-
-        function renderArticlesFiltered(list) {
-            const grid = document.getElementById('article-grid');
-            grid.innerHTML = '';
-            if(list.length === 0) grid.innerHTML = '<p class="text-slate-500 col-span-full">No articles found matching your query.</p>';
-            list.forEach((a) => {
-                const originalIndex = articles.indexOf(a); 
-                grid.innerHTML += `
-                    <div class="bg-slate-800 rounded-xl p-8 border border-slate-700 hover:border-brand-500/30 transition group cursor-pointer" onclick="openModal('${a.title}', 'article', ${originalIndex})">
-                        <div class="flex items-center justify-between mb-6">
-                            <span class="px-3 py-1 rounded-full bg-slate-700 text-slate-300 text-xs font-medium border border-slate-600">${a.tag}</span>
-                            <span class="text-slate-500 text-xs">${a.date}</span>
-                        </div>
-                        <h3 class="text-xl font-bold text-white mb-3 group-hover:text-brand-400 transition">${a.title}</h3>
-                        <p class="text-slate-400 text-sm leading-relaxed mb-6">${a.desc}</p>
-                        <div class="flex items-center text-sm font-medium text-slate-300 group-hover:text-white transition">Read Documentation <i class="fas fa-arrow-right ml-2 text-xs"></i></div>
-                    </div>`;
-            });
-        }
-
         // --- Data: AdSense Safe Content ---
         const videos = [
             { title: "Android Audit: Nethunter 2025", desc: "Mobile platform assessment guide for admins.", id: "jjpYYHW1cYc" },
@@ -731,7 +681,7 @@
         function renderVideosFiltered(list) {
             const grid = document.getElementById('video-grid');
             grid.innerHTML = '';
-            if(list.length === 0) grid.innerHTML = '<p class="text-slate-500 col-span-full">No videos found.</p>';
+            if(list.length === 0) grid.innerHTML = '<p class="text-slate-500 col-span-full">No videos found matching your query.</p>';
             list.forEach(v => {
                 grid.innerHTML += `
                     <div class="group bg-slate-800 rounded-xl overflow-hidden border border-slate-700 hover:border-brand-500/50 transition">
@@ -753,7 +703,7 @@
         function renderArticlesFiltered(list) {
             const grid = document.getElementById('article-grid');
             grid.innerHTML = '';
-            if(list.length === 0) grid.innerHTML = '<p class="text-slate-500 col-span-full">No articles found.</p>';
+            if(list.length === 0) grid.innerHTML = '<p class="text-slate-500 col-span-full">No articles found matching your query.</p>';
             list.forEach((a) => {
                 const originalIndex = articles.indexOf(a); 
                 grid.innerHTML += `
@@ -925,10 +875,64 @@
             document.getElementById('cookieConsent').classList.add('hidden');
         }
 
+        // Constants
+        const ITEMS_INITIAL = 3;
+
+        function filterContent(query) {
+            const loadVideosBtn = document.getElementById('loadMoreVideos');
+            const loadArticlesBtn = document.getElementById('loadMoreArticles');
+
+            if (!query) {
+                // Reset to default view (3 items)
+                renderVideosFiltered(videos.slice(0, ITEMS_INITIAL));
+                renderArticlesFiltered(articles.slice(0, ITEMS_INITIAL));
+                
+                // Show load buttons only if there are more items to load
+                if(videos.length > ITEMS_INITIAL) loadVideosBtn.classList.remove('hidden');
+                else loadVideosBtn.classList.add('hidden');
+                
+                if(articles.length > ITEMS_INITIAL) loadArticlesBtn.classList.remove('hidden');
+                else loadArticlesBtn.classList.add('hidden');
+                
+                return;
+            }
+
+            // Search Mode: Hide load buttons and show all matches
+            loadVideosBtn.classList.add('hidden');
+            loadArticlesBtn.classList.add('hidden');
+
+            const lowerQuery = query.toLowerCase();
+            const filteredVideos = videos.filter(v => v.title.toLowerCase().includes(lowerQuery) || v.desc.toLowerCase().includes(lowerQuery));
+            const filteredArticles = articles.filter(a => a.title.toLowerCase().includes(lowerQuery) || a.desc.toLowerCase().includes(lowerQuery));
+            
+            renderVideosFiltered(filteredVideos);
+            renderArticlesFiltered(filteredArticles);
+        }
+
         // --- Initialization ---
         document.addEventListener('DOMContentLoaded', () => {
-            renderVideosFiltered(videos); // Initial render
-            renderArticlesFiltered(articles); // Initial render
+            // Initial render with limits
+            renderVideosFiltered(videos.slice(0, ITEMS_INITIAL));
+            renderArticlesFiltered(articles.slice(0, ITEMS_INITIAL));
+            
+            // Setup Load More buttons
+            const loadVideosBtn = document.getElementById('loadMoreVideos');
+            const loadArticlesBtn = document.getElementById('loadMoreArticles');
+
+            // Initial visibility check
+            if(videos.length <= ITEMS_INITIAL) loadVideosBtn.classList.add('hidden');
+            if(articles.length <= ITEMS_INITIAL) loadArticlesBtn.classList.add('hidden');
+
+            loadVideosBtn.addEventListener('click', function(e) {
+                renderVideosFiltered(videos); // Show all videos
+                this.classList.add('hidden'); // Hide button
+            });
+
+            loadArticlesBtn.addEventListener('click', function(e) {
+                renderArticlesFiltered(articles); // Show all articles
+                this.classList.add('hidden'); // Hide button
+            });
+
             checkCookies();
 
             // Mobile Menu Toggle
