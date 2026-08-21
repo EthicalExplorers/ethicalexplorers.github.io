@@ -55,7 +55,7 @@ By subscribing to **[Ethical Explorers](https://youtube.com/@ethicalexplorers18)
     <td align="center">🤝 <b>Active Community</b></td>
   </tr>
   <tr>
-    <td>No boring theoretical lectures! Every video includes real-world demonstrations in safe, isolated lab environments.</td>
+    <td>Video includes real-world demonstrations in safe, isolated lab environments.</td>
     <td>Clear explanations designed for both beginners and intermediate cybersecurity enthusiasts.</td>
     <td>Connect with fellow security researchers on Telegram to discuss tools, techniques, and troubleshoot labs.</td>
   </tr>
