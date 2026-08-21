@@ -1,0 +1,11 @@
+# ==============================================================================
+# Robots.txt for Ethical Explorers Cybersecurity Blog & Educational Hub
+# Domain: https://ethicalexplorers.github.io
+# Purpose: Google Search Console, Bing, and Search Engine Web Crawlers
+# ==============================================================================
+
+User-agent: *
+Allow: /
+
+# Direct link to XML Sitemap for search engines and Googlebot
+Sitemap: https://ethicalexplorers.github.io/sitemap.xml
