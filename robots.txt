@@ -1,0 +1,12 @@
+# Ethical Explorers — robots.txt
+# https://ethicalexplorers.github.io
+
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://ethicalexplorers.github.io/sitemap.xml
+
+# Block internal data files from indexing
+Disallow: /data/
+Disallow: /.git/

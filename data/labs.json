@@ -1,0 +1,162 @@
+[
+  {
+    "title": "SQL Injection Testing with SQLMap",
+    "description": "Learn to detect and exploit SQL injection vulnerabilities using SQLMap in a controlled lab environment. Practice automated database enumeration, blind SQLi exploitation, and WAF bypass techniques.",
+    "difficulty": "Intermediate",
+    "category": "Web Application Security",
+    "tools": ["SQLMap", "Burp Suite", "DVWA"],
+    "url": "https://tryhackme.com/room/dvwa"
+  },
+  {
+    "title": "Nmap Network Scanning Fundamentals",
+    "description": "Master the fundamentals of network scanning with Nmap. Learn host discovery, SYN vs TCP connect scans, service version detection, NSE scripts, and OS fingerprinting in a safe sandbox.",
+    "difficulty": "Beginner",
+    "category": "Network Security",
+    "tools": ["Nmap", "Wireshark", "Zenmap"],
+    "url": "https://tryhackme.com/room/furthernmap"
+  },
+  {
+    "title": "Linux Privilege Escalation",
+    "description": "Practice escalating privileges on Linux systems. Exploit SUID binaries, misconfigured cron jobs, writable sudoers, kernel exploits (Dirty COW/Pipe), and automated LinPEAS enumeration.",
+    "difficulty": "Intermediate",
+    "category": "Penetration Testing",
+    "tools": ["LinPEAS", "GTFOBins", "Bash"],
+    "url": "https://tryhackme.com/room/linuxprivesc"
+  },
+  {
+    "title": "Windows Privilege Escalation",
+    "description": "Learn Windows local privilege escalation techniques including unquoted service paths, AlwaysInstallElevated registry keys, token impersonation (PrintSpoofer/JuicyPotato), and WinPEAS audits.",
+    "difficulty": "Intermediate",
+    "category": "Penetration Testing",
+    "tools": ["WinPEAS", "PowerShell", "Metasploit"],
+    "url": "https://tryhackme.com/room/windowsprivesc20"
+  },
+  {
+    "title": "Basic Penetration Testing Lab",
+    "description": "Your first penetration test from start to finish! Learn reconnaissance, network mapping, brute force attacks, web exploitation, and post-exploitation privilege escalation.",
+    "difficulty": "Beginner",
+    "category": "Penetration Testing",
+    "tools": ["Nmap", "Metasploit", "Gobuster", "Hydra"],
+    "url": "https://tryhackme.com/room/basicpentestingjt"
+  },
+  {
+    "title": "OWASP Top 10 Web Vulnerabilities",
+    "description": "Hands-on practice auditing and exploiting the OWASP Top 10 web vulnerabilities including Stored/Reflected XSS, CSRF, SSRF, IDOR, Broken Access Control, and Insecure Deserialization.",
+    "difficulty": "Intermediate",
+    "category": "Web Application Security",
+    "tools": ["Burp Suite", "OWASP ZAP", "DevTools"],
+    "url": "https://tryhackme.com/room/owasptop102021"
+  },
+  {
+    "title": "Metasploit Framework Mastery",
+    "description": "Deep dive into the industry-standard Metasploit Framework. Configure listeners, generate encoded payloads with MSFvenom, run auxiliary scanners, and establish persistent Meterpreter sessions.",
+    "difficulty": "Intermediate",
+    "category": "Exploitation",
+    "tools": ["Metasploit", "Meterpreter", "MSFvenom"],
+    "url": "https://tryhackme.com/room/metasploitintro"
+  },
+  {
+    "title": "Wireshark Packet Analysis & Traffic Forensics",
+    "description": "Analyze network traffic like a digital forensics investigator. Filter unencrypted credentials, extract transferred malicious files from PCAP streams, and identify C2 beacon traffic.",
+    "difficulty": "Beginner",
+    "category": "Network Security",
+    "tools": ["Wireshark", "tshark", "tcpdump"],
+    "url": "https://tryhackme.com/room/wireshark"
+  },
+  {
+    "title": "Active Directory Attack & Defense",
+    "description": "Attack and defend corporate Active Directory environments. Learn Kerberoasting, AS-REP roasting, DCSync attacks, BloodHound graph analysis, and Golden Ticket privilege abuse.",
+    "difficulty": "Advanced",
+    "category": "Penetration Testing",
+    "tools": ["BloodHound", "Mimikatz", "Impacket", "CrackMapExec"],
+    "url": "https://tryhackme.com/room/attacktivedirectory"
+  },
+  {
+    "title": "OSINT (Open Source Intelligence) Investigation",
+    "description": "Master online investigation and reconnaissance. Gather target intelligence from DNS records, WHOIS databases, social media scrapers, satellite imagery, and Shodan IoT search engines.",
+    "difficulty": "Beginner",
+    "category": "OSINT",
+    "tools": ["Maltego", "theHarvester", "Sherlock", "Shodan"],
+    "url": "https://tryhackme.com/room/searchlightosint"
+  },
+  {
+    "title": "Reverse Engineering & Malware Analysis",
+    "description": "Dissect and analyze suspicious binary files in an isolated sandbox. Perform static disassembly with Ghidra, inspect PE headers, debug executable routines with x64dbg, and extract IOCs.",
+    "difficulty": "Advanced",
+    "category": "Malware Analysis",
+    "tools": ["Ghidra", "x64dbg", "PE-bear", "Cutter"],
+    "url": "https://tryhackme.com/room/malmalintroductory"
+  },
+  {
+    "title": "Burp Suite Certified Practitioner Prep",
+    "description": "Master Burp Suite for professional web penetration testing. Learn HTTP request tampering, automated fuzzing with Intruder, custom match/replace rules, and Repeater workflows.",
+    "difficulty": "Beginner",
+    "category": "Web Application Security",
+    "tools": ["Burp Suite Community/Pro", "FoxyProxy"],
+    "url": "https://tryhackme.com/room/burpsuitebasics"
+  },
+  {
+    "title": "Cryptography & Hash Cracking Workshop",
+    "description": "Break cryptographic ciphers and crack password hashes. Learn dictionary attacks, rule-based mutations with Hashcat, John the Ripper configurations, and modern symmetric/asymmetric algorithms.",
+    "difficulty": "Intermediate",
+    "category": "Cryptography",
+    "tools": ["Hashcat", "John the Ripper", "CyberChef"],
+    "url": "https://tryhackme.com/room/encryptioncrypto101"
+  },
+  {
+    "title": "Stack-Based Buffer Overflow Exploitation",
+    "description": "Understand memory corruption vulnerabilities at assembly level. Find EIP register offsets, locate bad characters, generate shellcode, and craft reliable weaponized buffer overflow exploits.",
+    "difficulty": "Advanced",
+    "category": "Exploitation",
+    "tools": ["GDB-Peda", "Immunity Debugger", "mona.py", "pwntools"],
+    "url": "https://tryhackme.com/room/bufferoverflowprep"
+  },
+  {
+    "title": "OverTheWire: Bandit Wargame (Linux Mastery)",
+    "description": "The ultimate hands-on wargame for mastering Linux command line, piping, file permissions, SSH keys, cronjobs, and basic scripting through 34 progressively challenging levels.",
+    "difficulty": "Beginner",
+    "category": "Penetration Testing",
+    "tools": ["Linux CLI", "SSH", "Bash", "Netcat"],
+    "url": "https://overthewire.org/wargames/bandit/"
+  },
+  {
+    "title": "PortSwigger Web Security Academy: XSS Labs",
+    "description": "Free enterprise-grade web security labs from the creators of Burp Suite. Practice Reflected XSS, Stored XSS, DOM-based XSS, CSP bypasses, and AngularJS sandbox escapes.",
+    "difficulty": "Intermediate",
+    "category": "Web Application Security",
+    "tools": ["Burp Suite", "Browser DevTools"],
+    "url": "https://portswigger.net/web-security/cross-site-scripting"
+  },
+  {
+    "title": "Hack The Box: Starting Point (Tier 0 & 1)",
+    "description": "Beginner-friendly real target machines on Hack The Box. Learn service enumeration (FTP, SMB, Telnet, Redis), default credential attacks, and initial shell capture.",
+    "difficulty": "Beginner",
+    "category": "Penetration Testing",
+    "tools": ["Nmap", "Netcat", "FTP", "SMBclient"],
+    "url": "https://app.hackthebox.com/starting-point"
+  },
+  {
+    "title": "WiFi Hacking & WPA3/WPA2 Wireless Auditing",
+    "description": "Audit wireless network security ethically. Capture 4-way handshakes, exploit PMKID zero-client vulnerabilities, build fake rogue AP evil twins, and crack hashes with Hashcat.",
+    "difficulty": "Intermediate",
+    "category": "Wireless Security",
+    "tools": ["Aircrack-ng", "Bettercap", "Wifite", "Hashcat"],
+    "url": "https://tryhackme.com/room/introtowifi"
+  },
+  {
+    "title": "Android Application Penetration Testing",
+    "description": "Decompile APK binaries with APKTool and JADX-GUI. Bypass SSL certificate pinning with Frida and Objection scripts, and audit exported Android activities and content providers.",
+    "difficulty": "Advanced",
+    "category": "Mobile Security",
+    "tools": ["JADX", "Frida", "Objection", "ADB"],
+    "url": "https://tryhackme.com/room/androidhackingintro"
+  },
+  {
+    "title": "PicoCTF Practice Challenges",
+    "description": "Carnegie Mellon University's acclaimed cybersecurity challenge platform featuring live interactive exercises in Reverse Engineering, Cryptography, Web Exploitation, and Forensics.",
+    "difficulty": "Beginner",
+    "category": "CTF Challenges",
+    "tools": ["Python", "CyberChef", "GDB", "Grep"],
+    "url": "https://picoctf.org/"
+  }
+]
