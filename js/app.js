@@ -54,8 +54,12 @@ document.addEventListener('DOMContentLoaded', () => {
 // SPA ROUTER
 // ================================================================
 function handleRoute() {
-  const hash = window.location.hash.slice(1) || 'home';
-  const parts = hash.split('/');
+  const urlParams = new URLSearchParams(window.location.search);
+  const queryRoute = urlParams.get('p') || urlParams.get('page');
+  const hash = window.location.hash.slice(1);
+  const routeString = hash || queryRoute || 'home';
+
+  const parts = routeString.split('/');
   const page = parts[0];
   const param = parts.slice(1).join('/');
   const content = document.getElementById('app-content');
