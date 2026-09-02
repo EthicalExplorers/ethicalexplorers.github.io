@@ -1,5 +1,125 @@
 [
   {
+    "id": "bbot-ultimate-osint-recon-attack-surface-tool-tutorial",
+    "title": "BBOT Tutorial: Ultimate OSINT & Attack Surface Reconnaissance Tool",
+    "excerpt": "Master BBOT — the powerful automated OSINT and attack surface mapping tool. Learn installation, scanning techniques, and how to discover subdomains, endpoints, and leaked credentials.",
+    "content": "**BBOT** (Bighuge BLS OSINT Tool) is one of the most powerful automated reconnaissance and attack surface mapping frameworks available today. It combines dozens of OSINT data sources and scanning modules into a single, easy-to-use command-line tool.\n\nIn this comprehensive tutorial based on our Ethical Explorers video guide, we walk through everything from installation to advanced scanning techniques.\n\n## What is BBOT?\n\nBBOT is a recursive, modular OSINT scanner that automates the discovery of:\n- **Subdomains** (passive and active enumeration)\n- **Open ports and services**\n- **Web technologies and frameworks**\n- **Email addresses and credentials**\n- **Cloud assets** (AWS, Azure, GCP buckets)\n- **Vulnerabilities** (nuclei integration)\n\n## Installation on Kali/Parrot OS\n\n```bash\n# Install via pip (recommended)\npipx install bbot\n\n# Or clone from source\ngit clone https://github.com/blacklanternsecurity/bbot.git\ncd bbot\npip install .\n```\n\n## Basic Scanning Commands\n\n### Subdomain Enumeration\n```bash\nbbot -t target.com -f subdomain-enum\n```\n\n### Full Recon Scan\n```bash\nbbot -t target.com -f subdomain-enum web-basic cloud-enum email-enum\n```\n\n### Web Application Scanning\n```bash\nbbot -t target.com -f subdomain-enum web-thorough -m nuclei httpx gowitness\n```\n\n## Key Modules Explained\n\n- **subdomain-enum**: Passive subdomain discovery via Certificate Transparency logs, DNS brute-forcing, and web scraping\n- **web-basic**: HTTP probing, technology detection, screenshot capture\n- **cloud-enum**: Discover exposed S3 buckets, Azure blobs, and GCP storage\n- **email-enum**: Find email addresses associated with the target domain\n\n## Output Formats\n\nBBOT generates structured output in multiple formats:\n```bash\n# JSON output\nbbot -t target.com -f subdomain-enum -o json\n\n# CSV output for spreadsheet analysis\nbbot -t target.com -f subdomain-enum -o csv\n\n# Neo4j graph database integration\nbbot -t target.com -f subdomain-enum -o neo4j\n```\n\n## Advanced Configuration\n\nCustomize scanning behavior through the config file:\n```yaml\n# ~/.config/bbot/bbot.yml\nmodules:\n  nuclei:\n    severity: critical,high\n  httpx:\n    threads: 50\n```\n\n## Defensive Takeaways\n\n1. **Monitor your attack surface**: Run BBOT against your own organization regularly\n2. **Certificate Transparency monitoring**: Set up alerts for new certificates\n3. **Remove exposed cloud assets**: Audit S3/Azure/GCP bucket permissions\n\nWatch the full video tutorial on our YouTube channel for live demonstrations!",
+    "category": "Social Engineering",
+    "tags": [
+      "BBOT",
+      "OSINT",
+      "Recon",
+      "Attack-Surface",
+      "Subdomain"
+    ],
+    "date": "2026-09-01",
+    "author": "Ethical Explorers Team",
+    "readTime": "7 min read",
+    "image": "images/blog/osint-recon.jpg",
+    "featured": true,
+    "youtubeId": ""
+  },
+  {
+    "id": "kali-nethunter-rootless-android-termux-tutorial",
+    "title": "Kali Linux on Android WITHOUT Root: NetHunter Rootless via Termux",
+    "excerpt": "Turn your Android phone into a portable hacking lab. Install Kali NetHunter Rootless through Termux without rooting your device — full GUI desktop included.",
+    "content": "Want to run Kali Linux on your Android phone without rooting? **Kali NetHunter Rootless** makes this possible using Termux and a VNC/proot setup. This guide walks through the complete installation process.\n\n## What is NetHunter Rootless?\n\nNetHunter Rootless is an official Kali Linux project that runs a full Kali environment inside a proot container on Android — no root access required. You get:\n- Full Kali Linux terminal\n- GUI desktop via VNC\n- Most penetration testing tools\n- Network scanning capabilities\n\n## Prerequisites\n\n- Android 7.0+ device\n- At least 4GB free storage\n- Termux app (from F-Droid, NOT Google Play)\n- Termux:X11 or VNC Viewer app\n\n## Step 1: Install Termux\n\nDownload Termux from **F-Droid** (the Google Play version is outdated):\n```\nhttps://f-droid.org/en/packages/com.termux/\n```\n\n## Step 2: Update and Install Dependencies\n\n```bash\npkg update && pkg upgrade -y\npkg install wget curl proot -y\n```\n\n## Step 3: Install NetHunter Rootless\n\n```bash\n# Download the installer\nwget -O install-nethunter-termux https://offs.ec/2MceZWr\nchmod +x install-nethunter-termux\n./install-nethunter-termux\n```\n\nThe installer will download the Kali rootfs (~1.5GB) and configure the proot environment.\n\n## Step 4: Launch Kali Linux\n\n```bash\n# Start Kali CLI\nnethunter\n\n# Start Kali with GUI (XFCE Desktop via VNC)\nnethunter kex passwd  # Set VNC password first time\nnethunter kex &       # Start the desktop\n```\n\n## Step 5: Connect to the Desktop\n\nOpen your VNC Viewer app and connect to:\n```\nlocalhost:1\n```\n\nYou now have a full Kali XFCE desktop running on your phone!\n\n## Installing Hacking Tools\n\nInside the Kali environment:\n```bash\nsudo apt update\nsudo apt install nmap sqlmap nikto dirb gobuster metasploit-framework -y\n```\n\n## Limitations\n\n- No raw socket access (WiFi attacks limited without root)\n- Performance depends on phone hardware\n- Some kernel-level tools won't work\n\n## Tips for Best Experience\n\n1. Use a Bluetooth keyboard for better productivity\n2. Keep Termux wake lock enabled for long scans\n3. Use tmux for session management\n\nWatch our full video tutorial for live setup demonstration!",
+    "category": "Penetration Testing",
+    "tags": [
+      "Kali",
+      "Android",
+      "NetHunter",
+      "Termux",
+      "Mobile"
+    ],
+    "date": "2026-08-30",
+    "author": "Ethical Explorers Team",
+    "readTime": "6 min read",
+    "image": "images/blog/pentesting-tools.jpg",
+    "featured": true,
+    "youtubeId": ""
+  },
+  {
+    "id": "netryx-astra-v2-geolocation-osint-tool-tutorial",
+    "title": "Netryx Astra V2: Advanced Geolocation & IP Intelligence OSINT Tool",
+    "excerpt": "Discover Netryx Astra V2 — the advanced geolocation and IP intelligence tool for OSINT investigations. Track IP addresses, analyze network infrastructure, and map digital footprints.",
+    "content": "**Netryx Astra V2** is an advanced geolocation and IP intelligence gathering tool designed for OSINT investigators and cybersecurity professionals. It combines multiple data sources to provide comprehensive location and infrastructure intelligence.\n\n## Features\n\n- **IP Geolocation**: Precise geographic location of IP addresses\n- **Network Infrastructure Mapping**: ASN, ISP, and hosting provider identification\n- **Domain Intelligence**: WHOIS data, DNS records, and certificate transparency\n- **Bulk Analysis**: Process multiple targets simultaneously\n- **API Integration**: Connects to MaxMind, IPInfo, and Shodan databases\n\n## Installation\n\n```bash\ngit clone https://github.com/netryx/astra-v2.git\ncd astra-v2\npip3 install -r requirements.txt\npython3 astra.py --help\n```\n\n## Basic Usage\n\n### Single IP Lookup\n```bash\npython3 astra.py -t 8.8.8.8\n```\n\n### Domain Reconnaissance\n```bash\npython3 astra.py -d target.com --full\n```\n\n### Bulk IP Analysis\n```bash\npython3 astra.py -f targets.txt -o results.json\n```\n\n## Output Example\n\n```json\n{\n  \"ip\": \"8.8.8.8\",\n  \"country\": \"United States\",\n  \"city\": \"Mountain View, CA\",\n  \"isp\": \"Google LLC\",\n  \"asn\": \"AS15169\",\n  \"organization\": \"Google Public DNS\",\n  \"coordinates\": {\n    \"latitude\": 37.4056,\n    \"longitude\": -122.0775\n  }\n}\n```\n\n## OSINT Investigation Workflow\n\n1. **Gather target IPs** from DNS records, email headers, or network logs\n2. **Run Astra V2** for geolocation and infrastructure mapping\n3. **Cross-reference** with Shodan and Censys for exposed services\n4. **Document findings** for threat intelligence reports\n\n## Ethical Usage Reminder\n\nThis tool should only be used for authorized security assessments and OSINT research. Always obtain proper authorization before investigating targets.\n\nWatch our YouTube video for the complete walkthrough!",
+    "category": "Social Engineering",
+    "tags": [
+      "OSINT",
+      "Geolocation",
+      "IP-Intel",
+      "Recon",
+      "Astra"
+    ],
+    "date": "2026-08-28",
+    "author": "Ethical Explorers Team",
+    "readTime": "5 min read",
+    "image": "images/blog/osint-recon.jpg",
+    "featured": false,
+    "youtubeId": ""
+  },
+  {
+    "id": "12-essential-linux-commands-2026-hackers-guide",
+    "title": "12 Essential Linux Commands Every Hacker Needs in 2026",
+    "excerpt": "Master the 12 most critical Linux terminal commands for ethical hacking in 2026. From file navigation to network analysis — these are the commands every pentester must know.",
+    "content": "Linux mastery is the foundation of every cybersecurity career. Whether you're running Kali, Parrot OS, or Ubuntu Server, these 12 commands are absolutely essential for every ethical hacker in 2026.\n\n## 1. `find` — Advanced File Search\n\nLocate files by name, size, permissions, or modification time:\n```bash\n# Find all SUID binaries (privilege escalation vectors)\nfind / -perm -4000 -type f 2>/dev/null\n\n# Find files modified in the last 24 hours\nfind /var/log -mtime -1 -type f\n\n# Find files owned by root that are world-writable\nfind / -user root -perm -o+w -type f 2>/dev/null\n```\n\n## 2. `grep` — Pattern Matching\n\nSearch through files and command output for specific strings:\n```bash\n# Search for passwords in config files\ngrep -rni 'password' /etc/ 2>/dev/null\n\n# Find IP addresses in log files\ngrep -oE '\\b([0-9]{1,3}\\.){3}[0-9]{1,3}\\b' access.log\n```\n\n## 3. `curl` — HTTP Requests\n\nSend HTTP requests and interact with web services:\n```bash\n# Test for common vulnerabilities\ncurl -X POST https://target.com/api/login -d 'user=admin&pass=test'\n\n# Check response headers\ncurl -I https://target.com\n```\n\n## 4. `ss` / `netstat` — Network Connections\n\nMonitor active network connections:\n```bash\n# Show all listening ports\nss -tlnp\n\n# Show established connections\nss -tnp state established\n```\n\n## 5. `awk` — Text Processing\n\nPowerful text processing for log analysis:\n```bash\n# Extract unique IP addresses from Apache logs\nawk '{print $1}' access.log | sort -u\n\n# Count requests per IP\nawk '{print $1}' access.log | sort | uniq -c | sort -rn | head -20\n```\n\n## 6. `chmod` / `chown` — Permissions\n\nManage file permissions and ownership:\n```bash\nchmod 755 script.sh    # rwxr-xr-x\nchmod +x exploit.py    # Make executable\nchown root:root file   # Change ownership\n```\n\n## 7. `tar` / `zip` — Archiving\n\nCompress and extract files:\n```bash\ntar -czf backup.tar.gz /important/data/\ntar -xzf archive.tar.gz\n```\n\n## 8. `ssh` — Secure Shell\n\nRemote access and tunneling:\n```bash\nssh user@target -p 2222\nssh -L 8080:localhost:80 user@target  # Port forwarding\n```\n\n## 9. `tcpdump` — Packet Capture\n\nCapture network traffic:\n```bash\ntcpdump -i eth0 -w capture.pcap\ntcpdump -i eth0 port 80 -A  # Show HTTP traffic\n```\n\n## 10. `systemctl` — Service Management\n\n```bash\nsystemctl status ssh\nsystemctl start apache2\nsystemctl enable postgresql\n```\n\n## 11. `crontab` — Task Scheduling\n\n```bash\ncrontab -e\n# Run scan every night at 2 AM\n0 2 * * * /opt/scripts/nightly_scan.sh\n```\n\n## 12. `tmux` — Terminal Multiplexer\n\nManage multiple terminal sessions:\n```bash\ntmux new -s hack_session\ntmux attach -t hack_session\n# Ctrl+B then D to detach\n```\n\nMaster these 12 commands and you'll be comfortable in any Linux-based security environment!",
+    "category": "Penetration Testing",
+    "tags": [
+      "Linux",
+      "CLI",
+      "Commands",
+      "Tutorial",
+      "2026"
+    ],
+    "date": "2026-08-25",
+    "author": "Ethical Explorers Team",
+    "readTime": "8 min read",
+    "image": "images/blog/linux-terminal.jpg",
+    "featured": true,
+    "youtubeId": ""
+  },
+  {
+    "id": "vulnclaw-ai-powered-vulnerability-scanner-tutorial",
+    "title": "VulnClaw: AI-Powered Vulnerability Scanner — Setup & Tutorial",
+    "excerpt": "Discover VulnClaw — the next-generation AI-powered vulnerability scanner that uses machine learning to detect and classify web application vulnerabilities automatically.",
+    "content": "**VulnClaw** is a next-generation vulnerability scanner that leverages artificial intelligence and machine learning models to detect, classify, and prioritize web application vulnerabilities with higher accuracy than traditional rule-based scanners.\n\n## Why AI-Powered Scanning?\n\nTraditional vulnerability scanners rely on signature-based detection and predefined rules. VulnClaw takes a different approach:\n\n- **ML-Based Detection**: Trained models identify vulnerability patterns beyond static signatures\n- **Reduced False Positives**: AI classification reduces noise by up to 70%\n- **Context-Aware Analysis**: Understands application logic for deeper testing\n- **Auto-Prioritization**: Risk scoring based on exploitability and impact\n\n## Installation\n\n```bash\ngit clone https://github.com/vulnclaw/vulnclaw.git\ncd vulnclaw\npip3 install -r requirements.txt\npython3 vulnclaw.py --setup\n```\n\n## Basic Scanning\n\n### Quick Web Application Scan\n```bash\npython3 vulnclaw.py -u https://target.com --quick\n```\n\n### Full Deep Scan\n```bash\npython3 vulnclaw.py -u https://target.com --deep --auth-cookie \"session=abc123\"\n```\n\n### API Endpoint Scanning\n```bash\npython3 vulnclaw.py -u https://api.target.com -f openapi.json --api-mode\n```\n\n## Vulnerability Categories Detected\n\n| Category | Detection Rate |\n|---|---|\n| SQL Injection | 96% |\n| XSS (Reflected/Stored/DOM) | 94% |\n| SSRF | 91% |\n| IDOR | 89% |\n| Authentication Bypass | 87% |\n| File Upload Vulnerabilities | 92% |\n\n## Integration with CI/CD\n\n```yaml\n# GitHub Actions integration\n- name: Run VulnClaw Security Scan\n  run: |\n    python3 vulnclaw.py -u ${{ secrets.STAGING_URL }} --ci --fail-on high\n```\n\n## Report Generation\n\nVulnClaw generates detailed HTML and JSON reports:\n```bash\npython3 vulnclaw.py -u https://target.com --report html --output scan_results.html\n```\n\n## Best Practices\n\n1. Always scan in staging/test environments first\n2. Use authenticated scanning for deeper coverage\n3. Combine with manual testing for complete assessments\n4. Schedule regular automated scans\n\nWatch our complete video tutorial on the Ethical Explorers YouTube channel!",
+    "category": "Web App Sec",
+    "tags": [
+      "AI",
+      "VulnClaw",
+      "Scanner",
+      "Automation",
+      "ML"
+    ],
+    "date": "2026-08-22",
+    "author": "Ethical Explorers Team",
+    "readTime": "6 min read",
+    "image": "images/blog/web-app-security.jpg",
+    "featured": false,
+    "youtubeId": ""
+  },
+  {
+    "id": "evil-twin-wifi-attack-defense-fluxion-guide",
+    "title": "Evil Twin Wi-Fi Attacks & Defense: Complete Fluxion Guide",
+    "excerpt": "Understand Evil Twin wireless attacks — how attackers create fake access points to steal credentials. Learn to execute (in labs) and defend against these attacks using Fluxion.",
+    "content": "An **Evil Twin attack** is one of the most devastating wireless security threats. The attacker creates a rogue Wi-Fi access point that mimics a legitimate network, tricking users into connecting and surrendering their credentials.\n\n## How Evil Twin Attacks Work\n\n1. **Reconnaissance**: Attacker identifies the target network (SSID, BSSID, channel)\n2. **Deauthentication**: Clients are forcibly disconnected from the real AP using deauth frames\n3. **Rogue AP**: A fake access point with the same SSID is created\n4. **Captive Portal**: A phishing page requests the Wi-Fi password for \"re-authentication\"\n5. **Credential Capture**: The victim enters their password, which the attacker captures\n\n## Fluxion: Automated Evil Twin Framework\n\n**Fluxion** automates the entire Evil Twin attack workflow. It is designed for authorized wireless security audits.\n\n### Installation\n```bash\ngit clone https://github.com/FluxionNetwork/fluxion.git\ncd fluxion\nsudo ./fluxion.sh\n```\n\n### Requirements\n- Linux OS (Kali/Parrot recommended)\n- Two wireless adapters (one for deauth, one for rogue AP)\n- At least one adapter supporting monitor mode\n\n## Attack Workflow in Fluxion\n\n### Step 1: Scan for Networks\nFluxion scans for nearby wireless networks and displays:\n- SSID names\n- Signal strength\n- Encryption type (WPA/WPA2)\n- Connected clients\n\n### Step 2: Select Target\nChoose the target network and Fluxion automatically:\n- Captures the WPA handshake\n- Creates a matching rogue AP\n- Launches the captive portal\n\n### Step 3: Deauthentication\nFluxion sends deauth frames to disconnect clients from the real AP, forcing them to reconnect to the Evil Twin.\n\n### Step 4: Captive Portal\nVictims see a legitimate-looking login page requesting their Wi-Fi password. Once entered, Fluxion verifies it against the captured handshake.\n\n## Defending Against Evil Twin Attacks\n\n### For Individuals\n1. **Verify network authenticity** before connecting\n2. **Use VPN** on all public Wi-Fi connections\n3. **Disable auto-connect** to known networks\n4. **Look for HTTPS** — captive portals requesting passwords are suspicious\n\n### For Organizations\n1. **Deploy 802.1X/RADIUS** enterprise authentication\n2. **Use Wireless IDS** (WIDS) like Kismet to detect rogue APs\n3. **Enable Management Frame Protection** (802.11w)\n4. **Educate employees** about Evil Twin risks\n\n## Detection Tools\n\n```bash\n# Monitor for rogue APs with Kismet\nkismet -c wlan0mon\n\n# Detect deauthentication attacks\nairodump-ng wlan0mon --wps\n```\n\n> **⚠️ Legal Warning**: Evil Twin attacks are illegal without explicit authorization. Only perform these techniques in controlled lab environments or with written permission from the network owner.\n\nWatch the full Fluxion walkthrough on our YouTube channel!",
+    "category": "Network Security",
+    "tags": [
+      "WiFi",
+      "Evil-Twin",
+      "Fluxion",
+      "Wireless",
+      "Defense"
+    ],
+    "date": "2026-08-20",
+    "author": "Ethical Explorers Team",
+    "readTime": "8 min read",
+    "image": "images/blog/wifi-network.jpg",
+    "featured": true,
+    "youtubeId": ""
+  },
+  {
     "id": "sqlmap-mastery-database-vulnerability-assessment-guide",
     "title": "SQLMap Mastery: Automated Database Vulnerability Assessment & Exploitation",
     "excerpt": "Master SQLMap for detecting and exploiting SQL injection flaws. Learn command switches for database enumeration, WAF bypass tamper scripts, and remediation.",
@@ -15,7 +135,7 @@
     "date": "2026-06-23",
     "author": "Ethical Explorers Team",
     "readTime": "6 min read",
-    "image": "https://images.unsplash.com/photo-1544383835-bda2bc66a55d?auto=format&fit=crop&w=600&q=80",
+    "image": "images/blog/web-app-security.jpg",
     "featured": true
   },
   {
@@ -34,7 +154,7 @@
     "date": "2026-06-22",
     "author": "Ethical Explorers Team",
     "readTime": "6 min read",
-    "image": "https://images.unsplash.com/photo-1629654297299-c8506221ca97?auto=format&fit=crop&w=600&q=80",
+    "image": "images/blog/privilege-escalation.jpg",
     "featured": false
   },
   {
@@ -53,7 +173,7 @@
     "date": "2026-06-21",
     "author": "Ethical Explorers Team",
     "readTime": "5 min read",
-    "image": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=600&q=80",
+    "image": "images/blog/wifi-network.jpg",
     "featured": false
   },
   {
@@ -72,7 +192,7 @@
     "date": "2026-06-20",
     "author": "Ethical Explorers Team",
     "readTime": "5 min read",
-    "image": "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=600&q=80",
+    "image": "images/blog/social-engineering.jpg",
     "featured": false
   },
   {
@@ -91,7 +211,7 @@
     "date": "2026-06-19",
     "author": "Ethical Explorers Team",
     "readTime": "5 min read",
-    "image": "https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=600&q=80",
+    "image": "images/blog/password-crypto.jpg",
     "featured": false
   },
   {
@@ -110,7 +230,7 @@
     "date": "2026-06-18",
     "author": "Ethical Explorers Team",
     "readTime": "6 min read",
-    "image": "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=600&q=80",
+    "image": "images/blog/defensive-security.jpg",
     "featured": false
   },
   {
@@ -129,7 +249,7 @@
     "date": "2026-06-17",
     "author": "Ethical Explorers Team",
     "readTime": "4 min read",
-    "image": "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=600&q=80",
+    "image": "images/blog/pentesting-tools.jpg",
     "featured": true
   },
   {
@@ -147,7 +267,7 @@
     "date": "2026-06-16",
     "author": "Ethical Explorers Team",
     "readTime": "6 min read",
-    "image": "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=600&q=80",
+    "image": "images/blog/defensive-security.jpg",
     "featured": false
   },
   {
@@ -165,7 +285,7 @@
     "date": "2026-06-15",
     "author": "Ethical Explorers Team",
     "readTime": "5 min read",
-    "image": "https://images.unsplash.com/photo-1510511459019-5dda7724fd87?auto=format&fit=crop&w=600&q=80",
+    "image": "images/blog/web-app-security.jpg",
     "featured": false
   },
   {
@@ -183,7 +303,7 @@
     "date": "2026-06-14",
     "author": "Ethical Explorers Team",
     "readTime": "5 min read",
-    "image": "https://images.unsplash.com/photo-1562813733-b31f71025d54?auto=format&fit=crop&w=600&q=80",
+    "image": "images/blog/active-directory.jpg",
     "featured": false
   },
   {
@@ -202,7 +322,7 @@
     "date": "2026-06-13",
     "author": "Ethical Explorers Team",
     "readTime": "4 min read",
-    "image": "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=600&q=80",
+    "image": "images/blog/social-engineering.jpg",
     "featured": false
   },
   {
@@ -220,7 +340,7 @@
     "date": "2026-06-12",
     "author": "Ethical Explorers Team",
     "readTime": "5 min read",
-    "image": "https://images.unsplash.com/photo-1601597111158-2fceff270190?auto=format&fit=crop&w=600&q=80",
+    "image": "images/blog/web-app-security.jpg",
     "featured": false
   },
   {
@@ -238,7 +358,7 @@
     "date": "2026-06-12",
     "author": "Ethical Explorers Team",
     "readTime": "6 min read",
-    "image": "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=600&q=80",
+    "image": "images/blog/pentesting-tools.jpg",
     "featured": true
   },
   {
@@ -256,7 +376,7 @@
     "date": "2026-06-10",
     "author": "Ethical Explorers Team",
     "readTime": "5 min read",
-    "image": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=600&q=80",
+    "image": "images/blog/sqli-database.jpg",
     "featured": false
   },
   {
@@ -275,7 +395,7 @@
     "date": "2026-06-08",
     "author": "Ethical Explorers Team",
     "readTime": "5 min read",
-    "image": "https://images.unsplash.com/photo-1614064641938-3bbee52942c7?auto=format&fit=crop&w=600&q=80",
+    "image": "images/blog/wifi-network.jpg",
     "featured": false
   },
   {
@@ -293,7 +413,7 @@
     "date": "2026-06-07",
     "author": "Ethical Explorers Team",
     "readTime": "5 min read",
-    "image": "https://images.unsplash.com/photo-1618060932014-4eb9c1fc555e?auto=format&fit=crop&w=600&q=80",
+    "image": "images/blog/malware-forensics.jpg",
     "featured": false
   },
   {
@@ -311,7 +431,7 @@
     "date": "2026-06-06",
     "author": "Ethical Explorers Team",
     "readTime": "5 min read",
-    "image": "https://images.unsplash.com/photo-1526379095098-d400fd0bf935?auto=format&fit=crop&w=600&q=80",
+    "image": "images/blog/social-engineering.jpg",
     "featured": false
   },
   {
@@ -330,7 +450,7 @@
     "date": "2026-06-05",
     "author": "Ethical Explorers Team",
     "readTime": "5 min read",
-    "image": "https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=600&q=80",
+    "image": "images/blog/password-crypto.jpg",
     "featured": false
   },
   {
@@ -349,7 +469,7 @@
     "date": "2026-06-04",
     "author": "Ethical Explorers Team",
     "readTime": "5 min read",
-    "image": "https://images.unsplash.com/photo-1531297484001-80022131f5a1?auto=format&fit=crop&w=600&q=80",
+    "image": "images/blog/social-engineering.jpg",
     "featured": false
   },
   {
@@ -367,7 +487,7 @@
     "date": "2026-06-03",
     "author": "Ethical Explorers Team",
     "readTime": "5 min read",
-    "image": "https://images.unsplash.com/photo-1607799279861-4dd421887fb3?auto=format&fit=crop&w=600&q=80",
+    "image": "images/blog/privilege-escalation.jpg",
     "featured": false
   },
   {
@@ -385,7 +505,7 @@
     "date": "2026-06-02",
     "author": "Ethical Explorers Team",
     "readTime": "5 min read",
-    "image": "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=600&q=80",
+    "image": "images/blog/osint-recon.jpg",
     "featured": false
   },
   {
@@ -403,7 +523,7 @@
     "date": "2026-06-01",
     "author": "Ethical Explorers Team",
     "readTime": "5 min read",
-    "image": "https://images.unsplash.com/photo-1605810230434-7631ac76ec81?auto=format&fit=crop&w=600&q=80",
+    "image": "images/blog/network-scanning.jpg",
     "featured": false
   },
   {
@@ -421,7 +541,7 @@
     "date": "2026-05-30",
     "author": "Ethical Explorers Team",
     "readTime": "6 min read",
-    "image": "https://images.unsplash.com/photo-1581092921461-eab62e97a780?auto=format&fit=crop&w=600&q=80",
+    "image": "images/blog/web-app-security.jpg",
     "featured": false
   },
   {
@@ -439,7 +559,7 @@
     "date": "2026-05-28",
     "author": "Ethical Explorers Team",
     "readTime": "5 min read",
-    "image": "https://images.unsplash.com/photo-1560179707-f14e90ef3623?auto=format&fit=crop&w=600&q=80",
+    "image": "images/blog/password-crypto.jpg",
     "featured": false
   },
   {
@@ -457,7 +577,7 @@
     "date": "2026-05-26",
     "author": "Ethical Explorers Team",
     "readTime": "5 min read",
-    "image": "https://images.unsplash.com/photo-1546410531-bb4caa6b424d?auto=format&fit=crop&w=600&q=80",
+    "image": "images/blog/password-crypto.jpg",
     "featured": false
   },
   {
@@ -475,7 +595,7 @@
     "date": "2026-05-24",
     "author": "Ethical Explorers Team",
     "readTime": "5 min read",
-    "image": "https://images.unsplash.com/photo-1551808525-51a94da548ce?auto=format&fit=crop&w=600&q=80",
+    "image": "images/blog/web-app-security.jpg",
     "featured": false
   },
   {
@@ -493,7 +613,7 @@
     "date": "2026-05-22",
     "author": "Ethical Explorers Team",
     "readTime": "6 min read",
-    "image": "https://images.unsplash.com/photo-1563986768494-4dee2763ff3f?auto=format&fit=crop&w=600&q=80",
+    "image": "images/blog/pentesting-tools.jpg",
     "featured": false
   },
   {
@@ -511,7 +631,7 @@
     "date": "2026-05-20",
     "author": "Ethical Explorers Team",
     "readTime": "5 min read",
-    "image": "https://images.unsplash.com/photo-1508098682722-e99c43a406b2?auto=format&fit=crop&w=600&q=80",
+    "image": "images/blog/osint-recon.jpg",
     "featured": false
   },
   {
@@ -529,7 +649,7 @@
     "date": "2026-05-18",
     "author": "Ethical Explorers Team",
     "readTime": "5 min read",
-    "image": "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=600&q=80",
+    "image": "images/blog/defensive-security.jpg",
     "featured": false
   },
   {
@@ -547,7 +667,7 @@
     "date": "2026-05-16",
     "author": "Ethical Explorers Team",
     "readTime": "5 min read",
-    "image": "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?auto=format&fit=crop&w=600&q=80",
+    "image": "images/blog/active-directory.jpg",
     "featured": false
   },
   {
@@ -565,7 +685,7 @@
     "date": "2026-05-14",
     "author": "Ethical Explorers Team",
     "readTime": "5 min read",
-    "image": "https://images.unsplash.com/photo-1600132806370-bf17e65e942f?auto=format&fit=crop&w=600&q=80",
+    "image": "images/blog/social-engineering.jpg",
     "featured": false
   },
   {
@@ -584,7 +704,7 @@
     "date": "2026-05-12",
     "author": "Ethical Explorers Team",
     "readTime": "5 min read",
-    "image": "https://images.unsplash.com/photo-1629654297299-c8506221ca97?auto=format&fit=crop&w=600&q=80",
+    "image": "images/blog/defensive-security.jpg",
     "featured": false
   },
   {
@@ -602,7 +722,7 @@
     "date": "2026-05-10",
     "author": "Ethical Explorers Team",
     "readTime": "5 min read",
-    "image": "https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?auto=format&fit=crop&w=600&q=80",
+    "image": "images/blog/password-crypto.jpg",
     "featured": false
   },
   {
@@ -620,7 +740,7 @@
     "date": "2026-05-08",
     "author": "Ethical Explorers Team",
     "readTime": "5 min read",
-    "image": "https://images.unsplash.com/photo-1535378917042-10a22c95931a?auto=format&fit=crop&w=600&q=80",
+    "image": "images/blog/pentesting-tools.jpg",
     "featured": false
   },
   {
@@ -638,7 +758,7 @@
     "date": "2026-05-06",
     "author": "Ethical Explorers Team",
     "readTime": "5 min read",
-    "image": "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=600&q=80",
+    "image": "images/blog/wifi-network.jpg",
     "featured": false
   },
   {
@@ -656,7 +776,7 @@
     "date": "2026-05-04",
     "author": "Ethical Explorers Team",
     "readTime": "5 min read",
-    "image": "https://images.unsplash.com/photo-1579546929518-9e396f3cc809?auto=format&fit=crop&w=600&q=80",
+    "image": "images/blog/pentesting-tools.jpg",
     "featured": false
   },
   {
@@ -674,7 +794,7 @@
     "date": "2026-05-02",
     "author": "Ethical Explorers Team",
     "readTime": "5 min read",
-    "image": "https://images.unsplash.com/photo-1548092327-ae9b784782b3?auto=format&fit=crop&w=600&q=80",
+    "image": "images/blog/privilege-escalation.jpg",
     "featured": false
   },
   {
@@ -692,7 +812,7 @@
     "date": "2026-04-30",
     "author": "Ethical Explorers Team",
     "readTime": "5 min read",
-    "image": "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=600&q=80",
+    "image": "images/blog/defensive-security.jpg",
     "featured": false
   },
   {
@@ -710,7 +830,7 @@
     "date": "2026-04-28",
     "author": "Ethical Explorers Team",
     "readTime": "5 min read",
-    "image": "https://images.unsplash.com/photo-1633356122544-f134324a6cee?auto=format&fit=crop&w=600&q=80",
+    "image": "images/blog/defensive-security.jpg",
     "featured": false
   },
   {
@@ -728,7 +848,7 @@
     "date": "2026-04-26",
     "author": "Ethical Explorers Team",
     "readTime": "5 min read",
-    "image": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=600&q=80",
+    "image": "images/blog/wifi-network.jpg",
     "featured": false
   },
   {
@@ -746,7 +866,7 @@
     "date": "2026-04-24",
     "author": "Ethical Explorers Team",
     "readTime": "6 min read",
-    "image": "https://images.unsplash.com/photo-1544256718-3bcf237f3974?auto=format&fit=crop&w=600&q=80",
+    "image": "images/blog/malware-forensics.jpg",
     "featured": false
   },
   {
@@ -764,7 +884,7 @@
     "date": "2026-04-22",
     "author": "Ethical Explorers Team",
     "readTime": "5 min read",
-    "image": "https://images.unsplash.com/photo-1560732487-dfb23e80f2d0?auto=format&fit=crop&w=600&q=80",
+    "image": "images/blog/defensive-security.jpg",
     "featured": false
   },
   {
@@ -782,7 +902,7 @@
     "date": "2026-04-20",
     "author": "Ethical Explorers Team",
     "readTime": "5 min read",
-    "image": "https://images.unsplash.com/photo-1617791160536-598cf32026fb?auto=format&fit=crop&w=600&q=80",
+    "image": "images/blog/social-engineering.jpg",
     "featured": false
   },
   {
@@ -800,7 +920,7 @@
     "date": "2026-04-18",
     "author": "Ethical Explorers Team",
     "readTime": "5 min read",
-    "image": "https://images.unsplash.com/photo-1531403009284-440f080d1e12?auto=format&fit=crop&w=600&q=80",
+    "image": "images/blog/malware-forensics.jpg",
     "featured": false
   },
   {
@@ -818,7 +938,7 @@
     "date": "2026-04-16",
     "author": "Ethical Explorers Team",
     "readTime": "5 min read",
-    "image": "https://images.unsplash.com/photo-1620712440058-2452077f86eb?auto=format&fit=crop&w=600&q=80",
+    "image": "images/blog/web-app-security.jpg",
     "featured": false
   },
   {
@@ -837,7 +957,7 @@
     "date": "2026-04-14",
     "author": "Ethical Explorers Team",
     "readTime": "5 min read",
-    "image": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=600&q=80",
+    "image": "images/blog/defensive-security.jpg",
     "featured": false
   },
   {
@@ -855,7 +975,7 @@
     "date": "2026-04-12",
     "author": "Ethical Explorers Team",
     "readTime": "5 min read",
-    "image": "https://images.unsplash.com/photo-1588702547923-2df4576ef219?auto=format&fit=crop&w=600&q=80",
+    "image": "images/blog/web-app-security.jpg",
     "featured": false
   },
   {
@@ -873,7 +993,7 @@
     "date": "2026-04-10",
     "author": "Ethical Explorers Team",
     "readTime": "5 min read",
-    "image": "https://images.unsplash.com/photo-1531070897439-c1e1a5554f67?auto=format&fit=crop&w=600&q=80",
+    "image": "images/blog/malware-forensics.jpg",
     "featured": false
   },
   {
@@ -891,7 +1011,7 @@
     "date": "2026-04-08",
     "author": "Ethical Explorers Team",
     "readTime": "5 min read",
-    "image": "https://images.unsplash.com/photo-1537432373707-11e74cfb2c32?auto=format&fit=crop&w=600&q=80",
+    "image": "images/blog/network-scanning.jpg",
     "featured": false
   },
   {
@@ -910,7 +1030,7 @@
     "date": "2026-04-06",
     "author": "Ethical Explorers Team",
     "readTime": "5 min read",
-    "image": "https://images.unsplash.com/photo-1511310605556-eb4f9695d7af?auto=format&fit=crop&w=600&q=80",
+    "image": "images/blog/defensive-security.jpg",
     "featured": false
   },
   {
@@ -928,7 +1048,7 @@
     "date": "2026-04-04",
     "author": "Ethical Explorers Team",
     "readTime": "5 min read",
-    "image": "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&w=600&q=80",
+    "image": "images/blog/password-crypto.jpg",
     "featured": false
   },
   {
@@ -946,7 +1066,7 @@
     "date": "2026-04-02",
     "author": "Ethical Explorers Team",
     "readTime": "5 min read",
-    "image": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=600&q=80",
+    "image": "images/blog/pentesting-tools.jpg",
     "featured": false
   },
   {
@@ -963,7 +1083,7 @@
     "date": "2026-03-30",
     "author": "Ethical Explorers Team",
     "readTime": "5 min read",
-    "image": "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=600&q=80",
+    "image": "images/blog/web-app-security.jpg",
     "featured": false
   },
   {
@@ -981,7 +1101,7 @@
     "date": "2026-03-28",
     "author": "Ethical Explorers Team",
     "readTime": "5 min read",
-    "image": "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=600&q=80",
+    "image": "images/blog/defensive-security.jpg",
     "featured": false
   },
   {
@@ -1000,7 +1120,7 @@
     "date": "2026-03-26",
     "author": "Ethical Explorers Team",
     "readTime": "5 min read",
-    "image": "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=600&q=80",
+    "image": "images/blog/malware-forensics.jpg",
     "featured": false
   },
   {
@@ -1018,7 +1138,7 @@
     "date": "2026-03-24",
     "author": "Ethical Explorers Team",
     "readTime": "5 min read",
-    "image": "https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&w=600&q=80",
+    "image": "images/blog/password-crypto.jpg",
     "featured": false
   },
   {
@@ -1036,7 +1156,7 @@
     "date": "2026-03-22",
     "author": "Ethical Explorers Team",
     "readTime": "5 min read",
-    "image": "https://images.unsplash.com/photo-1504639725590-34d0984388bd?auto=format&fit=crop&w=600&q=80",
+    "image": "images/blog/social-engineering.jpg",
     "featured": false
   },
   {
@@ -1055,7 +1175,7 @@
     "date": "2026-03-20",
     "author": "Ethical Explorers Team",
     "readTime": "5 min read",
-    "image": "https://images.unsplash.com/photo-1516116211223-5c359a36298a?auto=format&fit=crop&w=600&q=80",
+    "image": "images/blog/pentesting-tools.jpg",
     "featured": false
   },
   {
@@ -1074,7 +1194,7 @@
     "date": "2026-03-18",
     "author": "Ethical Explorers Team",
     "readTime": "5 min read",
-    "image": "https://images.unsplash.com/photo-1580894732444-f8d95c9634f4?auto=format&fit=crop&w=600&q=80",
+    "image": "images/blog/network-scanning.jpg",
     "featured": false
   },
   {
@@ -1093,7 +1213,7 @@
     "date": "2026-03-16",
     "author": "Ethical Explorers Team",
     "readTime": "5 min read",
-    "image": "https://images.unsplash.com/photo-1587831990721-fd9d66a7b47e?auto=format&fit=crop&w=600&q=80",
+    "image": "images/blog/web-app-security.jpg",
     "featured": false
   },
   {
@@ -1111,7 +1231,7 @@
     "date": "2026-03-14",
     "author": "Ethical Explorers Team",
     "readTime": "5 min read",
-    "image": "https://images.unsplash.com/photo-1520086201886-5f05dfc4234a?auto=format&fit=crop&w=600&q=80",
+    "image": "images/blog/web-app-security.jpg",
     "featured": false
   },
   {
@@ -1129,7 +1249,7 @@
     "date": "2026-03-12",
     "author": "Ethical Explorers Team",
     "readTime": "5 min read",
-    "image": "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=600&q=80",
+    "image": "images/blog/malware-forensics.jpg",
     "featured": false
   },
   {
@@ -1148,7 +1268,7 @@
     "date": "2026-03-10",
     "author": "Ethical Explorers Team",
     "readTime": "5 min read",
-    "image": "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=600&q=80",
+    "image": "images/blog/defensive-security.jpg",
     "featured": false
   }
 ]
