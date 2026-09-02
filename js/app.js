@@ -263,20 +263,29 @@ function initMatrixRain() {
   if (!canvas) return;
   const ctx = canvas.getContext('2d');
 
+  const isMobile = window.innerWidth <= 768;
+  const chars = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン';
+  const fontSize = isMobile ? 18 : 14;
+  let columns = 0;
+  let drops = [];
+
   function resize() {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
+    columns = Math.floor(canvas.width / fontSize);
+    drops = Array(columns).fill(1);
   }
   resize();
-  window.addEventListener('resize', resize);
 
-  const chars = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン';
-  const fontSize = 14;
-  const columns = Math.floor(canvas.width / fontSize);
-  const drops = Array(columns).fill(1);
+  let resizeTimeout;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(resize, 200);
+  });
 
+  let intervalId;
   function draw() {
-    ctx.fillStyle = 'rgba(10, 10, 15, 0.05)';
+    ctx.fillStyle = 'rgba(10, 10, 15, 0.06)';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = '#9333ea';
     ctx.font = fontSize + 'px monospace';
@@ -292,7 +301,18 @@ function initMatrixRain() {
     }
   }
 
-  setInterval(draw, 50);
+  const speed = isMobile ? 90 : 50;
+  intervalId = setInterval(draw, speed);
+
+  // Pause when tab is not visible to conserve battery & performance
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+      clearInterval(intervalId);
+    } else {
+      clearInterval(intervalId);
+      intervalId = setInterval(draw, speed);
+    }
+  });
 }
 
 // ================================================================
