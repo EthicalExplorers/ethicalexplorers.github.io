@@ -222,10 +222,20 @@ async function renderArticlePage(articleId) {
     `;
   }
 
-  // Get related posts
+  // Get related posts — improved matching with tags + category, show 4
   const related = posts
-    .filter(p => p.id !== post.id && p.category === post.category)
-    .slice(0, 3);
+    .filter(p => p.id !== post.id)
+    .map(p => {
+      let score = 0;
+      if (p.category === post.category) score += 3;
+      const postTags = (post.tags || []).map(t => t.toLowerCase());
+      const pTags = (p.tags || []).map(t => t.toLowerCase());
+      score += postTags.filter(t => pTags.includes(t)).length * 2;
+      return { ...p, _score: score };
+    })
+    .filter(p => p._score > 0)
+    .sort((a, b) => b._score - a._score)
+    .slice(0, 4);
 
   const shareUrl = encodeURIComponent(`${SITE_URL}/#blog/${post.id}`);
   const shareTitle = encodeURIComponent(post.title);
@@ -427,6 +437,33 @@ async function renderLabsPage() {
         </div>
       </div>
 
+      <!-- Gamified Interactive CTF & Lab Score Tracker -->
+      <div class="lab-score-tracker reveal" id="lab-score-banner">
+        <div class="lab-score-stats">
+          <div class="lab-stat-box">
+            <span class="lab-stat-label">Hacker Rank</span>
+            <span class="lab-stat-value gold" id="lab-rank-display">Novice Explorer</span>
+          </div>
+          <div class="lab-stat-box">
+            <span class="lab-stat-label">Solved Labs</span>
+            <span class="lab-stat-value green" id="lab-solved-count">0 / 20</span>
+          </div>
+          <div class="lab-stat-box">
+            <span class="lab-stat-label">Total Score</span>
+            <span class="lab-stat-value" id="lab-score-display">0 PTS</span>
+          </div>
+        </div>
+        <div class="lab-progress-bar-container">
+          <div style="display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-muted);">
+            <span>MASTERY PROGRESS</span>
+            <span id="lab-progress-percent">0%</span>
+          </div>
+          <div class="lab-progress-bar-bg">
+            <div class="lab-progress-bar-fill" id="lab-progress-fill"></div>
+          </div>
+        </div>
+      </div>
+
       <div class="sandboxes-container" id="sandboxes-container">
 
         <!-- LAB 1: SQL Injection Simulator -->
@@ -440,11 +477,11 @@ async function renderLabsPage() {
             <div class="sandbox-form-grid">
               <div class="form-group">
                 <label>Target Username Input:</label>
-                <input type="text" id="sqli-user-input" value="admin' --" class="search-input" placeholder="Enter username or payload...">
+                <input type="text" id="sqli-user-input" value="" class="search-input" placeholder="Try: admin' -- or ' OR '1'='1">
               </div>
               <div class="form-group">
                 <label>Target Password Input:</label>
-                <input type="text" id="sqli-pass-input" value="anything" class="search-input" placeholder="Enter password...">
+                <input type="text" id="sqli-pass-input" value="" class="search-input" placeholder="Enter any password...">
               </div>
             </div>
             <div class="payload-quick-buttons">
@@ -474,7 +511,7 @@ async function renderLabsPage() {
           <div class="sandbox-body">
             <div class="form-group">
               <label>Injectable XSS Payload:</label>
-              <input type="text" id="xss-input" value="<img src=x onerror=alert('XSS_PWNED')>" class="search-input">
+              <input type="text" id="xss-input" value="" class="search-input" placeholder="Try: <script>alert(1)</script> or <img src=x onerror=...>">
             </div>
             <div class="payload-quick-buttons">
               <span class="quick-label">PAYLOADS:</span>
@@ -501,7 +538,7 @@ async function renderLabsPage() {
           <div class="sandbox-body">
             <div class="form-group">
               <label>Host to Ping (Vulnerable Parameter):</label>
-              <input type="text" id="rce-input" value="127.0.0.1; whoami; cat /etc/passwd" class="search-input">
+              <input type="text" id="rce-input" value="" class="search-input" placeholder="Try: 127.0.0.1; <command> or 127.0.0.1 | <command>">
             </div>
             <div class="payload-quick-buttons">
               <span class="quick-label">INJECTIONS:</span>
@@ -528,7 +565,7 @@ async function renderLabsPage() {
             <div class="sandbox-form-grid">
               <div class="form-group">
                 <label>Target MD5 Hash to Crack:</label>
-                <input type="text" id="bf-hash-input" value="5f4dcc3b5aa765d61d8327deb882cf99" class="search-input">
+                <input type="text" id="bf-hash-input" value="" class="search-input" placeholder="Paste an MD5 hash to crack...">
               </div>
               <div class="form-group">
                 <label>Target Account:</label>
@@ -585,7 +622,7 @@ async function renderLabsPage() {
           <div class="sandbox-body">
             <div class="form-group">
               <label>Target Page File Path (LFI Parameter):</label>
-              <input type="text" id="lfi-input" value="../../../../etc/passwd" class="search-input">
+              <input type="text" id="lfi-input" value="" class="search-input" placeholder="Try: ../../../../etc/passwd or php://filter/...">
             </div>
             <div class="payload-quick-buttons">
               <span class="quick-label">TRAVERSALS:</span>
@@ -612,7 +649,7 @@ async function renderLabsPage() {
           <div class="sandbox-body">
             <div class="form-group">
               <label>Template Expression Input:</label>
-              <input type="text" id="ssti-input" value="{{7*7}}" class="search-input">
+              <input type="text" id="ssti-input" value="" class="search-input" placeholder="Try: {{7*7}} or {{config.items()}}">
             </div>
             <div class="payload-quick-buttons">
               <span class="quick-label">EXPRESSIONS:</span>
@@ -799,7 +836,7 @@ async function renderLabsPage() {
             <p class="sandbox-sub">Transform recognizable SQL and XSS strings into obfuscated tamper variations designed to bypass naive regex firewalls.</p>
           </div>
           <div class="sandbox-body">
-            <div class="form-group"><label>Base Payload to Obfuscate:</label><input type="text" id="waf-input" value="SELECT * FROM users WHERE id=1 UNION SELECT 1,2,3" class="search-input"></div>
+            <div class="form-group"><label>Base Payload to Obfuscate:</label><input type="text" id="waf-input" value="" class="search-input" placeholder="Enter SQL or XSS payload to obfuscate..."></div>
             <div class="encoder-results-grid" style="margin-top:1rem;">
               <div class="encoder-box"><div class="enc-label">INLINE COMMENT OBFUSCATION (/**/)</div><div class="enc-val" id="waf-comments">...</div><button class="btn-copy-enc" data-target="waf-comments">Copy</button></div>
               <div class="encoder-box"><div class="enc-label">CASE RANDOMIZATION</div><div class="enc-val" id="waf-case">...</div><button class="btn-copy-enc" data-target="waf-case">Copy</button></div>
@@ -942,6 +979,9 @@ async function renderLabsPage() {
     });
   });
 
+  // Initialize Lab Scoring & Rank System
+  updateLabScoreUI();
+
   // Initialize all 20 Sandboxes
   initSQLiSimulator();
   initXSSSandbox();
@@ -963,6 +1003,53 @@ async function renderLabsPage() {
   initHashIdentifier();
   initDNSSimulator();
   initCTFChallengeRoom();
+}
+
+// ----------------------------------------------------------------
+// LAB SCORING & CTF PROGRESSION SYSTEM
+// ----------------------------------------------------------------
+function getSolvedLabs() {
+  try {
+    return JSON.parse(localStorage.getItem('ee_solved_labs') || '[]');
+  } catch {
+    return [];
+  }
+}
+
+function updateLabScoreUI() {
+  const solved = getSolvedLabs();
+  const count = solved.length;
+  const score = count * 100;
+  const percent = Math.min(100, Math.round((count / 20) * 100));
+
+  let rank = 'Novice Explorer';
+  if (count >= 18) rank = 'Elite Master Hacker 👑';
+  else if (count >= 14) rank = 'Senior Penetration Tester 🛡️';
+  else if (count >= 10) rank = 'Cyber Specialist ⚡';
+  else if (count >= 5) rank = 'AppSec Apprentice 🔍';
+  else if (count >= 1) rank = 'Junior Explorer 💻';
+
+  const rankEl = document.getElementById('lab-rank-display');
+  const countEl = document.getElementById('lab-solved-count');
+  const scoreEl = document.getElementById('lab-score-display');
+  const fillEl = document.getElementById('lab-progress-fill');
+  const percentEl = document.getElementById('lab-progress-percent');
+
+  if (rankEl) rankEl.textContent = rank;
+  if (countEl) countEl.textContent = `${count} / 20`;
+  if (scoreEl) scoreEl.textContent = `${score} PTS`;
+  if (fillEl) fillEl.style.width = `${percent}%`;
+  if (percentEl) percentEl.textContent = `${percent}%`;
+}
+
+function awardLabPoints(labId, labTitle) {
+  const solved = getSolvedLabs();
+  if (!solved.includes(labId)) {
+    solved.push(labId);
+    localStorage.setItem('ee_solved_labs', JSON.stringify(solved));
+    updateLabScoreUI();
+    showToast(`🏆 LAB SOLVED: ${labTitle}! (+100 PTS)`);
+  }
 }
 
 // Filter Navigation Handler
@@ -1007,6 +1094,7 @@ function initSQLiSimulator() {
     setTimeout(() => {
       const isBypassed = user.includes("' OR '1'='1") || user.includes("' OR 1=1") || user.includes("admin' --") || user.includes("UNION SELECT");
       if (isBypassed) {
+        awardLabPoints('sqli', 'SQL Injection Auth Bypass');
         termOut.innerHTML += `
           <div class="terminal-line"><span class="cmd-success">[✓] AUTHENTICATION BYPASSED! Evaluated to TRUE.</span></div>
           <div class="terminal-line" style="color:var(--neon-green);font-weight:bold;">[★] DB RECORD RETURNED: User 'admin' (Role: SuperAdmin)</div>
@@ -1038,6 +1126,7 @@ function initXSSSandbox() {
     `;
     setTimeout(() => {
       if (hasScript) {
+        awardLabPoints('xss', 'Cross-Site Scripting Sandbox');
         term.innerHTML += `
           <div class="terminal-line"><span class="cmd-success">[✓] EXPLOIT TRIGGERED: Unsanitized script execution detected!</span></div>
           <div class="terminal-line" style="color:var(--neon-yellow);">[!] Vulnerability: Reflected Cross-Site Scripting in search parameter.</div>
@@ -1064,6 +1153,7 @@ function initRCETerminal() {
     setTimeout(() => {
       term.innerHTML += `<div class="terminal-line" style="color:var(--text-secondary);">PING 127.0.0.1 (127.0.0.1) 56(84) bytes of data.</div>`;
       if (cmd.includes(';') || cmd.includes('|') || cmd.includes('&&')) {
+        awardLabPoints('rce', 'Command Injection (RCE)');
         term.innerHTML += `
           <div class="terminal-line"><span class="cmd-success">[✓] COMMAND INJECTION SUCCESS! Chained subcommands executed:</span></div>
           <div class="terminal-line" style="color:var(--neon-green);">uid=0(root) gid=0(root) groups=0(root)</div>
@@ -1093,6 +1183,7 @@ function initBruteForceLab() {
         i++;
       } else {
         clearInterval(interval);
+        awardLabPoints('bf', 'Hashcat / Hydra Cracker');
         term.innerHTML += `
           <div class="terminal-line"><span class="cmd-success">[✓] HASH CRACKED SUCCESSFULLY!</span></div>
           <div class="terminal-line" style="color:var(--neon-green);font-weight:bold;">[★] Plaintext Password: "password" (Matched in RockYou dictionary)</div>
@@ -1135,6 +1226,7 @@ function initJWTLab() {
     const forgedToken = `${forgedHeader}.${forgedPayload}.`;
     result.textContent = forgedToken;
     navigator.clipboard.writeText(forgedToken);
+    awardLabPoints('jwt', 'JWT None Algorithm Exploit');
     showToast('Forged Admin Token Copied! (alg: none exploit)');
   });
 }
@@ -1151,6 +1243,7 @@ function initLFILab() {
     term.innerHTML = `<div class="terminal-line"><span class="cmd-info">[+] Requesting file stream: ${escapeHtml(val)}</span></div>`;
     setTimeout(() => {
       if (val.includes('etc/passwd')) {
+        awardLabPoints('lfi', 'Local File Inclusion (LFI)');
         term.innerHTML += `
           <div class="terminal-line" style="color:var(--neon-green);">root:x:0:0:root:/root:/bin/bash</div>
           <div class="terminal-line" style="color:var(--neon-green);">daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin</div>
@@ -1177,6 +1270,7 @@ function initSSTILab() {
     term.innerHTML = `<div class="terminal-line"><span class="cmd-info">[+] Template Engine Input: ${escapeHtml(val)}</span></div>`;
     setTimeout(() => {
       if (val.includes('7*7')) {
+        awardLabPoints('ssti', 'Server-Side Template Injection');
         term.innerHTML += `
           <div class="terminal-line"><span class="cmd-success">[✓] SSTI Confirmed! Expression evaluated: 49</span></div>
           <div class="terminal-line" style="color:var(--neon-cyan);">[+] Template Engine: Jinja2 / Python 3.10</div>
@@ -1210,6 +1304,7 @@ function initCSRFLab() {
     });
 
     const poc = `&lt;html&gt;\n&lt;body&gt;\n&lt;form id="csrfForm" action="${url}" method="${method}"&gt;\n${inputsHTML}&lt;/form&gt;\n&lt;script&gt;document.getElementById('csrfForm').submit();&lt;/script&gt;\n&lt;/body&gt;\n&lt;/html&gt;`;
+    awardLabPoints('csrf', 'CSRF PoC Exploit Generator');
     out.innerHTML = `<div class="terminal-line"><span class="cmd-success">[✓] Weaponized CSRF PoC Generated:</span></div><div class="terminal-line" style="color:var(--neon-green);"><pre style="margin:0;background:none;border:none;"><code>${poc}</code></pre></div>`;
   });
 }
@@ -1523,6 +1618,7 @@ function initCTFChallengeRoom() {
     const val = inp.value.trim();
     // Clue was: Base64 'EE{SUPER_CYBER_HACKER_2026}'
     if (val === 'EE{SUPER_CYBER_HACKER_2026}') {
+      awardLabPoints('ctf', 'Multi-Stage CTF Flag Master');
       out.innerHTML = `
         <div class="terminal-line"><span class="cmd-success">══════════════════════════════════════════════════════</span></div>
         <div class="terminal-line" style="color:var(--neon-green);font-size:1rem;font-weight:bold;">🏆 CONGRATULATIONS, EXPLORER! FLAG VERIFIED 100% CORRECT!</div>
@@ -1534,144 +1630,6 @@ function initCTFChallengeRoom() {
       out.innerHTML = `<div class="terminal-line"><span class="cmd-warn">[!] Incorrect Flag! Clue: Base64-decode the string in the clue box above.</span></div>`;
     }
   });
-}
-
-// ----------------------------------------------------------------
-// INTERACTIVE LAB 2: PAYLOAD ENCODER & HASH INSPECTOR
-// ----------------------------------------------------------------
-async function initPayloadEncoder() {
-  const input = document.getElementById('encoder-input');
-  if (!input) return;
-
-  async function updateEncodings() {
-    const text = input.value;
-
-    // Base64
-    try {
-      document.getElementById('res-base64').textContent = btoa(unescape(encodeURIComponent(text)));
-    } catch {
-      document.getElementById('res-base64').textContent = 'Error';
-    }
-
-    // Hex
-    let hex = '';
-    for (let i = 0; i < text.length; i++) {
-      hex += text.charCodeAt(i).toString(16).padStart(2, '0') + ' ';
-    }
-    document.getElementById('res-hex').textContent = hex.trim() || 'Empty';
-
-    // URL
-    document.getElementById('res-url').textContent = encodeURIComponent(text) || 'Empty';
-
-    // ROT13
-    document.getElementById('res-rot13').textContent = text.replace(/[a-zA-Z]/g, c => {
-      const base = c <= 'Z' ? 65 : 97;
-      return String.fromCharCode(((c.charCodeAt(0) - base + 13) % 26) + base);
-    }) || 'Empty';
-
-    // SHA-256 Hash
-    try {
-      const msgBuffer = new TextEncoder().encode(text);
-      const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
-      const hashArray = Array.from(new Uint8Array(hashBuffer));
-      const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
-      document.getElementById('res-sha256').textContent = hashHex;
-    } catch {
-      document.getElementById('res-sha256').textContent = 'Crypto API Unavailable';
-    }
-  }
-
-  input.addEventListener('input', updateEncodings);
-  updateEncodings();
-
-  // Copy buttons
-  document.querySelectorAll('.btn-copy-enc').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const targetId = btn.dataset.target;
-      const text = document.getElementById(targetId)?.textContent;
-      if (text) {
-        navigator.clipboard.writeText(text);
-        showToast('Encoded payload copied!');
-      }
-    });
-  });
-}
-
-// ----------------------------------------------------------------
-// INTERACTIVE LAB 3: NMAP COMMAND ENGINE
-// ----------------------------------------------------------------
-function initNmapBuilder() {
-  const targetInp = document.getElementById('nmap-target');
-  const cmdOutput = document.getElementById('nmap-generated-cmd');
-  const copyBtn = document.getElementById('btn-copy-nmap');
-
-  if (!targetInp || !cmdOutput) return;
-
-  function updateNmapCmd() {
-    const target = targetInp.value.trim() || '10.10.10.254';
-    const flags = [];
-
-    if (document.getElementById('nmap-sS')?.checked) flags.push('-sS');
-    if (document.getElementById('nmap-sV')?.checked) flags.push('-sV');
-    if (document.getElementById('nmap-sC')?.checked) flags.push('-sC');
-    if (document.getElementById('nmap-A')?.checked) flags.push('-A');
-    if (document.getElementById('nmap-p')?.checked) flags.push('-p-');
-    if (document.getElementById('nmap-Pn')?.checked) flags.push('-Pn');
-    if (document.getElementById('nmap-vuln')?.checked) flags.push('--script=vuln');
-    if (document.getElementById('nmap-T4')?.checked) flags.push('-T4');
-
-    const fullCmd = `nmap ${flags.join(' ')} ${target}`;
-    cmdOutput.textContent = fullCmd;
-  }
-
-  targetInp.addEventListener('input', updateNmapCmd);
-  document.querySelectorAll('.nmap-check input').forEach(chk => {
-    chk.addEventListener('change', updateNmapCmd);
-  });
-
-  if (copyBtn) {
-    copyBtn.addEventListener('click', () => {
-      navigator.clipboard.writeText(cmdOutput.textContent);
-      showToast('Nmap command copied!');
-    });
-  }
-}
-
-// ----------------------------------------------------------------
-// INTERACTIVE LAB 4: SUBNET CALCULATOR
-// ----------------------------------------------------------------
-function initSubnetCalculator() {
-  const cidrInput = document.getElementById('cidr-input');
-  if (!cidrInput) return;
-
-  function calcSubnet() {
-    const val = cidrInput.value.trim();
-    const match = val.match(/^(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})\/(\d{1,2})$/);
-
-    if (!match) return;
-    const ip = match[1];
-    const prefix = parseInt(match[2], 10);
-    if (prefix < 8 || prefix > 30) return;
-
-    const totalHosts = Math.pow(2, 32 - prefix);
-    const usableHosts = totalHosts > 2 ? totalHosts - 2 : totalHosts;
-
-    const parts = ip.split('.').map(Number);
-    const ipNum = ((parts[0] << 24) >>> 0) + ((parts[1] << 16) >>> 0) + ((parts[2] << 8) >>> 0) + (parts[3] >>> 0);
-    const maskNum = (0xFFFFFFFF << (32 - prefix)) >>> 0;
-    const netNum = (ipNum & maskNum) >>> 0;
-    const bcastNum = (netNum | (~maskNum >>> 0)) >>> 0;
-
-    const numToIp = (num) => [(num >>> 24) & 255, (num >>> 16) & 255, (num >>> 8) & 255, num & 255].join('.');
-
-    document.getElementById('sub-net').textContent = numToIp(netNum);
-    document.getElementById('sub-range').textContent = `${numToIp(netNum + 1)} — ${numToIp(bcastNum - 1)}`;
-    document.getElementById('sub-bcast').textContent = numToIp(bcastNum);
-    document.getElementById('sub-hosts').textContent = `${usableHosts} Usable (${totalHosts} Total)`;
-  }
-
-  cidrInput.addEventListener('input', calcSubnet);
-  calcSubnet();
 }
 
 function escapeHtml(text) {
@@ -1757,15 +1715,21 @@ async function renderVideosPage() {
       return;
     }
 
-    grid.innerHTML = filtered.map(v => `
+    // Check if video is recent (within 7 days)
+    const sevenDaysAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString().substring(0, 10);
+
+    grid.innerHTML = filtered.map(v => {
+      const isNew = v.date && v.date >= sevenDaysAgo;
+      // YouTube facade pattern: show thumbnail first, load iframe on click
+      return `
       <div class="video-card">
-        <div class="video-embed">
-          <iframe src="https://www.youtube.com/embed/${v.id}" 
-                  title="${v.title.replace(/"/g, '&quot;')}" 
-                  frameborder="0" 
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                  allowfullscreen
-                  loading="lazy"></iframe>
+        <div class="video-facade" data-video-id="${v.id}" role="button" tabindex="0" aria-label="Play ${v.title.replace(/"/g, '&quot;')}">
+          <img src="https://img.youtube.com/vi/${v.id}/hqdefault.jpg" 
+               alt="${v.title.replace(/"/g, '&quot;')}" 
+               loading="lazy" decoding="async"
+               style="width:100%;height:100%;object-fit:cover;border-radius:12px 12px 0 0;">
+          <div class="video-play-btn">▶</div>
+          ${isNew ? '<span class="video-new-badge">NEW</span>' : ''}
         </div>
         <div class="video-card-info">
           <h3>${v.title}</h3>
@@ -1775,7 +1739,18 @@ async function renderVideosPage() {
           </div>
         </div>
       </div>
-    `).join('');
+    `;
+    }).join('');
+
+    // Attach click handlers to facade thumbnails
+    grid.querySelectorAll('.video-facade').forEach(facade => {
+      const handler = () => {
+        const vid = facade.dataset.videoId;
+        facade.outerHTML = `<div class="video-embed"><iframe src="https://www.youtube.com/embed/${vid}?autoplay=1" title="YouTube Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>`;
+      };
+      facade.addEventListener('click', handler);
+      facade.addEventListener('keypress', (e) => { if (e.key === 'Enter') handler(); });
+    });
   }
 
   renderVideoItems('all');
