@@ -15,17 +15,17 @@ const SITEMAP_PATH = path.join(ROOT_DIR, 'sitemap.xml');
 // Current date formatted as YYYY-MM-DD
 const today = new Date().toISOString().split('T')[0];
 
-// Static Core Pages
+// Static Core Pages (Google-compliant URLs without fragment # hashes)
 const staticPages = [
   { path: '', priority: '1.0', changefreq: 'daily' },
-  { path: '#blog', priority: '0.9', changefreq: 'daily' },
-  { path: '#labs', priority: '0.85', changefreq: 'weekly' },
-  { path: '#videos', priority: '0.8', changefreq: 'weekly' },
-  { path: '#about', priority: '0.7', changefreq: 'monthly' },
-  { path: '#contact', priority: '0.6', changefreq: 'monthly' },
-  { path: '#privacy', priority: '0.3', changefreq: 'yearly' },
-  { path: '#terms', priority: '0.3', changefreq: 'yearly' },
-  { path: '#disclaimer', priority: '0.3', changefreq: 'yearly' }
+  { path: '?p=blog', priority: '0.9', changefreq: 'daily' },
+  { path: '?p=labs', priority: '0.85', changefreq: 'weekly' },
+  { path: '?p=videos', priority: '0.8', changefreq: 'weekly' },
+  { path: '?p=about', priority: '0.7', changefreq: 'monthly' },
+  { path: '?p=contact', priority: '0.6', changefreq: 'monthly' },
+  { path: '?p=privacy', priority: '0.3', changefreq: 'yearly' },
+  { path: '?p=terms', priority: '0.3', changefreq: 'yearly' },
+  { path: '?p=disclaimer', priority: '0.3', changefreq: 'yearly' }
 ];
 
 function generateSitemap() {
@@ -58,13 +58,13 @@ function generateSitemap() {
     xml += '  </url>\n';
   });
 
-  // 2. Add Dynamic Blog Posts
+  // 2. Add Dynamic Blog Posts (Google-compliant query route)
   posts.forEach(post => {
     const postDate = post.date || today;
     const postSlug = encodeURIComponent(post.id || post.title.toLowerCase().replace(/[^a-z0-9]+/g, '-'));
 
     xml += '  <url>\n';
-    xml += `    <loc>${SITE_URL}/#blog/${postSlug}</loc>\n`;
+    xml += `    <loc>${SITE_URL}/?p=blog/${postSlug}</loc>\n`;
     xml += `    <lastmod>${postDate}</lastmod>\n`;
     xml += `    <changefreq>weekly</changefreq>\n`;
     xml += `    <priority>0.8</priority>\n`;
