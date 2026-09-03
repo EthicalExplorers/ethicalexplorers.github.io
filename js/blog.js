@@ -14,7 +14,7 @@ let videosCache = null;
 async function fetchPosts() {
   if (postsCache && postsCache.length > 0) return postsCache;
   try {
-    const res = await fetch('data/posts.json');
+    const res = await fetch('data/posts.json?v=20260903b');
     if (!res.ok) throw new Error('Fetch failed');
     postsCache = await res.json();
     return postsCache;
@@ -27,7 +27,7 @@ async function fetchPosts() {
 async function fetchLabs() {
   if (labsCache && labsCache.length > 0) return labsCache;
   try {
-    const res = await fetch('data/labs.json');
+    const res = await fetch('data/labs.json?v=20260903b');
     if (!res.ok) throw new Error('Fetch failed');
     labsCache = await res.json();
     return labsCache;
@@ -40,7 +40,7 @@ async function fetchLabs() {
 async function fetchVideos() {
   if (videosCache) return videosCache;
   try {
-    const res = await fetch('data/videos.json');
+    const res = await fetch('data/videos.json?v=20260903b');
     videosCache = await res.json();
     return videosCache;
   } catch (e) {
