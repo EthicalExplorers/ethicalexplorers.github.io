@@ -1,5 +1,45 @@
 [
   {
+    "id": "insto-instagram-reconnaissance-osint-tool-tutorial",
+    "title": "Insto Tutorial: Instagram Reconnaissance & OSINT Framework Guide",
+    "excerpt": "Master Insto — the command-line Instagram OSINT and intelligence gathering tool. Learn installation, metadata extraction, profile investigation, follower network analysis, and privacy defense.",
+    "category": "Social Engineering",
+    "tags": [
+      "Insto",
+      "OSINT",
+      "Instagram",
+      "Reconnaissance",
+      "Social-Engineering"
+    ],
+    "date": "2026-09-03",
+    "author": "Ethical Explorers Team",
+    "readTime": "8 min read",
+    "image": "images/blog/insto-instagram-osint.jpg",
+    "featured": true,
+    "youtubeId": "NHAZGX4893Y",
+    "content": "**Insto** is a powerful command-line Instagram OSINT (Open Source Intelligence) and reconnaissance utility tailored for cybersecurity researchers, fraud investigators, and authorized penetration testers. Because social media platforms frequently reveal high-value employee associations, infrastructure details, email formats, and personal habits, Instagram investigation forms a critical component of social engineering assessments and threat intelligence gathering.\n\nIn this practical walkthrough based on our Ethical Explorers video tutorial, we examine how to install Insto, gather publicly exposed profile metadata, extract high-resolution media, map social connections, and implement robust operational privacy controls.\n\n---\n\n## Why Instagram OSINT Matters in Cybersecurity\n\nSocial media intelligence (SOCMINT) serves several legitimate cybersecurity use cases:\n- **Red Team Reconnaissance:** Identifying target organization personnel, technology stacks mentioned in photos, badge designs, or workstation configurations accidentally shared in desk pictures.\n- **Credential & Phishing Defense:** Evaluating whether executives or employees publish details (e.g., pets, birthdays, travel schedules) frequently exploited in credential spraying or targeted spear-phishing.\n- **Investigative Journalism & Threat Hunting:** Correlating fake accounts, coordinated scam networks, bot operations, and brand impersonation campaigns.\n\n---\n\n## Prerequisites & Installation\n\nInsto runs in Python 3 environments across Linux (Kali Linux, Parrot OS, Ubuntu), macOS, and Termux on Android.\n\n```bash\n# 1. Clone the official repository\ngit clone https://github.com/ethicalexplorers/insto.git\ncd insto\n\n# 2. Set up an isolated Python virtual environment (recommended)\npython3 -m venv venv\nsource venv/bin/activate\n\n# 3. Install required dependencies\npip install -r requirements.txt\n```\n\n---\n\n## Core Features & Commands\n\nInsto executes rapid, non-intrusive metadata extraction against public Instagram targets without triggering security flags or requiring invasive permissions.\n\n### 1. Basic Profile Intelligence Extraction\nTo pull public biographical information, account status, user ID, external links, and verification status:\n\n```bash\npython3 insto.py -u <target_username>\n```\n\n**Output Breakdown:**\n- **User ID & Verified Status:** Unique immutable numeric ID useful for tracking targets even if their username changes.\n- **External URL & Bio Text:** Reveals linked portfolios, Linktree trees, Discord handles, or personal domains.\n- **Post & Follower Count Metrics:** Gauges engagement and whether the account exhibits bot-like ratio anomalies.\n\n### 2. Deep Media & Metadata Inspection\nExtract post timestamps, caption text, geotag coordinates, and high-definition profile photos:\n\n```bash\n# Download profile picture and inspect raw headers\npython3 insto.py -u <target_username> --download-avatar\n\n# Extract tagged users and geotag data\npython3 insto.py -u <target_username> --geotags --output json\n```\n\n### 3. Follower & Interaction Mapping\nUnderstand relationship networks and potential associates:\n\n```bash\npython3 insto.py -u <target_username> --analyze-network\n```\n\n---\n\n## Defensive Countermeasures: Hardening Your Profile\n\nUnderstanding how reconnaissance tools query public data allows security professionals to harden organizational and personal accounts:\n\n1. **Set Profiles to Private:** Prevent automated scrapers from enumerating followers, tagged images, and post timestamps.\n2. **Scrub Location Metadata:** Disable precise location sharing and never tag real-time locations; delay posting travel updates until leaving the venue.\n3. **Audit Workstation Photography:** Enforce policies forbidding photography of computer monitors, whiteboards, security passes, or employee badges.\n4. **Use Unique Usernames:** Do not reuse identical usernames across professional (GitHub/LinkedIn) and personal (Instagram/Discord) accounts."
+  },
+  {
+    "id": "how-to-install-kali-nethunter-rooted-android-magisk-guide",
+    "title": "How to Install Kali NetHunter on Any Rooted Android Phone (Magisk Guide 2026)",
+    "excerpt": "Complete 2026 step-by-step guide to installing full Kali NetHunter on any rooted Android smartphone using Magisk. Unleash hardware access, chroot terminal, Kex desktop, and wireless auditing tools.",
+    "category": "Penetration Testing",
+    "tags": [
+      "Kali-NetHunter",
+      "Android",
+      "Magisk",
+      "Root",
+      "Mobile-Security"
+    ],
+    "date": "2026-09-02",
+    "author": "Ethical Explorers Team",
+    "readTime": "11 min read",
+    "image": "images/blog/nethunter-rooted-magisk.jpg",
+    "featured": true,
+    "youtubeId": "8VrQ96OhGdY",
+    "content": "**Kali NetHunter** is the premier mobile penetration testing platform based on Kali Linux for Android devices. While Rootless NetHunter operates within Termux user space with limited hardware interaction, installing NetHunter on a **rooted device with Magisk** unlocks full raw socket privileges, hardware-level OTG Wi-Fi adapter control, BadUSB attacks, HID keyboard emulation, and complete access to the underlying Linux kernel.\n\nIn this updated 2026 walkthrough, we demonstrate how to flash and configure Kali NetHunter on any ARM64 rooted Android device using Magisk.\n\n---\n\n## Rootless vs. Rooted NetHunter: Key Differences\n\n| Capability | NetHunter Rootless (Termux) | Rooted NetHunter (Magisk) |\n| :--- | :--- | :--- |\n| **Root Permissions** | Emulated (proot) | True kernel root (su) |\n| **Raw Packet Sockets** | No | Full access |\n| **External Wi-Fi Monitor Mode** | No | Yes (OTG supported chipsets) |\n| **BadUSB / HID Emulation** | No | Yes (with custom kernel) |\n| **Bluetooth Wardriving** | Limited | Yes (hciconfig / bluepy) |\n| **Kex GUI Desktop** | User-level | Native chroot performance |\n\n---\n\n## Requirements & Prerequisites\n\nBefore starting, ensure your device meets these requirements:\n- **Unlocked Bootloader** and active **Magisk (v26.0+)** or **KernelSU**.\n- **ARM64 Architecture** (modern Android devices running Android 10, 11, 12, 13, 14, or 15).\n- At least **12GB to 15GB of free internal storage** for the full Kali Chroot.\n- Reliable high-speed Wi-Fi connection.\n\n---\n\n## Step 1: Download Official NetHunter Assets\n\n1. Head over to the official Offensive Security NetHunter download portal or repository.\n2. Download the **Kali NetHunter Generic ARM64 Full Chroot archive** (`kali-nethunter-chroot-full-arm64.tar.xz`).\n3. Download the **Kali NetHunter Magisk Module** zip package.\n\n---\n\n## Step 2: Flash the NetHunter Module in Magisk\n\n1. Launch the **Magisk Manager** app on your Android device.\n2. Navigate to the **Modules** tab at the bottom right.\n3. Tap **Install from storage** and select the downloaded NetHunter Magisk module (`.zip`).\n4. Allow Magisk to flash the system modifications, then tap **Reboot** to apply changes.\n\n---\n\n## Step 3: Install NetHunter Core Applications\n\nAfter rebooting, install the essential NetHunter APKs from the NetHunter App Store (`F-Droid` mirror):\n- **NetHunter App:** The centralized administrative dashboard.\n- **NetHunter Terminal:** Android terminal preconfigured for chroot switching.\n- **NetHunter Kex:** High-performance VNC client for graphical XFCE desktop access.\n\n---\n\n## Step 4: Initialize the Kali Chroot\n\n1. Open the **NetHunter App** and grant Superuser privileges when prompted by Magisk.\n2. Tap the hamburger menu and select **Kali Chroot Manager**.\n3. Tap **Install Kali Chroot** -> **Restore from Local Storage**.\n4. Point to your downloaded `kali-nethunter-chroot-full-arm64.tar.xz` file.\n5. The extraction process will decompress the full Kali Linux filesystem into `/data/local/nhsystem/kali-arm64`. This process takes 5-15 minutes depending on processor speed.\n\nOnce finished, tap **Start Kali Chroot**.\n\n---\n\n## Step 5: Launch Graphical Desktop via NetHunter Kex\n\nTo run desktop tools like Wireshark, Burp Suite, or Metasploit GUI:\n\n1. In the NetHunter Terminal, launch a root chroot:\n```bash\nnh -r\n```\n2. Set your VNC password and start the Kex server:\n```bash\nkex passwd\nkex &\n```\n3. Open the **NetHunter Kex** app on your phone, leave the host as `127.0.0.1:5901`, enter your password, and tap **Connect**. You now have a full Kali Linux desktop directly on your phone!"
+  },
+  {
     "id": "bbot-ultimate-osint-recon-attack-surface-tool-tutorial",
     "title": "BBOT Tutorial: Ultimate OSINT & Attack Surface Reconnaissance Tool",
     "excerpt": "Master BBOT — the powerful automated OSINT and attack surface mapping tool. Learn installation, scanning techniques, and how to discover subdomains, endpoints, and leaked credentials.",
@@ -17,7 +57,27 @@
     "readTime": "7 min read",
     "image": "images/blog/osint-recon.jpg",
     "featured": true,
-    "youtubeId": ""
+    "youtubeId": "CrobJEz9fu4"
+  },
+  {
+    "id": "knockpy-tutorial-subdomain-enumeration-reconnaissance-guide",
+    "title": "KnockPy Tutorial: Python Subdomain Enumeration & Attack Surface Mapping",
+    "excerpt": "Complete tutorial on KnockPy v9 for fast DNS subdomain enumeration, passive intelligence, VirusTotal integration, and discovering hidden attack surfaces in ethical penetration testing.",
+    "category": "Penetration Testing",
+    "tags": [
+      "KnockPy",
+      "Subdomain",
+      "DNS",
+      "Recon",
+      "Attack-Surface"
+    ],
+    "date": "2026-09-01",
+    "author": "Ethical Explorers Team",
+    "readTime": "8 min read",
+    "image": "images/blog/knockpy-subdomain-recon.jpg",
+    "featured": false,
+    "youtubeId": "xDun3MTRMV8",
+    "content": "**KnockPy** is a legendary Python3 reconnaissance utility designed to enumerate subdomains on a target domain through rapid wordlist dictionary analysis, DNS brute-forcing, and passive intelligence extraction. Built to assist penetration testers and bug bounty hunters in identifying forgotten dev servers, staging portals, API gateways, and admin panels, KnockPy v9 brings complete asynchronous execution, automatic wildcard DNS filtering, and direct VirusTotal API correlation.\n\n---\n\n## Why Subdomain Enumeration is Essential\n\nSubdomains frequently host legacy software, test builds, pre-production microservices, or cloud storage buckets that lack the strict security controls applied to primary domains:\n- **Forgotten Staging Servers:** Developers deploying staging environments with default credentials or active debug consoles (`staging.target.com`).\n- **Subdomain Takeovers:** Dangling DNS CNAME records pointing to decommissioned AWS S3, GitHub Pages, or Heroku instances.\n- **Internal APIs:** Microservice endpoints intended for internal communication accidentally exposed to the public internet (`api-dev.target.com`).\n\n---\n\n## Installation & Setup\n\nKnockPy requires Python 3.8+ and runs on any modern Linux, macOS, or Windows environment.\n\n```bash\n# 1. Clone the repository\ngit clone https://github.com/guelfoweb/knock.git\ncd knock\n\n# 2. Install dependencies\npip3 install -r requirements.txt\n\n# 3. Optional: Install globally\npython3 setup.py install\n```\n\n---\n\n## Basic and Advanced Scanning Commands\n\n### 1. Basic Quick Scan\nRun a default scan using KnockPy's built-in curated dictionary:\n\n```bash\nknockpy example.com\n```\n\nKnockPy will automatically test wildcard DNS responses first to eliminate false positives, resolve DNS records, and report active subdomains along with corresponding IP addresses and HTTP response codes.\n\n### 2. Integrating VirusTotal API\nTo supercharge discovery with passive DNS logs without generating suspicious query bursts:\n\n```bash\n# Set your free VirusTotal API key in knockpy\nexport KNOCK_VIRUSTOTAL_API_KEY=\"your_api_key_here\"\n\n# Execute scan with passive VirusTotal extraction\nknockpy example.com --virustotal\n```\n\n### 3. Custom Wordlist & Multi-threaded Bruteforce\nSupply custom target wordlists (e.g., from SecLists) and export findings directly to JSON:\n\n```bash\nknockpy example.com -w /usr/share/wordlists/seclists/Discovery/DNS/subdomains-top1million-20000.txt --json\n```\n\n---\n\n## Defensive Recommendations for System Administrators\n\n1. **Implement Split-Horizon DNS:** Ensure internal services and testing endpoints resolve exclusively within internal DNS zones (e.g., VPC private zones).\n2. **Continuous External Monitoring:** Regularly monitor your organization's domain perimeters to catch unauthorized subdomains created by shadow IT.\n3. **Prevent Subdomain Takeovers:** Clean up stale DNS CNAME pointers whenever cloud resources, CDN distributions, or GitHub repositories are decommissioned."
   },
   {
     "id": "kali-nethunter-rootless-android-termux-tutorial",
@@ -37,7 +97,7 @@
     "readTime": "6 min read",
     "image": "images/blog/pentesting-tools.jpg",
     "featured": true,
-    "youtubeId": ""
+    "youtubeId": "KXhsHGjkkrQ"
   },
   {
     "id": "netryx-astra-v2-geolocation-osint-tool-tutorial",
@@ -57,7 +117,7 @@
     "readTime": "5 min read",
     "image": "images/blog/osint-recon.jpg",
     "featured": false,
-    "youtubeId": ""
+    "youtubeId": "AInO0nDRHC0"
   },
   {
     "id": "12-essential-linux-commands-2026-hackers-guide",
@@ -77,7 +137,7 @@
     "readTime": "8 min read",
     "image": "images/blog/linux-terminal.jpg",
     "featured": true,
-    "youtubeId": ""
+    "youtubeId": "CipCRtxBiBw"
   },
   {
     "id": "vulnclaw-ai-powered-vulnerability-scanner-tutorial",
@@ -97,7 +157,7 @@
     "readTime": "6 min read",
     "image": "images/blog/web-app-security.jpg",
     "featured": false,
-    "youtubeId": ""
+    "youtubeId": "ogA2HIoZy-8"
   },
   {
     "id": "evil-twin-wifi-attack-defense-fluxion-guide",
@@ -117,7 +177,127 @@
     "readTime": "8 min read",
     "image": "images/blog/wifi-network.jpg",
     "featured": true,
-    "youtubeId": ""
+    "youtubeId": "GuCm0sHoEVs"
+  },
+  {
+    "id": "blackbird-osint-find-any-account-online-seconds-tutorial",
+    "title": "Blackbird OSINT: Find Any Account Across 500+ Platforms in Seconds",
+    "excerpt": "Learn how to use Blackbird — the high-speed Python OSINT reconnaissance tool that scans over 570 platforms simultaneously to identify target usernames, digital footprints, and social accounts.",
+    "category": "Social Engineering",
+    "tags": [
+      "Blackbird",
+      "OSINT",
+      "Username-Search",
+      "Recon",
+      "Privacy"
+    ],
+    "date": "2026-08-14",
+    "author": "Ethical Explorers Team",
+    "readTime": "9 min read",
+    "image": "images/blog/blackbird-osint-account-search.jpg",
+    "featured": false,
+    "youtubeId": "Ll2hyh3V6k4",
+    "content": "**Blackbird** is a next-generation Python OSINT (Open Source Intelligence) tool built to search target usernames across more than 570 websites simultaneously. Whether auditing corporate exposure, tracking identity theft, investigating fraudulent threat actors, or analyzing digital footprints, Blackbird provides unmatched scanning speed, ultra-low false-positive rates, and an optional built-in interactive Web UI.\n\n---\n\n## How Username Enumeration Works\n\nMost web applications expose public profile URLs structured predictably (e.g., `https://platform.com/user/<username>`). However, traditional scrapers often misinterpret HTTP status codes:\n- Some services return HTTP 200 even for non-existent profiles (soft 404s).\n- Some block automated user-agents with CAPTCHAs or redirects.\n\nBlackbird solves this by utilizing custom verification rules, multi-threading asynchronous requests, and checking exact response body strings to verify account validity with surgical precision.\n\n---\n\n## Installing Blackbird\n\n```bash\n# 1. Clone the Blackbird repository\ngit clone https://github.com/p1ngul1n0/blackbird.git\ncd blackbird\n\n# 2. Install required Python packages\npip3 install -r requirements.txt\n```\n\n---\n\n## Essential Usage & Practical Examples\n\n### 1. Simple Command-Line Scan\nSearch for a specific handle across all 570+ platforms:\n\n```bash\npython3 blackbird.py -u <target_username>\n```\n\nThe terminal will print color-coded live progress, showing instant green confirmations for verified accounts along with direct profile links.\n\n### 2. Scan and Export Structured Reports\nGenerate reports in JSON or CSV for integration into threat intelligence platforms (TIPs) or penetration testing documentation:\n\n```bash\npython3 blackbird.py -u <target_username> --csv --json\n```\n\n### 3. Launching the Interactive Web UI\nBlackbird includes a local web dashboard that enables browser-based investigations:\n\n```bash\npython3 blackbird.py --web\n```\nNavigate to `http://127.0.0.1:9797` to run queries, view global social connection charts, and filter targets visually.\n\n---\n\n## OPSEC & Privacy Hardening\n\n- **Avoid Username Reuse:** Using identical usernames across sensitive accounts (crypto wallets, forums, work emails) enables adversaries to correlate your entire online identity in under 15 seconds.\n- **Audit Defunct Accounts:** Regularly discover and request deletion (GDPR right to erasure) of accounts you created years ago that may contain exposed historical data."
+  },
+  {
+    "id": "nuclei-vulnerability-scanner-beginner-to-pro-guide-2026",
+    "title": "Nuclei Vulnerability Scanner: The Ultimate Beginner-to-Pro Guide (2026)",
+    "excerpt": "Master ProjectDiscovery Nuclei — the lightning-fast, template-driven vulnerability scanner. Learn installation, scanning strategies, template filtering, custom YAML rules, and bug bounty workflows.",
+    "category": "Web App Sec",
+    "tags": [
+      "Nuclei",
+      "Vulnerability-Scanner",
+      "ProjectDiscovery",
+      "Automation",
+      "CVE"
+    ],
+    "date": "2026-07-20",
+    "author": "Ethical Explorers Team",
+    "readTime": "12 min read",
+    "image": "images/blog/nuclei-vulnerability-scanner.jpg",
+    "featured": false,
+    "youtubeId": "cHC5017VX80",
+    "content": "**Nuclei**, developed by ProjectDiscovery, has revolutionized modern vulnerability assessment, bug bounty hunting, and DevSecOps pipelines. Unlike heavy, traditional black-box scanners that rely on inflexible scanning engines, Nuclei is driven entirely by open-source, community-vetted **YAML templates**. With thousands of templates covering zero-days, known CVEs, cloud misconfigurations, and sensitive file exposures, Nuclei executes zero-false-positive audits at blistering speed.\n\n---\n\n## Nuclei Core Capabilities\n\n- **Template-Based Extensibility:** Every security check is defined in readable YAML. If a new vulnerability drops, you can write and execute a template within minutes.\n- **Protocol Flexibility:** Supports HTTP/HTTPS, DNS, TCP, SSL, Headless browser rendering, WHOIS, and WebSocket audits.\n- **Massive Scalability:** Highly optimized Go-based engine capable of scanning thousands of endpoints concurrently with fine-grained rate-limiting.\n\n---\n\n## Installation & Initial Setup\n\n```bash\n# Option 1: Install using Go\ngo install -v github.com/projectdiscovery/nuclei/v3/cmd/nuclei@latest\n\n# Option 2: Install on Kali/Parrot OS\nsudo apt update && sudo apt install nuclei\n\n# Option 3: Download official binary from GitHub Releases\n```\n\n### Updating Templates\nBefore running any audit, sync the latest community templates:\n\n```bash\nnuclei -update-templates\n```\n\n---\n\n## Practical Scanning Workflows\n\n### 1. Basic Target Scanning\n```bash\nnuclei -u https://target.example.com\n```\n\n### 2. Filtering by Severity (Critical & High)\nPrevent alert fatigue and prioritize urgent vulnerabilities:\n\n```bash\nnuclei -u https://target.example.com -severity critical,high\n```\n\n### 3. Scanning a Target List with Rate Limiting\nWhen scanning multiple domains (e.g., from subdomain enumeration), always enforce rate limits to protect target infrastructure:\n\n```bash\nnuclei -list active_subdomains.txt -c 25 -rate-limit 50 -o findings.txt\n```\n\n### 4. Running Specific Vulnerability Categories\nFocus your assessment on specific threats:\n\n```bash\n# Test exclusively for Cross-Site Scripting (XSS)\nnuclei -u https://target.example.com -tags xss\n\n# Check for exposed sensitive files (.env, git repos, backup archives)\nnuclei -u https://target.example.com -tags exposure,config\n```\n\n---\n\n## Writing a Custom Nuclei Template\n\nCreating custom templates allows security teams to detect internal policy violations or verify proprietary patches:\n\n```yaml\nid: custom-exposed-env-file\ninfo:\n  name: Exposed Production .env Configuration File\n  author: ethicalexplorers\n  severity: critical\n  description: Detects publicly exposed environment files containing secrets.\n\nhttp:\n  - method: GET\n    path:\n      - \"{{BaseURL}}/.env\"\n      - \"{{BaseURL}}/core/.env\"\n\n    matchers-condition: and\n    matchers:\n      - type: status\n        status:\n          - 200\n\n      - type: word\n        words:\n          - \"DB_PASSWORD=\"\n          - \"APP_KEY=\"\n          - \"AWS_SECRET_ACCESS_KEY=\"\n        condition: or\n```\n\n---\n\n## Defensive Best Practices\n\n- **Integrate into CI/CD:** Run Nuclei in GitHub Actions or GitLab CI before promoting staging code to production.\n- **Monitor Default Exposures:** Regularly verify that hidden files (`.git`, `.env`, `.DS_Store`, `backup.sql`) are blocked at the web server (Nginx/Apache) configuration level."
+  },
+  {
+    "id": "xsstrike-advanced-xss-detection-exploitation-guide",
+    "title": "XSStrike: Advanced Cross-Site Scripting (XSS) Detection & Exploitation Suite",
+    "excerpt": "Complete tutorial on XSStrike — the intelligent Python XSS vulnerability detection suite. Discover parameter fuzzing, DOM XSS inspection, WAF bypass encoding, and effective remediation techniques.",
+    "category": "Web App Sec",
+    "tags": [
+      "XSStrike",
+      "XSS",
+      "Web-Security",
+      "Bug-Bounty",
+      "Fuzzing"
+    ],
+    "date": "2026-07-17",
+    "author": "Ethical Explorers Team",
+    "readTime": "10 min read",
+    "image": "images/blog/xsstrike-xss-scanner.jpg",
+    "featured": false,
+    "youtubeId": "VJYj_5J6la0",
+    "content": "**Cross-Site Scripting (XSS)** consistently ranks among the most prevalent vulnerabilities across modern web applications. However, basic automated fuzzers often fail because modern web applications employ dynamic DOM manipulation, contextual HTML encoding, and Web Application Firewalls (WAFs).\n\n**XSStrike** is an advanced Python-based XSS detection suite that replaces random payload spraying with **contextual response parsing**, intelligent character fuzzing, and adaptive WAF bypass generation.\n\n---\n\n## How XSStrike Differs from Ordinary Scanners\n\n1. **Context Analysis:** Instead of blindly injecting `<script>alert(1)</script>`, XSStrike analyzes how alphanumeric strings are reflected in the HTML DOM (e.g., inside an attribute, between script tags, or inside an HTML comment).\n2. **Fuzzy Vector Generation:** It generates tailored payloads specific to the exact reflection context.\n3. **Integrated WAF Detection:** Automatically identifies firewalls like Cloudflare, Akamai, or ModSecurity and applies corresponding obfuscation techniques.\n4. **Blind & DOM XSS Support:** Inspects client-side JavaScript sources and sinks to uncover hidden DOM-based execution paths.\n\n---\n\n## Installation & Setup\n\n```bash\n# 1. Clone the repository\ngit clone https://github.com/s0md3v/XSStrike.git\ncd XSStrike\n\n# 2. Install requirements\npip3 install -r requirements.txt\n```\n\n---\n\n## Practical Scanning Scenarios\n\n### 1. Testing a Single Target URL (GET Parameter)\n```bash\npython3 xsstrike.py -u \"http://vulnerable-site.local/search.php?query=test\"\n```\nXSStrike will probe each parameter, evaluate filter behavior, determine allowable symbols (`< ` `\" ` `' ` `/ `), and construct executable proof-of-concept exploits.\n\n### 2. Auditing POST Forms\n```bash\npython3 xsstrike.py -u \"http://vulnerable-site.local/login.php\" --data \"username=test&password=123\"\n```\n\n### 3. Crawling an Entire Website for XSS Endpoints\n```bash\npython3 xsstrike.py -u \"http://vulnerable-site.local\" --crawl -l 3\n```\n\n### 4. Discovering Hidden Parameters\n```bash\npython3 xsstrike.py -u \"http://vulnerable-site.local/page.php\" --params\n```\n\n---\n\n## Defensive Mitigation Strategies\n\n1. **Context-Aware Output Encoding:** Encode data immediately before rendering it in the browser (HTML entity encoding, JavaScript variable encoding, URL attribute encoding).\n2. **Enforce Strict Content Security Policy (CSP):** Disallow inline scripts with `Content-Security-Policy: default-src 'self'; script-src 'self' 'nonce-RANDOM'`.\n3. **Use Modern Frontend Frameworks:** Utilize frameworks like React, Vue, or Angular that inherently escape interpolated data binding expressions by default."
+  },
+  {
+    "id": "owasp-amass-asset-discovery-bug-bounty-recon-guide",
+    "title": "OWASP Amass: Deep Asset Discovery & Bug Bounty Reconnaissance Masterclass",
+    "excerpt": "Master OWASP Amass for enterprise attack surface mapping, deep DNS enumeration, network topology visualization, and external perimeter discovery in bug bounty and red team operations.",
+    "category": "Penetration Testing",
+    "tags": [
+      "OWASP-Amass",
+      "Attack-Surface",
+      "Reconnaissance",
+      "Bug-Bounty",
+      "DNS"
+    ],
+    "date": "2026-07-15",
+    "author": "Ethical Explorers Team",
+    "readTime": "13 min read",
+    "image": "images/blog/owasp-amass-recon.jpg",
+    "featured": false,
+    "youtubeId": "OXLlhTLEjNE",
+    "content": "**OWASP Amass** is widely regarded as the gold standard open-source framework for network mapping, in-depth external asset discovery, and Attack Surface Management (ASM). Maintained under the Open Web Application Security Project (OWASP), Amass aggregates dozens of passive intelligence sources, autonomous system (ASN) routing tables, certificate transparency logs, web archives, and active DNS resolution techniques to construct comprehensive graphical models of an organization's digital footprint.\n\n---\n\n## Core Pillars of Amass Reconnaissance\n\n- **Passive Information Gathering:** Scrapes public data providers, search engines, TLS certificate logs, and threat exchanges without directly contacting target IP infrastructure.\n- **Active DNS Enumeration:** Brute-forces subdomains, resolves wildcard records, and performs recursive DNS query expansion.\n- **Network Routing Analysis:** Maps BGP routing paths, Autonomous System Numbers (ASNs), and netblocks associated with target enterprises.\n- **Graph Database Storage:** Stores all infrastructure relationships in an embedded graph database (SQLite/PostgreSQL) for continuous diffing and trend tracking.\n\n---\n\n## Installation & Configuration\n\n```bash\n# On Kali Linux / Debian\nsudo apt update && sudo apt install amass\n\n# Or install via Go\ngo install -v github.com/owasp-amass/amass/v4/...@master\n```\n\n### Supercharging Amass with `config.ini`\nTo maximize intelligence retrieval, configure free and commercial API keys in `~/.config/amass/config.ini`:\n- Shodan\n- Censys\n- SecurityTrails\n- AlienVault OTX\n- GitHub API\n\n---\n\n## Essential Commands & Real-World Operations\n\n### 1. Passive Subdomain Discovery\nExecute a zero-touch passive audit:\n```bash\namass enum -passive -d target.example.com\n```\n\n### 2. Comprehensive Active Reconnaissance\nCombines passive sources with active DNS resolution and certificate extraction:\n```bash\namass enum -active -d target.example.com -brute -w /usr/share/wordlists/dns.txt -o amass_results.txt\n```\n\n### 3. Discovering Organization Netblocks via ASN\nBefore attacking web endpoints, discover all IP ranges registered to an enterprise:\n```bash\n# Find ASN matching organization name\namass intel -org \"Target Corporation\"\n\n# Enumerate all domains within that ASN\namass intel -asn <ASN_NUMBER>\n```\n\n### 4. Interactive Graph Visualization\nExport Amass scan data into an interactive D3.js web visualizer:\n```bash\namass viz -d3 -d target.example.com\n```\nOpen the generated HTML document in your browser to inspect nodes connecting subdomains, IP blocks, mail servers, and name servers.\n\n---\n\n## Corporate Defense & Attack Surface Management\n\nOrganizations must adopt the same visibility as external adversaries:\n- **Continuous Asset Discovery:** Schedule recurring Amass differential scans to detect rogue infrastructure spun up by contractors or cloud engineers.\n- **Zone Hygiene:** Decommission unused public cloud interfaces and restrict test builds behind zero-trust network access (ZTNA)."
+  },
+  {
+    "id": "master-wpscan-wordpress-vulnerability-security-guide",
+    "title": "Master WPScan: Complete WordPress Vulnerability Scanning & Security Guide",
+    "excerpt": "Comprehensive tutorial on WPScan — the industry-standard black-box WordPress vulnerability scanner. Learn plugin/theme enumeration, user identification, password testing, and hardening tactics.",
+    "category": "Web App Sec",
+    "tags": [
+      "WPScan",
+      "WordPress",
+      "CMS-Security",
+      "Vulnerability-Scanner",
+      "Hardening"
+    ],
+    "date": "2026-07-13",
+    "author": "Ethical Explorers Team",
+    "readTime": "9 min read",
+    "image": "images/blog/wpscan-wordpress-security.jpg",
+    "featured": false,
+    "youtubeId": "RbFAEgMteoM",
+    "content": "Powering over 40% of the entire web, **WordPress** is the most widely deployed Content Management System (CMS) in existence. Unfortunately, this ubiquity makes it the primary target for automated malware botnets, cryptominers, and credential brute-force attacks. The vast majority of compromises do not stem from the core WordPress platform itself, but from **vulnerable third-party plugins, abandoned themes, and weak administrator passwords**.\n\n**WPScan** is the official black-box vulnerability scanner designed specifically to audit WordPress installations for known security flaws.\n\n---\n\n## What WPScan Detects\n\n- **Core Version Vulnerabilities:** Compares installed WordPress version against known CVE databases.\n- **Vulnerable Plugins & Themes:** Detects outdated modules susceptible to SQL injection, XSS, Arbitrary File Upload, and Remote Code Execution (RCE).\n- **User Enumeration:** Discovers valid author usernames exposed through the WordPress REST API (`/wp-json/wp/v2/users`) and author archive pages (`/?author=1`).\n- **Exposed Sensitive Files:** Identifies uncleaned database backups (`dump.sql`), configuration files (`wp-config.php.bak`), and error logs (`debug.log`).\n\n---\n\n## Installation & API Token Setup\n\n```bash\n# Install on Kali Linux\nsudo apt update && sudo apt install wpscan\n\n# Or install via Ruby Gem\ngem install wpscan\n```\n\n### Configuring the WPScan Vulnerability Database API\nWPScan provides free API tokens granting 25 daily requests to query real-time vulnerability intelligence:\n```bash\nwpscan --api-token \"YOUR_WPSCAN_API_TOKEN\" --url https://target-wordpress.com\n```\n\n---\n\n## Essential Scanning Workflows\n\n### 1. Non-Intrusive Quick Audit\n```bash\nwpscan --url https://target-wordpress.com --random-user-agent\n```\n\n### 2. Comprehensive Plugin & Theme Enumeration\nFind all vulnerable components installed on the site:\n```bash\nwpscan --url https://target-wordpress.com --enumerate vp,vt --api-token \"YOUR_TOKEN\"\n```\n- `vp`: Vulnerable plugins only.\n- `vt`: Vulnerable themes only.\n\n### 3. Enumerating WordPress Usernames\nBefore testing credentials, map administrative accounts:\n```bash\nwpscan --url https://target-wordpress.com --enumerate u\n```\n\n### 4. Testing Password Hygiene\nAuthorized security testers can evaluate password strength using wordlists:\n```bash\nwpscan --url https://target-wordpress.com -U admin,editor -P /usr/share/wordlists/rockyou.txt --max-threads 5\n```\n\n---\n\n## WordPress Hardening Checklist\n\n1. **Keep Everything Updated:** Enable automatic security updates for minor core versions and audit plugins monthly.\n2. **Enforce Two-Factor Authentication (2FA):** Protect the `/wp-login.php` screen with hardware security keys (FIDO2) or authenticator apps.\n3. **Disable XML-RPC:** Block access to `/xml-rpc.php` at the web server level if mobile app publishing is not required.\n4. **Restrict REST API User Endpoints:** Block unauthenticated queries to `/wp-json/wp/v2/users` to stop automated username harvesting."
+  },
+  {
+    "id": "camphish-explained-camera-social-engineering-awareness-defense",
+    "title": "CamPhish Explained: How Social Engineering Cam-Phishing Works & How to Defend",
+    "excerpt": "Deep-dive cybersecurity awareness tutorial explaining how social engineering webcam phishing attacks operate, the WebRTC & HTML5 camera capture mechanisms, and how to defend against privacy intrusions.",
+    "category": "Social Engineering",
+    "tags": [
+      "CamPhish",
+      "Social-Engineering",
+      "Phishing",
+      "Webcam-Security",
+      "Privacy"
+    ],
+    "date": "2026-07-10",
+    "author": "Ethical Explorers Team",
+    "readTime": "8 min read",
+    "image": "images/blog/camphish-camera-social-engineering.jpg",
+    "featured": false,
+    "youtubeId": "-c993JqJKEs",
+    "content": "Digital privacy concerns have escalated rapidly as web browsers gained direct access to hardware peripherals like webcams and microphones via modern HTML5 APIs. While these capabilities power seamless video conferencing and online collaboration, they also enable sophisticated social engineering vectors known colloquially as **Cam-Phishing**.\n\n**CamPhish** is an educational open-source cybersecurity awareness utility built to demonstrate how attackers craft deceitful lures to manipulate unsuspecting users into granting camera permissions.\n\n---\n\n## The Technical Mechanism: How Browsers Access Webcams\n\nIn modern web standards, webcams cannot be accessed silently in a sandbox browser without explicit user consent. Attackers bypass this restriction not through zero-day software exploits, but through **psychological deception**:\n\n1. **The Bait Page:** The attacker deploys a convincing lure via Cloudflare or Ngrok tunnels (e.g., an online festival greeting card, a Tinder/dating match verification prompt, or a YouTube video requiring age verification).\n2. **The API Request:** The decoy page executes the HTML5 `navigator.mediaDevices.getUserMedia({ video: true })` JavaScript API call.\n3. **The Browser Permission Dialog:** The browser displays a native prompt: *\"site.com wants to use your camera\"*. The attacker's page design visually mislabels this prompt as an *\"Identity Verification\"* or *\"Click Allow to Watch\"* requirement.\n4. **Capture & Exfiltration:** Once the victim clicks **Allow**, hidden JavaScript captures video frames via an off-screen HTML5 `<canvas>` element, converts them to base64 images, and transmits them to the attacker's command-and-control server.\n\n---\n\n## Dissecting the Social Engineering Psychology\n\nSocial engineering succeeds by exploiting human cognitive biases:\n- **Curiosity & FOMO:** *\"Someone sent you a private greeting! Allow camera to reveal.\"*\n- **Authority & Compliance:** *\"Security check: please scan your face to access this protected document.\"*\n- **Desensitization:** Users routinely click **Allow** on cookie banners and notifications without carefully reading the prompt context.\n\n---\n\n## Defensive Strategies & Privacy Hardening\n\nUnderstanding the attack methodology allows users and security administrators to enforce bulletproof safeguards:\n\n### 1. Scrutinize Browser Hardware Permission Prompts\nNever approve camera or microphone access on websites that have no legitimate operational need for video. If an informational article or video viewer asks for camera access, close the tab immediately.\n\n### 2. Configure Default Deny Policies\nIn your browser settings (Chrome, Firefox, Brave, Safari):\n- Navigate to **Settings -> Privacy & Security -> Site Settings -> Camera**.\n- Choose: **\"Don't allow sites to see your camera\"** or enable **\"Ask before accessing\"**.\n\n### 3. Physical Hardware Privacy Covers\nA simple mechanical physical webcam slide cover remains the most infallible countermeasure against unauthorized surveillance. When the slider is closed, no software compromise or rogue permission can expose your visual environment.\n\n### 4. Deploy Anti-Phishing DNS Resolvers\nImplement DNS-level filtering (such as Cloudflare 1.1.1.2/1.1.1.3 or NextDNS) to automatically block known tunneling domains (`ngrok-free.app`, malicious Cloudflare workers) frequently used to host disposable phishing servers."
   },
   {
     "id": "sqlmap-mastery-database-vulnerability-assessment-guide",
