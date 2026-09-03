@@ -600,7 +600,7 @@ function renderHomePage() {
 }
 
 function loadFeaturedPosts() {
-  fetch('data/posts.json')
+  fetch('data/posts.json?v=20260903b')
     .then(r => r.json())
     .then(posts => {
       const grid = document.getElementById('featured-posts-grid');
