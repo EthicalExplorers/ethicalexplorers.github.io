@@ -40,7 +40,7 @@ async function fetchLabs() {
 async function fetchVideos() {
   if (videosCache) return videosCache;
   try {
-    const res = await fetch('data/videos.json?v=20260903b');
+    const res = await fetch('data/videos.json?v=20260903c');
     videosCache = await res.json();
     return videosCache;
   } catch (e) {
