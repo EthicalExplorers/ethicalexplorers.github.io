@@ -238,23 +238,42 @@ function injectFooter() {
 // MOBILE NAVIGATION
 // ================================================================
 function setupMobileNav() {
+  function closeMobileNav() {
+    const toggle = document.getElementById('nav-toggle');
+    const menu = document.getElementById('nav-menu');
+    if (menu) menu.classList.remove('active');
+    if (toggle) {
+      toggle.classList.remove('active');
+      toggle.setAttribute('aria-expanded', 'false');
+    }
+  }
+
   document.addEventListener('click', (e) => {
     const toggle = document.getElementById('nav-toggle');
     const menu = document.getElementById('nav-menu');
     if (!toggle || !menu) return;
 
     if (e.target.closest('#nav-toggle')) {
-      menu.classList.toggle('active');
-      toggle.classList.toggle('active');
-      toggle.setAttribute('aria-expanded', menu.classList.contains('active'));
-    } else if (e.target.closest('.nav-link')) {
-      menu.classList.remove('active');
-      toggle.classList.remove('active');
-      toggle.setAttribute('aria-expanded', 'false');
+      const willOpen = !menu.classList.contains('active');
+      menu.classList.toggle('active', willOpen);
+      toggle.classList.toggle('active', willOpen);
+      toggle.setAttribute('aria-expanded', String(willOpen));
+    } else if (e.target.closest('.nav-link') || e.target.closest('#nav-subscribe-btn')) {
+      closeMobileNav();
     } else if (!menu.contains(e.target) && !toggle.contains(e.target)) {
-      menu.classList.remove('active');
-      toggle.classList.remove('active');
-      toggle.setAttribute('aria-expanded', 'false');
+      closeMobileNav();
+    }
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      closeMobileNav();
+    }
+  });
+
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 1024) {
+      closeMobileNav();
     }
   });
 }
