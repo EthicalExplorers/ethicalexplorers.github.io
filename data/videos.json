@@ -1,5 +1,29 @@
 [
   {
+    "id": "NHAZGX4893Y",
+    "title": "Insto Tutorial: Instagram Reconnaissance & OSINT Tool for Cybersecurity",
+    "description": "Learn how to install and use Insto, an open-source Instagram OSINT and reconnaissance CLI tool for cybersecurity researchers, OSINT analysts, and authorized penetration testing.\n\nIn this tutorial, we ...",
+    "category": "OSINT & Recon",
+    "date": "2026-09-03",
+    "youtubeUrl": "https://www.youtube.com/watch?v=NHAZGX4893Y"
+  },
+  {
+    "id": "8VrQ96OhGdY",
+    "title": "How to Install Kali NetHunter on ANY Rooted Android Phone | Magisk 2026",
+    "description": "Learn how to install Kali NetHunter on any rooted Android phone using Magisk in this complete 2026 tutorial. This guide shows how to install the generic Kali NetHunter ARM64 Full build, configure the ...",
+    "category": "Linux & System",
+    "date": "2026-09-02",
+    "youtubeUrl": "https://www.youtube.com/watch?v=8VrQ96OhGdY"
+  },
+  {
+    "id": "xDun3MTRMV8",
+    "title": "KnockPy Tutorial: Subdomain Enumeration & Reconnaissance | Ethical Hacking",
+    "description": "Learn how to use KnockPy v9 for subdomain enumeration and cybersecurity reconnaissance in this complete beginner-friendly tutorial.\n\nKnockPy is a powerful Python-based subdomain enumeration tool desig...",
+    "category": "OSINT & Recon",
+    "date": "2026-09-01",
+    "youtubeUrl": "https://www.youtube.com/watch?v=xDun3MTRMV8"
+  },
+  {
     "id": "CrobJEz9fu4",
     "title": "BBOT Tutorial: The Ultimate OSINT & Recon Tool for Ethical Hackers",
     "description": "BBOT Tutorial: Learn how to use BBOT (Bighuge BLS OSINT Tool), a powerful open-source reconnaissance, OSINT and Attack Surface Management framework for cybersecurity professionals, penetration testers...",
@@ -118,10 +142,5 @@
     "category": "OSINT & Recon",
     "date": "2026-07-03",
     "youtubeUrl": "https://www.youtube.com/watch?v=IFmMvK08CnM"
-  },
-  {
-    "youtubeId": "3Kq1MIfTWCE",
-    "title": "Ethical Hacking Full Course — Learn Cybersecurity",
-    "category": "Full Course"
   }
 ]
