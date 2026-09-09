@@ -1,5 +1,37 @@
 [
   {
+    "id": "8rUnbUIc1Zg",
+    "title": "Mosint OSINT Tool: Find Email Intelligence with Kali Linux | Email OSINT Tutorial",
+    "description": "Learn how to use Mosint, a powerful open-source email OSINT tool, for ethical reconnaissance and digital footprint analysis. In this tutorial, we explore Mosint on Kali Linux and Ubuntu, install it using Go, configure API keys, and perform passive email intelligence.",
+    "category": "OSINT & Recon",
+    "date": "2026-09-08",
+    "youtubeUrl": "https://www.youtube.com/watch?v=8rUnbUIc1Zg"
+  },
+  {
+    "id": "wBNfsbnIhrY",
+    "title": "StrykerOSS: Turn Your Android Phone Into a Pentesting Machine! | Nmap, Metasploit & More",
+    "description": "Turn your Android phone into a powerful mobile cybersecurity and penetration testing lab with StrykerOSS! Complete setup process, network security auditing, wireless scanning, and Metasploit integration on mobile.",
+    "category": "Linux & System",
+    "date": "2026-09-07",
+    "youtubeUrl": "https://www.youtube.com/watch?v=wBNfsbnIhrY"
+  },
+  {
+    "id": "sexkWxBtAhY",
+    "title": "How to Install OpenWrt on Raspberry Pi 4 & Turn It Into a WiFi Router | Part 1",
+    "description": "Learn how to install OpenWrt on a Raspberry Pi 4B and turn it into a high-performance WiFi router! Complete initial installation walkthrough from required hardware, downloading and flashing the firmware, to network interface configuration.",
+    "category": "Network & Wireless Attacks",
+    "date": "2026-09-06",
+    "youtubeUrl": "https://www.youtube.com/watch?v=sexkWxBtAhY"
+  },
+  {
+    "id": "eAs-9UCVZ8w",
+    "title": "KaliDroid: Run Full Kali Linux on Android Without Root! | 2026 Guide",
+    "description": "Run Kali Linux on your Android phone WITHOUT ROOT! Complete KaliDroid installation on Android, including APK configuration, storage permissions, launching the Kali Linux environment, and accessing full GUI desktop.",
+    "category": "Linux & System",
+    "date": "2026-09-05",
+    "youtubeUrl": "https://www.youtube.com/watch?v=eAs-9UCVZ8w"
+  },
+  {
     "id": "NHAZGX4893Y",
     "title": "Insto Tutorial: Instagram Reconnaissance & OSINT Tool for Cybersecurity",
     "description": "Learn how to install and use Insto, an open-source Instagram OSINT and reconnaissance CLI tool for cybersecurity researchers, OSINT analysts, and authorized penetration testing.\n\nIn this tutorial, we ...",
@@ -33,8 +65,8 @@
   },
   {
     "id": "KXhsHGjkkrQ",
-    "title": "Kali Linux on Android WITHOUT Root 🔥 Install NetHunter Rootless with Termux | Full Guide 2026",
-    "description": "Want to install Kali Linux on Android without root? 🔥 In this complete step-by-step tutorial, I'll show you how to install Kali NetHunter Rootless on an Android phone using Termux — without rooting y...",
+    "title": "Kali Linux on Android WITHOUT Root \ud83d\udd25 Install NetHunter Rootless with Termux | Full Guide 2026",
+    "description": "Want to install Kali Linux on Android without root? \ud83d\udd25 In this complete step-by-step tutorial, I'll show you how to install Kali NetHunter Rootless on an Android phone using Termux \u2014 without rooting y...",
     "category": "Linux & System",
     "date": "2026-08-30",
     "youtubeUrl": "https://www.youtube.com/watch?v=KXhsHGjkkrQ"
@@ -58,87 +90,87 @@
   {
     "id": "ogA2HIoZy-8",
     "title": "VulnClaw Tutorial: AI-Powered Vulnerability Scanning Tool | Ethical Hacking & Cybersecurity",
-    "description": "VulnClaw Tutorial — an AI-powered penetration testing tool for ethical hackers and cybersecurity researchers. 🦞🔥\n\nIn this video, we'll explore VulnClaw, an open-source AI penetration testing agent t...",
+    "description": "VulnClaw Tutorial \u2014 an AI-powered penetration testing tool for ethical hackers and cybersecurity researchers. \ud83e\udd9e\ud83d\udd25\n\nIn this video, we'll explore VulnClaw, an open-source AI penetration testing agent t...",
     "category": "Web & Vulnerability Scanning",
     "date": "2026-08-19",
     "youtubeUrl": "https://www.youtube.com/watch?v=ogA2HIoZy-8"
   },
   {
     "id": "GuCm0sHoEVs",
-    "title": "🛡️ How Evil Twin Wi-Fi Attacks Work & How to Defend | Parrot OS & Fluxion Deep Dive 📡",
-    "description": "🛡️ Understanding Evil Twin Wireless Auditing &amp; Network Defense 📡\n\nWelcome to this comprehensive breakdown of wireless security auditing! In this video, we dissect the mechanics behind Evil Twin ...",
+    "title": "\ud83d\udee1\ufe0f How Evil Twin Wi-Fi Attacks Work & How to Defend | Parrot OS & Fluxion Deep Dive \ud83d\udce1",
+    "description": "\ud83d\udee1\ufe0f Understanding Evil Twin Wireless Auditing &amp; Network Defense \ud83d\udce1\n\nWelcome to this comprehensive breakdown of wireless security auditing! In this video, we dissect the mechanics behind Evil Twin ...",
     "category": "Network & Wireless Attacks",
     "date": "2026-08-17",
     "youtubeUrl": "https://www.youtube.com/watch?v=GuCm0sHoEVs"
   },
   {
     "id": "Ll2hyh3V6k4",
-    "title": "🔍 Find ANY Account Online in Seconds! (Blackbird OSINT Tutorial 🕵️‍♂️)",
-    "description": "Hey everyone and welcome to another video! 👋 \n\nIn this comprehensive guide, we dive deep into Open Source Intelligence (OSINT) and passive reconnaissance using Blackbird—one of the fastest and most p...",
+    "title": "\ud83d\udd0d Find ANY Account Online in Seconds! (Blackbird OSINT Tutorial \ud83d\udd75\ufe0f\u200d\u2642\ufe0f)",
+    "description": "Hey everyone and welcome to another video! \ud83d\udc4b \n\nIn this comprehensive guide, we dive deep into Open Source Intelligence (OSINT) and passive reconnaissance using Blackbird\u2014one of the fastest and most p...",
     "category": "OSINT & Recon",
     "date": "2026-08-14",
     "youtubeUrl": "https://www.youtube.com/watch?v=Ll2hyh3V6k4"
   },
   {
     "id": "cHC5017VX80",
-    "title": "Nuclei Vulnerability Scanner Tutorial for Beginners (2026) 🛡️",
-    "description": "🚀 Welcome to another episode of EthicalExplorers! In today's video, we are diving deep into one of the most powerful tools in a security professional's arsenal: the Nuclei Vulnerability Scanner by Pr...",
+    "title": "Nuclei Vulnerability Scanner Tutorial for Beginners (2026) \ud83d\udee1\ufe0f",
+    "description": "\ud83d\ude80 Welcome to another episode of EthicalExplorers! In today's video, we are diving deep into one of the most powerful tools in a security professional's arsenal: the Nuclei Vulnerability Scanner by Pr...",
     "category": "Web & Vulnerability Scanning",
     "date": "2026-07-20",
     "youtubeUrl": "https://www.youtube.com/watch?v=cHC5017VX80"
   },
   {
     "id": "VJYj_5J6la0",
-    "title": "💻 Find XSS Faster! Complete XSStrike Installation & Features Guide 🛡️",
-    "description": "Welcome back to EthicalExplorers! 🌐 In today's video, we are diving deep into an absolute game-changer for web application security testing: XSStrike! 💥\n\nIf you spend any time dealing with bug bount...",
+    "title": "\ud83d\udcbb Find XSS Faster! Complete XSStrike Installation & Features Guide \ud83d\udee1\ufe0f",
+    "description": "Welcome back to EthicalExplorers! \ud83c\udf10 In today's video, we are diving deep into an absolute game-changer for web application security testing: XSStrike! \ud83d\udca5\n\nIf you spend any time dealing with bug bount...",
     "category": "Web & Vulnerability Scanning",
     "date": "2026-07-17",
     "youtubeUrl": "https://www.youtube.com/watch?v=VJYj_5J6la0"
   },
   {
     "id": "OXLlhTLEjNE",
-    "title": "Find Hidden Assets with OWASP Amass! 🌐 Bug Bounty Recon Guide 2026",
-    "description": "Welcome back to Ethical Explorers! 🌍 In today's video, we are diving deep into the OWASP Amass Project, an absolute must-have tool for cybersecurity professionals, penetration testers, and bug bounty...",
+    "title": "Find Hidden Assets with OWASP Amass! \ud83c\udf10 Bug Bounty Recon Guide 2026",
+    "description": "Welcome back to Ethical Explorers! \ud83c\udf0d In today's video, we are diving deep into the OWASP Amass Project, an absolute must-have tool for cybersecurity professionals, penetration testers, and bug bounty...",
     "category": "OSINT & Recon",
     "date": "2026-07-15",
     "youtubeUrl": "https://www.youtube.com/watch?v=OXLlhTLEjNE"
   },
   {
     "id": "RbFAEgMteoM",
-    "title": "Master WPScan in 5 Minutes! 🛡️ Ultimate WordPress Security Guide",
-    "description": "Welcome to EthicalExplorers! 🌍\nIn today's video, we are diving deep into WPScan, the ultimate black box vulnerability scanner designed specifically for WordPress environments! 🛡️💻\n\nWordPress powers...",
+    "title": "Master WPScan in 5 Minutes! \ud83d\udee1\ufe0f Ultimate WordPress Security Guide",
+    "description": "Welcome to EthicalExplorers! \ud83c\udf0d\nIn today's video, we are diving deep into WPScan, the ultimate black box vulnerability scanner designed specifically for WordPress environments! \ud83d\udee1\ufe0f\ud83d\udcbb\n\nWordPress powers...",
     "category": "Web & Vulnerability Scanning",
     "date": "2026-07-13",
     "youtubeUrl": "https://www.youtube.com/watch?v=RbFAEgMteoM"
   },
   {
     "id": "-c993JqJKEs",
-    "title": "📸 How Hackers Trick You Into Giving Camera Access 😱 | CamPhish Explained",
-    "description": "🎥 Welcome back to EthicalExplorers!\n\nIn this video, we explore CamPhish, an educational cybersecurity awareness tool that demonstrates how social engineering attacks can trick users into granting cam...",
+    "title": "\ud83d\udcf8 How Hackers Trick You Into Giving Camera Access \ud83d\ude31 | CamPhish Explained",
+    "description": "\ud83c\udfa5 Welcome back to EthicalExplorers!\n\nIn this video, we explore CamPhish, an educational cybersecurity awareness tool that demonstrates how social engineering attacks can trick users into granting cam...",
     "category": "Network & Wireless Attacks",
     "date": "2026-07-10",
     "youtubeUrl": "https://www.youtube.com/watch?v=-c993JqJKEs"
   },
   {
     "id": "6BWH2i2GTRI",
-    "title": "🔐 How Attackers Target Sessions Instead of Passwords | EvilnoVNC Installation",
-    "description": "🚨 Cybersecurity threats are evolving faster than ever!\n\nIn this video, we explore how modern phishing attacks have changed and why traditional security awareness is no longer enough. Learn how attack...",
+    "title": "\ud83d\udd10 How Attackers Target Sessions Instead of Passwords | EvilnoVNC Installation",
+    "description": "\ud83d\udea8 Cybersecurity threats are evolving faster than ever!\n\nIn this video, we explore how modern phishing attacks have changed and why traditional security awareness is no longer enough. Learn how attack...",
     "category": "Network & Wireless Attacks",
     "date": "2026-07-08",
     "youtubeUrl": "https://www.youtube.com/watch?v=6BWH2i2GTRI"
   },
   {
     "id": "NAX3uwX3Gd0",
-    "title": "🚀 Turn Python Scripts into .deb Packages Instantly with Py2Deb! 🐍📦",
-    "description": "Hey everyone, welcome back to EthicalExplorers! 🌍🕵️‍♂️\n\nIn today's video, we are diving into Py2Deb, a powerful and user-friendly Python GUI tool that lets you convert your .py or .sh scripts into D...",
+    "title": "\ud83d\ude80 Turn Python Scripts into .deb Packages Instantly with Py2Deb! \ud83d\udc0d\ud83d\udce6",
+    "description": "Hey everyone, welcome back to EthicalExplorers! \ud83c\udf0d\ud83d\udd75\ufe0f\u200d\u2642\ufe0f\n\nIn today's video, we are diving into Py2Deb, a powerful and user-friendly Python GUI tool that lets you convert your .py or .sh scripts into D...",
     "category": "Linux & System",
     "date": "2026-07-06",
     "youtubeUrl": "https://www.youtube.com/watch?v=NAX3uwX3Gd0"
   },
   {
     "id": "IFmMvK08CnM",
-    "title": "Slash OSINT Tool | Track Usernames Across the Internet 🔎🌐",
-    "description": "Find ANYONE's Digital Footprint With THIS Automated OSINT Tool! 🕵️‍♂️💻 (Slash Tutorial)\n\nWelcome back to EthicalExplorers! 🌍🔒 In today's video, we are diving deep into an incredible automated Open...",
+    "title": "Slash OSINT Tool | Track Usernames Across the Internet \ud83d\udd0e\ud83c\udf10",
+    "description": "Find ANYONE's Digital Footprint With THIS Automated OSINT Tool! \ud83d\udd75\ufe0f\u200d\u2642\ufe0f\ud83d\udcbb (Slash Tutorial)\n\nWelcome back to EthicalExplorers! \ud83c\udf0d\ud83d\udd12 In today's video, we are diving deep into an incredible automated Open...",
     "category": "OSINT & Recon",
     "date": "2026-07-03",
     "youtubeUrl": "https://www.youtube.com/watch?v=IFmMvK08CnM"
