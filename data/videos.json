@@ -1,5 +1,29 @@
 [
   {
+    "id": "2WddE7dbiRA",
+    "title": "Rucky Android USB Rubber Ducky Tutorial | Kali NetHunter HID Setup & Demo",
+    "description": "Turn your Android phone into a USB Rubber Ducky with Rucky! Setup Kali NetHunter HID mode, fix kernel unsupported issues, configure HID targets, load Ducky Scripts, and test keystroke injection.",
+    "category": "Linux & System",
+    "date": "2026-09-11",
+    "youtubeUrl": "https://www.youtube.com/watch?v=2WddE7dbiRA"
+  },
+  {
+    "id": "5IWUuIrRYPE",
+    "title": "StrykerOSS Rootless on Android 🔥 Full Setup Guide Without Root | QEMU + WiFi Adapter",
+    "description": "Run StrykerOSS on Android completely without root using its Rootless QEMU engine. Full setup walkthrough from QEMU virtualization, VNC desktop, and Arsenal to OTG external Wi-Fi adapter integration.",
+    "category": "Linux & System",
+    "date": "2026-09-10",
+    "youtubeUrl": "https://www.youtube.com/watch?v=5IWUuIrRYPE"
+  },
+  {
+    "id": "kyWmDdiucDE",
+    "title": "Raspberry Pi OpenWrt Router Setup: WiFi Hotspot, SSH & Network Configuration (Part 2)",
+    "description": "Turn your Raspberry Pi into a powerful OpenWrt router and WiFi hotspot! Part 2 covers securing SSH access, backup configuration, LAN & WWAN settings, firewall rules, and internal WiFi hotspot setup.",
+    "category": "Network & Wireless Attacks",
+    "date": "2026-09-09",
+    "youtubeUrl": "https://www.youtube.com/watch?v=kyWmDdiucDE"
+  },
+  {
     "id": "8rUnbUIc1Zg",
     "title": "Mosint OSINT Tool: Find Email Intelligence with Kali Linux | Email OSINT Tutorial",
     "description": "Learn how to use Mosint, a powerful open-source email OSINT tool, for ethical reconnaissance and digital footprint analysis. In this tutorial, we explore Mosint on Kali Linux and Ubuntu, install it using Go, configure API keys, and perform passive email intelligence.",
