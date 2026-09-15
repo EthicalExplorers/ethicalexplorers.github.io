@@ -2,6 +2,8 @@
  * Ethical Explorers — Automatic Sitemap Generator
  * Automatically syncs all static pages and dynamic blog posts from data/posts.json into sitemap.xml
  * for Google Search Console and other search engines.
+ * 
+ * Also generates a sitemap_index.xml wrapper for better Google Search Console compatibility.
  */
 
 const fs = require('fs');
@@ -11,6 +13,7 @@ const SITE_URL = 'https://ethicalexplorers.github.io';
 const ROOT_DIR = path.resolve(__dirname, '..');
 const POSTS_PATH = path.join(ROOT_DIR, 'data', 'posts.json');
 const SITEMAP_PATH = path.join(ROOT_DIR, 'sitemap.xml');
+const SITEMAP_INDEX_PATH = path.join(ROOT_DIR, 'sitemap_index.xml');
 
 // Current date formatted as YYYY-MM-DD
 const today = new Date().toISOString().split('T')[0];
@@ -27,6 +30,18 @@ const staticPages = [
   { path: '?p=terms', priority: '0.3', changefreq: 'yearly' },
   { path: '?p=disclaimer', priority: '0.3', changefreq: 'yearly' }
 ];
+
+/**
+ * Escape special XML characters in URLs
+ */
+function escapeXml(str) {
+  return str
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&apos;');
+}
 
 function generateSitemap() {
   console.log('⚡ Generating sitemap for Ethical Explorers...');
@@ -51,7 +66,7 @@ function generateSitemap() {
   staticPages.forEach(page => {
     const loc = page.path ? `${SITE_URL}/${page.path}` : `${SITE_URL}/`;
     xml += '  <url>\n';
-    xml += `    <loc>${loc}</loc>\n`;
+    xml += `    <loc>${escapeXml(loc)}</loc>\n`;
     xml += `    <lastmod>${today}</lastmod>\n`;
     xml += `    <changefreq>${page.changefreq}</changefreq>\n`;
     xml += `    <priority>${page.priority}</priority>\n`;
@@ -64,7 +79,7 @@ function generateSitemap() {
     const postSlug = encodeURIComponent(post.id || post.title.toLowerCase().replace(/[^a-z0-9]+/g, '-'));
 
     xml += '  <url>\n';
-    xml += `    <loc>${SITE_URL}/?p=blog/${postSlug}</loc>\n`;
+    xml += `    <loc>${escapeXml(`${SITE_URL}/?p=blog/${postSlug}`)}</loc>\n`;
     xml += `    <lastmod>${postDate}</lastmod>\n`;
     xml += `    <changefreq>weekly</changefreq>\n`;
     xml += `    <priority>0.8</priority>\n`;
@@ -73,9 +88,21 @@ function generateSitemap() {
 
   xml += '</urlset>\n';
 
-  // Write to sitemap.xml
+  // Write main sitemap.xml
   fs.writeFileSync(SITEMAP_PATH, xml, 'utf8');
-  console.log(`✅ Successfully updated sitemap.xml with ${staticPages.length + posts.length} total URLs!`);
+  console.log(`✅ Updated sitemap.xml with ${staticPages.length + posts.length} total URLs`);
+
+  // 3. Generate sitemap_index.xml wrapper (better GSC compatibility)
+  let indexXml = '<?xml version="1.0" encoding="UTF-8"?>\n';
+  indexXml += '<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n';
+  indexXml += '  <sitemap>\n';
+  indexXml += `    <loc>${SITE_URL}/sitemap.xml</loc>\n`;
+  indexXml += `    <lastmod>${today}</lastmod>\n`;
+  indexXml += '  </sitemap>\n';
+  indexXml += '</sitemapindex>\n';
+
+  fs.writeFileSync(SITEMAP_INDEX_PATH, indexXml, 'utf8');
+  console.log(`✅ Updated sitemap_index.xml (wrapper for GSC)`);
 }
 
 generateSitemap();
