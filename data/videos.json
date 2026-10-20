@@ -1,0 +1,354 @@
+[
+  {
+    "id": "cnrVOFg8VR4",
+    "title": "StrykerOSS 6.5 Update: Major Mobile Pentesting Upgrade & New Linux Engine",
+    "description": "StrykerOSS 6.5 brings major architectural upgrades to Android penetration testing: a new User-Mode Linux engine, optimized OTG Wi-Fi drivers, updated chroot pentest arsenal, and an enhanced tactical dashboard.",
+    "category": "Linux & System",
+    "date": "2026-10-09",
+    "youtubeUrl": "https://www.youtube.com/watch?v=cnrVOFg8VR4"
+  },
+  {
+    "id": "ZZ3fvXhUaFU",
+    "title": "FinalRecon: Fast & Modular Web Reconnaissance Framework on Kali Linux",
+    "description": "Master FinalRecon, the rapid Python web intelligence tool. Automate SSL certificate analysis, WHOIS lookups, DNS enumeration, subdomain discovery, directory crawling, and Wayback Machine scraping.",
+    "category": "OSINT & Recon",
+    "date": "2026-10-07",
+    "youtubeUrl": "https://www.youtube.com/watch?v=ZZ3fvXhUaFU"
+  },
+  {
+    "id": "nQUFyoOFg2E",
+    "title": "Kali NetHunter Pro on Laptop (Part 2): Full Live USB Demo & Field Testing",
+    "description": "Experience Kali NetHunter Pro running natively on an x86_64 laptop. Complete live USB walkthrough featuring the mobile Phosh UI, built-in wireless auditing tools, USB Arsenal, and hardware driver compatibility.",
+    "category": "Linux & System",
+    "date": "2026-10-01",
+    "youtubeUrl": "https://www.youtube.com/watch?v=nQUFyoOFg2E"
+  },
+  {
+    "id": "j739aDxeL8o",
+    "title": "How to Install Kali NetHunter Pro on PC & Laptop: Bootable USB Setup Guide (Part 1)",
+    "description": "Step-by-step guide to flashing and installing Kali NetHunter Pro AMD64 on PCs and laptops using Balena Etcher. Learn image verification, BIOS/UEFI boot configurations, and initial partition setup.",
+    "category": "Linux & System",
+    "date": "2026-09-30",
+    "youtubeUrl": "https://www.youtube.com/watch?v=j739aDxeL8o"
+  },
+  {
+    "id": "22Pta7WZI3g",
+    "title": "ObscuraCam Guide: Facial Blurring, Metadata Scrubbing & Photo/Video Privacy on Android",
+    "description": "Protect identities and operational security with ObscuraCam. Learn automated and manual facial redaction, pixelation filters, EXIF metadata removal, and operational privacy workflows from The Guardian Project.",
+    "category": "Linux & System",
+    "date": "2026-09-29",
+    "youtubeUrl": "https://www.youtube.com/watch?v=22Pta7WZI3g"
+  },
+  {
+    "id": "YvKLfrUk40Q",
+    "title": "NetCut Android Tutorial: Local Network Device Discovery, Bandwidth Control & ARP Defense",
+    "description": "Learn how NetCut operates on rooted Android devices to map local network hosts, throttle suspicious bandwidth hogs, analyze ARP table dynamics, and defend against unauthorized ARP spoofing attacks.",
+    "category": "Network & Wireless Attacks",
+    "date": "2026-09-28",
+    "youtubeUrl": "https://www.youtube.com/watch?v=YvKLfrUk40Q"
+  },
+  {
+    "id": "38hilApDDLk",
+    "title": "cSploit Complete Guide: Advanced Network Pentesting & Exploitation Toolkit for Android",
+    "description": "Turn your rooted Android phone into a full network attack suite with cSploit. Learn network mapping, vulnerability scanning, Metasploit integration, TCP/UDP packet forging, and MITM traffic manipulation.",
+    "category": "Network & Wireless Attacks",
+    "date": "2026-09-27",
+    "youtubeUrl": "https://www.youtube.com/watch?v=38hilApDDLk"
+  },
+  {
+    "id": "xeU1NVnNXrc",
+    "title": "Kali NetHunter WPS Attacks: OneShot & Pixie Dust Wi-Fi Security Auditing on Android",
+    "description": "Audit Wi-Fi Protected Setup (WPS) vulnerabilities on mobile using Kali NetHunter. Learn how OneShot and Pixie Dust attacks recover WPA/WPA2 pre-shared keys via WPS registrar flaws without brute force.",
+    "category": "Network & Wireless Attacks",
+    "date": "2026-09-26",
+    "youtubeUrl": "https://www.youtube.com/watch?v=xeU1NVnNXrc"
+  },
+  {
+    "id": "oQYbz_987tg",
+    "title": "Intercepter-NG Android Guide: Mobile Packet Sniffing & Tactical Wireshark Alternative",
+    "description": "Analyze unencrypted network streams directly from Android with Intercepter-NG. Explore packet sniffing, OS fingerprinting, ARP-based MITM capture, credential detection, and defensive SSL/TLS enforcement.",
+    "category": "Network & Wireless Attacks",
+    "date": "2026-09-25",
+    "youtubeUrl": "https://www.youtube.com/watch?v=oQYbz_987tg"
+  },
+  {
+    "id": "m1uNAOmxPK4",
+    "title": "LineageOS TV on Raspberry Pi (Part 2): First Boot, Display Setup & Android 16 Configuration",
+    "description": "Complete Part 2 walkthrough of LineageOS TV (Android 16) on Raspberry Pi 3, 4, and 5. Configure display resolution, USB peripherals, hardware video acceleration, and sideload privacy/security testing apps.",
+    "category": "Linux & System",
+    "date": "2026-09-24",
+    "youtubeUrl": "https://www.youtube.com/watch?v=m1uNAOmxPK4"
+  },
+  {
+    "id": "68FaAh6ECbg",
+    "title": "NFC Card Emulator Pro (Root) Tutorial: CUID Emulation, Access Cards & LSPosed on Android",
+    "description": "Simulate 13.56MHz RFID/NFC access badges and IC smart cards on Android using NFC Card Emulator Pro. Master root setup, LSPosed NFC hooks, CUID card writing, and physical access security mitigations.",
+    "category": "Linux & System",
+    "date": "2026-09-23",
+    "youtubeUrl": "https://www.youtube.com/watch?v=68FaAh6ECbg"
+  },
+  {
+    "id": "9FIhL5uETTw",
+    "title": "USB Gadget Tool for Android: Fix Rucky 'Kernel Not Supported' Without Custom Kernels",
+    "description": "Bypass the 'Kernel Not Supported' error in Rucky and Kali NetHunter using USB Gadget Tool. Leverage Linux ConfigFS to dynamically expose USB HID keyboard/mouse endpoints on standard rooted Android kernels.",
+    "category": "Linux & System",
+    "date": "2026-09-20",
+    "youtubeUrl": "https://www.youtube.com/watch?v=9FIhL5uETTw"
+  },
+  {
+    "id": "ZeCr3aS48l4",
+    "title": "Trape OSINT Guide: Tracking IP, Geolocation & Digital Footprints via Browser APIs",
+    "description": "Explore Trape, the OSINT research platform analyzing browser fingerprinting. Learn how malicious web links track public IPs, battery status, open tabs, and social sessions, along with defensive counter-tactics.",
+    "category": "OSINT & Recon",
+    "date": "2026-09-18",
+    "youtubeUrl": "https://www.youtube.com/watch?v=ZeCr3aS48l4"
+  },
+  {
+    "id": "v18Va_C48-o",
+    "title": "Kali NetHunter 2026.2 Deep Dive: Complete Android Mobile Pentesting Architecture Explained",
+    "description": "Comprehensive architectural breakdown of Kali NetHunter 2026.2 on Android. Explore chroot file hierarchies, KeX desktop streaming, USB Arsenal, Wi-Fi monitor injection, and mobile Bluetooth auditing.",
+    "category": "Linux & System",
+    "date": "2026-09-17",
+    "youtubeUrl": "https://www.youtube.com/watch?v=v18Va_C48-o"
+  },
+  {
+    "id": "DKGJQbYEwyA",
+    "title": "Install LineageOS TV on Raspberry Pi 3/4/5: Android TV Firmware & Hardware Guide (Part 1)",
+    "description": "Build your own custom Android TV box with LineageOS TV and Raspberry Pi. In Part 1, we cover hardware selection, SD card partitioning, flashing KonstaKANG firmware, and power supply prerequisites.",
+    "category": "Linux & System",
+    "date": "2026-09-16",
+    "youtubeUrl": "https://www.youtube.com/watch?v=DKGJQbYEwyA"
+  },
+  {
+    "id": "KW6rqsZer8c",
+    "title": "Maigret OSINT Tutorial: Find Profiles & Social Media Accounts by Username Across 3,000+ Sites",
+    "description": "Supercharge your digital reconnaissance with Maigret. Learn recursive username enumeration, PDF reporting, Tor routing, parsing account metadata, and mitigating your personal online exposure footprint.",
+    "category": "OSINT & Recon",
+    "date": "2026-09-15",
+    "youtubeUrl": "https://www.youtube.com/watch?v=KW6rqsZer8c"
+  },
+  {
+    "id": "7SUG9w9yTQQ",
+    "title": "Raspberry Pi OpenWrt Router (Part 3): External USB Wi-Fi Adapter & High-Gain AP Setup",
+    "description": "Upgrade your Raspberry Pi OpenWrt router with external high-gain USB Wi-Fi adapters. Install Linux wireless drivers (kmod), configure simultaneous 2.4/5GHz dual AP hotspots, and bridge WWAN uplink connections.",
+    "category": "Network & Wireless Attacks",
+    "date": "2026-09-14",
+    "youtubeUrl": "https://www.youtube.com/watch?v=7SUG9w9yTQQ"
+  },
+  {
+    "id": "ytDp1RpaM_M",
+    "title": "PixelKnot Steganography Tutorial: Hide Encrypted Secret Messages Inside Android Photos",
+    "description": "Master mobile steganography with PixelKnot from The Guardian Project. Learn how the F5 steganographic algorithm conceals encrypted payloads inside standard JPEG DCT coefficients without visual degradation.",
+    "category": "Linux & System",
+    "date": "2026-09-13",
+    "youtubeUrl": "https://www.youtube.com/watch?v=ytDp1RpaM_M"
+  },
+  {
+    "id": "eMDmUlqELTU",
+    "title": "Tookie OSINT Tutorial: Username Reconnaissance & Digital Footprinting on Linux",
+    "description": "Discover public online presence with Tookie OSINT on Linux. Learn tool installation, multi-platform username scanning, identifying false positives, and auditing your personal username exposure.",
+    "category": "OSINT & Recon",
+    "date": "2026-09-12",
+    "youtubeUrl": "https://www.youtube.com/watch?v=eMDmUlqELTU"
+  },
+  {
+    "id": "2WddE7dbiRA",
+    "title": "Rucky Android USB Rubber Ducky Tutorial | Kali NetHunter HID Setup & Demo",
+    "description": "Turn your Android phone into a USB Rubber Ducky with Rucky! Setup Kali NetHunter HID mode, fix kernel unsupported issues, configure HID targets, load Ducky Scripts, and test keystroke injection.",
+    "category": "Linux & System",
+    "date": "2026-09-11",
+    "youtubeUrl": "https://www.youtube.com/watch?v=2WddE7dbiRA"
+  },
+  {
+    "id": "5IWUuIrRYPE",
+    "title": "StrykerOSS Rootless on Android 🔥 Full Setup Guide Without Root | QEMU + WiFi Adapter",
+    "description": "Run StrykerOSS on Android completely without root using its Rootless QEMU engine. Full setup walkthrough from QEMU virtualization, VNC desktop, and Arsenal to OTG external Wi-Fi adapter integration.",
+    "category": "Linux & System",
+    "date": "2026-09-10",
+    "youtubeUrl": "https://www.youtube.com/watch?v=5IWUuIrRYPE"
+  },
+  {
+    "id": "kyWmDdiucDE",
+    "title": "Raspberry Pi OpenWrt Router Setup: WiFi Hotspot, SSH & Network Configuration (Part 2)",
+    "description": "Turn your Raspberry Pi into a powerful OpenWrt router and WiFi hotspot! Part 2 covers securing SSH access, backup configuration, LAN & WWAN settings, firewall rules, and internal WiFi hotspot setup.",
+    "category": "Network & Wireless Attacks",
+    "date": "2026-09-09",
+    "youtubeUrl": "https://www.youtube.com/watch?v=kyWmDdiucDE"
+  },
+  {
+    "id": "8rUnbUIc1Zg",
+    "title": "Mosint OSINT Tool: Find Email Intelligence with Kali Linux | Email OSINT Tutorial",
+    "description": "Learn how to use Mosint, a powerful open-source email OSINT tool, for ethical reconnaissance and digital footprint analysis. In this tutorial, we explore Mosint on Kali Linux and Ubuntu, install it using Go, configure API keys, and perform passive email intelligence.",
+    "category": "OSINT & Recon",
+    "date": "2026-09-08",
+    "youtubeUrl": "https://www.youtube.com/watch?v=8rUnbUIc1Zg"
+  },
+  {
+    "id": "wBNfsbnIhrY",
+    "title": "StrykerOSS: Turn Your Android Phone Into a Pentesting Machine! | Nmap, Metasploit & More",
+    "description": "Turn your Android phone into a powerful mobile cybersecurity and penetration testing lab with StrykerOSS! Complete setup process, network security auditing, wireless scanning, and Metasploit integration on mobile.",
+    "category": "Linux & System",
+    "date": "2026-09-07",
+    "youtubeUrl": "https://www.youtube.com/watch?v=wBNfsbnIhrY"
+  },
+  {
+    "id": "sexkWxBtAhY",
+    "title": "How to Install OpenWrt on Raspberry Pi 4 & Turn It Into a WiFi Router | Part 1",
+    "description": "Learn how to install OpenWrt on a Raspberry Pi 4B and turn it into a high-performance WiFi router! Complete initial installation walkthrough from required hardware, downloading and flashing the firmware, to network interface configuration.",
+    "category": "Network & Wireless Attacks",
+    "date": "2026-09-06",
+    "youtubeUrl": "https://www.youtube.com/watch?v=sexkWxBtAhY"
+  },
+  {
+    "id": "eAs-9UCVZ8w",
+    "title": "KaliDroid: Run Full Kali Linux on Android Without Root! | 2026 Guide",
+    "description": "Run Kali Linux on your Android phone WITHOUT ROOT! Complete KaliDroid installation on Android, including APK configuration, storage permissions, launching the Kali Linux environment, and accessing full GUI desktop.",
+    "category": "Linux & System",
+    "date": "2026-09-05",
+    "youtubeUrl": "https://www.youtube.com/watch?v=eAs-9UCVZ8w"
+  },
+  {
+    "id": "NHAZGX4893Y",
+    "title": "Insto Tutorial: Instagram Reconnaissance & OSINT Tool for Cybersecurity",
+    "description": "Learn how to install and use Insto, an open-source Instagram OSINT and reconnaissance CLI tool for cybersecurity researchers, OSINT analysts, and authorized penetration testing.\n\nIn this tutorial, we ...",
+    "category": "OSINT & Recon",
+    "date": "2026-09-03",
+    "youtubeUrl": "https://www.youtube.com/watch?v=NHAZGX4893Y"
+  },
+  {
+    "id": "8VrQ96OhGdY",
+    "title": "How to Install Kali NetHunter on ANY Rooted Android Phone | Magisk 2026",
+    "description": "Learn how to install Kali NetHunter on any rooted Android phone using Magisk in this complete 2026 tutorial. This guide shows how to install the generic Kali NetHunter ARM64 Full build, configure the ...",
+    "category": "Linux & System",
+    "date": "2026-09-02",
+    "youtubeUrl": "https://www.youtube.com/watch?v=8VrQ96OhGdY"
+  },
+  {
+    "id": "xDun3MTRMV8",
+    "title": "KnockPy Tutorial: Subdomain Enumeration & Reconnaissance | Ethical Hacking",
+    "description": "Learn how to use KnockPy v9 for subdomain enumeration and cybersecurity reconnaissance in this complete beginner-friendly tutorial.\n\nKnockPy is a powerful Python-based subdomain enumeration tool desig...",
+    "category": "OSINT & Recon",
+    "date": "2026-09-01",
+    "youtubeUrl": "https://www.youtube.com/watch?v=xDun3MTRMV8"
+  },
+  {
+    "id": "CrobJEz9fu4",
+    "title": "BBOT Tutorial: The Ultimate OSINT & Recon Tool for Ethical Hackers",
+    "description": "BBOT Tutorial: Learn how to use BBOT (Bighuge BLS OSINT Tool), a powerful open-source reconnaissance, OSINT and Attack Surface Management framework for cybersecurity professionals, penetration testers...",
+    "category": "OSINT & Recon",
+    "date": "2026-08-31",
+    "youtubeUrl": "https://www.youtube.com/watch?v=CrobJEz9fu4"
+  },
+  {
+    "id": "KXhsHGjkkrQ",
+    "title": "Kali Linux on Android WITHOUT Root 🔥 Install NetHunter Rootless with Termux | Full Guide 2026",
+    "description": "Want to install Kali Linux on Android without root? 🔥 In this complete step-by-step tutorial, I'll show you how to install Kali NetHunter Rootless on an Android phone using Termux — without rooting y...",
+    "category": "Linux & System",
+    "date": "2026-08-30",
+    "youtubeUrl": "https://www.youtube.com/watch?v=KXhsHGjkkrQ"
+  },
+  {
+    "id": "AInO0nDRHC0",
+    "title": "Netryx Astra V2 Geolocation Tool Explained | Ethical Hacking & OSINT Cybersecurity Tool",
+    "description": "Netryx Astra V2 is a geolocation and reconnaissance tool designed for cybersecurity research, ethical hacking, OSINT, and security testing. In this video, we'll take a look at the Netryx Astra V2 Geol...",
+    "category": "OSINT & Recon",
+    "date": "2026-08-24",
+    "youtubeUrl": "https://www.youtube.com/watch?v=AInO0nDRHC0"
+  },
+  {
+    "id": "CipCRtxBiBw",
+    "title": "12 Essential Linux Commands You Should Know in 2026",
+    "description": "Learn 12 essential Linux commands for beginners in this practical Linux terminal tutorial! \n\nIn this video, we demonstrate useful Linux commands with real terminal examples on Parrot OS, including ech...",
+    "category": "Linux & System",
+    "date": "2026-08-21",
+    "youtubeUrl": "https://www.youtube.com/watch?v=CipCRtxBiBw"
+  },
+  {
+    "id": "ogA2HIoZy-8",
+    "title": "VulnClaw Tutorial: AI-Powered Vulnerability Scanning Tool | Ethical Hacking & Cybersecurity",
+    "description": "VulnClaw Tutorial — an AI-powered penetration testing tool for ethical hackers and cybersecurity researchers. 🦞🔥\n\nIn this video, we'll explore VulnClaw, an open-source AI penetration testing agent t...",
+    "category": "Web & Vulnerability Scanning",
+    "date": "2026-08-19",
+    "youtubeUrl": "https://www.youtube.com/watch?v=ogA2HIoZy-8"
+  },
+  {
+    "id": "GuCm0sHoEVs",
+    "title": "🛡️ How Evil Twin Wi-Fi Attacks Work & How to Defend | Parrot OS & Fluxion Deep Dive 📡",
+    "description": "🛡️ Understanding Evil Twin Wireless Auditing &amp; Network Defense 📡\n\nWelcome to this comprehensive breakdown of wireless security auditing! In this video, we dissect the mechanics behind Evil Twin ...",
+    "category": "Network & Wireless Attacks",
+    "date": "2026-08-17",
+    "youtubeUrl": "https://www.youtube.com/watch?v=GuCm0sHoEVs"
+  },
+  {
+    "id": "Ll2hyh3V6k4",
+    "title": "🔍 Find ANY Account Online in Seconds! (Blackbird OSINT Tutorial 🕵️‍♂️)",
+    "description": "Hey everyone and welcome to another video! 👋 \n\nIn this comprehensive guide, we dive deep into Open Source Intelligence (OSINT) and passive reconnaissance using Blackbird—one of the fastest and most p...",
+    "category": "OSINT & Recon",
+    "date": "2026-08-14",
+    "youtubeUrl": "https://www.youtube.com/watch?v=Ll2hyh3V6k4"
+  },
+  {
+    "id": "cHC5017VX80",
+    "title": "Nuclei Vulnerability Scanner Tutorial for Beginners (2026) 🛡️",
+    "description": "🚀 Welcome to another episode of EthicalExplorers! In today's video, we are diving deep into one of the most powerful tools in a security professional's arsenal: the Nuclei Vulnerability Scanner by Pr...",
+    "category": "Web & Vulnerability Scanning",
+    "date": "2026-07-20",
+    "youtubeUrl": "https://www.youtube.com/watch?v=cHC5017VX80"
+  },
+  {
+    "id": "VJYj_5J6la0",
+    "title": "💻 Find XSS Faster! Complete XSStrike Installation & Features Guide 🛡️",
+    "description": "Welcome back to EthicalExplorers! 🌐 In today's video, we are diving deep into an absolute game-changer for web application security testing: XSStrike! 💥\n\nIf you spend any time dealing with bug bount...",
+    "category": "Web & Vulnerability Scanning",
+    "date": "2026-07-17",
+    "youtubeUrl": "https://www.youtube.com/watch?v=VJYj_5J6la0"
+  },
+  {
+    "id": "OXLlhTLEjNE",
+    "title": "Find Hidden Assets with OWASP Amass! 🌐 Bug Bounty Recon Guide 2026",
+    "description": "Welcome back to Ethical Explorers! 🌍 In today's video, we are diving deep into the OWASP Amass Project, an absolute must-have tool for cybersecurity professionals, penetration testers, and bug bounty...",
+    "category": "OSINT & Recon",
+    "date": "2026-07-15",
+    "youtubeUrl": "https://www.youtube.com/watch?v=OXLlhTLEjNE"
+  },
+  {
+    "id": "RbFAEgMteoM",
+    "title": "Master WPScan in 5 Minutes! 🛡️ Ultimate WordPress Security Guide",
+    "description": "Welcome to EthicalExplorers! 🌍\nIn today's video, we are diving deep into WPScan, the ultimate black box vulnerability scanner designed specifically for WordPress environments! 🛡️💻\n\nWordPress powers...",
+    "category": "Web & Vulnerability Scanning",
+    "date": "2026-07-13",
+    "youtubeUrl": "https://www.youtube.com/watch?v=RbFAEgMteoM"
+  },
+  {
+    "id": "-c993JqJKEs",
+    "title": "📸 How Hackers Trick You Into Giving Camera Access 😱 | CamPhish Explained",
+    "description": "🎥 Welcome back to EthicalExplorers!\n\nIn this video, we explore CamPhish, an educational cybersecurity awareness tool that demonstrates how social engineering attacks can trick users into granting cam...",
+    "category": "Network & Wireless Attacks",
+    "date": "2026-07-10",
+    "youtubeUrl": "https://www.youtube.com/watch?v=-c993JqJKEs"
+  },
+  {
+    "id": "6BWH2i2GTRI",
+    "title": "🔐 How Attackers Target Sessions Instead of Passwords | EvilnoVNC Installation",
+    "description": "🚨 Cybersecurity threats are evolving faster than ever!\n\nIn this video, we explore how modern phishing attacks have changed and why traditional security awareness is no longer enough. Learn how attack...",
+    "category": "Network & Wireless Attacks",
+    "date": "2026-07-08",
+    "youtubeUrl": "https://www.youtube.com/watch?v=6BWH2i2GTRI"
+  },
+  {
+    "id": "NAX3uwX3Gd0",
+    "title": "🚀 Turn Python Scripts into .deb Packages Instantly with Py2Deb! 🐍📦",
+    "description": "Hey everyone, welcome back to EthicalExplorers! 🌍🕵️‍♂️\n\nIn today's video, we are diving into Py2Deb, a powerful and user-friendly Python GUI tool that lets you convert your .py or .sh scripts into D...",
+    "category": "Linux & System",
+    "date": "2026-07-06",
+    "youtubeUrl": "https://www.youtube.com/watch?v=NAX3uwX3Gd0"
+  },
+  {
+    "id": "IFmMvK08CnM",
+    "title": "Slash OSINT Tool | Track Usernames Across the Internet 🔎🌐",
+    "description": "Find ANYONE's Digital Footprint With THIS Automated OSINT Tool! 🕵️‍♂️💻 (Slash Tutorial)\n\nWelcome back to EthicalExplorers! 🌍🔒 In today's video, we are diving deep into an incredible automated Open...",
+    "category": "OSINT & Recon",
+    "date": "2026-07-03",
+    "youtubeUrl": "https://www.youtube.com/watch?v=IFmMvK08CnM"
+  }
+]

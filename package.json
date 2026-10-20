@@ -1,0 +1,20 @@
+{
+  "name": "ethical-explorers-website",
+  "version": "2.0.0",
+  "description": "Ethical Explorers — Cybersecurity Education Platform, Ethical Hacking Blog, and Interactive Practical Labs",
+  "scripts": {
+    "sync:youtube": "node scripts/sync-youtube.js",
+    "sitemap": "node scripts/generate-sitemap.js",
+    "sync:all": "node scripts/sync-youtube.js && node scripts/generate-sitemap.js",
+    "serve": "python3 -m http.server 8888"
+  },
+  "keywords": [
+    "cybersecurity",
+    "ethical-hacking",
+    "penetration-testing",
+    "ctf-labs",
+    "network-security"
+  ],
+  "author": "Ethical Explorers Team",
+  "license": "MIT"
+}
